@@ -1,0 +1,17 @@
+$bgColor: yellow;
+
+@mixin h1($size) {
+  font-size: #{$size-10}px;
+  background-color: $bgColor;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+.container {
+  h1 {
+    @include h1(75);
+  }
+  p{
+    @include h1(45)
+  }
+}

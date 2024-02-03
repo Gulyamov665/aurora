@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap');
+body {
+  margin: 0;
+  background-color: #ffffff !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+* {
+  box-sizing: border-box;
+}
+
+/*Todo INTro_css________ */
+
+.section {
+  width: 90%;
+  display: flex;
+  margin: 0 auto;
+}
+.op {
+  width: 90%;
+  height: 500px;
+  border-radius: 30px;
+  margin-top: 10px;
+  position: absolute;
+  /* top: 0;
+  left: 10; */
+  z-index: 2;
+  background-color: black;
+  filter: opacity(30%);
+}
+.img {
+  width: 100%;
+  height: 500px;
+  border-radius: 30px;
+  margin-top: 10px;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+}
+
+.img_log {
+  width: 150px;
+  height: 150px;
+  border-radius: 20px;
+  background-color: #f5f4f2;
+  z-index: 3;
+  position: absolute;
+  top: 415px;
+  left: 115px;
+  
+}
+
+.img_logo {
+  width: 150px;
+  height: 150px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.texts {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+  /* margin-left: 80px; */
+}
+
+/*Todo CARD_css________ */
+
+.card {
+  /* width: 100%; */
+  /* height: 150px; */
+  /* overflow: hidden; */
+  border-radius: 15px !important;
+  border: 1px solid lavender;
+  margin: 10px 10px 10px 0;
+  box-shadow: 5px 5px 15px 5px rgba(230, 230, 250, 1);
+}
+
+/* .card__image {
+  height: 100%;
+} */
+.card__image {
+  width: 100%;
+  border-radius: 15px 15px 0 0;
+  /* position: absolute; */
+  height: 170px;
+  object-fit: cover;
+  /* object-position: center; */
+  margin: 0 auto;
+}
+
+.card__info {
+  font-family: 'Montserrat', sans-serif;
+  padding: 10px 10px 0 10px;
+}
+
+.card__info h3 {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Rubik', sans-serif;
+  padding-bottom: 20px;
+}
+.card__info p {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .col-sm-6 {
+    margin: 0 !important;
+    padding: 0 !important;
+    justify-content: center !important;
+  }
+  .card {
+    margin: 10px 5px 10px 0;
+
+    .card__info h3 {
+      font-size: 16px;
+    }
+
+    .card__info p {
+      font-size: 14px;
+    }
+  }
+
+  .op {
+    width: 90%;
+    height: 300px;
+    margin-top: 10px;
+    /* top: 0;
+    left: 10; */
+  }
+  .img {
+    width: 100%;
+    height: 300px;
+    margin-top: 10px;
+  }
+
+  .img_log {
+    width: 80px;
+    height: 80px;
+    top: 300px;
+    left: 40px;
+  }
+  .img_logo {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* todo navbar styles */
+
+.custom-navbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 10px;
+  overflow: auto;
+  white-space: nowrap;
+  background: rgb(235,232,220);
+  background: linear-gradient(251deg, rgba(235,232,220,1) 19%, rgba(250,225,0,1) 88%);
+  border-radius: 8px;
+
+}
+
+.custom-navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.custom-navbar ul li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.custom-navbar ul li:last-child {
+  margin-right: 0;
+}
+
+.custom-navbar ul li a {
+  color: black;
+  text-decoration: none;
+}
+
+.active {
+  font-weight: bold;
+  border-bottom: 5px solid #000000;
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+@media (min-width: 480px) and (max-width: 768px){
+  .img_log {
+    top: 420px;
+    left: 65px;
+  }
+}
+
+
+
+
+
+/* ######################################################### */
+/* ################---Header - Footer styless ---#################### */
+/* ######################################################### */
+
+.header_backgroud{
+  background: rgb(235,232,220);
+  background: linear-gradient(251deg, rgba(235,232,220,1) 19%, rgba(250,225,0,1) 88%);
+
+}
+
+
+.footer_style{
+  background: rgb(235,232,220);
+  background: linear-gradient(251deg, rgba(235,232,220,1) 19%, rgba(250,225,0,1) 88%);
+  
+
+  .footer_style_text{
+    color: #797C80;
+    font-weight: 500;
+
+  .footer_powered{
+    color: #46484C;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  }
+
+}
+
+
+
+
+
+
+
+
+/* ########
+
+*/
