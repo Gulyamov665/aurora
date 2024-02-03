@@ -44,7 +44,7 @@ export default function Sass() {
       setAuthTokens(data)
       setUser(jwtDecode(data.access))
       localStorage.setItem('authTokens', JSON.stringify(data))
-      history('/admin/bon')
+      history('/test/bon')
     } else {
       alert('Something went wrong!')
     }
