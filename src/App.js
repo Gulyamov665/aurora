@@ -25,7 +25,7 @@ function App() {
         </Route>
 
         <Route path='*' element={<NotFound />} />
-        <Route path='sass' element={<Sass />} />
+        <Route path='/' element={<Sass />} />
         <Route path='navbar' element={<Navbar />} />
         <Route path='home' element={<HomePage />} />
         <Route path='login' element={<LoginPage />} />
