@@ -4,10 +4,11 @@ import styles from './AdminMain.module.scss'
 export default function AdminMain() {
   return (
     <div className={styles.restaurant}>
+      {/* <div className={styles.restaurant_container}> */}
       <img src="/img/12.jpg" className={styles.restaurant_image} alt="" />
-      <div className={styles.opacity} />
-      <div className={styles.restaurant_card}>
-        <h2>Chaikhana</h2>
+      {/* </div> */}
+      {/* <div className={styles.restaurant_card}> */}
+        {/* <h2>Chaikhana</h2>
         <label className={styles.restaurant_input}>
           <input type="text" placeholder="name" />
         </label>
@@ -19,8 +20,8 @@ export default function AdminMain() {
         </label>
         <label className={styles.restaurant_input}>
           <input type="text" placeholder="image" />
-        </label>
-      </div>
+        </label> */}
+      {/* </div> */}
     </div>
   )
 }

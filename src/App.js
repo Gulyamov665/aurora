@@ -13,8 +13,6 @@ import 'react-toastify/dist/ReactToastify.css'
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/HomePage';
 import Navbar from './components/Navbar';
-import Header from './components/Header';
-import Post from './components/Post';
 
 function App() {
   return (
