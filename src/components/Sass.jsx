@@ -91,54 +91,53 @@ export default function Sass() {
   }, [authTokens, loading])
 
   return (
-    <div
-      style={{
-        width: '400px',
-        height: '400px',
-        margin: '100px auto',
-      }}
-    >
-      <form onSubmit={submitFunc}>
-        <div className="form-group">
-          <label htmlFor="exampleInputEmail1">Login</label>
-          <input
-            type="text"
-            name="username"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="Enter login"
+    <div className="background d-flex align-items-center">
+      <div className="container text-center">
+        <form onSubmit={submitFunc}>
+          <img
+            className="mb-4 login_logo"
+            src="img/transparent_logo.png"
+            alt=""
           />
-          <small id="emailHelp" className="form-text text-muted">
-            We'll never share your email with anyone else.
-          </small>
-        </div>
-        <div className="form-group">
-          <label htmlFor="exampleInputPassword1">Password</label>
-          <input
-            type="password"
-            name="password"
-            className="form-control"
-            id="exampleInputPassword1"
-            placeholder="Password"
-          />
-        </div>
-        <div className="form-group form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="exampleCheck1"
-          />
-          <label className="form-check-label" htmlFor="exampleCheck1">
-            Check me out
-          </label>
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+          <h1 className="h4 mb-3 fw-normal login_text">Вход в сервис</h1>
+
+          <div className="form-floating mb-1">
+            <input
+              type="text"
+              name="username"
+              className="form-control"
+              id="floatingInput"
+              aria-describedby="loginHelp"
+              placeholder="login"
+            />
+            <label for="floatingInput">Логин</label>
+          </div>
+          <div className="form-floating">
+            <input
+              className="form-control"
+              id="floatingPassword"
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
+            <label for="floatingPassword">Пароль</label>
+          </div>
+          <br />
+          <button className="btn btn-info w-100 py-2" type="submit">
+            Войти
+          </button>
+          <p className="mt-5 mb-3 text-light footer">
+            © 2024 Powered by{' '}
+            <a className="footer_powered" href="https://t.me/mgulyamov">
+              Gulyamov
+            </a>{' '}
+            and{' '}
+            <a className="footer_powered" href="https://t.me/Bomuratov">
+              Bomuratov
+            </a>
+          </p>
+        </form>
+      </div>
     </div>
   )
 }
-// with_employee=true
-// params запросы

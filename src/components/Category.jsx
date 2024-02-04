@@ -21,22 +21,22 @@ export default function Category() {
 
   return (
     <nav className="">
-      <div className='container sticky-top'>
-      <div className="custom-navbar">
-        <ul>
-          <Scrollspy
-            className=""
-            items={category.map((item) => item.id)}
-            currentClassName="active"
-          >
-            {category.map((item) => (
-              <li>
-                <a href={`#${item.id}`}>{item.name}</a>
-              </li>
-            ))}
-          </Scrollspy>
-        </ul>
-      </div>
+      <div className="container sticky-top">
+        <div className="custom-navbar">
+          <ul>
+            <Scrollspy
+              className=""
+              items={category.map((item) => item.id)}
+              currentClassName="active"
+            >
+              {category.map((item) => (
+                <li>
+                  <a href={`#${item.id}`}>{item.name}</a>
+                </li>
+              ))}
+            </Scrollspy>
+          </ul>
+        </div>
       </div>
       <div>
         {menuItems.length > 0 &&
@@ -72,20 +72,4 @@ export default function Category() {
   )
 }
 
-{
-  /* 
-<div class="container">
 
-  <div class="row">
-
-    <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-
-    <Card.jsx/>
-
-    </div>
-
-  </div>
-  
-</div>
- */
-}

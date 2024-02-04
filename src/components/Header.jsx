@@ -7,7 +7,11 @@ const Header = () => {
         className="container-fluid d-grid gap-3 align-items-center"
         style={{ gridTemplateColumns: '1fr 2fr' }}
       >
-        <img src="/img/transparent_logo.png" style={{ width: 150 }} alt />
+        <img
+          src="/img/transparent_logo.png"
+          style={{ width: 150 }}
+          alt="logo"
+        />
         <div className="d-flex align-items-end justify-content-end">
           <form className="" role="search">
             <input
@@ -17,7 +21,6 @@ const Header = () => {
               aria-label="Search"
             />
           </form>
-          {/* <button className="btn btn-light">Search</button> */}
         </div>
       </div>
     </header>
