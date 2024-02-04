@@ -61,9 +61,11 @@
   color: #5c4272;
 }
 
-
-@media (max-width: 420px){
-  .sectionMini{
+@media (max-width: 420px) {
+  .sectionMini {
     width: 20%;
+  }
+  .section1 {
+    // display: none;
   }
 }
