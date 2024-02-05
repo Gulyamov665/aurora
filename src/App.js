@@ -6,7 +6,7 @@ import Category from './components/Category';
 import Admin from './components/Admin/Admin';
 import AdminCategory from './components/Admin/AdminCategory';
 import NotFound from './components/NotFound';
-import Sass from './components/Sass';
+import Login from './components/Login';
 import AdminMain from './components/Admin/AdminMain';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -24,7 +24,7 @@ function App() {
         </Route>
 
         <Route path='*' element={<NotFound />} />
-        <Route path='/' element={<Sass />} />
+        <Route path='/' element={<Login />} />
         <Route path='navbar' element={<Navbar />} />
         <Route path='home' element={<HomePage />} />
         <Route path='login' element={<LoginPage />} />

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { useNavigate } from 'react-router-dom'
 import { useGetTokenMutation } from '../store/tokenApi'
-import Loading from './Loading'
+import { toast } from 'react-toastify'
 
 //todo reactHook form
 
-export default function Sass() {
+export default function Login() {
   const [getToken, { data, isSuccess, isError, isLoading }] =
     useGetTokenMutation()
   const [authTokens, setAuthTokens] = useState(() =>
@@ -29,14 +29,11 @@ export default function Sass() {
 
     const username = e.target.username.value
     const password = e.target.password.value
-    try {
-      await getToken({
-        username: username,
-        password: password,
-      })
-    } catch (err) {
-      console.log(err)
-    }
+
+    await getToken({
+      username: username,
+      password: password,
+    })
   }
 
   useEffect(() => {
@@ -45,10 +42,9 @@ export default function Sass() {
       setUser(jwtDecode(data.access))
       localStorage.setItem('authTokens', JSON.stringify(data))
       history('/admin/bon')
-    } else if (isError) return console.log('someting went wrong')
+      toast.success('Добро пожаловать')
+    }
   }, [isSuccess, isError])
-
-  // if (isLoading) return <Loading />
 
   // let updateToken = async () => {
   //   let response = await fetch(BaseUrl + 'refresh/', {
