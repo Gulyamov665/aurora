@@ -6,8 +6,6 @@ import Loading from './Loading'
 
 //todo reactHook form
 
-const BaseUrl = process.env.REACT_APP_BASE_URL
-
 export default function Sass() {
   const [getToken, { data, isSuccess, isError, isLoading }] =
     useGetTokenMutation()
@@ -22,24 +20,24 @@ export default function Sass() {
       : null
   )
 
-  let [loading, setLoading] = useState(true)
-
   const history = useNavigate()
-  console.log(isLoading)
+  console.log(isError)
+  console.log(isSuccess)
 
   const submitFunc = async (e) => {
     e.preventDefault()
 
     const username = e.target.username.value
     const password = e.target.password.value
-
-    await getToken({
-      username: username,
-      password: password,
-    })
+    try {
+      await getToken({
+        username: username,
+        password: password,
+      })
+    } catch (err) {
+      console.log(err)
+    }
   }
-
-  // useEffect(() => {}, [isLoading])
 
   useEffect(() => {
     if (isSuccess) {
@@ -47,12 +45,11 @@ export default function Sass() {
       setUser(jwtDecode(data.access))
       localStorage.setItem('authTokens', JSON.stringify(data))
       history('/admin/bon')
-    } else if (isError) {
-      alert('something went wrong')
-    }
-  }, [isSuccess])
+    } else if (isError) return console.log('someting went wrong')
+  }, [isSuccess, isError])
 
-  if (isLoading) return <Loading />
+  // if (isLoading) return <Loading />
+
   // let updateToken = async () => {
   //   let response = await fetch(BaseUrl + 'refresh/', {
   //     method: 'POST',
@@ -125,10 +122,23 @@ export default function Sass() {
             />
             <label htmlFor="floatingPassword">Пароль</label>
           </div>
+          {isError && (
+            <p style={{ color: 'red' }}>Логин или пароль не верный</p>
+          )}
           <br />
-          <button className="btn btn-info w-100 py-2" type="submit">
-            Войти
-          </button>
+          {isLoading ? (
+            <button className="btn btn-info w-100 py-2" type="button" disabled>
+              <span
+                className="spinner-border spinner-border-sm"
+                aria-hidden="true"
+              ></span>
+            </button>
+          ) : (
+            <button className="btn btn-info w-100 py-2" type="submit">
+              <span role="status">Войти</span>
+            </button>
+          )}
+
           <p className="mt-5 mb-3 text-light footer">
             © 2024 Powered by{' '}
             <a className="footer_powered" href="https://t.me/mgulyamov">
