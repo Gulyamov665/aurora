@@ -42,7 +42,9 @@ export default function Login() {
       setUser(jwtDecode(data.access))
       localStorage.setItem('authTokens', JSON.stringify(data))
       history('/admin/bon')
-      toast.success('Добро пожаловать')
+      toast.success(
+        'Добро пожаловать ' + user.first_name + ' ' + user.last_name
+      )
     }
   }, [isSuccess, isError])
 
