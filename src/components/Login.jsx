@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 //todo reactHook form
 
 export default function Login() {
-  const [getToken, { data, isSuccess, isError, isLoading }] =
+  const [getToken, { data, isSuccess, isError, isLoading, error }] =
     useGetTokenMutation()
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem('authTokens')
@@ -21,7 +21,7 @@ export default function Login() {
   )
 
   const history = useNavigate()
-  console.log(isError)
+  console.log(error)
   console.log(isSuccess)
 
   const submitFunc = async (e) => {
