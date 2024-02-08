@@ -1,5 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { baseQuery } from './apiConfig'
+import { Bulb } from 'react-ionicons'
 
 
 
@@ -21,6 +22,15 @@ export const categoriesApi = createApi({
             }),
             invalidatesTags: ['Categories']
         }),
+        updateOrder: build.mutation({
+            query: body => ({
+                url: 'categories/update_order/',
+                method: "POST",
+                body
+            }),
+            invalidatesTags: ['Categories']
+        }),
+
         updateCategory: build.mutation({
             query: body => ({
                 url: 'categorys/',
@@ -31,4 +41,4 @@ export const categoriesApi = createApi({
     })
 })
 
-export const { useGetCategoriesQuery, useAddCategoryMutation } = categoriesApi
+export const { useGetCategoriesQuery, useAddCategoryMutation, useUpdateOrderMutation } = categoriesApi

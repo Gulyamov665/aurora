@@ -19,6 +19,7 @@ import {
 import {
   useAddCategoryMutation,
   useGetCategoriesQuery,
+  useUpdateOrderMutation,
 } from '../../store/categoryApi'
 import { Reorder } from 'framer-motion'
 import { toast } from 'react-toastify'
@@ -35,6 +36,7 @@ export default function AdminCategory() {
   const [items, setItems] = useState([])
   const [updateProduct] = useUpdateProductMutation()
   const [addCategory] = useAddCategoryMutation()
+  const [updateOrder] = useUpdateOrderMutation()
   const { createModal, selectedCategory: select } = useSelector(
     (state) => state.modals
   )
@@ -73,6 +75,12 @@ export default function AdminCategory() {
     setItems(category)
   }, [category])
 
+  const updatePosition = async () => {
+    const update = items.map((item) => item.id)
+    await updateOrder(update)
+  }
+  console.log(items)
+
   return (
     <>
       <div className={styles.category}>
@@ -93,27 +101,20 @@ export default function AdminCategory() {
             handleCategory={handleCategory}
           />
 
-          {/* {category &&
-            category.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => dispatch(selectedCategory(item.id))}
-                className={`btn mt-2 ${styles.but_col} ${
-                  select === item.id ? styles.but_col_active : ''
-                }`}
-              >
-                {item.name}
-              </button>
-            ))} */}
           {items && (
-            <Reorder.Group axis="y" as='div' values={items} onReorder={setItems}>
+            <Reorder.Group
+              axis="y"
+              as="div"
+              values={items}
+              onReorder={setItems}
+            >
               {items &&
                 items.map((item, i) => (
                   <Reorder.Item
                     className={styles.but_col}
                     key={item.id}
                     value={item}
-                    onMouseUpCapture={() => console.log(i)}
+                    onMouseUpCapture={() => updatePosition()}
                   >
                     <button
                       key={item.id}
