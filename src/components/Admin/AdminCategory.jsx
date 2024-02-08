@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useAxios from '../../hooks/useAxios'
 import { useDispatch, useSelector } from 'react-redux'
 import AdminCard from './AdminCard'
@@ -32,6 +32,7 @@ export default function AdminCategory() {
   const [updatedItem, setUpdatedItem] = useState(null)
   const { data: menuItems } = useGetProductsQuery(res)
   const { data: category } = useGetCategoriesQuery(res)
+  const [items, setItems] = useState([])
   const [updateProduct] = useUpdateProductMutation()
   const [addCategory] = useAddCategoryMutation()
   const { createModal, selectedCategory: select } = useSelector(
@@ -68,6 +69,10 @@ export default function AdminCategory() {
     toast.success('Новая категория добавлена')
   }
 
+  useEffect(() => {
+    setItems(category)
+  }, [category])
+
   return (
     <>
       <div className={styles.category}>
@@ -88,7 +93,7 @@ export default function AdminCategory() {
             handleCategory={handleCategory}
           />
 
-          {category &&
+          {/* {category &&
             category.map((item) => (
               <button
                 key={item.id}
@@ -99,7 +104,30 @@ export default function AdminCategory() {
               >
                 {item.name}
               </button>
-            ))}
+            ))} */}
+          {items && (
+            <Reorder.Group axis="y" as='div' values={items} onReorder={setItems}>
+              {items &&
+                items.map((item, i) => (
+                  <Reorder.Item
+                    className={styles.but_col}
+                    key={item.id}
+                    value={item}
+                    onMouseUpCapture={() => console.log(i)}
+                  >
+                    <button
+                      key={item.id}
+                      onClick={() => dispatch(selectedCategory(item.id))}
+                      className={`btn mt-2 ${styles.but_col} ${
+                        select === item.id ? styles.but_col_active : ''
+                      }`}
+                    >
+                      {item.name}
+                    </button>
+                  </Reorder.Item>
+                ))}
+            </Reorder.Group>
+          )}
         </div>
       </div>
       <div className={styles.menuItems}>
