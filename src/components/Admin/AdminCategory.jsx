@@ -79,7 +79,6 @@ export default function AdminCategory() {
     const update = items.map((item) => item.id)
     await updateOrder(update)
   }
-  console.log(items)
 
   return (
     <>
@@ -154,7 +153,7 @@ export default function AdminCategory() {
         )}
         {select &&
           menuItems
-            .filter((obj) => obj.category === select)
+            ?.filter((obj) => obj.category === select)
             .map((item) => (
               <AdminCard
                 setUpdatedItem={setUpdatedItem}
