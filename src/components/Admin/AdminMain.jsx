@@ -9,6 +9,7 @@ export default function AdminMain() {
       </div>
       <div className={styles.restaurant_card}>
         <h2>Chaikhana</h2>
+
         <label className={styles.restaurant_input}>
           <input type="text" placeholder="Название" />
         </label>
@@ -21,6 +22,12 @@ export default function AdminMain() {
         <label className={styles.restaurant_input}>
           <input type="text" placeholder="Обложка" />
         </label>
+
+        <div className={styles.button_form}>
+          <button className={`${styles.button_form} btn btn-success`}>
+            Сохранить
+          </button>
+        </div>
       </div>
     </div>
   )

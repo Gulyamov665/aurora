@@ -71,6 +71,8 @@ export default function AdminCategory() {
     toast.success('Новая категория добавлена')
   }
 
+  console.log(menuItems)
+
   useEffect(() => {
     setItems(category)
   }, [category])

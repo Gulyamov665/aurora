@@ -46,10 +46,10 @@ export default function Admin() {
             <Link
               key={index}
               to={link}
-              className={`${styles.buttons} text-start btn buttons my-1`}
+              className={`${styles.buttons} text-start btn`}
             >
               {sidebarWidth ? (
-                <span className="ms-3">{text}</span>
+                <span className="">{text}</span>
               ) : (
                 <React.Fragment>{icon}</React.Fragment>
               )}
