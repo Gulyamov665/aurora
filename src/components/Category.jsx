@@ -1,15 +1,67 @@
-import React, { useEffect, useRef, useCallback } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Card from './Card'
 import { useGetProductsQuery } from '../store/productsApi'
 import { useParams } from 'react-router-dom'
 import { useGetCategoriesQuery } from '../store/categoryApi'
 import Loading from './Loading'
-import Scrollspy from 'react-scrollspy'
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import { Navigation } from 'swiper/modules'
 
 export default function Category() {
   const { res } = useParams()
   const { data: category = [] } = useGetCategoriesQuery(res)
   const { data: menuItems = [], isLoading, isError } = useGetProductsQuery(res)
+
+  const sectionRefs = useRef([])
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const ChangeSlide = ({ position }) => {
+    const swiper = useSwiper()
+
+    useEffect(() => {
+      if (swiper) {
+        swiper.slideTo(position)
+      }
+    }, [swiper, position])
+    // return null
+  }
+
+  useEffect(() => {
+    const links = document.querySelectorAll('.nav__link')
+    const cb = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+          links.forEach((link) => link.classList.remove('active'))
+
+          console.log(entry.target)
+          const activeId = Number(entry.target.id)
+
+          const activeLink = document.querySelector(
+            `.nav__link[href="#${activeId}"]`
+          )
+          setActiveIndex(activeId)
+          if (activeLink) {
+            activeLink.classList.add('active')
+          }
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(cb, {
+      rootMargin: '0px',
+      threshold: 0.75,
+    })
+
+    sectionRefs.current.forEach((sec) => {
+      observer.observe(sec)
+    })
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [isLoading, category])
 
   if (isLoading) {
     return <Loading />
@@ -23,26 +75,37 @@ export default function Category() {
     <nav>
       <div className="container sticky-top">
         <div className="custom-navbar">
-          <ul>
-            <Scrollspy
-              items={category.map((item) => item.name)}
-              currentClassName="active"
-            >
-              {category.map((item) => (
-                <li key={item.id}>
-                  <a href={`#${item.name}`}>{item.name}</a>
-                </li>
-              ))}
-            </Scrollspy>
-          </ul>
+          <Swiper
+            slidesPerView={5}
+            watchOverflow={true}
+            freeMode={{ enabled: true, sticky: true }}
+            pagination={{
+              clickable: true,
+            }}
+            modules={Navigation}
+            mousewheel={true}
+          >
+            <ChangeSlide position={activeIndex} />
+            {category.map((item, index) => (
+              <SwiperSlide key={item.id}>
+                <a className="nav__link" href={`#${index}`}>
+                  {item.name}
+                </a>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
       {menuItems.length > 0 &&
-        category.map((item) => (
+        category.map((item, index) => (
           <div id={item.name} className="section" key={item.id}>
             <div className="container">
               <h2 className="">{item.name}</h2>
-              <div className="row">
+              <div
+                className="row"
+                ref={(ref) => (sectionRefs.current[index] = ref)}
+                id={index}
+              >
                 {menuItems
                   .filter((obj) => obj.category === item.id)
                   .map(

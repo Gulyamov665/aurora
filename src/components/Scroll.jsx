@@ -6,7 +6,7 @@ import Loading from './Loading'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import { Navigation, Pagination } from 'swiper/modules'
+import { Navigation } from 'swiper/modules'
 
 export default function Scroll() {
   const { data: category = [] } = useGetCategoriesQuery('bon')
@@ -18,8 +18,6 @@ export default function Scroll() {
 
   const sectionRefs = useRef([])
   const [activeIndex, setActiveIndex] = useState(0)
-  const swiperRef = useRef(null)
-  const [swiperLink, setSwiperLink] = useState(null)
 
   const ChangeSlide = ({ position }) => {
     const swiper = useSwiper()
@@ -29,20 +27,18 @@ export default function Scroll() {
         swiper.slideTo(position)
       }
     }, [swiper, position])
-    return null
+    // return null
   }
 
   useEffect(() => {
     const links = document.querySelectorAll('.nav__link')
     const cb = (entries) => {
       entries.forEach((entry) => {
-        if (
-          (entry.isIntersecting && entry.intersectionRatio > 0.23) ||
-          entry.intersectionRatio > 0.9
-        ) {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
           links.forEach((link) => link.classList.remove('active'))
 
-          const activeId = entry.target.id
+          console.log(entry.target)
+          const activeId = Number(entry.target.id)
 
           const activeLink = document.querySelector(
             `.nav__link[href="#${activeId}"]`
@@ -57,7 +53,7 @@ export default function Scroll() {
 
     const observer = new IntersectionObserver(cb, {
       rootMargin: '0px',
-      threshold: 0.25,
+      threshold: 0.75,
     })
 
     sectionRefs.current.forEach((sec) => {
@@ -76,6 +72,7 @@ export default function Scroll() {
   if (isError) {
     return <p>Error not found page </p>
   }
+  console.log(category)
 
   return (
     <nav>
@@ -83,18 +80,18 @@ export default function Scroll() {
         <div className="custom-navbar">
           <Swiper
             slidesPerView={5}
-            spaceBetween={10}
+            watchOverflow={true}
+            freeMode={{ enabled: true, sticky: true }}
             pagination={{
               clickable: true,
             }}
-            modules={[Pagination, Navigation]}
+            modules={Navigation}
             mousewheel={true}
-            className=""
           >
-            {category.map((item) => (
-              <SwiperSlide>
-                <ChangeSlide position={activeIndex} />
-                <a className="nav__link" href={`#${item.name}`}>
+            <ChangeSlide position={activeIndex} />
+            {category.map((item, index) => (
+              <SwiperSlide key={item.id}>
+                <a className="nav__link" href={`#${index}`}>
                   {item.name}
                 </a>
               </SwiperSlide>
@@ -104,7 +101,7 @@ export default function Scroll() {
       </div>
       {menuItems.length > 0 &&
         category.map((item, index) => (
-          <div className="section" key={item.id} id={item.name}>
+          <div className="section" key={item.id} id={item.id}>
             <div className="container">
               <h2>{item.name}</h2>
               <div
