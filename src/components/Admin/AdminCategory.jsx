@@ -5,6 +5,8 @@ import AdminCard from './AdminCard'
 import styles from './AdminCategory.module.scss'
 import MenuModal from '../MenuModal'
 import CategoryModal from '../CategoryModal'
+import AddIcon from '@mui/icons-material/Add';
+import EditNoteIcon from '@mui/icons-material/EditNote';
 import {
   toggleCreate,
   toggleUpdate,
@@ -87,13 +89,15 @@ export default function AdminCategory() {
       <div className={styles.category}>
         <div className="col d-flex flex-column mt-3 sticky-top">
           <h4 className="text-center text-dark">Категории</h4>
+          <div className="btn-group">
           <button
             className={`btn mt-2 fs-sm-1 ${styles.but_col}`}
             onClick={() => setShowModalCategory(!showModalCategory)}
           >
-            Добавить категорию
+           <AddIcon /> Добавить
           </button>
-
+          <button className={`btn mt-2 fs-sm-1 ${styles.but_col}`}><EditNoteIcon /> Изменить</button>
+          </div>
           <CategoryModal
             showModalCategory={showModalCategory}
             setShowModalCategory={setShowModalCategory}

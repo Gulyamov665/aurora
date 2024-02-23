@@ -25,14 +25,14 @@ export default function Category() {
         swiper.slideTo(position)
       }
     }, [swiper, position])
-    // return null
+    return null
   }
 
   useEffect(() => {
     const links = document.querySelectorAll('.nav__link')
     const cb = (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.2) {
           links.forEach((link) => link.classList.remove('active'))
 
           console.log(entry.target)
@@ -51,7 +51,7 @@ export default function Category() {
 
     const observer = new IntersectionObserver(cb, {
       rootMargin: '0px',
-      threshold: 0.75,
+      threshold: 0.25,
     })
 
     sectionRefs.current.forEach((sec) => {
@@ -77,13 +77,25 @@ export default function Category() {
         <div className="custom-navbar">
           <Swiper
             slidesPerView={5}
-            watchOverflow={true}
-            freeMode={{ enabled: true, sticky: true }}
+            // watchOverflow={true}
+            freeMode={true}
             pagination={{
               clickable: true,
             }}
             modules={Navigation}
-            mousewheel={true}
+            // mousewheel={true}
+            breakpoints={{
+              320: {
+                slidesPerView: 2.5,
+                spaceBetween: 10,
+              },
+              480: {
+                slidesPerView: 2.8,
+              },
+              640: {
+                slidesPerView: 4,
+              },
+            }}
           >
             <ChangeSlide position={activeIndex} />
             {category.map((item, index) => (
