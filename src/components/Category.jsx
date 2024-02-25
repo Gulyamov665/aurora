@@ -1,18 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Card from './Card'
 import { useGetProductsQuery } from '../store/productsApi'
-import { useParams } from 'react-router-dom'
 import { useGetCategoriesQuery } from '../store/categoryApi'
+import { useGetPromosQuery } from '../store/promoApi'
+import { useParams } from 'react-router-dom'
 import Loading from './Loading'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import { Navigation } from 'swiper/modules'
+import { Navigation, Autoplay } from 'swiper/modules'
 
 export default function Category() {
   const { res } = useParams()
   const { data: category = [] } = useGetCategoriesQuery(res)
   const { data: menuItems = [], isLoading, isError } = useGetProductsQuery(res)
+  const { data: promo = [] } = useGetPromosQuery(res)
 
   const sectionRefs = useRef([])
   const [activeIndex, setActiveIndex] = useState(0)
@@ -35,7 +37,6 @@ export default function Category() {
         if (entry.isIntersecting && entry.intersectionRatio > 0.2) {
           links.forEach((link) => link.classList.remove('active'))
 
-          console.log(entry.target)
           const activeId = Number(entry.target.id)
 
           const activeLink = document.querySelector(
@@ -51,7 +52,7 @@ export default function Category() {
 
     const observer = new IntersectionObserver(cb, {
       rootMargin: '0px',
-      threshold: 0.25,
+      threshold: 0.2,
     })
 
     sectionRefs.current.forEach((sec) => {
@@ -73,17 +74,47 @@ export default function Category() {
 
   return (
     <nav>
+      <div className="container">
+        <Swiper
+          slidesPerView={4}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: true,
+          }}
+          breakpoints={{
+            320: {
+              slidesPerView: 1.9,
+              spaceBetween: 10,
+            },
+            480: {
+              slidesPerView: 2.8,
+            },
+            640: {
+              slidesPerView: 4,
+            },
+          }}
+          modules={[Navigation, Autoplay]}
+          pagination={true}
+          className="scrollDiv"
+        >
+          {promo?.map((item) => (
+            <SwiperSlide>
+              <img className="imgScroll" src={item.photo} alt="item.name" />
+              <b className="text_promo">{item.name}</b>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
       <div className="container sticky-top">
         <div className="custom-navbar">
           <Swiper
             slidesPerView={5}
-            // watchOverflow={true}
             freeMode={true}
             pagination={{
               clickable: true,
             }}
             modules={Navigation}
-            // mousewheel={true}
+            mousewheel={true}
             breakpoints={{
               320: {
                 slidesPerView: 2.5,
@@ -93,7 +124,7 @@ export default function Category() {
                 slidesPerView: 2.8,
               },
               640: {
-                slidesPerView: 4,
+                slidesPerView: 5,
               },
             }}
           >

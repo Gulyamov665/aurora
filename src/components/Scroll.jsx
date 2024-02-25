@@ -6,7 +6,8 @@ import Loading from './Loading'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import { Navigation } from 'swiper/modules'
+import { Navigation, Autoplay } from 'swiper/modules'
+import { useGetPromosQuery } from '../store/promoApi'
 
 export default function Scroll() {
   const { data: category = [] } = useGetCategoriesQuery('bon')
@@ -15,6 +16,7 @@ export default function Scroll() {
     isLoading,
     isError,
   } = useGetProductsQuery('bon')
+  const { data: promo = [] } = useGetPromosQuery('bon')
 
   const sectionRefs = useRef([])
   const [activeIndex, setActiveIndex] = useState(0)
@@ -75,59 +77,79 @@ export default function Scroll() {
   console.log(category)
 
   return (
-    <nav>
-      <div className="container sticky-top">
-        <div className="custom-navbar">
+    <div>
+      <nav>
+        <div className="container">
           <Swiper
-            slidesPerView={5}
-            watchOverflow={true}
-            freeMode={{ enabled: true, sticky: true }}
-            pagination={{
-              clickable: true,
+            slidesPerView={2}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
             }}
-            modules={Navigation}
-            mousewheel={true}
+            modules={[Navigation, Autoplay]}
+            pagination={true}
+            className="scrollDiv"
           >
-            <ChangeSlide position={activeIndex} />
-            {category.map((item, index) => (
-              <SwiperSlide key={item.id}>
-                <a className="nav__link" href={`#${index}`}>
-                  {item.name}
-                </a>
+            {promo?.map((item) => (
+              <SwiperSlide>
+                <img className="imgScroll" src={item.photo} alt="" />
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
-      </div>
-      {menuItems.length > 0 &&
-        category.map((item, index) => (
-          <div className="section" key={item.id} id={item.id}>
-            <div className="container">
-              <h2>{item.name}</h2>
-              <div
-                className="row"
-                ref={(ref) => (sectionRefs.current[index] = ref)}
-                id={index}
-              >
-                {menuItems
-                  .filter((obj) => obj.category === item.id && obj.is_active)
-                  .map((filteredObj) => (
-                    <div
-                      key={filteredObj.id}
-                      className="col-6 col-sm-6 col-md-4 col-lg-3"
-                    >
-                      <Card
-                        img={filteredObj.photo}
-                        name={filteredObj.name}
-                        desc={filteredObj.description}
-                        price={filteredObj.price}
-                      />
-                    </div>
-                  ))}
+        <div className="container sticky-top">
+          <div className="custom-navbar">
+            <Swiper
+              slidesPerView={5}
+              watchOverflow={true}
+              freeMode={{ enabled: true, sticky: true }}
+              pagination={{
+                clickable: true,
+              }}
+              modules={Navigation}
+              mousewheel={true}
+            >
+              <ChangeSlide position={activeIndex} />
+              {category.map((item, index) => (
+                <SwiperSlide key={item.id}>
+                  <a className="nav__link" href={`#${index}`}>
+                    {item.name}
+                  </a>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+        {menuItems.length > 0 &&
+          category.map((item, index) => (
+            <div className="section" key={item.id} id={item.id}>
+              <div className="container">
+                <h2>{item.name}</h2>
+                <div
+                  className="row"
+                  ref={(ref) => (sectionRefs.current[index] = ref)}
+                  id={index}
+                >
+                  {menuItems
+                    .filter((obj) => obj.category === item.id && obj.is_active)
+                    .map((filteredObj) => (
+                      <div
+                        key={filteredObj.id}
+                        className="col-6 col-sm-6 col-md-4 col-lg-3"
+                      >
+                        <Card
+                          img={filteredObj.photo}
+                          name={filteredObj.name}
+                          desc={filteredObj.description}
+                          price={filteredObj.price}
+                        />
+                      </div>
+                    ))}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-    </nav>
+          ))}
+      </nav>
+    </div>
   )
 }

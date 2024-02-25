@@ -215,9 +215,51 @@ code {
   border-radius: 8px !important;
 }
 
+.scrollDiv {
+  height: 130px;
+  transition: 0.3s !important;
+}
+.imgScroll {
+  width: 300px;
+  height: 130px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.text_promo {
+  /* width: 50%; */
+  z-index: 100;
+  position: absolute;
+  top: 15px;
+  left: 0;
+  background-color: #71b378;
+  color: #f5f4f2;
+  border-radius: 15px;
+  padding: 5px 5px;
+  font-weight: 700;
+}
 .swiper-wrapper {
   width: auto !important;
   height: 50px !important;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .scrollDiv {
+    height: 90px;
+    transition: 0.3s !important;
+  }
+
+  .imgScroll {
+    width: 170px;
+    height: 90px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  .text_promo {
+    font-size: 12px;
+    font-weight: 800;
+    border-radius: 10px;
+  }
 }
 
 @media (min-width: 480px) and (max-width: 768px) {

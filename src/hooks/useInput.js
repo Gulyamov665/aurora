@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { removeData } from "../store/appSlice"
 import { useGetProductsQuery } from "../store/productsApi"
 import { useParams } from "react-router-dom"
 
@@ -8,7 +7,7 @@ import { useParams } from "react-router-dom"
 const useInput = (restaurant, selectedCategory, updatedItem) => {
 
     const { res } = useParams()
-    const { updateModal, removedData } = useSelector((state) => state.modals)
+    const { updateModal } = useSelector((state) => state.modals)
     const { data: menuItems } = useGetProductsQuery(res)
     const dispatch = useDispatch()
 
@@ -20,37 +19,7 @@ const useInput = (restaurant, selectedCategory, updatedItem) => {
     }
 
     const [data, setData] = useState(initialValue)
-    // if (updateModal) {
-    //     let update = delete updatedItem.photo
-    // }
-    // console.log(updatedItem)
-    // const handleRemove = (id) => {
-    //     let removed = menuItems.find((item) => item.id === id)
-    //     return removed
-    // }
 
-    // const upd = handleRemove(updatedItem)
-
-
-
-
-    // if (updateModal) {
-
-
-    //     let updateObj = {
-    //         ...upd
-
-
-    //     }
-    //     delete updateObj.photo
-    //     return updateObj
-    // }
-
-
-
-    // useEffect(() => {
-
-    // }, [updateModal]);
 
     useEffect(() => {
         if (updateModal && menuItems.length) {
