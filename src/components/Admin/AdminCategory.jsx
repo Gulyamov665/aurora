@@ -5,8 +5,8 @@ import AdminCard from './AdminCard'
 import styles from './AdminCategory.module.scss'
 import MenuModal from '../MenuModal'
 import CategoryModal from '../CategoryModal'
-import AddIcon from '@mui/icons-material/Add';
-import EditNoteIcon from '@mui/icons-material/EditNote';
+import AddIcon from '@mui/icons-material/Add'
+import EditNoteIcon from '@mui/icons-material/EditNote'
 import {
   toggleCreate,
   toggleUpdate,
@@ -73,8 +73,6 @@ export default function AdminCategory() {
     toast.success('Новая категория добавлена')
   }
 
-  console.log(menuItems)
-
   useEffect(() => {
     setItems(category)
   }, [category])
@@ -90,13 +88,15 @@ export default function AdminCategory() {
         <div className="col d-flex flex-column mt-3 sticky-top">
           <h4 className="text-center text-dark">Категории</h4>
           <div className="btn-group">
-          <button
-            className={`btn mt-2 fs-sm-1 ${styles.but_col}`}
-            onClick={() => setShowModalCategory(!showModalCategory)}
-          >
-           <AddIcon /> Добавить
-          </button>
-          <button className={`btn mt-2 fs-sm-1 ${styles.but_col}`}><EditNoteIcon /> Изменить</button>
+            <button
+              className={`btn mt-2 fs-sm-1 ${styles.but_col}`}
+              onClick={() => setShowModalCategory(!showModalCategory)}
+            >
+              <AddIcon /> Добавить
+            </button>
+            <button className={`btn mt-2 fs-sm-1 ${styles.but_col}`}>
+              <EditNoteIcon /> Изменить
+            </button>
           </div>
           <CategoryModal
             showModalCategory={showModalCategory}

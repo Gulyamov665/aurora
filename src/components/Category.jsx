@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { Navigation, Autoplay } from 'swiper/modules'
+import CardView from './CardView'
 
 export default function Category() {
   const { res } = useParams()
@@ -18,6 +19,13 @@ export default function Category() {
 
   const sectionRefs = useRef([])
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isOpen, setIsOpen] = useState(false)
+  const [viewItem, setViewItem] = useState(null)
+
+  const handleView = (item) => {
+    setIsOpen(!isOpen)
+    setViewItem(item)
+  }
 
   const ChangeSlide = ({ position }) => {
     const swiper = useSwiper()
@@ -98,7 +106,7 @@ export default function Category() {
           className="scrollDiv"
         >
           {promo?.map((item) => (
-            <SwiperSlide>
+            <SwiperSlide key={item.id}>
               <img className="imgScroll" src={item.photo} alt="item.name" />
               <b className="text_promo">{item.name}</b>
             </SwiperSlide>
@@ -139,6 +147,7 @@ export default function Category() {
           </Swiper>
         </div>
       </div>
+
       {menuItems.length > 0 &&
         category.map((item, index) => (
           <div id={item.name} className="section" key={item.id}>
@@ -155,6 +164,7 @@ export default function Category() {
                     (filteredObj) =>
                       filteredObj.is_active && (
                         <div
+                          onClick={() => handleView(filteredObj)}
                           key={filteredObj.id}
                           className="col-6 col-sm-6 col-md-4 col-lg-3"
                         >
@@ -171,6 +181,7 @@ export default function Category() {
             </div>
           </div>
         ))}
+      <CardView item={viewItem} open={isOpen} />
     </nav>
   )
 }
