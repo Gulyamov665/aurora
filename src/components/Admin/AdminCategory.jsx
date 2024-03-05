@@ -92,10 +92,10 @@ export default function AdminCategory() {
               className={`btn mt-2 fs-sm-1 ${styles.but_col}`}
               onClick={() => setShowModalCategory(!showModalCategory)}
             >
-              <AddIcon /> Добавить
+              <AddIcon /> 
             </button>
             <button className={`btn mt-2 fs-sm-1 ${styles.but_col}`}>
-              <EditNoteIcon /> Изменить
+              <EditNoteIcon /> 
             </button>
           </div>
           <CategoryModal
@@ -128,7 +128,7 @@ export default function AdminCategory() {
                         select === item.id ? styles.but_col_active : ''
                       }`}
                     >
-                      {item.name}
+                      <div className={styles.button_name}>{item.name}</div>
                     </button>
                   </Reorder.Item>
                 ))}

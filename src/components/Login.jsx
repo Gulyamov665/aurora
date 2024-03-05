@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 //todo reactHook form
 
 export default function Login() {
-  const [getToken, { data, isSuccess, isError, isLoading, error }] =
+  const [getToken, { data, isSuccess, isError, isLoading }] =
     useGetTokenMutation()
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem('authTokens')
@@ -21,8 +21,6 @@ export default function Login() {
   )
 
   const history = useNavigate()
-  console.log(error)
-  console.log(isSuccess)
 
   const submitFunc = async (e) => {
     e.preventDefault()
@@ -38,55 +36,16 @@ export default function Login() {
 
   useEffect(() => {
     if (isSuccess) {
-      setAuthTokens(data)
-      setUser(jwtDecode(data.access))
+      const dataDecode = jwtDecode(data.access)
       localStorage.setItem('authTokens', JSON.stringify(data))
-      history('/admin/bon')
+      setAuthTokens(data)
+      setUser(dataDecode)
+      history(`/admin/${dataDecode.vendor}`)
       toast.success(
-        'Добро пожаловать ' + user.first_name + ' ' + user.last_name
+        `Добро пожаловать ${dataDecode.first_name} ${dataDecode.last_name}`
       )
     }
-  }, [isSuccess, isError])
-
-  // let updateToken = async () => {
-  //   let response = await fetch(BaseUrl + 'refresh/', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ refresh: authTokens?.refresh }),
-  //   })
-
-  //   let data = await response.json()
-
-  //   if (response.status === 200) {
-  //     setAuthTokens(data)
-  //     setUser(jwtDecode(data.access))
-  //     localStorage.setItem('authTokens', JSON.stringify(data))
-  //   } else {
-  //     // logoutUser()
-  //     console.log('user is logout')
-  //   }
-
-  //   if (loading) {
-  //     setLoading(false)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   if (loading) {
-  //     updateToken()
-  //   }
-
-  //   let fourMinutes = 1000 * 60 * 4
-
-  //   let interval = setInterval(() => {
-  //     if (authTokens) {
-  //       updateToken()
-  //     }
-  //   }, fourMinutes)
-  //   return () => clearInterval(interval)
-  // }, [authTokens, loading])
+  }, [isSuccess, isError, authTokens])
 
   return (
     <div className="background d-flex align-items-center">

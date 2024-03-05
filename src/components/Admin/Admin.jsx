@@ -4,7 +4,7 @@ import { Outlet, Link } from 'react-router-dom'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
-import TableRestaurantIcon from '@mui/icons-material/TableRestaurant'
+import RedeemIcon from '@mui/icons-material/Redeem'
 import BorderColorIcon from '@mui/icons-material/BorderColor'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 
@@ -29,7 +29,11 @@ export default function Admin() {
       icon: <MenuBookIcon color="white" sx={{ fontSize: 35 }} />,
       link: 'menu',
     },
-    { text: 'Столы', icon: <TableRestaurantIcon sx={{ fontSize: 35 }} /> },
+    {
+      text: 'Акции',
+      icon: <RedeemIcon sx={{ fontSize: 35 }} />,
+      link: 'promo',
+    },
     { text: 'Заказы', icon: <BorderColorIcon sx={{ fontSize: 35 }} /> },
   ]
 

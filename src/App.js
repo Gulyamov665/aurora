@@ -14,6 +14,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/HomePage';
 import Navbar from './components/Navbar';
 import Scroll from './components/Scroll';
+import AdminPromo from './components/Admin/AdminPromo';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path='/admin/:res' element={<Admin />} >
           <Route path='main' element={<AdminMain />} />
           <Route path='menu' element={<AdminCategory />} />
+          <Route path='promo' element={<AdminPromo />} />
         </Route>
 
         <Route path='*' element={<NotFound />} />
