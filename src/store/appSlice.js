@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useAddProductMutation } from './productsApi'
+import { useAddProductMutation } from './admin/productsApi'
 
 
 

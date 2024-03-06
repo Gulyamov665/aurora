@@ -1,9 +1,9 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "./apiConfig";
+import { baseQuery } from "../apiConfigUser";
 
 
 
-export const promosApi = createApi({
+export const promosApiUser = createApi({
     reducerPath: 'promosApi',
     tagTypes: ['Promos'],
     baseQuery,
@@ -17,4 +17,4 @@ export const promosApi = createApi({
 })
 
 
-export const { useGetPromosQuery } = promosApi
+export const { useGetPromosQuery } = promosApiUser

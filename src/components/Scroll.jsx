@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Card from './Card'
-import { useGetProductsQuery } from '../store/productsApi'
-import { useGetCategoriesQuery } from '../store/categoryApi'
+import { useGetProductsQuery } from '../store/admin/productsApi'
+import { useGetCategoriesQuery } from '../store/admin/categoryApi'
 import Loading from './Loading'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { Navigation, Autoplay } from 'swiper/modules'
-import { useGetPromosQuery } from '../store/promoApi'
+import { useGetPromosQuery } from '../store/admin/promoApi'
 
 export default function Scroll() {
   const { data: category = [] } = useGetCategoriesQuery('bon')

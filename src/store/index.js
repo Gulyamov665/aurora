@@ -1,9 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import appReducer from './appSlice'
-import { productsApi } from "./productsApi";
-import { categoriesApi } from "./categoryApi";
+import { productsApi } from "./admin/productsApi";
+import { categoriesApi } from "./admin/categoryApi";
 import { tokenApi } from "./tokenApi";
-import { promosApi } from "./promoApi";
+import { promosApi } from "./admin/promoApi";
+import { categoriesApiUser } from "./user/categoryApi";
+import { productsApiUser } from "./user/productsApi";
+import { promosApiUser } from "./user/promoApi";
 
 export default configureStore({
     reducer: {
@@ -11,7 +14,18 @@ export default configureStore({
         [productsApi.reducerPath]: productsApi.reducer,
         [categoriesApi.reducerPath]: categoriesApi.reducer,
         [tokenApi.reducerPath]: tokenApi.reducer,
-        [promosApi.reducerPath]: promosApi.reducer
+        [promosApi.reducerPath]: promosApi.reducer,
+        [categoriesApiUser.reducerPath]: categoriesApiUser.reducer,
+        [productsApiUser.reducerPath]: productsApiUser.reducer,
+        [promosApiUser.reducerPath]: promosApi.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(productsApi.middleware, categoriesApi.middleware, tokenApi.middleware, promosApi.middleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
+        productsApi.middleware,
+        categoriesApi.middleware,
+        tokenApi.middleware,
+        promosApi.middleware,
+        categoriesApiUser.middleware,
+        productsApiUser.middleware,
+        promosApiUser.middleware,
+    )
 })

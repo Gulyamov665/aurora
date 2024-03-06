@@ -3,7 +3,7 @@ import styles from './AdminPromo.module.scss'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import EditNoteIcon from '@mui/icons-material/EditNote'
 import IOSSwitch from '../MuiSwitch'
-import { useGetPromosQuery } from '../../store/promoApi'
+import { useGetPromosQuery } from '../../store/admin/promoApi'
 import { useParams } from 'react-router-dom'
 
 const AdminPromo = () => {

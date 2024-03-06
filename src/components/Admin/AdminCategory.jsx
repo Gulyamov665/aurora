@@ -17,12 +17,12 @@ import { useParams } from 'react-router-dom'
 import {
   useGetProductsQuery,
   useUpdateProductMutation,
-} from '../../store/productsApi'
+} from '../../store/admin/productsApi'
 import {
   useAddCategoryMutation,
   useGetCategoriesQuery,
   useUpdateOrderMutation,
-} from '../../store/categoryApi'
+} from '../../store/admin/categoryApi'
 import { Reorder } from 'framer-motion'
 import { toast } from 'react-toastify'
 
@@ -92,10 +92,10 @@ export default function AdminCategory() {
               className={`btn mt-2 fs-sm-1 ${styles.but_col}`}
               onClick={() => setShowModalCategory(!showModalCategory)}
             >
-              <AddIcon /> 
+              <AddIcon />
             </button>
             <button className={`btn mt-2 fs-sm-1 ${styles.but_col}`}>
-              <EditNoteIcon /> 
+              <EditNoteIcon />
             </button>
           </div>
           <CategoryModal
