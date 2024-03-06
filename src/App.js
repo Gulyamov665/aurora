@@ -33,7 +33,7 @@ function App() {
         <Route path='home' element={<HomePage />} />
         <Route path='login' element={<LoginPage />} />
 
-        <Route path='test/:res' element={<Test />} >
+        <Route path='vendor/:res' element={<Test />} >
           <Route index element={<Category />} />
         </Route>
 
