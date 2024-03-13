@@ -5,16 +5,27 @@ import { useSwipeable } from 'react-swipeable'
 export default function CardView({ item, open, setIsOpen }) {
   const handlers = useSwipeable({
     onSwipedDown: () => setIsOpen(false),
+    preventDefaultTouchmoveEvent: true,
   })
 
   return (
     <AnimatePresence>
       {open && (
         <motion.div
-          {...handlers}
-          initial={{ opacity: 0, y: 800 }}
-          animate={{ opacity: 1, x: 0, y: 12 }}
-          transition={{ delay: 0.1, duration: 0.3 }}
+        {...handlers}
+        initial={{ y: '100%' }}
+        animate={{ y: 0 }}
+        exit={{ y: '100%' }}
+        transition={{ duration: 0.3 }}
+        style={{
+          position: 'fixed',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'white',
+          padding: '20px',
+          boxShadow: '0px -5px 10px rgba(0, 0, 0, 0.1)',
+        }}
           className="card_view_motion"
         >
           <div className="container">
