@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 
 export default function Card(props) {
   const [isOpen, setIsOpen] = useState(false)
+
+ 
+
   return (
     <>
-      <div onClick={() => setIsOpen(!isOpen)} className="card">
+      <div className="card">
         <img className="card__image" src={props.img} alt={props.name} />
         <div className="card__info">
           <div className="car__info--title">

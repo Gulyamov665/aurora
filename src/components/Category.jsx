@@ -27,6 +27,8 @@ export default function Category() {
     setViewItem(item)
   }
 
+
+
   const ChangeSlide = ({ position }) => {
     const swiper = useSwiper()
 
@@ -181,7 +183,7 @@ export default function Category() {
             </div>
           </div>
         ))}
-      <CardView item={viewItem} open={isOpen} />
+      <CardView item={viewItem} open={isOpen} setIsOpen={setIsOpen} />
     </nav>
   )
 }

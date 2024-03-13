@@ -1,11 +1,17 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useSwipeable } from 'react-swipeable'
 
-export default function CardView({ item, open }) {
+export default function CardView({ item, open, setIsOpen }) {
+  const handlers = useSwipeable({
+    onSwipedDown: () => setIsOpen(false),
+  })
+
   return (
     <AnimatePresence>
       {open && (
         <motion.div
+          {...handlers}
           initial={{ opacity: 0, y: 800 }}
           animate={{ opacity: 1, x: 0, y: 12 }}
           transition={{ delay: 0.1, duration: 0.3 }}

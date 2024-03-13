@@ -31,7 +31,7 @@ const useInput = (restaurant, selectedCategory, updatedItem) => {
     }, [updateModal, updatedItem, menuItems])
 
 
-    const handleChange = (e) => {
+    const handleChange = e => {
         const { name, value, files } = e.target;
 
         if (name === "photo" && files) {
