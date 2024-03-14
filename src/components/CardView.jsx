@@ -18,7 +18,7 @@ export default function CardView({ item, open, setIsOpen }) {
           // {...handlers}
           drag="y"
           dragControls={controls}
-          dragElastic={0.1} // Настройка упругости перетаскивания
+          dragElastic={0.7} // Настройка упругости перетаскивания
           dragMomentum={false} // Отключение инерции перетаскивания
           dragConstraints={{ top: 0, bottom: 0 }} // Ограничение перетаскивания карточки внутри окна
           onDragEnd={(event, info) => {
