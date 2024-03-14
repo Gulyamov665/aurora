@@ -1,21 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { motion, AnimatePresence, useDragControls } from 'framer-motion'
-import { useSwipeable } from 'react-swipeable'
 
 export default function CardView({ item, open, setIsOpen }) {
-  // const handlers = useSwipeable({
-  //   onSwipedDown: () => setIsOpen(false),
-  //   preventDefaultTouchmoveEvent: true,
-  // })
-
   const controls = useDragControls()
-  console.log(controls)
+  useEffect(() => {
+    if (open) {
+      document.body.classList.add('modal-open')
+    } else {
+      document.body.classList.remove('modal-open')
+    }
+
+    return () => {
+      document.body.classList.remove('modal-open')
+    }
+  }, [open])
 
   return (
     <AnimatePresence>
       {open && (
         <motion.div
-          // {...handlers}
           drag="y"
           dragControls={controls}
           dragElastic={0.7} // Настройка упругости перетаскивания
