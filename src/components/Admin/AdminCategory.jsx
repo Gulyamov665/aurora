@@ -120,6 +120,7 @@ export default function AdminCategory() {
                     key={item.id}
                     value={item}
                     onMouseUpCapture={() => updatePosition()}
+                    // onDragEnd={() => updatePosition()}
                   >
                     <button
                       key={item.id}

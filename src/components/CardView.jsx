@@ -3,13 +3,11 @@ import { motion, AnimatePresence, useDragControls } from 'framer-motion'
 
 export default function CardView({ item, open, setIsOpen }) {
   const controls = useDragControls()
+  
   useEffect(() => {
     if (open) {
-      document.body.classList.add('modal-open')
-    } else {
-      document.body.classList.remove('modal-open')
+      document.body.classList.toggle('modal-open')
     }
-
     return () => {
       document.body.classList.remove('modal-open')
     }

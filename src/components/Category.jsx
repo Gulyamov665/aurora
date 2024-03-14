@@ -27,8 +27,6 @@ export default function Category() {
     setViewItem(item)
   }
 
-
-
   const ChangeSlide = ({ position }) => {
     const swiper = useSwiper()
 
@@ -44,7 +42,7 @@ export default function Category() {
     const links = document.querySelectorAll('.nav__link')
     const cb = (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio > 0.2) {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
           links.forEach((link) => link.classList.remove('active'))
 
           const activeId = Number(entry.target.id)
@@ -61,8 +59,8 @@ export default function Category() {
     }
 
     const observer = new IntersectionObserver(cb, {
-      rootMargin: '0px',
-      threshold: 0.2,
+      // rootMargin: '0px',
+      threshold: [0.3, 0.5, 1],
     })
 
     sectionRefs.current.forEach((sec) => {
