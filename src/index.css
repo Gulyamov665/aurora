@@ -17,6 +17,18 @@ code {
 .modal-open {
   overflow: hidden;
 }
+
+.card_modal {
+  width: auto;
+  height: 100%;
+  background-color: #00000047;
+  text-align: center;
+  z-index: 1021;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
 * {
   box-sizing: border-box;
 }
