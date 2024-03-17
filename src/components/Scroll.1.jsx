@@ -4,8 +4,6 @@ import { useGetProductsQuery } from '../store/admin/productsApi'
 import { useGetCategoriesQuery } from '../store/admin/categoryApi'
 import Loading from './Loading'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/pagination'
 import { Navigation, Autoplay } from 'swiper/modules'
 import { useGetPromosQuery } from '../store/admin/promoApi'
 
@@ -18,7 +16,7 @@ export default function Scroll() {
   } = useGetProductsQuery('bon')
   const { data: promo = [] } = useGetPromosQuery('bon')
 
-  const sectionRefs = useRef([])
+  const testRefs = useRef([])
   const [activeIndex, setActiveIndex] = useState(0)
 
   const ChangeSlide = ({ position }) => {
@@ -58,7 +56,7 @@ export default function Scroll() {
       threshold: 0.75,
     })
 
-    sectionRefs.current.forEach((sec) => {
+    testRefs.current.forEach((sec) => {
       observer.observe(sec)
     })
 
@@ -127,7 +125,7 @@ export default function Scroll() {
                 <h2>{item.name}</h2>
                 <div
                   className="row"
-                  ref={(ref) => (sectionRefs.current[index] = ref)}
+                  ref={(ref) => (testRefs.current[index] = ref)}
                   id={index}
                 >
                   {menuItems

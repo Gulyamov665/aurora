@@ -13,7 +13,6 @@ import 'react-toastify/dist/ReactToastify.css'
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/HomePage';
 import Navbar from './components/Navbar';
-import Scroll from './components/Scroll';
 import AdminPromo from './components/Admin/AdminPromo';
 
 function App() {
@@ -28,7 +27,6 @@ function App() {
 
         <Route path='*' element={<NotFound />} />
         <Route path='/' element={<Login />} />
-        <Route path='scroll' element={<Scroll />} />
         <Route path='navbar' element={<Navbar />} />
         <Route path='home' element={<HomePage />} />
         <Route path='login' element={<LoginPage />} />

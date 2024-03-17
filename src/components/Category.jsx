@@ -59,7 +59,7 @@ export default function Category() {
     }
 
     const observer = new IntersectionObserver(cb, {
-      // rootMargin: '0px',
+      rootMargin: '10px',
       threshold: [0.3, 0.5, 1],
     })
 

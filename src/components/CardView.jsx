@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useDragControls } from 'framer-motion'
 
 export default function CardView({ item, open, setIsOpen }) {
   const controls = useDragControls()
-  
+
   useEffect(() => {
     if (open) {
       document.body.classList.toggle('modal-open')
@@ -20,18 +20,18 @@ export default function CardView({ item, open, setIsOpen }) {
           <motion.div
             drag="y"
             dragControls={controls}
-            dragElastic={0.7} // Настройка упругости перетаскивания
-            dragMomentum={false} // Отключение инерции перетаскивания
-            dragConstraints={{ top: 0, bottom: 0 }} // Ограничение перетаскивания карточки внутри окна
+            dragElastic={0.7}
+            dragMomentum={false}
+            dragConstraints={{ top: 0, bottom: 0 }}
             onDragEnd={(event, info) => {
               if (info.offset.y > 100) {
-                setIsOpen(false) // Закрываем карточку, если она была перетащена вниз на расстояние больше 100px
+                setIsOpen(!open)
               }
             }}
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.1 }}
             style={{
               position: 'fixed',
               left: 0,

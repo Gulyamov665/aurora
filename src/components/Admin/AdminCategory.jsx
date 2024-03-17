@@ -119,8 +119,8 @@ export default function AdminCategory() {
                     className={styles.but_col}
                     key={item.id}
                     value={item}
-                    onMouseUpCapture={() => updatePosition()}
-                    // onDragEnd={() => updatePosition()}
+                    // onMouseUpCapture={() => updatePosition()}
+                    onDragEnd={() => updatePosition()}
                   >
                     <button
                       key={item.id}
