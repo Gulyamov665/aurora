@@ -11,9 +11,9 @@ export default function CardView({ item, open, setIsOpen }) {
       document.body.classList.remove('modal-open')
     }
 
-    return () => {
-      document.body.classList.remove('modal-open')
-    }
+    // return () => {
+    //   document.body.classList.remove('modal-open')
+    // }
   }, [open])
 
   return (
