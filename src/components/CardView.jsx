@@ -31,7 +31,7 @@ export default function CardView({ item, open, setIsOpen }) {
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
-            transition={{ duration: 0.1 }}
+            transition={{ duration: 0.2 }}
             style={{
               position: 'fixed',
               left: 0,
