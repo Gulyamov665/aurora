@@ -4,15 +4,15 @@ import { motion, AnimatePresence, useDragControls } from 'framer-motion'
 export default function CardView({ item, open, setIsOpen }) {
   const controls = useDragControls()
 
-  // useEffect(() => {
-  //   if (open) {
-  //     document.body.classList.toggle('modal-open')
-  //   }
+  useEffect(() => {
+    if (open) {
+      document.body.classList.toggle('modal-open')
+    }
 
-  //   return () => {
-  //     document.body.classList.remove('modal-open')
-  //   }
-  // }, [open])
+    return () => {
+      document.body.classList.remove('modal-open')
+    }
+  }, [open])
 
   return (
     <AnimatePresence>
@@ -23,7 +23,7 @@ export default function CardView({ item, open, setIsOpen }) {
             dragControls={controls}
             dragElastic={0.7}
             dragMomentum={false}
-            dragConstraints={{ top: 0, bottom: 0 }}
+            dragConstraints={{ bottom: 0 }}
             onDragEnd={(event, info) => {
               if (info.offset.y > 100) {
                 setIsOpen(!open)

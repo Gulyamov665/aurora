@@ -4,14 +4,14 @@ import { baseQuery } from "../apiConfigUser";
 
 
 export const promosApiUser = createApi({
-    reducerPath: 'promosApi',
+    reducerPath: 'promosApiUser',
     tagTypes: ['Promos'],
     baseQuery,
 
     endpoints: build => ({
         getPromos: build.query({
             query: res => `promo/${res}`,
-            providesTags: ['Prmos']
+            providesTags: ['Promos']
         })
     })
 })

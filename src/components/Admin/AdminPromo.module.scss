@@ -3,7 +3,7 @@
   height: 200px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: flex-start;
   flex: auto;
 
   .card_promo {
@@ -42,7 +42,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
- 
 
     .card_promo {
       width: 90%;

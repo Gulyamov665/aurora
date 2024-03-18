@@ -4,14 +4,12 @@ import { baseQuery } from '../apiConfigUser'
 
 
 export const categoriesApiUser = createApi({
-    reducerPath: 'categoriesApi',
-    tagTypes: ['Categories'],
+    reducerPath: 'categoriesApiUser',
     baseQuery,
 
     endpoints: build => ({
         getCategories: build.query({
             query: res => `category/${res}`,
-            providesTags: ['Categories']
         }),
         addCategory: build.mutation({
             query: body => ({
@@ -19,7 +17,6 @@ export const categoriesApiUser = createApi({
                 method: "POST",
                 body
             }),
-            invalidatesTags: ['Categories']
         }),
         updateOrder: build.mutation({
             query: body => ({
@@ -27,7 +24,6 @@ export const categoriesApiUser = createApi({
                 method: "POST",
                 body
             }),
-            invalidatesTags: ['Categories']
         }),
 
         updateCategory: build.mutation({

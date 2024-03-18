@@ -4,13 +4,11 @@ import { baseQuery } from '../apiConfigUser'
 
 
 export const productsApiUser = createApi({
-    reducerPath: 'productsApi',
-    tagTypes: ['Products'],
+    reducerPath: 'productsApiUser',
     baseQuery,
     endpoints: (build) => ({
         getProducts: build.query({
             query: (res) => `menu/${res}`,
-            providesTags: ["Products"]
         }),
         addProduct: build.mutation({
             query: (body) => ({
@@ -18,7 +16,6 @@ export const productsApiUser = createApi({
                 method: "POST",
                 body,
             }),
-            invalidatesTags: ['Products']
         }),
 
         updateProduct: build.mutation({
@@ -27,7 +24,6 @@ export const productsApiUser = createApi({
                 method: 'PUT',
                 body
             }),
-            invalidatesTags: ['Products']
         }),
 
         deleteProduct: build.mutation({
@@ -35,7 +31,6 @@ export const productsApiUser = createApi({
                 url: `menus/${id}`,
                 method: 'DELETE',
             }),
-            invalidatesTags: ['Products']
         })
     })
 })

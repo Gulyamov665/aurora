@@ -17,7 +17,7 @@ export default configureStore({
         [promosApi.reducerPath]: promosApi.reducer,
         [categoriesApiUser.reducerPath]: categoriesApiUser.reducer,
         [productsApiUser.reducerPath]: productsApiUser.reducer,
-        [promosApiUser.reducerPath]: promosApi.reducer,
+        [promosApiUser.reducerPath]: promosApiUser.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
         productsApi.middleware,
