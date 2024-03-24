@@ -11,4 +11,10 @@ export default defineConfig({
       root: 'build',
     },
   },
+
+  source:{
+    alias:{
+      '@store': './src/store/'
+    }
+  }
 })

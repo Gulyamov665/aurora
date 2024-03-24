@@ -7,22 +7,18 @@ import MenuModal from '../MenuModal'
 import CategoryModal from '../CategoryModal'
 import AddIcon from '@mui/icons-material/Add'
 import EditNoteIcon from '@mui/icons-material/EditNote'
-import {
-  toggleCreate,
-  toggleUpdate,
-  selectedCategory,
-} from '../../store/appSlice'
+import { toggleCreate, toggleUpdate, selectedCategory } from '@store/appSlice'
 
 import { useParams } from 'react-router-dom'
 import {
   useGetProductsQuery,
   useUpdateProductMutation,
-} from '../../store/admin/productsApi'
+} from '@store/admin/productsApi'
 import {
   useAddCategoryMutation,
   useGetCategoriesQuery,
   useUpdateOrderMutation,
-} from '../../store/admin/categoryApi'
+} from '@store/admin/categoryApi'
 import { Reorder } from 'framer-motion'
 import { toast } from 'react-toastify'
 
