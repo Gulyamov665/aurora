@@ -13,13 +13,14 @@ export default function Header({ sidebar }) {
       ? JSON.parse(localStorage.getItem('authTokens'))
       : null
   )
-  const [qrCode] = useQrCodeMutation()
-  const { data: getQrCode } = useGetQrCodeQuery()
+  const [qrCode, { data }] = useQrCodeMutation()
+  // const { data: getQrCode } = useGetQrCodeQuery()
   const [vendor, setVendor] = useState()
 
+  // console.log(data)
   const qrCodeGenerate = async () => {
     await qrCode()
-    DownloadQr(getQrCode)
+    DownloadQr(data)
   }
 
   useEffect(() => {

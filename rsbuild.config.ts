@@ -12,9 +12,9 @@ export default defineConfig({
     },
   },
 
-  source:{
-    alias:{
-      '@store': './src/store/'
-    }
-  }
+  source: {
+    alias: {
+      '@store': './src/store/',
+    },
+  },
 })

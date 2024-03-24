@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useGetQrCodeQuery } from '../store/admin/qrCode'
 
 export const DownloadQr = async (data) => {
+    console.log(data)
     // const { data } = useGetQrCodeQuery()
     // console.log(data)
     try {
