@@ -1,17 +1,51 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { jwtDecode } from 'jwt-decode'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
+  const [authTokens, setAuthTokens] = useState(() =>
+    localStorage.getItem('authTokens')
+      ? JSON.parse(localStorage.getItem('authTokens'))
+      : null
+  )
+  const [vendor, setVendor] = useState()
+
+  const handleExit = () => {
+    localStorage.removeItem('authTokens')
+    setAuthTokens(null)
+  }
+
+  useEffect(() => {
+    if (authTokens) {
+      setVendor(jwtDecode(authTokens.access).vendor)
+    } else {
+      setVendor('')
+    }
+  }, [authTokens])
+
   return (
     <header className="py-3 rounded-bottom mb-3 border-bottom header_backgroud">
       <div
         className="container-fluid d-grid gap-3 align-items-center"
         style={{ gridTemplateColumns: '1fr 2fr' }}
       >
-        <img
-          src="/img/transparent_logo.png"
-          style={{ width: 150 }}
-          alt="logo"
-        />
+        {!vendor ? (
+          <img
+            src="/img/transparent_logo.png"
+            style={{ width: 150 }}
+            alt="logo"
+          />
+        ) : (
+          <div>
+            <Link to={`/admin/${vendor}/menu`}>
+              <button className="btn btn_edit">Редактировать</button>
+            </Link>
+            <button className="btn btn-danger" onClick={handleExit}>
+              выход
+            </button>
+          </div>
+        )}
+
         <div className="d-flex align-items-end justify-content-end">
           <form className="" role="search">
             <input

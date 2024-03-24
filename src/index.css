@@ -377,6 +377,12 @@ code {
   /* background-color: #34495e; */
 }
 
+.btn_edit{
+  background: #71b378;
+  color: white;
+
+}
+
 .footer_style {
   background: rgb(235, 232, 220);
   background: linear-gradient(

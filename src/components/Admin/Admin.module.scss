@@ -15,28 +15,23 @@
   width: 15%;
   height: 100vh;
   background-color: #210638;
-  position: sticky;
+  position: fixed;
   top: 0;
   transition: 1s;
+  z-index: 99999;
 }
 
-.sectionMini {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 7%;
-  height: 100vh;
-  background-color: #210638;
-  position: sticky;
-  top: 0;
-  transition: 1s;
-}
-
-.logo {
-  width: 70%;
-  height: 70%;
-  margin: 50px auto 60px;
-}
+// .sectionMini {
+//   display: none;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   width: 0%;
+//   height: 100vh;
+//   background-color: #210638;
+//   position: fixed;
+//   top: 0;
+//   transition: 1s;
+// }
 
 .buttons {
   width: auto !important;
@@ -66,7 +61,7 @@
   .sectionMini {
     width: 20%;
   }
-  
+
   .section1 {
     width: 27%;
     z-index: 100000;

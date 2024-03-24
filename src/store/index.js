@@ -7,6 +7,7 @@ import { promosApi } from "./admin/promoApi";
 import { categoriesApiUser } from "./user/categoryApi";
 import { productsApiUser } from "./user/productsApi";
 import { promosApiUser } from "./user/promoApi";
+import { qrCodeApi } from "./admin/qrCode";
 
 export default configureStore({
     reducer: {
@@ -18,6 +19,7 @@ export default configureStore({
         [categoriesApiUser.reducerPath]: categoriesApiUser.reducer,
         [productsApiUser.reducerPath]: productsApiUser.reducer,
         [promosApiUser.reducerPath]: promosApiUser.reducer,
+        [qrCodeApi.reducerPath]: qrCodeApi.reducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
         productsApi.middleware,
@@ -27,5 +29,6 @@ export default configureStore({
         categoriesApiUser.middleware,
         productsApiUser.middleware,
         promosApiUser.middleware,
+        qrCodeApi.middleware
     )
 })
