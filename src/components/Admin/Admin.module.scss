@@ -62,14 +62,14 @@
   transition: 0.3s;
 }
 
-@media (max-width: 420px) {
+@media (min-width: 320px) and (max-width: 420px) {
   .sectionMini {
     width: 20%;
   }
 
   .section1 {
     width: 48%;
-    height: 91.6vh;;
+    height: 91.7%;
     z-index: 9999;
   }
 
