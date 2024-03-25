@@ -13,10 +13,11 @@
   flex-direction: column;
   justify-content: space-between;
   width: 15%;
-  height: 93vh;
+  height: 100vh;
   background-color: #210638;
-  position: fixed;
-  bottom: 0;
+  position: sticky;
+  top: 0;
+  
   transition: 1s;
   z-index: 9999;
 }
@@ -69,7 +70,7 @@
 
   .section1 {
     width: 48%;
-    height: 91.7%;
+    height: 100vh;
     z-index: 9999;
   }
 
