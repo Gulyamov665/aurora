@@ -23,3 +23,12 @@
     width: 100px;
   }
 }
+@media (min-width: 421px) and (max-width: 520px){
+  .btn_size{
+    font-size: 15px;
+    padding: 5px;
+  }
+  .logo{
+    width: 120px;
+  }
+}

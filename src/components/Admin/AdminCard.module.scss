@@ -27,3 +27,14 @@
     width: 100%;
   }
 }
+
+@media (min-width: 421px) and (max-width: 520px) {
+  .col_1 {
+    width: 100%;
+  }
+}
+@media (min-width: 521px) and (max-width: 768px) {
+  .col_1 {
+    width: 48%;
+  }
+}

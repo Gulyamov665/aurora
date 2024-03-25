@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { useGetProductsQuery } from "../store/admin/productsApi"
 import { useParams } from "react-router-dom"
 
@@ -9,7 +9,7 @@ const useInput = (restaurant, selectedCategory, updatedItem) => {
     const { res } = useParams()
     const { updateModal } = useSelector((state) => state.modals)
     const { data: menuItems } = useGetProductsQuery(res)
-    const dispatch = useDispatch()
+
 
     let initialValue = {
         name: '',

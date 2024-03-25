@@ -41,8 +41,10 @@ export default function ReorderPage({
                       value={item}
                       onPointerDown={(e) => controls.start(e)}
                     /> */}
+                    <div className={styles.button_text}>
                     {item.name}
-                    {/* <EditNoteIcon /> */}
+                    </div>
+                    <EditNoteIcon />
                   </div>
                 </button>
               </Reorder.Item>
