@@ -4,23 +4,20 @@ import styles from './Header.module.scss'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Link } from 'react-router-dom'
 import { useQrCodeMutation } from '@store/admin/qrCode'
-import { useGetQrCodeQuery } from '../store/admin/qrCode'
 import { DownloadQr } from '../Utils/downloadQr'
 
 export default function Header({ sidebar }) {
-  const [authTokens] = useState(() =>
+  const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem('authTokens')
       ? JSON.parse(localStorage.getItem('authTokens'))
       : null
   )
-  const [qrCode, { data }] = useQrCodeMutation()
-  // const { data: getQrCode } = useGetQrCodeQuery()
+  const [qrCode, { isLoading }] = useQrCodeMutation()
   const [vendor, setVendor] = useState()
 
-  // console.log(data)
   const qrCodeGenerate = async () => {
     await qrCode()
-    DownloadQr(data)
+    DownloadQr(authTokens?.access)
   }
 
   useEffect(() => {
@@ -47,12 +44,28 @@ export default function Header({ sidebar }) {
           alt="img"
         />
       </div>
-      <div className="btn-group">
-        <button className="btn btn-danger" onClick={qrCodeGenerate}>
-          QrCode
-        </button>
+      <div className="d-flex justify-content-between">
+        {!isLoading ? (
+          <button
+            className={`btn btn-danger ${styles.btn_size} me-2`}
+            onClick={qrCodeGenerate}
+          >
+            QrCode
+          </button>
+        ) : (
+          <button
+            className={`btn btn-danger ${styles.btn_size}`}
+            onClick={qrCodeGenerate}
+          >
+            <span
+              class="spinner-border spinner-border-sm "
+              aria-hidden="true"
+            ></span>
+          </button>
+        )}
+
         <Link to={`/vendor/${vendor}`}>
-          <button className="btn btn-info">
+          <button className={`btn btn-info ${styles.btn_size}`}>
             <span style={{ color: 'white' }}>Предпросмотр</span>
           </button>
         </Link>

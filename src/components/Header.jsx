@@ -40,9 +40,6 @@ const Header = () => {
             <Link to={`/admin/${vendor}/menu`}>
               <button className="btn btn_edit">Редактировать</button>
             </Link>
-            <button className="btn btn-danger" onClick={handleExit}>
-              выход
-            </button>
           </div>
         )}
 

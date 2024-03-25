@@ -1,6 +1,7 @@
 .category {
   width: 20%;
   height: auto;
+  margin-top: 12px;
   padding-left: 5px;
   // display: none;
 }
@@ -24,6 +25,8 @@
 
 .button_name{
   font-size: 14px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .but_col_active {
@@ -34,6 +37,7 @@
 
 .menuItems {
   // width: 65%;
+ 
   padding: 53px 5px 10px;
   display: flex;
   flex-wrap: wrap;
@@ -43,10 +47,10 @@
 
 @media (max-width: 420px) {
   .category {
-    width: 30%;
+    width: 45%;
   }
   .menuItems {
-    width: 40%;
+    width: 50%;
   }
 
   .col_1 {

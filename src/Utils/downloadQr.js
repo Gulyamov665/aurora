@@ -1,18 +1,25 @@
 import axios from 'axios'
-import { useGetQrCodeQuery } from '../store/admin/qrCode'
 
-export const DownloadQr = async (data) => {
-    console.log(data)
-    // const { data } = useGetQrCodeQuery()
-    // console.log(data)
+const baseURL = process.env.PUBLIC_BASE_URL
+
+export const DownloadQr = async (token) => {
+
     try {
-        // const response = data
+        const response = await axios.get(
+            `${baseURL}admins/download/qr`,
+            {
+                responseType: 'blob',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                }
+            },
 
-        const url = window.URL.createObjectURL(new Blob([data]))
+        )
+        const url = window.URL.createObjectURL(new Blob([response.data]))
 
         const link = document.createElement('a')
         link.href = url
-        link.setAttribute('download')
+        link.setAttribute('download', `image.jpg`)
         document.body.appendChild(link)
 
         link.click()

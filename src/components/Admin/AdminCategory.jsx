@@ -6,6 +6,7 @@ import styles from './AdminCategory.module.scss'
 import MenuModal from '../MenuModal'
 import CategoryModal from '../CategoryModal'
 import AddIcon from '@mui/icons-material/Add'
+
 import EditNoteIcon from '@mui/icons-material/EditNote'
 import { toggleCreate, toggleUpdate, selectedCategory } from '@store/appSlice'
 
@@ -19,8 +20,9 @@ import {
   useGetCategoriesQuery,
   useUpdateOrderMutation,
 } from '@store/admin/categoryApi'
-import { Reorder } from 'framer-motion'
+
 import { toast } from 'react-toastify'
+import ReorderPage from './ReorderPage'
 
 export default function AdminCategory() {
   const { res } = useParams()
@@ -57,7 +59,7 @@ export default function AdminCategory() {
       updatedItem: item.id,
     }).unwrap()
   }
-
+  console.log()
   const handleCategory = async () => {
     const categoryItem = {
       restaurant: rest,
@@ -81,7 +83,7 @@ export default function AdminCategory() {
   return (
     <>
       <div className={styles.category}>
-        <div className="col d-flex flex-column mt-3 sticky-top">
+        <div className="col d-flex flex-column sticky-top">
           <h4 className="text-center text-dark">Категории</h4>
           <div className="btn-group">
             <button
@@ -102,35 +104,12 @@ export default function AdminCategory() {
             handleCategory={handleCategory}
           />
 
-          {items && (
-            <Reorder.Group
-              axis="y"
-              as="div"
-              values={items}
-              onReorder={setItems}
-            >
-              {items &&
-                items.map((item, i) => (
-                  <Reorder.Item
-                    className={styles.but_col}
-                    key={item.id}
-                    value={item}
-                    // onMouseUpCapture={() => updatePosition()}
-                    onDragEnd={() => updatePosition()}
-                  >
-                    <button
-                      key={item.id}
-                      onClick={() => dispatch(selectedCategory(item.id))}
-                      className={`btn mt-2 ${styles.but_col} ${
-                        select === item.id ? styles.but_col_active : ''
-                      }`}
-                    >
-                      <div className={styles.button_name}>{item.name}</div>
-                    </button>
-                  </Reorder.Item>
-                ))}
-            </Reorder.Group>
-          )}
+          <ReorderPage
+            updatePosition={updatePosition}
+            items={items}
+            setItems={setItems}
+            select={select}
+          />
         </div>
       </div>
       <div className={styles.menuItems}>
@@ -139,7 +118,7 @@ export default function AdminCategory() {
             role="button"
             data-bs-toggle="modal"
             data-bs-target="#create_mode"
-            className={`${styles.col_1} mt-2`}
+            className={`${styles.col_1}`}
           >
             <p
               className="pt-5 text-center"

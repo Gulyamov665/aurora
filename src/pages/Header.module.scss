@@ -5,10 +5,20 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 15px;
+
 }
 .logo {
   width: 150px;
-  // padding: 20px 0 0 30px;
-  // position: absolute;
-  // z-index: 999999;
+}
+
+
+
+@media (max-width: 420px){
+  .btn_size{
+    font-size: 12px;
+    padding: 5px;
+  }
+  .logo{
+    width: 100px;
+  }
 }

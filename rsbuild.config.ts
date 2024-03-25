@@ -17,4 +17,8 @@ export default defineConfig({
       '@store': './src/store/',
     },
   },
+
+  dev: {
+    assetPrefix: true,
+  },
 })

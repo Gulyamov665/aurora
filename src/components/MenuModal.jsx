@@ -47,7 +47,7 @@ function MenuModal({ restaurant, updatedItem, close }) {
   return (
     <>
       <Modal show={createModal ? createModal : updateModal} onHide={close}>
-        <Modal.Header closeButton>
+        <Modal.Header className="" closeButton>
           {createModal ? (
             <Modal.Title>Добавить меню</Modal.Title>
           ) : (

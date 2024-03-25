@@ -13,13 +13,14 @@
   flex-direction: column;
   justify-content: space-between;
   width: 15%;
-  height: 100vh;
+  height: 93vh;
   background-color: #210638;
   position: fixed;
-  top: 0;
+  bottom: 0;
   transition: 1s;
-  z-index: 99999;
+  z-index: 9999;
 }
+
 
 // .sectionMini {
 //   display: none;
@@ -34,13 +35,17 @@
 // }
 
 .buttons {
-  width: auto !important;
-  margin: 0 auto;
+  width: 180px !important;
   color: #ffffff !important;
   font-family: 'Josefin Sans', sans-serif !important;
   background-color: transparent !important;
   border: 0 !important;
   transition: 0.3s;
+}
+
+.div{
+  display: flex;
+  align-items: center;
 }
 
 .buttons:hover {
@@ -63,7 +68,12 @@
   }
 
   .section1 {
-    width: 27%;
-    z-index: 100000;
+    width: 48%;
+
+    z-index: 9999;
+  }
+
+  .buttons {
+    width: 160px !important;
   }
 }

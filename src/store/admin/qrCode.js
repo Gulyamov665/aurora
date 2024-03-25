@@ -8,7 +8,8 @@ export const qrCodeApi = createApi({
 
     endpoints: build => ({
         getQrCode: build.query({
-            query: () => 'download/qr'
+            query: () => 'download/qr',
+            responseType: 'blob'
         }),
 
         qrCode: build.mutation({
