@@ -6,10 +6,8 @@ import styles from './AdminCategory.module.scss'
 import MenuModal from '../MenuModal'
 import CategoryModal from '../CategoryModal'
 import AddIcon from '@mui/icons-material/Add'
-
 import EditNoteIcon from '@mui/icons-material/EditNote'
 import { toggleCreate, toggleUpdate } from '@store/appSlice'
-
 import { useParams } from 'react-router-dom'
 import {
   useGetProductsQuery,
@@ -20,7 +18,6 @@ import {
   useGetCategoriesQuery,
   useUpdateOrderMutation,
 } from '@store/admin/categoryApi'
-
 import { toast } from 'react-toastify'
 import ReorderPage from './ReorderPage'
 
