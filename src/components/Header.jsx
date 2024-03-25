@@ -10,11 +10,6 @@ const Header = () => {
   )
   const [vendor, setVendor] = useState()
 
-  const handleExit = () => {
-    localStorage.removeItem('authTokens')
-    setAuthTokens(null)
-  }
-
   useEffect(() => {
     if (authTokens) {
       setVendor(jwtDecode(authTokens.access).vendor)

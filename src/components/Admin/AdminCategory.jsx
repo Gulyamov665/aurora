@@ -8,7 +8,7 @@ import CategoryModal from '../CategoryModal'
 import AddIcon from '@mui/icons-material/Add'
 
 import EditNoteIcon from '@mui/icons-material/EditNote'
-import { toggleCreate, toggleUpdate, selectedCategory } from '@store/appSlice'
+import { toggleCreate, toggleUpdate } from '@store/appSlice'
 
 import { useParams } from 'react-router-dom'
 import {
