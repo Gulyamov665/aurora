@@ -46,6 +46,15 @@ code {
   display: flex;
   margin: 0 auto;
 }
+
+.cat_name{
+  font-weight: 700;
+}
+
+.cat_name hr{
+  
+}
+
 .op {
   width: 90%;
   height: 500px;
