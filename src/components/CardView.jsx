@@ -22,7 +22,7 @@ export default function CardView({ item, open, setIsOpen }) {
             drag="y"
             dragDirection="down"
             dragControls={controls}
-            dragElastic={1}
+            dragElastic={2}
             dragConstraints={{ top: 0, bottom: 0 }}
             onDragEnd={(event, info) => {
               if (info.offset.y > 100) {
