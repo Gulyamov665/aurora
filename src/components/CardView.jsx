@@ -39,8 +39,8 @@ export default function CardView({ item, open, setIsOpen }) {
               right: 0,
               bottom: 0,
               background: 'white',
-              padding: '20px',
-              boxShadow: '0px -5px 10px rgba(0, 0, 0, 0.1)',
+              // padding: '20px',
+              // boxShadow: '0px -5px 10px rgba(0, 0, 0, 0.1)',
             }}
             className="card_view_motion"
           >

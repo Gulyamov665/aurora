@@ -148,7 +148,6 @@ code {
 
 .card_view_motion {
   margin: 0 auto;
-  padding: 0 !important;
   /* width: 50%; */
   background-color: #ffff;
   border-radius: 15px;
