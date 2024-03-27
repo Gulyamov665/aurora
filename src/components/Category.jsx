@@ -81,7 +81,7 @@ export default function Category() {
   }
 
   return (
-    <nav>
+    <nav className="">
       <div className="container">
         <Swiper
           slidesPerView={4}
@@ -147,40 +147,41 @@ export default function Category() {
           </Swiper>
         </div>
       </div>
-
-      {menuItems.length > 0 &&
-        category.map((item, index) => (
-          <div id={item.name} className="section" key={item.id}>
-            <div className="container">
-              <h2 className="">{item.name}</h2>
-              <div
-                className="row"
-                ref={(ref) => (sectionRefs.current[index] = ref)}
-                id={index}
-              >
-                {menuItems
-                  .filter((obj) => obj.category === item.id)
-                  .map(
-                    (filteredObj) =>
-                      filteredObj.is_active && (
-                        <div
-                          onClick={() => handleView(filteredObj)}
-                          key={filteredObj.id}
-                          className="col-6 col-sm-6 col-md-4 col-lg-3"
-                        >
-                          <Card
-                            img={filteredObj.photo}
-                            name={filteredObj.name}
-                            desc={filteredObj.description}
-                            price={filteredObj.price}
-                          />
-                        </div>
-                      )
-                  )}
+      <div className="round">
+        {menuItems.length > 0 &&
+          category.map((item, index) => (
+            <div id={item.name} className="section" key={item.id}>
+              <div className="container">
+                <h2 className="">{item.name}</h2>
+                <div
+                  className="row"
+                  ref={(ref) => (sectionRefs.current[index] = ref)}
+                  id={index}
+                >
+                  {menuItems
+                    .filter((obj) => obj.category === item.id)
+                    .map(
+                      (filteredObj) =>
+                        filteredObj.is_active && (
+                          <div
+                            onClick={() => handleView(filteredObj)}
+                            key={filteredObj.id}
+                            className="col-6 col-sm-6 col-md-4 col-lg-3"
+                          >
+                            <Card
+                              img={filteredObj.photo}
+                              name={filteredObj.name}
+                              desc={filteredObj.description}
+                              price={filteredObj.price}
+                            />
+                          </div>
+                        )
+                    )}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+      </div>
       <CardView item={viewItem} open={isOpen} setIsOpen={setIsOpen} />
     </nav>
   )

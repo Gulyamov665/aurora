@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap');
 body {
   margin: 0;
-  background-color: #ffffff !important;
+  background-color: #e6e4e4 !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -377,10 +377,9 @@ code {
   /* background-color: #34495e; */
 }
 
-.btn_edit{
+.btn_edit {
   background: #71b378;
   color: white;
-
 }
 
 .footer_style {
@@ -610,4 +609,10 @@ section-nav {
 
 Swiper {
   background-color: #fafffc;
+}
+
+.round {
+  background-color: #ffffffb2;
+  border-radius: 10px;
+  margin-top: 10px;
 }
