@@ -22,7 +22,7 @@ code {
 .card_modal {
   width: auto;
   height: 100%;
-  background-color: #00000047;
+  background-color: #00000080;
   text-align: center;
   z-index: 1021;
   position: fixed;

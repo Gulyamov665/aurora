@@ -17,7 +17,7 @@ export default function CardView({ item, open, setIsOpen }) {
   return (
     <AnimatePresence>
       {open && (
-        <div className="">
+        <div className="card_modal">
           <motion.div
             drag="y"
             dragDirection="down"
