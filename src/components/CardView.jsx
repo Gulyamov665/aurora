@@ -46,8 +46,8 @@ export default function CardView({ item, open, setIsOpen }) {
           >
             <div className="">
               <div className="card_view">
-                <h2 style={{ paddingTop: '10px' }}>{item.name}</h2>
                 <img className="card_view_img" src={item.photo} alt="" />
+                <h2 style={{ paddingTop: '10px' }}>{item.name}</h2>
                 <br />
                 <b>Описание</b>
                 <p>{item.description}</p>
