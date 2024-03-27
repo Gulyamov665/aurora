@@ -17,13 +17,12 @@ export default function CardView({ item, open, setIsOpen }) {
   return (
     <AnimatePresence>
       {open && (
-        <div className="card_modal">
+        <div className="">
           <motion.div
             drag="y"
             dragDirection="down"
             dragControls={controls}
             dragElastic={1}
-            // dragMomentum={true}
             dragConstraints={{ top: 0, bottom: 0 }}
             onDragEnd={(event, info) => {
               if (info.offset.y > 100) {
@@ -33,7 +32,7 @@ export default function CardView({ item, open, setIsOpen }) {
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.3 }}
             style={{
               position: 'fixed',
               // left: 0,

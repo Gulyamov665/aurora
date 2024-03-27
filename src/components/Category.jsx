@@ -14,7 +14,7 @@ import CardView from './CardView'
 export default function Category() {
   const { res } = useParams()
   const { data: category = [] } = useGetCategoriesQuery(res)
-  const { data: menuItems = [], isLoading, isError } = useGetProductsQuery(res)
+  const { data: menuItems = [], isLoading, isError, isSuccess } = useGetProductsQuery(res)
   const { data: promo = [] } = useGetPromosQuery(res)
 
   const sectionRefs = useRef([])
@@ -60,7 +60,7 @@ export default function Category() {
 
     const observer = new IntersectionObserver(cb, {
       rootMargin: '10px',
-      threshold: [0.3, 0.5, 1],
+      threshold: [0.2, 0.5, 1],
     })
 
     sectionRefs.current.forEach((sec) => {
@@ -70,7 +70,7 @@ export default function Category() {
     return () => {
       observer.disconnect()
     }
-  }, [isLoading, category])
+  }, [isSuccess])
 
   if (isLoading) {
     return <Loading />
@@ -91,11 +91,11 @@ export default function Category() {
           }}
           breakpoints={{
             320: {
-              slidesPerView: 1.9,
-              spaceBetween: 10,
+              slidesPerView: 2,
+              spaceBetween: 7,
             },
             480: {
-              slidesPerView: 2.8,
+              slidesPerView: 3,
             },
             640: {
               slidesPerView: 4,
@@ -129,7 +129,7 @@ export default function Category() {
                 spaceBetween: 10,
               },
               480: {
-                slidesPerView: 2.8,
+                slidesPerView: 3,
               },
               640: {
                 slidesPerView: 5,
