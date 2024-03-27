@@ -20,10 +20,11 @@ export default function CardView({ item, open, setIsOpen }) {
         <div className="card_modal">
           <motion.div
             drag="y"
+            dragDirection="down"
             dragControls={controls}
             dragElastic={1}
-            dragMomentum={false}
-            dragConstraints={{ bottom: 0 }}
+            // dragMomentum={true}
+            dragConstraints={{ top: 0, bottom: 0 }}
             onDragEnd={(event, info) => {
               if (info.offset.y > 100) {
                 setIsOpen(!open)
@@ -35,8 +36,8 @@ export default function CardView({ item, open, setIsOpen }) {
             transition={{ duration: 0.2 }}
             style={{
               position: 'fixed',
-              left: 0,
-              right: 0,
+              // left: 0,
+              // right: 0,
               bottom: 0,
               background: 'white',
               // padding: '20px',
