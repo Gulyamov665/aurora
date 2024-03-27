@@ -44,7 +44,7 @@ export default function CardView({ item, open, setIsOpen }) {
             }}
             className="card_view_motion"
           >
-            <div className="container">
+            <div className="">
               <div className="card_view">
                 <h2 style={{ paddingTop: '10px' }}>{item.name}</h2>
                 <img className="card_view_img" src={item.photo} alt="" />
