@@ -21,7 +21,7 @@ export default function CardView({ item, open, setIsOpen }) {
           <motion.div
             drag="y"
             dragControls={controls}
-            dragElastic={0.7}
+            dragElastic={0.5}
             dragMomentum={false}
             dragConstraints={{ bottom: 0 }}
             onDragEnd={(event, info) => {

@@ -81,7 +81,7 @@ export default function Category() {
   }
 
   return (
-    <nav className="">
+    <nav>
       <div className="container">
         <Swiper
           slidesPerView={4}
@@ -153,7 +153,7 @@ export default function Category() {
             <div id={item.name} className="section" key={item.id}>
               <div className="container">
                 <h2 className="cat_name pt-4">{item.name}</h2>
-                <hr/>
+                <hr />
                 <div
                   className="row"
                   ref={(ref) => (sectionRefs.current[index] = ref)}
