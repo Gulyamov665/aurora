@@ -27,7 +27,7 @@ export default function CardView({ item, open, setIsOpen }) {
             dragConstraints={{ top: 0, bottom: 0 }}
             onDragEnd={(event, info) => {
               if (info.offset.y > 100) {
-                setIsOpen(!open)
+                setIsOpen(false)
               }
             }}
             initial={{ y: '100%' }}
