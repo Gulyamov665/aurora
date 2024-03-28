@@ -10,15 +10,22 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { Navigation, Autoplay } from 'swiper/modules'
 import CardView from './CardView'
+import { useInView } from 'react-intersection-observer'
 
 export default function Category() {
   const { res } = useParams()
   const { data: category = [] } = useGetCategoriesQuery(res)
-  const { data: menuItems = [], isLoading, isError, isSuccess } = useGetProductsQuery(res)
+  const {
+    data: menuItems = [],
+    isLoading,
+    isError,
+    isSuccess,
+  } = useGetProductsQuery(res)
   const { data: promo = [] } = useGetPromosQuery(res)
 
   const sectionRefs = useRef([])
-  const [activeIndex, setActiveIndex] = useState(0)
+  const navLinks = useRef([])
+  const [activeIndex, setActiveIndex] = useState()
   const [isOpen, setIsOpen] = useState(false)
   const [viewItem, setViewItem] = useState(null)
 
@@ -39,18 +46,21 @@ export default function Category() {
   }
 
   useEffect(() => {
-    const links = document.querySelectorAll('.nav__link')
     const cb = (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-          links.forEach((link) => link.classList.remove('active'))
+        // console.log(entry)
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.2) {
+          navLinks.current.forEach((link) => link.classList.remove('active'))
 
-          const activeId = Number(entry.target.id)
+          let activeId = Number(entry.target.id)
 
+          console.log(activeId)
           const activeLink = document.querySelector(
             `.nav__link[href="#${activeId}"]`
           )
+
           setActiveIndex(activeId)
+
           if (activeLink) {
             activeLink.classList.add('active')
           }
@@ -59,8 +69,8 @@ export default function Category() {
     }
 
     const observer = new IntersectionObserver(cb, {
-      rootMargin: '10px',
-      threshold: [0.2, 0.5, 1],
+      rootMargin: '0px',
+      threshold: [0.3, 1],
     })
 
     sectionRefs.current.forEach((sec) => {
@@ -85,10 +95,10 @@ export default function Category() {
       <div className="container">
         <Swiper
           slidesPerView={4}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: true,
-          }}
+          // autoplay={{
+          //   delay: 2500,
+          //   disableOnInteraction: true,
+          // }}
           breakpoints={{
             320: {
               slidesPerView: 2,
@@ -125,7 +135,7 @@ export default function Category() {
             mousewheel={true}
             breakpoints={{
               320: {
-                slidesPerView: 2.5,
+                slidesPerView: 2.8,
                 spaceBetween: 10,
               },
               480: {
@@ -139,7 +149,11 @@ export default function Category() {
             <ChangeSlide position={activeIndex} />
             {category.map((item, index) => (
               <SwiperSlide key={item.id}>
-                <a className="nav__link" href={`#${index}`}>
+                <a
+                  className="nav__link"
+                  href={`#${index}`}
+                  ref={(ref) => (navLinks.current[index] = ref)}
+                >
                   {item.name}
                 </a>
               </SwiperSlide>
@@ -151,14 +165,14 @@ export default function Category() {
         {menuItems.length > 0 &&
           category.map((item, index) => (
             <div id={item.name} className="section" key={item.id}>
-              <div className="container">
+              <div
+                className="container"
+                ref={(ref) => (sectionRefs.current[index] = ref)}
+                id={index}
+              >
                 <h2 className="cat_name pt-4">{item.name}</h2>
                 <hr />
-                <div
-                  className="row"
-                  ref={(ref) => (sectionRefs.current[index] = ref)}
-                  id={index}
-                >
+                <div className="row">
                   {menuItems
                     .filter((obj) => obj.category === item.id)
                     .map(
