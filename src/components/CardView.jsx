@@ -20,7 +20,6 @@ export default function CardView({ item, open, setIsOpen }) {
         <div className="card_modal">
           <motion.div
             drag="y"
-            dragDirection="down"
             dragControls={controls}
             dragElastic={{ top: 0, bottom: 2 }}
             dragConstraints={{ top: 0, bottom: 0 }}
