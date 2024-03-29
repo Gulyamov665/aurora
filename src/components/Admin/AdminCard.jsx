@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './AdminCard.module.scss'
-import IOSSwitch from '../MuiSwitch'
+import IOSSwitch from '../Client/MuiSwitch'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import BorderColorIcon from '@mui/icons-material/BorderColor'
 import { useDispatch } from 'react-redux'

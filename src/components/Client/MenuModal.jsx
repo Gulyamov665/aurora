@@ -1,14 +1,14 @@
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
-import useInput from '../hooks/useInput'
+import useInput from '../../hooks/useInput'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useSelector } from 'react-redux'
 import {
   useAddProductMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,
-} from '../store/admin/productsApi'
+} from '../../store/admin/productsApi'
 import { toast } from 'react-toastify'
 
 function MenuModal({ restaurant, updatedItem, close }) {

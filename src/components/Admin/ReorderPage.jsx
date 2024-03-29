@@ -1,8 +1,7 @@
 import React from 'react'
 import styles from './Reorder.module.scss'
 import { useDispatch } from 'react-redux'
-import { Reorder, useDragControls } from 'framer-motion'
-import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
+import { Reorder } from 'framer-motion'
 import { selectedCategory } from '@store/appSlice'
 import EditNoteIcon from '@mui/icons-material/EditNote'
 
@@ -13,7 +12,7 @@ export default function ReorderPage({
   select,
 }) {
   const dispatch = useDispatch()
-  const controls = useDragControls()
+
   return (
     <div>
       {items && (
@@ -25,6 +24,8 @@ export default function ReorderPage({
                 key={item.id}
                 value={item}
                 onDragEnd={() => updatePosition()}
+                // dragListener={false}
+
                 whileDrag={{ scale: 1.1 }}
               >
                 <button
@@ -35,11 +36,6 @@ export default function ReorderPage({
                   }`}
                 >
                   <div className={styles.button_name}>
-                    {/* <DragIndicatorIcon
-                      style={{ touchAction: 'none' }}
-                      value={item}
-                      onPointerDown={(e) => controls.start(e)}
-                    /> */}
                     <div className={styles.button_text}>{item.name}</div>
                     <EditNoteIcon />
                   </div>

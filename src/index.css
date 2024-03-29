@@ -137,11 +137,11 @@ code {
   /* background-color: #ffff; */
   /* border-radius: 15px 10px 0 0; */
   /* box-shadow: 5px 5px 15px 5px rgba(230, 230, 250, 1); */
-  text-align: center;
+  /* text-align: center; */
   z-index: 99999999;
   /* position: fixed; */
   top: 20%;
-  /* bottom: 0; */
+  bottom: 0;
   left: 0;
   right: 0;
 }
@@ -151,7 +151,7 @@ code {
   /* width: 50%; */
   background-color: #ffff;
   border-radius: 20px 20px 0 0;
-  text-align: center;
+  /* text-align: center; */
   z-index: 99999999;
   /* position: fixed; */
   top: 20%;

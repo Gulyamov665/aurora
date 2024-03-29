@@ -17,21 +17,21 @@
   background-color: #210638;
   position: absolute;
   top: 60;
-  transition: 1s;
+  // transition: 1s;
   z-index: 9999;
 }
 
-// .sectionMini {
-//   display: none;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   width: 0%;
-//   height: 100vh;
-//   background-color: #210638;
-//   position: fixed;
-//   top: 0;
-//   transition: 1s;
-// }
+.sectionMini {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 15%;
+  height: 100vh;
+  background-color: #210638;
+  position: fixed;
+  top: 0;
+  transition: 1s;
+}
 
 .buttons {
   width: 180px !important;

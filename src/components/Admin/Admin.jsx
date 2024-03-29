@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
+import { Outlet, Link, useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import styles from './Admin.module.scss'
-import { Outlet, Link } from 'react-router-dom'
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
 import RedeemIcon from '@mui/icons-material/Redeem'
 import BorderColorIcon from '@mui/icons-material/BorderColor'
 import Header from '../../pages/Header'
-import { useNavigate } from 'react-router-dom'
 
 export default function Admin() {
   const navigate = useNavigate()
@@ -54,7 +54,15 @@ export default function Admin() {
       <Header sidebar={handleSidebar} />
       <div className={styles.parent}>
         {sidebarWidth && (
-          <div className={styles.section1}>
+          <motion.div
+            className={styles.section1}
+            initial={{ x: -200 }}
+            animate={{ x: 0 }}
+            exit={{
+              x: -200,
+            }}
+            transition={{ duration: 0.3 }}
+          >
             <div className={styles.section_0}></div>
             <div className="d-flex flex-column ms-2">
               {buttonsInfo.map(({ text, icon, link }, index) => (
@@ -81,7 +89,7 @@ export default function Admin() {
                 <strong>Выход</strong>
               </button>
             </div>
-          </div>
+          </motion.div>
         )}
 
         <Outlet />

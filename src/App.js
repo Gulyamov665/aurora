@@ -1,25 +1,27 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
-import Test from './components/Test';
-import Category from './components/Category';
+import Test from './components/Client/Test';
+import Category from './components/Client/Category';
 import Admin from './components/Admin/Admin';
 import AdminCategory from './components/Admin/AdminCategory';
-import NotFound from './components/NotFound';
-import Login from './components/Login';
+import NotFound from './components/Client/NotFound';
+import Login from './components/Client/Login';
 import AdminMain from './components/Admin/AdminMain';
 import { ToastContainer } from 'react-toastify'
+import { AnimatePresence } from 'framer-motion';
 import 'react-toastify/dist/ReactToastify.css'
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/HomePage';
-import Navbar from './components/Navbar';
+import Navbar from './components/Client/Navbar';
 import AdminPromo from './components/Admin/AdminPromo';
-import Promo from './components/Promo';
+
 
 function App() {
+  const location = useLocation()
   return (
-    <>
-      <Routes>
+    <AnimatePresence>
+      <Routes location={location} key={location.pathname}>
         <Route path='/admin/:res' element={<Admin />} >
           <Route path='main' element={<AdminMain />} />
           <Route path='menu' element={<AdminCategory />} />
@@ -34,14 +36,13 @@ function App() {
 
         <Route path='vendor/:res' element={<Test />} >
           <Route index element={<Category />} />
-          <Route path='test' element={<Promo />} />
         </Route>
 
       </Routes >
 
 
       <ToastContainer />
-    </>
+    </AnimatePresence>
   );
 }
 

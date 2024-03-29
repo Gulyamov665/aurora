@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './AdminPromo.module.scss'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import EditNoteIcon from '@mui/icons-material/EditNote'
-import IOSSwitch from '../MuiSwitch'
+import IOSSwitch from '../Client/MuiSwitch'
 import { useGetPromosQuery } from '../../store/admin/promoApi'
 import { useParams } from 'react-router-dom'
 
@@ -10,7 +10,6 @@ const AdminPromo = () => {
   const { res } = useParams()
   const { data: promo = [] } = useGetPromosQuery(res)
 
-  console.log(promo)
   return (
     <div className={`${styles.container_promo}`}>
       {promo?.map((item) => (

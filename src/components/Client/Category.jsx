@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Card from './Card'
-import { useGetProductsQuery } from '../store/user/productsApi'
-import { useGetCategoriesQuery } from '../store/user/categoryApi'
-import { useGetPromosQuery } from '../store/user/promoApi'
+import { useGetProductsQuery } from '../../store/user/productsApi'
+import { useGetCategoriesQuery } from '../../store/user/categoryApi'
+import { useGetPromosQuery } from '../../store/user/promoApi'
 import { useParams } from 'react-router-dom'
 import Loading from './Loading'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
@@ -10,7 +10,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { Navigation, Autoplay } from 'swiper/modules'
 import CardView from './CardView'
-import { useInView } from 'react-intersection-observer'
+import Promo from './Promo'
 
 export default function Category() {
   const { res } = useParams()
@@ -48,7 +48,6 @@ export default function Category() {
   useEffect(() => {
     const cb = (entries) => {
       entries.forEach((entry) => {
-        // console.log(entry)
         if (entry.isIntersecting && entry.intersectionRatio >= 0.2) {
           navLinks.current.forEach((link) => link.classList.remove('active'))
 
@@ -92,37 +91,7 @@ export default function Category() {
 
   return (
     <nav>
-      <div className="container">
-        <Swiper
-          slidesPerView={4}
-          // autoplay={{
-          //   delay: 2500,
-          //   disableOnInteraction: true,
-          // }}
-          breakpoints={{
-            320: {
-              slidesPerView: 2,
-              spaceBetween: 7,
-            },
-            480: {
-              slidesPerView: 3,
-            },
-            640: {
-              slidesPerView: 4,
-            },
-          }}
-          modules={[Navigation, Autoplay]}
-          pagination={true}
-          className="scrollDiv"
-        >
-          {promo?.map((item) => (
-            <SwiperSlide key={item.id}>
-              <img className="imgScroll" src={item.photo} alt="item.name" />
-              <b className="text_promo">{item.name}</b>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+      <Promo promo={promo} />
       <div className="container sticky-top">
         <div className="custom-navbar">
           <Swiper

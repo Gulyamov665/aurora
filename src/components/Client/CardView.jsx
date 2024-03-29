@@ -43,15 +43,13 @@ export default function CardView({ item, open, setIsOpen }) {
             }}
             className="card_view_motion"
           >
-            <div className="">
-              <div className="card_view">
-                <img className="card_view_img" src={item.photo} alt="" />
-                <h2 style={{ paddingTop: '10px' }}>{item.name}</h2>
-                <br />
-                <b>Описание</b>
-                <p>{item.description}</p>
-                <p className="card_view_price">{item.price}</p>
-              </div>
+            <div className="card_view">
+              <img className="card_view_img" src={item.photo} alt="" />
+              <h2 style={{ paddingTop: '10px' }}>{item.name}</h2>
+              <br />
+              <b>Описание</b>
+              <p>{item.description}</p>
+              <p className="card_view_price">{item.price}</p>
             </div>
           </motion.div>
         </div>

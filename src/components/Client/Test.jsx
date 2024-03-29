@@ -1,6 +1,6 @@
 import Intro from './Intro'
 import { Outlet } from 'react-router-dom'
-import useAxios from '../hooks/useAxios'
+import useAxios from '../../hooks/useAxios'
 import Header from './Header'
 import Footer from './Footer'
 
