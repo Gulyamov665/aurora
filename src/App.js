@@ -20,7 +20,7 @@ import AdminPromo from './components/Admin/AdminPromo';
 function App() {
   const location = useLocation()
   return (
-    <AnimatePresence>
+    <>
       <Routes location={location} key={location.pathname}>
         <Route path='/admin/:res' element={<Admin />} >
           <Route path='main' element={<AdminMain />} />
@@ -42,7 +42,7 @@ function App() {
 
 
       <ToastContainer />
-    </AnimatePresence>
+    </>
   );
 }
 

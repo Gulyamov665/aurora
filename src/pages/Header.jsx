@@ -12,13 +12,19 @@ export default function Header({ sidebar }) {
       ? JSON.parse(localStorage.getItem('authTokens'))
       : null
   )
-  const [qrCode, { isLoading }] = useQrCodeMutation()
+ 
+
+  const [qrCode, { data, isLoading, isSuccess }] = useQrCodeMutation()
   const [vendor, setVendor] = useState()
 
   const qrCodeGenerate = async () => {
     await qrCode()
     DownloadQr(authTokens?.access)
   }
+
+  if (isSuccess) localStorage.setItem('qrCode', JSON.stringify(data.image_path))
+
+  
 
   useEffect(() => {
     if (authTokens) {
@@ -58,7 +64,7 @@ export default function Header({ sidebar }) {
             onClick={qrCodeGenerate}
           >
             <span
-              class="spinner-border spinner-border-sm "
+              className="spinner-border spinner-border-sm "
               aria-hidden="true"
             ></span>
           </button>
