@@ -14,6 +14,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/HomePage';
 import Navbar from './components/Navbar';
 import AdminPromo from './components/Admin/AdminPromo';
+import Promo from './components/Promo';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
 
         <Route path='vendor/:res' element={<Test />} >
           <Route index element={<Category />} />
+          <Route path='test' element={<Promo />} />
         </Route>
 
       </Routes >

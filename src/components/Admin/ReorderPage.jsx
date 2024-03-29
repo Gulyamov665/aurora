@@ -25,8 +25,7 @@ export default function ReorderPage({
                 key={item.id}
                 value={item}
                 onDragEnd={() => updatePosition()}
-                // dragListener={false}
-                // dragControls={controls}
+                whileDrag={{ scale: 1.1 }}
               >
                 <button
                   key={item.id}
@@ -41,9 +40,7 @@ export default function ReorderPage({
                       value={item}
                       onPointerDown={(e) => controls.start(e)}
                     /> */}
-                    <div className={styles.button_text}>
-                    {item.name}
-                    </div>
+                    <div className={styles.button_text}>{item.name}</div>
                     <EditNoteIcon />
                   </div>
                 </button>
