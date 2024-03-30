@@ -12,7 +12,7 @@ import { Navigation, Autoplay } from 'swiper/modules'
 import CardView from './CardView'
 import Promo from './Promo'
 
-export default function Category() {
+export default function Category({ search }) {
   const { res } = useParams()
   const { data: category = [] } = useGetCategoriesQuery(res)
   const {
@@ -53,7 +53,6 @@ export default function Category() {
 
           let activeId = Number(entry.target.id)
 
-          console.log(activeId)
           const activeLink = document.querySelector(
             `.nav__link[href="#${activeId}"]`
           )
@@ -131,40 +130,55 @@ export default function Category() {
         </div>
       </div>
       <div className="round">
-        {menuItems.length > 0 &&
-          category.map((item, index) => (
-            <div id={item.name} className="section" key={item.id}>
-              <div
-                className="container"
-                ref={(ref) => (sectionRefs.current[index] = ref)}
-                id={index}
-              >
-                <h2 className="cat_name pt-4">{item.name}</h2>
-                <hr />
-                <div className="row">
-                  {menuItems
-                    .filter((obj) => obj.category === item.id)
-                    .map(
-                      (filteredObj) =>
-                        filteredObj.is_active && (
-                          <div
-                            onClick={() => handleView(filteredObj)}
-                            key={filteredObj.id}
-                            className="col-6 col-sm-6 col-md-4 col-lg-3"
-                          >
-                            <Card
-                              img={filteredObj.photo}
-                              name={filteredObj.name}
-                              desc={filteredObj.description}
-                              price={filteredObj.price}
-                            />
-                          </div>
-                        )
-                    )}
+        {search
+          ? menuItems
+              .filter((item) =>
+                item.name.toLowerCase().includes(search.toLowerCase())
+              )
+              .map((searchItem) => (
+                <div key={searchItem.id} onClick={() => handleView(searchItem)}>
+                  <Card
+                    img={searchItem.photo}
+                    name={searchItem.name}
+                    desc={searchItem.description}
+                    price={searchItem.price}
+                  />
+                </div>
+              ))
+          : menuItems.length > 0 &&
+            category.map((item, index) => (
+              <div id={item.name} className="section" key={item.id}>
+                <div
+                  className="container"
+                  ref={(ref) => (sectionRefs.current[index] = ref)}
+                  id={index}
+                >
+                  <h2 className="cat_name pt-4">{item.name}</h2>
+                  <hr />
+                  <div className="row">
+                    {menuItems
+                      .filter((obj) => obj.category === item.id)
+                      .map(
+                        (filteredObj) =>
+                          filteredObj.is_active && (
+                            <div
+                              onClick={() => handleView(filteredObj)}
+                              key={filteredObj.id}
+                              className="col-6 col-sm-6 col-md-4 col-lg-3"
+                            >
+                              <Card
+                                img={filteredObj.photo}
+                                name={filteredObj.name}
+                                desc={filteredObj.description}
+                                price={filteredObj.price}
+                              />
+                            </div>
+                          )
+                      )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
       </div>
       <CardView item={viewItem} open={isOpen} setIsOpen={setIsOpen} />
     </nav>

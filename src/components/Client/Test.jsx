@@ -1,16 +1,18 @@
+import React, { useState } from 'react'
 import Intro from './Intro'
-import { Outlet } from 'react-router-dom'
 import useAxios from '../../hooks/useAxios'
 import Header from './Header'
 import Footer from './Footer'
+import Category from './Category'
 
 function Test() {
   const { restData: pos } = useAxios('restaurant')
+  const [search, setSearch] = useState('')
 
   return (
     <div>
       <div>
-        <Header />
+        <Header search={search} setSearch={setSearch} />
       </div>
       <div>
         {Object.keys(pos).length > 0 && (
@@ -21,7 +23,7 @@ function Test() {
             logo={pos.logo}
           />
         )}
-        <Outlet />
+        <Category search={search} />
       </div>
       <Footer />
     </div>

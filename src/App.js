@@ -35,7 +35,6 @@ function App() {
         <Route path='login' element={<LoginPage />} />
 
         <Route path='vendor/:res' element={<Test />} >
-          <Route index element={<Category />} />
         </Route>
 
       </Routes >

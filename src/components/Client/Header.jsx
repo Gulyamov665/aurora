@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { Link } from 'react-router-dom'
 
-const Header = () => {
+const Header = ({ search, setSearch }) => {
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem('authTokens')
       ? JSON.parse(localStorage.getItem('authTokens'))
       : null
   )
-  const [vendor, setVendor] = useState()
+  const [vendor, setVendor] = useState(null)
 
   useEffect(() => {
     if (authTokens) {
@@ -44,7 +44,9 @@ const Header = () => {
               type="search"
               className="form-control"
               placeholder="Search..."
+              value={search}
               aria-label="Search"
+              onChange={(e) => setSearch(e.target.value)}
             />
           </form>
         </div>

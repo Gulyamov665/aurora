@@ -32,7 +32,14 @@ export default function Footer() {
           </li>
         </ul>
         <p className="text-center footer_style_text">
-          © 2024 Powered by <a href='https://t.me/mgulyamov' className='footer_powered'>Gulyamov</a> and <a href='https://t.me/Bomuratov' className='footer_powered'>Bomuratov</a>
+          © 2024 Powered by{' '}
+          <a href="https://t.me/mgulyamov" className="footer_powered">
+            Gulyamov
+          </a>{' '}
+          and{' '}
+          <a href="https://t.me/Bomuratov" className="footer_powered">
+            Bomuratov
+          </a>
         </p>
       </footer>
     </>

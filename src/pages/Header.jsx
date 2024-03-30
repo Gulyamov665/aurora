@@ -6,13 +6,12 @@ import { Link } from 'react-router-dom'
 import { useQrCodeMutation } from '@store/admin/qrCode'
 import { DownloadQr } from '../Utils/downloadQr'
 
-export default function Header({ sidebar }) {
+export default function Header({ sidebar}) {
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem('authTokens')
       ? JSON.parse(localStorage.getItem('authTokens'))
       : null
   )
- 
 
   const [qrCode, { data, isLoading, isSuccess }] = useQrCodeMutation()
   const [vendor, setVendor] = useState()
@@ -23,8 +22,6 @@ export default function Header({ sidebar }) {
   }
 
   if (isSuccess) localStorage.setItem('qrCode', JSON.stringify(data.image_path))
-
-  
 
   useEffect(() => {
     if (authTokens) {
