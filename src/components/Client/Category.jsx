@@ -8,7 +8,7 @@ import Loading from './Loading'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import { Navigation, Autoplay } from 'swiper/modules'
+import { Navigation } from 'swiper/modules'
 import CardView from './CardView'
 import Promo from './Promo'
 
@@ -39,7 +39,7 @@ export default function Category({ search }) {
 
     useEffect(() => {
       if (swiper) {
-        swiper.slideTo(position)
+        swiper.slideTo(position - 1)
       }
     }, [swiper, position])
     return null
@@ -48,36 +48,29 @@ export default function Category({ search }) {
   useEffect(() => {
     const cb = (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.2) {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.25) {
           navLinks.current.forEach((link) => link.classList.remove('active'))
-
           let activeId = Number(entry.target.id)
-
-          const activeLink = document.querySelector(
-            `.nav__link[href="#${activeId}"]`
-          )
-
+          const activeLink = navLinks.current[activeId]
           setActiveIndex(activeId)
-
           if (activeLink) {
-            activeLink.classList.add('active')
+            activeLink.classList.toggle('active')
           }
         }
       })
     }
 
     const observer = new IntersectionObserver(cb, {
-      rootMargin: '0px',
-      threshold: [0.3, 1],
+      threshold: [0.3],
     })
 
     sectionRefs.current.forEach((sec) => {
       observer.observe(sec)
     })
 
-    return () => {
-      observer.disconnect()
-    }
+    // return () => {
+    //   observer.disconnect()
+    // }
   }, [isSuccess])
 
   if (isLoading) {
@@ -148,14 +141,14 @@ export default function Category({ search }) {
           : menuItems.length > 0 &&
             category.map((item, index) => (
               <div id={item.name} className="section" key={item.id}>
-                <div
-                  className="container"
-                  ref={(ref) => (sectionRefs.current[index] = ref)}
-                  id={index}
-                >
+                <div className="container">
                   <h2 className="cat_name pt-4">{item.name}</h2>
                   <hr />
-                  <div className="row">
+                  <div
+                    className="row"
+                    ref={(ref) => (sectionRefs.current[index] = ref)}
+                    id={index}
+                  >
                     {menuItems
                       .filter((obj) => obj.category === item.id)
                       .map(
