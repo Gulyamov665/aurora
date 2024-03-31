@@ -48,6 +48,7 @@ export default function Category({ search }) {
   useEffect(() => {
     const cb = (entries) => {
       entries.forEach((entry) => {
+        console.log('first')
         if (entry.isIntersecting && entry.intersectionRatio > 0.25) {
           navLinks.current.forEach((link) => link.classList.remove('active'))
           let activeId = Number(entry.target.id)
@@ -61,7 +62,7 @@ export default function Category({ search }) {
     }
 
     const observer = new IntersectionObserver(cb, {
-      threshold: [0.3],
+      threshold: [0.3, 1],
     })
 
     sectionRefs.current.forEach((sec) => {
@@ -82,7 +83,7 @@ export default function Category({ search }) {
   }
 
   return (
-    <nav>
+    <>
       <Promo promo={promo} />
       <div className="container sticky-top">
         <div className="custom-navbar">
@@ -117,6 +118,7 @@ export default function Category({ search }) {
                 >
                   {item.name}
                 </a>
+                <div className="animation"></div>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -174,6 +176,6 @@ export default function Category({ search }) {
             ))}
       </div>
       <CardView item={viewItem} open={isOpen} setIsOpen={setIsOpen} />
-    </nav>
+    </>
   )
 }
