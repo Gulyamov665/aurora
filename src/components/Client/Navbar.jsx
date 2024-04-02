@@ -1,129 +1,83 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
+import { Navigation } from 'swiper/modules'
 
-export default function Navbar() {
+export default function Navbar({ isSuccess, sectionRefs, category }) {
+  const [activeIndex, setActiveIndex] = useState()
+  const navLinks = useRef([])
+
+  const ChangeSlide = ({ position }) => {
+    const swiper = useSwiper()
+    useEffect(() => {
+      if (swiper) {
+        swiper.slideTo(position - 1)
+      }
+    }, [swiper, position])
+    return null
+  }
+
+  useEffect(() => {
+    const cb = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.25) {
+          navLinks.current.forEach((link) => link.classList.remove('active'))
+          let activeId = Number(entry.target.id)
+          const activeLink = navLinks.current[activeId]
+          setActiveIndex(activeId)
+          if (activeLink) {
+            activeLink.classList.toggle('active')
+          }
+        }
+      })
+    }
+    const observer = new IntersectionObserver(cb, {
+      threshold: [0.3, 0.9],
+    })
+    sectionRefs.current.forEach((sec) => {
+      observer.observe(sec)
+    })
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [isSuccess])
   return (
-    <div
-      classname="navbar-test sticky-top"
-      data-spy="scroll"
-      data-target=".navbar"
-      data-offset={50}
-    >
-      <nav className="navbar navbar-inverse navbar-fixed-top">
-        <div className="container-fluid">
-          <div className="navbar-header">
-            <button
-              type="button"
-              className="navbar-toggle"
-              data-toggle="collapse"
-              data-target="#myNavbar"
+    <div className="custom-navbar">
+      <Swiper
+        slidesPerView={5}
+        freeMode={true}
+        pagination={{
+          clickable: true,
+        }}
+        modules={Navigation}
+        mousewheel={true}
+        breakpoints={{
+          320: {
+            slidesPerView: 2.8,
+            spaceBetween: 10,
+          },
+          480: {
+            slidesPerView: 3,
+          },
+          640: {
+            slidesPerView: 5,
+          },
+        }}
+      >
+        <ChangeSlide position={activeIndex} />
+        {category.map((item, index) => (
+          <SwiperSlide key={item.id}>
+            <a
+              className="nav__link"
+              href={`#${index}`}
+              ref={(ref) => (navLinks.current[index] = ref)}
             >
-              <span className="icon-bar" />
-              <span className="icon-bar" />
-              <span className="icon-bar" />
-            </button>
-            <a className="navbar-brand" href="#">
-              WebSiteName
+              {item.name}
             </a>
-          </div>
-          <div>
-            <div className="collapse navbar-collapse" id="myNavbar">
-              <ul className="nav navbar-nav">
-                <li>
-                  <a href="#section1">Section 1</a>
-                </li>
-                <li>
-                  <a href="#section2">Section 2</a>
-                </li>
-                <li>
-                  <a href="#section3">Section 3</a>
-                </li>
-                <li className="dropdown">
-                  <a
-                    className="dropdown-toggle"
-                    data-toggle="dropdown"
-                    href="#"
-                  >
-                    Section 4 <span className="caret" />
-                  </a>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a href="#section41">Section 4-1</a>
-                    </li>
-                    <li>
-                      <a href="#section42">Section 4-2</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
-      <div id="section1" className="container-fluid">
-        <h1>Section 1</h1>
-        <p>
-          Try to scroll this section and look at the navigation bar while
-          scrolling! Try to scroll this section and look at the navigation bar
-          while scrolling!
-        </p>
-        <p>
-          Try to scroll this section and look at the navigation bar while
-          scrolling! Try to scroll this section and look at the navigation bar
-          while scrolling!
-        </p>
-      </div>
-      <div id="section2" className="container-fluid">
-        <h1>Section 2</h1>
-        <p>
-          Try to scroll this section and look at the navigation bar while
-          scrolling! Try to scroll this section and look at the navigation bar
-          while scrolling!
-        </p>
-        <p>
-          Try to scroll this section and look at the navigation bar while
-          scrolling! Try to scroll this section and look at the navigation bar
-          while scrolling!
-        </p>
-      </div>
-      <div id="section3" className="container-fluid">
-        <h1>Section 3</h1>
-        <p>
-          Try to scroll this section and look at the navigation bar while
-          scrolling! Try to scroll this section and look at the navigation bar
-          while scrolling!
-        </p>
-        <p>
-          Try to scroll this section and look at the navigation bar while
-          scrolling! Try to scroll this section and look at the navigation bar
-          while scrolling!
-        </p>
-      </div>
-      <div id="section41" className="container-fluid">
-        <h1>Section 4 Submenu 1</h1>
-        <p>
-          Try to scroll this section and look at the navigation bar while
-          scrolling! Try to scroll this section and look at the navigation bar
-          while scrolling!
-        </p>
-        <p>
-          Try to scroll this section and look at the navigation bar while
-          scrolling! Try to scroll this section and look at the navigation bar
-          while scrolling!
-        </p>
-      </div>
-      <div id="section42" className="container-fluid">
-        <h1>Section 4 Submenu 2</h1>
-        <p>
-          Try to scroll this section and look at the navigation bar while
-          scrolling! Try to scroll this section and look at the navigation bar
-          while scrolling!
-        </p>
-        <p>
-          Try to scroll this section and look at the navigation bar while
-          scrolling! Try to scroll this section and look at the navigation bar
-          while scrolling!
-        </p>
-      </div>
+            <div className="animation"></div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   )
 }

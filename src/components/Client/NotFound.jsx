@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './NotFound.module.scss'
+import { Link } from 'react-router-dom'
 
 export default function NotFound() {
   return (
@@ -321,7 +322,7 @@ export default function NotFound() {
         <h2>Не удалось запустить :(</h2>
         <h3>
           Страница не найдена, но можно выйти на
-          <a href="#">Главную страницу</a>
+          <Link to="/"> Главную страницу</Link>
         </h3>
       </div>
     </div>

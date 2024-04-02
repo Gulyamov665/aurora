@@ -134,27 +134,22 @@ code {
 .card_view {
   margin: 0 auto;
   width: 100%;
-  /* background-color: #ffff; */
-  /* border-radius: 15px 10px 0 0; */
-  /* box-shadow: 5px 5px 15px 5px rgba(230, 230, 250, 1); */
-  /* text-align: center; */
   z-index: 99999999;
-  /* position: fixed; */
-  top: 20%;
+  top: 5%;
   bottom: 0;
   left: 0;
   right: 0;
 }
+
 
 .card_view_motion {
   margin: 0 auto;
   width: 50%;
   background-color: #ffff;
   border-radius: 20px 20px 0 0;
-  /* text-align: center; */
   z-index: 99999999;
   position: fixed;
-  top: 20%;
+  top: 5%;
   bottom: 0;
   left: 0;
   right: 0;
@@ -167,6 +162,42 @@ code {
   border-radius: 20px 20px 0 0;
   object-fit: cover;
 }
+
+.card_view h2 {
+  /* background: #dbdbdb95; */
+  padding: 5px 0;
+  margin: 0;
+  color: #333333;
+  font-weight: 700;
+
+}
+.card_view h2 hr{
+  margin-bottom: 0;
+  margin-top: 10px;
+
+}
+.card_view_desc{
+  font-size: 15px;
+  height: 150px;
+  margin: 0;
+  overflow: auto;
+  padding: 0 5px;
+  margin-bottom: 10px;
+  color: #343434;
+  font-weight: 500;
+}
+.card_view_price{
+  margin: 0 15px;
+  display: flex;
+  justify-content: space-around;
+  
+  .grey{
+    background-color: #9c9b9b;
+    font-weight: 700;
+    
+  }
+}
+
 
 @media (min-width: 320px) and (max-width: 480px) {
   .col-sm-6 {
@@ -215,15 +246,15 @@ code {
   }
   .card_view {
     width: 100%;
-    /* top: 5%; */
     height: 100vh;
-    /* position: sticky; */
-    top: 0;
+    top: 15%;
     bottom: 0;
     border-radius: 20px 20px 0 0;
+    background-color: #dbdbdb95;
   }
   .card_view_motion {
     width: 100%;
+    top: 15%;
     height: auto;
   }
   .card_view_img {
@@ -234,9 +265,40 @@ code {
     object-fit: cover;
   }
 
-  .card_view p {
+  .card_view h2 {
+    /* background: #dbdbdb95; */
+    padding: 10px 0;
+    margin: 0;
+    color: #333333;
+    font-weight: 700;
+
+  }
+  .card_view h2 hr{
+    margin-bottom: 0;
+    margin-top: 10px;
+
+  }
+  .card_view_desc{
+    font-size: 15px;
+    height: 140px;
+    margin: 0;
     overflow: scroll;
-    height: 100px;
+    padding: 0 5px;
+    margin-bottom: 10px;
+    color: #343434;
+    font-weight: 500;
+  }
+  .card_view_price{
+    margin: 0 15px;
+    display: flex;
+    justify-content: space-around;
+    
+    .grey{
+      background-color: #9c9b9b;
+      font-weight: 700;
+      
+    }
+
   }
 }
 

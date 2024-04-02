@@ -2,6 +2,7 @@ import React from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 export default function CategoryModal({
   showModalCategory,
@@ -9,12 +10,26 @@ export default function CategoryModal({
   newCategory,
   setNewCategory,
   handleCategory,
+  editCategory,
+  setEditCategory,
+  handleUpdataCategory,
+  handleDeleteCategory,
 }) {
   return (
     <>
-      <Modal show={showModalCategory} onHide={setShowModalCategory}>
+      <Modal
+        show={showModalCategory || editCategory}
+        onHide={!editCategory ? setShowModalCategory : setEditCategory}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Добавить меню</Modal.Title>
+          {editCategory && (
+            <DeleteIcon
+              style={{ cursor: 'pointer' }}
+              color="error"
+              onClick={() => handleDeleteCategory()}
+            />
+          )}
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -32,11 +47,19 @@ export default function CategoryModal({
         <Modal.Footer>
           <Button
             variant="danger"
-            onClick={() => setShowModalCategory(!showModalCategory)}
+            onClick={
+              !editCategory
+                ? () => setShowModalCategory(!showModalCategory)
+                : () => setEditCategory(false)
+            }
           >
             Закрыть
           </Button>
-          <Button type="submit" variant="success" onClick={handleCategory}>
+          <Button
+            type="submit"
+            variant="success"
+            onClick={!editCategory ? handleCategory : handleUpdataCategory}
+          >
             Сохранить
           </Button>
         </Modal.Footer>

@@ -17,7 +17,10 @@ import {
   useAddCategoryMutation,
   useGetCategoriesQuery,
   useUpdateOrderMutation,
+  useDeleteCategoryMutation,
+  useUpdateCategoryMutation,
 } from '@store/admin/categoryApi'
+
 import { toast } from 'react-toastify'
 import ReorderPage from './ReorderPage'
 
@@ -34,9 +37,13 @@ export default function AdminCategory() {
   const [updateProduct] = useUpdateProductMutation()
   const [addCategory] = useAddCategoryMutation()
   const [updateOrder] = useUpdateOrderMutation()
+  const [updateCategory] = useUpdateCategoryMutation()
+  const [deleteCategory] = useDeleteCategoryMutation()
   const { createModal, selectedCategory: select } = useSelector(
     (state) => state.modals
   )
+  const [editCategory, setEditCategory] = useState(false)
+  const [changeItem, setChangeItem] = useState(null)
   const dispatch = useDispatch()
 
   const handleCloseModal = () => {
@@ -56,7 +63,7 @@ export default function AdminCategory() {
       updatedItem: item.id,
     }).unwrap()
   }
-  console.log()
+
   const handleCategory = async () => {
     const categoryItem = {
       restaurant: rest,
@@ -71,6 +78,24 @@ export default function AdminCategory() {
   useEffect(() => {
     setItems(category)
   }, [category])
+
+  const handleUpdataCategory = async () => {
+    await updateCategory({
+      body: {
+        ...changeItem,
+        name: newCategory,
+      },
+      id: changeItem.id,
+    })
+    setEditCategory(false)
+  }
+
+  const handleDeleteCategory = async () => {
+    await deleteCategory({
+      id: changeItem.id,
+    })
+    setEditCategory(false)
+  }
 
   const updatePosition = async () => {
     const update = items.map((item) => item.id)
@@ -99,6 +124,10 @@ export default function AdminCategory() {
             newCategory={newCategory}
             setNewCategory={setNewCategory}
             handleCategory={handleCategory}
+            editCategory={editCategory}
+            setEditCategory={setEditCategory}
+            handleUpdataCategory={handleUpdataCategory}
+            handleDeleteCategory={handleDeleteCategory}
           />
 
           <ReorderPage
@@ -106,6 +135,9 @@ export default function AdminCategory() {
             items={items}
             setItems={setItems}
             select={select}
+            setEditCategory={setEditCategory}
+            setNewCategory={setNewCategory}
+            setChangeItem={setChangeItem}
           />
         </div>
       </div>

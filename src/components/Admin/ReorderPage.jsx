@@ -10,8 +10,19 @@ export default function ReorderPage({
   items,
   setItems,
   select,
+  setEditCategory,
+  setNewCategory,
+  setChangeItem,
 }) {
   const dispatch = useDispatch()
+
+  const handleChangeCategory = (item) => {
+    setEditCategory(true)
+    setNewCategory(item.name)
+    setChangeItem({
+      ...item,
+    })
+  }
 
   return (
     <div>
@@ -24,8 +35,6 @@ export default function ReorderPage({
                 key={item.id}
                 value={item}
                 onDragEnd={() => updatePosition()}
-                // dragListener={false}
-
                 whileDrag={{ scale: 1.1 }}
               >
                 <button
@@ -37,7 +46,11 @@ export default function ReorderPage({
                 >
                   <div className={styles.button_name}>
                     <div className={styles.button_text}>{item.name}</div>
-                    <EditNoteIcon />
+                    <EditNoteIcon
+                      onClick={() => {
+                        handleChangeCategory(item)
+                      }}
+                    />
                   </div>
                 </button>
               </Reorder.Item>

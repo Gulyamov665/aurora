@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion, AnimatePresence, useDragControls } from 'framer-motion'
+import RemoveIcon from '@mui/icons-material/Remove'
+import AddIcon from '@mui/icons-material/Add'
 
 export default function CardView({ item, open, setIsOpen }) {
+  const [count, setCount] = useState(1)
+
   const controls = useDragControls()
 
   useEffect(() => {
@@ -45,11 +49,37 @@ export default function CardView({ item, open, setIsOpen }) {
           >
             <div className="card_view">
               <img className="card_view_img" src={item.photo} alt="" />
-              <h2 style={{ paddingTop: '10px' }}>{item.name}</h2>
-              <br />
-              <b>Описание</b>
-              <p>{item.description}</p>
-              <p className="card_view_price">{item.price}</p>
+              <h2>
+                {item.name} <hr />
+              </h2>
+              <p className="card_view_desc">{item.description}</p>
+              <div className="card_view_price">
+                <button className="btn btn-warning w-100 me-4">
+                  <strong style={{ color: '#333333' }}>
+                    {item.price * count} сум
+                  </strong>
+                </button>
+                <div className="btn-group">
+                  <button
+                    className={
+                      count > 1
+                        ? 'btn text-light grey '
+                        : 'btn text-light grey disabled'
+                    }
+                    onClick={() => setCount(count - 1)}
+                  >
+                    <RemoveIcon sx={{ fontSize: 20 }} />
+                  </button>
+
+                  <button className="btn text-light grey">{count}</button>
+                  <button
+                    className="btn text-light grey"
+                    onClick={() => setCount(count + 1)}
+                  >
+                    <AddIcon sx={{ fontSize: 20 }} />
+                  </button>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>

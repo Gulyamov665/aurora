@@ -20,5 +20,9 @@ export default defineConfig({
 
   dev: {
     assetPrefix: true,
+    progressBar: true,
+  },
+  performance: {
+    removeConsole: true,
   },
 })

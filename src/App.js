@@ -9,7 +9,6 @@ import NotFound from './components/Client/NotFound';
 import Login from './components/Client/Login';
 import AdminMain from './components/Admin/AdminMain';
 import { ToastContainer } from 'react-toastify'
-import { AnimatePresence } from 'framer-motion';
 import 'react-toastify/dist/ReactToastify.css'
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/HomePage';

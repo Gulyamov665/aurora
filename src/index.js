@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import store from './store';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'swiper/css'
+import 'swiper/css/pagination'
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
