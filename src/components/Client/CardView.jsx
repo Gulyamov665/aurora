@@ -53,33 +53,35 @@ export default function CardView({ item, open, setIsOpen }) {
                 {item.name} <hr />
               </h2>
               <p className="card_view_desc">{item.description}</p>
-              <div className="card_view_price">
-                <button className="btn btn-warning w-100 me-4">
-                  <strong style={{ color: '#333333' }}>
-                    {item.price * count} сум
-                  </strong>
-                </button>
-                <div className="btn-group">
-                  <button
-                    className={
-                      count > 1
-                        ? 'btn text-light grey '
-                        : 'btn text-light grey disabled'
-                    }
-                    onClick={() => setCount(count - 1)}
-                  >
-                    <RemoveIcon sx={{ fontSize: 20 }} />
-                  </button>
+            
+            <div className="card_view_price">
+              <button className="btn btn-warning w-100 me-4">
+                <strong style={{ color: '#333333' }}>
+                  {item.price * count} сум
+                </strong>
+              </button>
 
-                  <button className="btn text-light grey">{count}</button>
-                  <button
-                    className="btn text-light grey"
-                    onClick={() => setCount(count + 1)}
-                  >
-                    <AddIcon sx={{ fontSize: 20 }} />
-                  </button>
-                </div>
+              <div className="btn-group">
+                <button
+                  className={
+                    count > 1
+                      ? 'btn text-light grey '
+                      : 'btn text-light grey disabled'
+                  }
+                  onClick={() => setCount(count - 1)}
+                >
+                  <RemoveIcon sx={{ fontSize: 20 }} />
+                </button>
+
+                <button className="btn text-light grey">{count}</button>
+                <button
+                  className="btn text-light grey"
+                  onClick={() => setCount(count + 1)}
+                >
+                  <AddIcon sx={{ fontSize: 20 }} />
+                </button>
               </div>
+            </div>
             </div>
           </motion.div>
         </div>
