@@ -32,7 +32,7 @@ export default function Header({ sidebar}) {
   }, [authTokens])
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} sticky-top`}>
       <div>
         <MenuIcon
           sx={{
