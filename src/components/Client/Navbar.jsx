@@ -31,7 +31,8 @@ export default function Navbar({ isSuccess, sectionRefs, category }) {
       })
     }
     const observer = new IntersectionObserver(cb, {
-      threshold: [0.3, 0.9],
+      // rootMargin : '100px',
+      threshold: [0.3, 0.85],
     })
     sectionRefs.current.forEach((sec) => {
       observer.observe(sec)
@@ -42,7 +43,7 @@ export default function Navbar({ isSuccess, sectionRefs, category }) {
     }
   }, [isSuccess])
   return (
-    <div className="custom-navbar">
+    <div className="custom-nfavbar">
       <Swiper
         slidesPerView={5}
         freeMode={true}
