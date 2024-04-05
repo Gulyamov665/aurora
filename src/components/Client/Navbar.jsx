@@ -43,7 +43,7 @@ export default function Navbar({ isSuccess, sectionRefs, category }) {
     }
   }, [isSuccess])
   return (
-    <div className="custom-nfavbar">
+    <div className="custom-navbar">
       <Swiper
         slidesPerView={5}
         freeMode={true}

@@ -19,6 +19,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",
+    "react-insta-stories": "^2.6.2",
     "react-intersection-observer": "^9.8.0",
     "react-ionicons": "^4.2.1",
     "react-redux": "^9.0.4",

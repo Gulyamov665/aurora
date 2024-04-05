@@ -14,6 +14,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/HomePage';
 import Navbar from './components/Client/Navbar';
 import AdminPromo from './components/Admin/AdminPromo';
+import Story from './components/Client/Story';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path='login' element={<LoginPage />} />
 
         <Route path='vendor/:res' element={<Test />} >
+          {/* <Route path='story' element={<Story />} /> */}
         </Route>
 
       </Routes >

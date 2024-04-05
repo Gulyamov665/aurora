@@ -1,8 +1,9 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Autoplay } from 'swiper/modules'
+import Story from './Story'
 
-export default function Promo({ promo }) {
+export default function Promo({ promo, setShowStory }) {
   return (
     <div>
       <div className="container">
@@ -30,7 +31,12 @@ export default function Promo({ promo }) {
         >
           {promo?.map((item) => (
             <SwiperSlide key={item.id}>
-              <img className="imgScroll" src={item.photo} alt="item.name" />
+              <img
+                className="imgScroll"
+                onClick={() => setShowStory(true)}
+                src={item.photo}
+                alt="item.name"
+              />
               <b className="text_promo">{item.name}</b>
             </SwiperSlide>
           ))}

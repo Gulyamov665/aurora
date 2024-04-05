@@ -9,6 +9,7 @@ import CardView from './CardView'
 import Promo from './Promo'
 import Navbar from './Navbar'
 import Products from './Products'
+import Story from './Story'
 
 export default function Category({ search }) {
   const { res } = useParams()
@@ -23,6 +24,7 @@ export default function Category({ search }) {
   const sectionRefs = useRef([])
   const [isOpen, setIsOpen] = useState(false)
   const [viewItem, setViewItem] = useState(null)
+  const [showStory, setShowStory] = useState(false)
 
   const handleView = (item) => {
     setIsOpen(!isOpen)
@@ -39,7 +41,8 @@ export default function Category({ search }) {
 
   return (
     <>
-      <Promo promo={promo} />
+      {showStory && <Story setShowStory={setShowStory} />}
+      <Promo promo={promo} setShowStory={setShowStory} />
       <div className="container sticky-top">
         <Navbar
           isSuccess={isSuccess}
