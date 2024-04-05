@@ -8,15 +8,18 @@
   top: 0;
   left: 0;
   right: 0;
-  margin: 0 auto;
+//   margin: 0 auto;
 }
 
 .stories_main {
+  width: 50%;
   margin: 0 auto;
   height: 100%;
+  text-align: center;
 }
 
-.stories {
-  filter: drop-shadow(0 20px 30px #aaa);
-  height: 100% !important;
+@media (max-width: 768px) {
+  .stories_main {
+    width: 100%;
+  }
 }
