@@ -14,10 +14,12 @@ export default function Story({ setShowStory, showStory }) {
   }, [showStory])
 
   const stories = [
-    'https://avatars.mds.yandex.net/get-altay/214458/2a00000162aab900bd6f56e10c1be07409b0/XXL',
-    'https://avatars.mds.yandex.net/i?id=43f1a029d98aef8cb0091dba04947086_l-5292126-images-thumbs&n=27&h=480&w=480',
-    'https://animals-land.ru/wp-content/uploads/2022/02/1627489827_21-funart-pro-p-boitsovskie-porodi-sobak-pitbul-zhivotnie-23.jpg',
-    'https://w.forfun.com/fetch/5d/5d572d697e41c82ac511549420ebcf44.jpeg',
+    'https://wallbox.ru/resize/640x960/wallpapers/main/201316/6ac55852b6fddde.jpg',
+    'https://w.forfun.com/fetch/2d/2d89483a3b3f38a008b870eee3d3ac1d.jpeg?h=900&r=0.5',
+    'https://wallbox.ru/resize/640x960/wallpapers/main/201316/6ac55852b6fddde.jpg',
+    'https://img.alicdn.com/imgextra/i1/40280947/O1CN01p2BsLR1IrlbXLPNiv_!!40280947.jpg',
+    'https://kartinki.pics/uploads/posts/2021-08/1629689190_8-kartinkin-com-p-samaya-krasivaya-yeda-yeda-krasivo-foto-8.jpg',
+    'https://kartinki.pics/uploads/posts/2021-07/1625795930_8-kartinkin-com-p-samaya-vkusnaya-yeda-yeda-krasivo-foto-8.jpg',
   ]
 
   return (
@@ -28,8 +30,12 @@ export default function Story({ setShowStory, showStory }) {
           defaultInterval={5000}
           width="100%"
           height="100vh"
-          storyStyles={{ margin: '0 auto' }}
-          progressContainerStyles={{ marginTop: '50px' }}
+          //   storyStyles={{
+          //     objectFit: 'cover',
+          //     textAlign: 'center',
+          //     margin: '0 auto',
+          //   }}
+          progressContainerStyles={{ marginTop: '10px' }}
           onAllStoriesEnd={() => setShowStory(false)}
         />
       </div>
