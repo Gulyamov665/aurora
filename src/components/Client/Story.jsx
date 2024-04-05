@@ -28,6 +28,8 @@ export default function Story({ setShowStory, showStory }) {
           defaultInterval={5000}
           width="100%"
           height="100vh"
+          storyStyles={{ margin: '0 auto' }}
+          progressContainerStyles={{ marginTop: '50px' }}
           onAllStoriesEnd={() => setShowStory(false)}
         />
       </div>
