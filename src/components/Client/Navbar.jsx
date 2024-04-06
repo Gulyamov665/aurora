@@ -32,7 +32,7 @@ export default function Navbar({ isSuccess, sectionRefs, category }) {
     }
     const observer = new IntersectionObserver(cb, {
       // rootMargin : '100px',
-      threshold: [0.3, 0.85, 1],
+      threshold: [0.3, 0.85],
     })
     sectionRefs.current.forEach((sec) => {
       observer.observe(sec)

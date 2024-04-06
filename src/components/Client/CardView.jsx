@@ -56,7 +56,7 @@ export default function CardView({ item, open, setIsOpen }) {
               </h2>
 
               <div className="card_view_desc">
-                <p>{item.description}</p>
+                <p >{item.description}</p>
               </div>
             </div>
 
