@@ -8,22 +8,22 @@ export default function Promo({ promo, setShowStory }) {
     <div>
       <div className="container">
         <Swiper
-          slidesPerView={4}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: true,
-          }}
+          slidesPerView="auto"
+          // autoplay={{
+          //   delay: 2500,
+          //   disableOnInteraction: true,
+          // }}
           breakpoints={{
-            320: {
-              slidesPerView: 2,
-              spaceBetween: 7,
-            },
-            480: {
-              slidesPerView: 3,
-            },
-            640: {
-              slidesPerView: 4,
-            },
+            // 320: {
+            //   slidesPerView: 'auto',
+            //   spaceBetween: 7,
+            // },
+            // 480: {
+            //   slidesPerView: 3,
+            // },
+            // 640: {
+            //   slidesPerView: 4,
+            // },
           }}
           modules={[Navigation, Autoplay]}
           pagination={true}

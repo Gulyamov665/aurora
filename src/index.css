@@ -148,7 +148,7 @@ code {
   border-radius: 20px 20px 0 0;
   z-index: 99999999;
   position: fixed;
-  top: 5%;
+  /* top: 5%; */
   bottom: 0;
   left: 0;
   right: 0;
@@ -279,12 +279,8 @@ code {
     font-weight: 500;
   }
   .card_view_price {
-    /* width: 100%; */
     background-color: white;
     padding-bottom: 15px;
-    /* margin: 0 15px; */
-    /* display: flex; */
-    /* justify-content: space-around; */
 
     .grey {
       background-color: #9c9b9b;
@@ -334,7 +330,7 @@ code {
 
 .swiper-slide-next {
   width: auto;
-  margin-right: -12px !important;
+  /* margin-right: -12px !important; */
 }
 
 .swiper-slide {
