@@ -1,7 +1,6 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Autoplay } from 'swiper/modules'
-import Story from './Story'
+import { FreeMode } from 'swiper/modules'
 
 export default function Promo({ promo, setShowStory }) {
   return (
@@ -9,23 +8,27 @@ export default function Promo({ promo, setShowStory }) {
       <div className="container">
         <Swiper
           slidesPerView="auto"
+          freeMode={true}
+          modules={[FreeMode]}
           // autoplay={{
           //   delay: 2500,
           //   disableOnInteraction: true,
           // }}
-          breakpoints={{
-            // 320: {
-            //   slidesPerView: 'auto',
-            //   spaceBetween: 7,
-            // },
-            // 480: {
-            //   slidesPerView: 3,
-            // },
-            // 640: {
-            //   slidesPerView: 4,
-            // },
-          }}
-          modules={[Navigation, Autoplay]}
+          breakpoints={
+            {
+              // 320: {
+              //   slidesPerView: 'auto',
+              //   spaceBetween: 7,
+              // },
+              // 480: {
+              //   slidesPerView: 3,
+              // },
+              // 640: {
+              //   slidesPerView: 4,
+              // },
+            }
+          }
+          // modules={[Navigation, Autoplay]}
           pagination={true}
           className="scrollDiv"
         >

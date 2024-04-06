@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
-import { Navigation } from 'swiper/modules'
+import { Navigation, FreeMode } from 'swiper/modules'
 
 export default function Navbar({ isSuccess, sectionRefs, category }) {
   const [activeIndex, setActiveIndex] = useState()
@@ -50,7 +50,7 @@ export default function Navbar({ isSuccess, sectionRefs, category }) {
         pagination={{
           clickable: true,
         }}
-        modules={Navigation}
+        modules={[Navigation, FreeMode]}
         mousewheel={true}
         breakpoints={{
           320: {
