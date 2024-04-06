@@ -69,20 +69,20 @@ export default function CardView({ item, open, setIsOpen }) {
                 <button
                   className={
                     count > 1
-                      ? 'btn text-light grey '
+                      ? 'btn text-danger '
                       : 'btn text-light grey disabled'
                   }
                   onClick={() => setCount(count - 1)}
                 >
-                  <RemoveIcon sx={{ fontSize: 20 }} />
+                  <RemoveIcon sx={{ fontSize: 20, color: 'black' }} />
                 </button>
 
-                <button className="btn text-light grey">{count}</button>
+                <button className="btn text-black">{count}</button>
                 <button
-                  className="btn text-light grey"
+                  className="btn text-success"
                   onClick={() => setCount(count + 1)}
                 >
-                  <AddIcon sx={{ fontSize: 20 }} />
+                  <AddIcon sx={{ fontSize: 20, color: 'black' }} />
                 </button>
               </div>
             </div>
