@@ -16,32 +16,32 @@ export default function Navbar({ isSuccess, sectionRefs, category }) {
     return null
   }
 
-  useEffect(() => {
-    const cb = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navLinks.current.forEach((link) => link.classList.remove('active'))
-          let activeId = Number(entry.target.id)
-          const activeLink = navLinks.current[activeId]
-          setActiveIndex(activeId)
-          if (activeLink) {
-            activeLink.classList.toggle('active')
-          }
-        }
-      })
-    }
-    const observer = new IntersectionObserver(cb, {
-      // rootMargin : '100px',
-      threshold: [0.3, 0.85, 1],
-    })
-    sectionRefs.current.forEach((sec) => {
-      observer.observe(sec)
-    })
+  // useEffect(() => {
+  //   const cb = (entries) => {
+  //     entries.forEach((entry) => {
+  //       if (entry.isIntersecting) {
+  //         navLinks.current.forEach((link) => link.classList.remove('active'))
+  //         let activeId = Number(entry.target.id)
+  //         const activeLink = navLinks.current[activeId]
+  //         setActiveIndex(activeId)
+  //         if (activeLink) {
+  //           activeLink.classList.toggle('active')
+  //         }
+  //       }
+  //     })
+  //   }
+  //   const observer = new IntersectionObserver(cb, {
+  //     // rootMargin : '100px',
+  //     threshold: [0.3, 0.85, 1],
+  //   })
+  //   sectionRefs.current.forEach((sec) => {
+  //     observer.observe(sec)
+  //   })
 
-    return () => {
-      observer.disconnect()
-    }
-  }, [isSuccess])
+  //   return () => {
+  //     observer.disconnect()
+  //   }
+  // }, [isSuccess])
   return (
     <div className="custom-navbar">
       <Swiper
