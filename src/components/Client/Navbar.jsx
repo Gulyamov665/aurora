@@ -19,7 +19,7 @@ export default function Navbar({ isSuccess, sectionRefs, category }) {
   useEffect(() => {
     const cb = (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio > 0.25) {
+        if (entry.isIntersecting) {
           navLinks.current.forEach((link) => link.classList.remove('active'))
           let activeId = Number(entry.target.id)
           const activeLink = navLinks.current[activeId]
@@ -32,7 +32,7 @@ export default function Navbar({ isSuccess, sectionRefs, category }) {
     }
     const observer = new IntersectionObserver(cb, {
       // rootMargin : '100px',
-      threshold: [0.3, 0.85],
+      threshold: [0.3, 0.85, 1],
     })
     sectionRefs.current.forEach((sec) => {
       observer.observe(sec)
