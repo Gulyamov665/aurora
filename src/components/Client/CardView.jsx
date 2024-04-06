@@ -21,7 +21,9 @@ export default function CardView({ item, open, setIsOpen }) {
   return (
     <AnimatePresence>
       {open && (
-        <div className="card_modal" onClick={() => setIsOpen(!open)}>
+        <div>
+          <div className="card_modal" onClick={() => setIsOpen(!open)}></div>
+
           <motion.div
             drag="y"
             dragControls={controls}
