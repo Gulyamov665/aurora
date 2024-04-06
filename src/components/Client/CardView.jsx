@@ -53,7 +53,8 @@ export default function CardView({ item, open, setIsOpen }) {
                 {item.name} <hr />
               </h2>
               <p className="card_view_desc">{item.description}</p>
-            
+            </div>
+
             <div className="card_view_price">
               <button className="btn btn-warning w-100 me-4">
                 <strong style={{ color: '#333333' }}>
@@ -81,7 +82,6 @@ export default function CardView({ item, open, setIsOpen }) {
                   <AddIcon sx={{ fontSize: 20 }} />
                 </button>
               </div>
-            </div>
             </div>
           </motion.div>
         </div>
