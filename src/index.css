@@ -363,6 +363,7 @@ code {
   height: 130px;
   border-radius: 10px;
   object-fit: cover;
+  margin-right: 5px;
 }
 
 .text_promo {
