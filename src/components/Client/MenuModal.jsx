@@ -16,7 +16,8 @@ function MenuModal({ restaurant, updatedItem, close }) {
     (state) => state.modals
   )
   const [addProduct, { isLoading }] = useAddProductMutation()
-  const [updateProduct] = useUpdateProductMutation()
+  const [updateProduct, { isLoading: UpdateLoading }] =
+    useUpdateProductMutation()
   const [deleteProduct] = useDeleteProductMutation()
   const { data, handleChange, formData } = useInput(
     restaurant,
@@ -30,7 +31,6 @@ function MenuModal({ restaurant, updatedItem, close }) {
     toast.success('Позиция добавлена')
   }
 
-  
   const handleUpdateMenu = async () => {
     await updateProduct({
       body: formData,
@@ -121,7 +121,7 @@ function MenuModal({ restaurant, updatedItem, close }) {
             onClick={createModal ? handleSubmitCategory : handleUpdateMenu}
             className={isLoading && 'disabled'}
           >
-            {isLoading ? (
+            {isLoading || UpdateLoading ? (
               <span
                 className="spinner-border spinner-border-sm"
                 aria-hidden="true"
