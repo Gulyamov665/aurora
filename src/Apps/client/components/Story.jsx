@@ -20,6 +20,7 @@ export default function Story({ setShowStory, showStory }) {
     'https://img.alicdn.com/imgextra/i1/40280947/O1CN01p2BsLR1IrlbXLPNiv_!!40280947.jpg',
     'https://kartinki.pics/uploads/posts/2021-08/1629689190_8-kartinkin-com-p-samaya-krasivaya-yeda-yeda-krasivo-foto-8.jpg',
     'https://kartinki.pics/uploads/posts/2021-07/1625795930_8-kartinkin-com-p-samaya-vkusnaya-yeda-yeda-krasivo-foto-8.jpg',
+    'https://s10.stc.all.kpcdn.net/russia/wp-content/uploads/2021/10/dostavka-gotovoj-edy-na-zakaz-v-moskve-Barskaya-trapeza.jpg',
   ]
 
   return (
@@ -28,14 +29,17 @@ export default function Story({ setShowStory, showStory }) {
         <Stories
           className={styles.stories}
           stories={stories}
-          defaultInterval={5000}
-          width="100%"
-          height="100%"
-          //   storyStyles={{
-          //     objectFit: 'cover',
-          //     textAlign: 'center',
-          //     margin: '0 auto',
-          //   }}
+          defaultInterval={10000}
+          // width="100%"
+          height="100vh"
+          width={432}
+          // height="100%"
+          storyContainerStyles={{
+            objectFit: 'contain',
+            // textAlign: 'center',
+            margin: '0 auto',
+            // height: '90%',
+          }}
           //   progressContainerStyles={{ marginTop: '10px' }}
           onAllStoriesEnd={() => setShowStory(false)}
         />

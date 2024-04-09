@@ -2,27 +2,26 @@
   width: auto;
   height: 100%;
   background-color: #00000080;
-  text-align: center;
+  // text-align: center;
   z-index: 1021;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  //   margin: 0 auto;
+  margin: auto;
 }
 
 .stories_main {
-  width: 50%;
-  margin: 0 auto;
-  height: 100%;
-  text-align: center;
-}
-.stories {
-  object-fit: cover;
+  // position: fixed;
+  // margin: auto;
+  // height: 100%;
+  // top: 0;
+  // left: 0;
+  // right: 0;
 }
 
-@media (max-width: 768px) {
-  .stories_main {
-    width: 100%;
-  }
-}
+// @media (max-width: 768px) {
+//   .stories_main {
+//     width: 100%;
+//   }
+// }
