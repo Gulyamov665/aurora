@@ -4,9 +4,9 @@ import styles from './Header.module.scss'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Link } from 'react-router-dom'
 import { useQrCodeMutation } from '@store/admin/qrCode'
-import { DownloadQr } from '../Utils/downloadQr'
+import { DownloadQr } from '../../../Utils/downloadQr'
 
-export default function Header({ sidebar}) {
+export default function Header({ sidebar }) {
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem('authTokens')
       ? JSON.parse(localStorage.getItem('authTokens'))

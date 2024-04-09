@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { useNavigate } from 'react-router-dom'
-import { useGetTokenMutation } from '../../store/tokenApi'
+import { useGetTokenMutation } from '../../../store/tokenApi'
 import { toast } from 'react-toastify'
 
 //todo reactHook form

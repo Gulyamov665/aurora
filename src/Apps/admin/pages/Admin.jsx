@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { Outlet, Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import styles from './Admin.module.scss'
+import styles from '../static/Admin.module.scss'
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
 import RedeemIcon from '@mui/icons-material/Redeem'
 import BorderColorIcon from '@mui/icons-material/BorderColor'
-import Header from '../../pages/Header'
+import Header from '../components/Header'
 
 export default function Admin() {
   const navigate = useNavigate()
@@ -68,14 +68,9 @@ export default function Admin() {
             transition={{ duration: 0.3 }}
           >
             <div className={`${styles.section_0} text-center`}>
-            <img
-                src={qrCodeLocal}
-             
-                className={styles.qrcode}
-              />
+              <img src={qrCodeLocal} className={styles.qrcode} />
             </div>
             <div className="d-flex flex-column ms-2">
-            
               {buttonsInfo.map(({ text, icon, link }, index) => (
                 <Link
                   key={index}

@@ -1,10 +1,10 @@
 import React from 'react'
 import styles from './AdminCard.module.scss'
-import IOSSwitch from '../Client/MuiSwitch'
+import IOSSwitch from '../../client/components/MuiSwitch'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import BorderColorIcon from '@mui/icons-material/BorderColor'
 import { useDispatch } from 'react-redux'
-import { toggleUpdate } from '../../store/appSlice'
+import { toggleUpdate } from '../../../store/appSlice'
 
 export default function AdminCard({
   item,

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Stories from 'react-insta-stories'
-import styles from './Story.module.scss'
+import styles from '../static/Story.module.scss'
 
 export default function Story({ setShowStory, showStory }) {
   useEffect(() => {

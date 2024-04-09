@@ -1,9 +1,9 @@
 import React from 'react'
-import styles from './AdminPromo.module.scss'
+import styles from '../static/AdminPromo.module.scss'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import EditNoteIcon from '@mui/icons-material/EditNote'
-import IOSSwitch from '../Client/MuiSwitch'
-import { useGetPromosQuery } from '../../store/admin/promoApi'
+import IOSSwitch from '../../client/components/MuiSwitch'
+import { useGetPromosQuery } from '../../../store/admin/promoApi'
 import { useParams } from 'react-router-dom'
 
 const AdminPromo = () => {

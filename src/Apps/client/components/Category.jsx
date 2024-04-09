@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
-import { useGetProductsQuery } from '../../store/user/productsApi'
-import { useGetCategoriesQuery } from '../../store/user/categoryApi'
-import { useGetPromosQuery } from '../../store/user/promoApi'
+import { useGetProductsQuery } from '../../../store/user/productsApi'
+import { useGetCategoriesQuery } from '../../../store/user/categoryApi'
+import { useGetPromosQuery } from '../../../store/user/promoApi'
 import { useParams } from 'react-router-dom'
 import Card from './Card'
 import Loading from './Loading'
@@ -45,11 +45,7 @@ export default function Category({ search }) {
 
       <Promo promo={promo} setShowStory={setShowStory} />
       <div className="container sticky-top">
-        <Navbar
-          isSuccess={isSuccess}
-          sectionRefs={sectionRefs}
-          category={category}
-        />
+        <Navbar sectionRefs={sectionRefs} category={category} />
       </div>
       <div className="round">
         {search ? (

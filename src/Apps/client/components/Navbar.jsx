@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import { Navigation, FreeMode } from 'swiper/modules'
+import { useObserver } from '../../../hooks/useObserver'
+import intersectionScrollSpyFunc from '../../../Utils/scrollSpy'
 
-export default function Navbar({ isSuccess, sectionRefs, category }) {
+export default function Navbar({ sectionRefs, category }) {
   const [activeIndex, setActiveIndex] = useState()
   const navLinks = useRef([])
+  const entries = useObserver(sectionRefs, { threshold: [0.25, 0.75] })
 
   const ChangeSlide = ({ position }) => {
     const swiper = useSwiper()
@@ -17,31 +20,9 @@ export default function Navbar({ isSuccess, sectionRefs, category }) {
   }
 
   useEffect(() => {
-    const cb = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navLinks.current.forEach((link) => link.classList.remove('active'))
-          let activeId = Number(entry.target.id)
-          const activeLink = navLinks.current[activeId]
-          setActiveIndex(activeId)
-          if (activeLink) {
-            activeLink.classList.toggle('active')
-          }
-        }
-      })
-    }
-    const observer = new IntersectionObserver(cb, {
-      // rootMargin : '100px',
-      threshold: [0.3, 0.85],
-    })
-    sectionRefs.current.forEach((sec) => {
-      observer.observe(sec)
-    })
+    intersectionScrollSpyFunc(entries, navLinks, setActiveIndex)
+  }, [entries])
 
-    return () => {
-      observer.disconnect()
-    }
-  }, [isSuccess])
   return (
     <div className="custom-navbar">
       <Swiper

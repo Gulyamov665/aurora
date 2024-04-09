@@ -343,12 +343,8 @@ code {
   width: 100%;
   font-weight: bold !important;
   background-color: #e67e22;
-  /* border-bottom: 5px solid #000000; */
   transform: scaleX(1) !important;
   transform-origin: left !important;
-  /* position: absolute !important; */
-  /* height: 100% !important; */
-  /* top: 0 !important; */
   z-index: 0 !important;
   transition: all 0.3s ease 0s !important;
   border-radius: 8px !important;
@@ -674,4 +670,3 @@ Swiper {
   border-radius: 10px;
   margin-top: 10px;
 }
-

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import Intro from './Intro'
-import useAxios from '../../hooks/useAxios'
-import Header from './Header'
-import Footer from './Footer'
-import Category from './Category'
+import Intro from '../components/Intro'
+import useAxios from '../../../hooks/useAxios'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Category from '../components/Category'
 
 function Test() {
   const { restData: pos } = useAxios('restaurant')

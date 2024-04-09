@@ -1,20 +1,17 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import './App.css';
-import Test from './components/Client/Test';
-import Category from './components/Client/Category';
-import Admin from './components/Admin/Admin';
-import AdminCategory from './components/Admin/AdminCategory';
-import NotFound from './components/Client/NotFound';
-import Login from './components/Client/Login';
-import AdminMain from './components/Admin/AdminMain';
+import Test from './Apps/client/pages/Test';
+import Admin from './Apps/admin/pages/Admin';
+import AdminCategory from './Apps/admin/pages/AdminCategory';
+import NotFound from './Apps/client/components/NotFound';
+import Login from './Apps/admin/pages/Login';
+import AdminMain from './Apps/admin/pages/AdminMain';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/HomePage';
-import Navbar from './components/Client/Navbar';
-import AdminPromo from './components/Admin/AdminPromo';
-import Story from './components/Client/Story';
+import Navbar from './Apps/client/components/Navbar';
+import AdminPromo from './Apps/admin/pages/AdminPromo';
 
 
 function App() {

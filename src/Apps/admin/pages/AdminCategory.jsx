@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import useAxios from '../../hooks/useAxios'
+import useAxios from '../../../hooks/useAxios'
 import { useDispatch, useSelector } from 'react-redux'
-import AdminCard from './AdminCard'
-import styles from './AdminCategory.module.scss'
-import MenuModal from '../Client/MenuModal'
-import CategoryModal from '../Client/CategoryModal'
+import AdminCard from '../components/AdminCard'
+import styles from '../static/AdminCategory.module.scss'
+import MenuModal from '../../client/components/MenuModal'
+import CategoryModal from '../../client/components/CategoryModal'
 import AddIcon from '@mui/icons-material/Add'
 import EditNoteIcon from '@mui/icons-material/EditNote'
 import { toggleCreate, toggleUpdate } from '@store/appSlice'
@@ -22,7 +22,7 @@ import {
 } from '@store/admin/categoryApi'
 
 import { toast } from 'react-toastify'
-import ReorderPage from './ReorderPage'
+import ReorderPage from '../components/ReorderPage'
 
 export default function AdminCategory() {
   const { res } = useParams()
