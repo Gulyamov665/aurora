@@ -30,15 +30,18 @@ export default function Story({ setShowStory, showStory }) {
           className={styles.stories}
           stories={stories}
           defaultInterval={10000}
-          // width="100%"
+          width="100%"
           height="100vh"
-          width={432}
+          // width={432}
           // height="100%"
           storyContainerStyles={{
-            objectFit: 'contain',
             // textAlign: 'center',
             margin: '0 auto',
             // height: '90%',
+          }}
+          storyStyles={{
+            objectFit: 'contain',
+            textAlign: 'center',
           }}
           //   progressContainerStyles={{ marginTop: '10px' }}
           onAllStoriesEnd={() => setShowStory(false)}
