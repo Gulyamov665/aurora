@@ -6,6 +6,23 @@
   justify-content: flex-start;
   flex: auto;
 
+
+  .add_promo{
+    width: 15.95%;
+    border: 2px solid red;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(159, 228, 159);
+    border: 2px solid rgb(159, 228, 159);
+    color: white;
+    font-weight: 700;
+    font-size: 50px;
+  }
+
   .card_promo {
     width: 15.95%;
     border: 2px solid #360b5bb2;
@@ -42,6 +59,16 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+
+    .add_promo{
+      width: 90%;
+      border: 2px solid red;
+      border-radius: 15px;
+      padding: 15px 10px;
+      margin: 5px;
+      text-align: center;
+      font-size: 35px;
+    }
 
     .card_promo {
       width: 90%;
@@ -80,6 +107,19 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+
+    .add_promo{
+      width: 90%;
+      background-color: rgb(159, 228, 159);
+      border: 2px solid rgb(159, 228, 159);
+      color: white;
+      font-weight: 700;
+      border-radius: 15px;
+      padding: 15px 10px;
+      margin: 5px;
+      text-align: center;
+      font-size: 35px;
+    }
 
     .card_promo {
       width: 90%;

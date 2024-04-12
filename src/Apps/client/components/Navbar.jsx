@@ -4,10 +4,14 @@ import { Navigation, FreeMode } from 'swiper/modules'
 import { useObserver } from '../../../hooks/useObserver'
 import intersectionScrollSpyFunc from '../../../Utils/scrollSpy'
 
-export default function Navbar({ sectionRefs, category }) {
+export default function Navbar({ sectionRefs, category, rootRef }) {
   const [activeIndex, setActiveIndex] = useState()
   const navLinks = useRef([])
-  const entries = useObserver(sectionRefs, { threshold: [0.25, 0.75] })
+  const entries = useObserver(sectionRefs, {
+    root: rootRef.current,
+    rootMargin: '-35% 0px -10% 0px',
+    threshold: [0.2, 0.5, 1],
+  })
 
   const ChangeSlide = ({ position }) => {
     const swiper = useSwiper()

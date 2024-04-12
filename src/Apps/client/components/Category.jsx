@@ -14,14 +14,10 @@ import Story from './Story'
 export default function Category({ search }) {
   const { res } = useParams()
   const { data: category = [] } = useGetCategoriesQuery(res)
-  const {
-    data: menuItems = [],
-    isLoading,
-    isError,
-    isSuccess,
-  } = useGetProductsQuery(res)
+  const { data: menuItems = [], isLoading, isError } = useGetProductsQuery(res)
   const { data: promo = [] } = useGetPromosQuery(res)
   const sectionRefs = useRef([])
+  const rootSection = useRef(null)
   const [isOpen, setIsOpen] = useState(false)
   const [viewItem, setViewItem] = useState(null)
   const [showStory, setShowStory] = useState(false)
@@ -45,9 +41,13 @@ export default function Category({ search }) {
 
       <Promo promo={promo} setShowStory={setShowStory} />
       <div className="container sticky-top">
-        <Navbar sectionRefs={sectionRefs} category={category} />
+        <Navbar
+          sectionRefs={sectionRefs}
+          category={category}
+          rootRef={rootSection}
+        />
       </div>
-      <div className="round">
+      <div className="round" ref={rootSection}>
         {search ? (
           menuItems
             .filter((item) =>

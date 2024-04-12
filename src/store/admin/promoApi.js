@@ -11,10 +11,39 @@ export const promosApi = createApi({
     endpoints: build => ({
         getPromos: build.query({
             query: res => `promo/${res}`,
-            providesTags: ['Prmos']
+            providesTags: ['Promos']
+        }),
+
+        getPromo: build.query({
+            query: id => `promo/${id}`,
+            providesTags: ['Promos']
+        }),
+
+        addPromos: build.mutation({
+            query: (body) => ({
+                url: 'promos',
+                method: 'POST',
+                body
+            }),
+            invalidatesTags: ['Promos']
+        }),
+        updatePromo: build.mutation({
+            query: ({ body, id }) => ({
+                url: `promos/${id}`,
+                method: 'PUT',
+                body
+            }),
+            invalidatesTags: ['Promos']
+        }),
+        deletePromo: build.mutation({
+            query: ({ id }) => ({
+                url: `promos/${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ['Promos']
         })
     })
 })
 
 
-export const { useGetPromosQuery } = promosApi
+export const { useGetPromosQuery, useAddPromosMutation, useUpdatePromoMutation } = promosApi

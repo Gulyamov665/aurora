@@ -10,10 +10,6 @@ export default function Promo({ promo, setShowStory }) {
           slidesPerView="auto"
           freeMode={true}
           modules={[FreeMode]}
-          // autoplay={{
-          //   delay: 2500,
-          //   disableOnInteraction: true,
-          // }}
           breakpoints={
             {
               // 320: {
@@ -32,17 +28,19 @@ export default function Promo({ promo, setShowStory }) {
           pagination={true}
           className="scrollDiv"
         >
-          {promo?.map((item) => (
-            <SwiperSlide key={item.id}>
-              <img
-                className="imgScroll"
-                onClick={() => setShowStory(true)}
-                src={item.photo}
-                alt="item.name"
-              />
-              <b className="text_promo">{item.name}</b>
-            </SwiperSlide>
-          ))}
+          {promo
+            ?.filter((promos) => promos.is_active)
+            .map((item) => (
+              <SwiperSlide key={item.id}>
+                <img
+                  className="imgScroll"
+                  onClick={() => setShowStory(true)}
+                  src={item.photo}
+                  alt="item.name"
+                />
+                <b className="text_promo">{item.name}</b>
+              </SwiperSlide>
+            ))}
         </Swiper>
       </div>
     </div>

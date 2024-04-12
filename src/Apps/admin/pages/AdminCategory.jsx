@@ -46,6 +46,7 @@ export default function AdminCategory() {
   const [changeItem, setChangeItem] = useState(null)
   const dispatch = useDispatch()
 
+  console.log(restData.id)
   const handleCloseModal = () => {
     createModal ? dispatch(toggleCreate()) : dispatch(toggleUpdate())
   }
