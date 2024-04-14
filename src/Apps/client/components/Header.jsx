@@ -39,16 +39,15 @@ const Header = ({ search, setSearch }) => {
         )}
 
         <div className="d-flex align-items-end justify-content-end">
-          <form className="" role="search">
-            <input
-              type="search"
-              className="form-control"
-              placeholder="Search..."
-              value={search}
-              aria-label="Search"
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </form>
+
+
+
+
+        <div class="search-box">
+            <button class="btn-search"> <span className='span'>Sea</span>rch</button>
+            <input type="text" class="input-search" placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)}/>
+        </div>
+        
         </div>
       </div>
     </header>
