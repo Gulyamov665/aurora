@@ -1,0 +1,111 @@
+/* Header */
+.header_backgroud {
+    background: rgb(235, 232, 220);
+    background: linear-gradient(
+        251deg,
+        rgb(147, 168, 204) 19%,
+        #34495e 75%
+    );
+  }
+/* End-Header */
+
+/* Button */
+.btn_edit {
+    background: rgba(254, 151, 8, 0.986);
+    color: rgb(200, 200, 200);
+    border-radius: 5px;
+    transition: .3s;
+    border: none;
+    height: 40px;
+}  
+.btn_edit:hover{
+    background: rgb(255, 196, 0);
+    color: black;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px 1px rgb(255, 255, 255);
+}
+/* End-Button */
+
+/* Seach */
+.span {
+    color: rgb(169, 103, 103);
+}
+.search_box{
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    padding-right: 60px;
+}
+.input_search{
+    height: 50px;
+    width: 50px;
+    border-style: none;
+    padding: 10px;
+    font-size: 18px;
+    letter-spacing: 2px;
+    outline: none;
+    border-radius: 25px;
+    transition: all .5s ease-in-out;
+    background-color: #ffa600;
+    padding-right: 40px;
+    color: white;
+    cursor: pointer;
+}
+.input_search:focus{
+    width: 320px;
+    border-radius: 0px;
+    background-color: transparent;
+    border-bottom:1px solid rgb(248, 133, 1);
+    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+    /* width: 170px; */
+  }
+.input_search::placeholder{
+    color: black;
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: 100;
+}
+.btn_search{
+    margin-right: 40px;
+    width: 50px;
+    height: 50px;
+    border-style: none;
+    font-size: 20px;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+    border-radius: 50%;
+    position: absolute;
+    right: 0px;
+    color:#ffffff ;
+    background-color:transparent;
+    pointer-events: painted;  
+}
+.btn_search:focus ~ .input_search{
+    width: 320px;
+    border-radius: 0px;
+    background-color: transparent;
+    border-bottom:1px solid rgb(251, 255, 0);
+    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+/* End-Seach */
+
+
+
+/* Mobil version */
+@media screen and (max-width: 455px) and (max-height: 626px) {
+    .btn_search:focus ~ .input_search{
+      width: 120px;
+      border-radius: 0px;
+      background-color: transparent;
+      border-bottom:1px solid rgb(251, 255, 0);
+      transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+    }
+    .input_search:focus{
+      width: 120px;
+      border-radius: 0px;
+      background-color: transparent;
+      border-bottom:1px solid rgb(248, 133, 1);
+      transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+    }
+  }

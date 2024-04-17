@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { Link } from 'react-router-dom'
+import header from '../static/Header.module.scss'
 
 const Header = ({ search, setSearch }) => {
   const [authTokens, setAuthTokens] = useState(() =>
@@ -19,7 +20,7 @@ const Header = ({ search, setSearch }) => {
   }, [authTokens])
 
   return (
-    <header className="py-3 rounded-bottom mb-3 border-bottom header_backgroud">
+    <header className={`${header.header_backgroud} py-3 rounded-bottom mb-3 border-bottom header_backgroud`}>
       <div
         className="container-fluid d-grid gap-3 align-items-center"
         style={{ gridTemplateColumns: '1fr 2fr' }}
@@ -33,7 +34,7 @@ const Header = ({ search, setSearch }) => {
         ) : (
           <div>
             <Link to={`/admin/${vendor}/menu`}>
-              <button className="btn btn_edit">Редактировать</button>
+              <button className={header.btn_edit}>Редактировать</button>
             </Link>
           </div>
         )}
@@ -43,9 +44,9 @@ const Header = ({ search, setSearch }) => {
 
 
 
-        <div class="search-box">
-            <button class="btn-search"> <span className='span'>Sea</span>rch</button>
-            <input type="text" class="input-search" placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)}/>
+        <div class={header.search_box }>
+            <button class={header.btn_search}> <span className={header.span}>Sea</span>rch</button>
+            <input type="text" class={header.input_search} placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)}/>
         </div>
         
         </div>
