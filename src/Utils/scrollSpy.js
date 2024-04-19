@@ -1,6 +1,6 @@
 
 
-function intersectionScrollSpyFunc(entries, navLinks, setActiveIndex) {
+export function intersectionScrollSpyFunc(entries, navLinks, setActiveIndex) {
     entries.forEach((entry) => {
         if (window.innerHeight >= entry.intersectionRect.top / 2 && entry.isIntersecting) {
 
@@ -17,4 +17,3 @@ function intersectionScrollSpyFunc(entries, navLinks, setActiveIndex) {
     })
 }
 
-export default intersectionScrollSpyFunc
