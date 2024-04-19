@@ -17,7 +17,7 @@ export default function Category({ search }) {
   const { data: menuItems = [], isLoading, isError } = useGetProductsQuery(res)
   const { data: promo = [] } = useGetPromosQuery(res)
   const sectionRefs = useRef([])
-  const rootSection = useRef(null)
+  const rootSection = useRef([])
   const [isOpen, setIsOpen] = useState(false)
   const [viewItem, setViewItem] = useState(null)
   const [showStory, setShowStory] = useState(false)
@@ -40,14 +40,14 @@ export default function Category({ search }) {
       {showStory && <Story setShowStory={setShowStory} showStory={showStory} />}
 
       <Promo promo={promo} setShowStory={setShowStory} />
-      <div className="container sticky-top">
+      <div className="sticky-top">
         <Navbar
           sectionRefs={sectionRefs}
           category={category}
           rootRef={rootSection}
         />
       </div>
-      <div className="round" ref={rootSection}>
+      <div className="round" ref={(ref) => (rootSection.current[0] = ref)}>
         {search ? (
           menuItems
             .filter((item) =>

@@ -60,7 +60,7 @@ export default function PromoModal({
               <Form.Control
                 type="number"
                 autoFocus
-                placeholder="Пропишите цена акции"
+                placeholder="Пропишите цену акции"
                 {...register('price', { required: true })}
               />
             </Form.Group>

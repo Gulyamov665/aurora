@@ -291,13 +291,17 @@ code {
 
 /* todo navbar styles */
 
+.fullNavBar {
+  width: 100% !important;
+  border-radius: 0px !important;
+}
+
 .custom-navbar {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
   margin: 27px auto 0;
-  /* position: relative; */
-  width: 100%;
+  width: 95%;
   height: 50px;
   background-color: #34495e;
   border-radius: 8px;
