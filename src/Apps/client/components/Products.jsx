@@ -11,12 +11,13 @@ export default function Products({
     <>
       {menuItems.length &&
         category.map((item, index) => (
-          <div id={item.name} className="section" key={item.id}>
-            <div
-              ref={(ref) => (sectionRefs.current[index] = ref)}
-              id={index}
-              className="container"
-            >
+          <div
+            id={index}
+            className="section"
+            key={item.id}
+            ref={(ref) => (sectionRefs.current[index] = ref)}
+          >
+            <div className="container">
               <h2 className="cat_name pt-4">{item.name}</h2>
               <hr />
               <div className="row">
