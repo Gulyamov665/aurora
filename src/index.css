@@ -320,7 +320,7 @@ code {
   background-color: #34495e;
   border-radius: 8px;
   font-size: 0;
-  transition: all 0.3s ease 0s;
+  transition: all 1s ease 0s;
 }
 
 .custom-navbar a {
