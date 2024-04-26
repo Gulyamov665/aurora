@@ -3,9 +3,7 @@ import { motion, AnimatePresence, useDragControls } from 'framer-motion'
 import RemoveIcon from '@mui/icons-material/Remove'
 import AddIcon from '@mui/icons-material/Add'
 
-export default function CardView({ item, open, setIsOpen }) {
-  const [count, setCount] = useState(1)
-
+export default function CardView({ item, open, setIsOpen, count, setCount }) {
   const controls = useDragControls()
 
   useEffect(() => {

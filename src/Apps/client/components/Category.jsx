@@ -21,10 +21,12 @@ export default function Category({ search }) {
   const [isOpen, setIsOpen] = useState(false)
   const [viewItem, setViewItem] = useState(null)
   const [showStory, setShowStory] = useState(false)
+  const [count, setCount] = useState(1)
 
   const handleView = (item) => {
     setIsOpen(!isOpen)
     setViewItem(item)
+    setCount(1)
   }
 
   if (isLoading) {
@@ -72,7 +74,13 @@ export default function Category({ search }) {
           />
         )}
       </div>
-      <CardView item={viewItem} open={isOpen} setIsOpen={setIsOpen} />
+      <CardView
+        item={viewItem}
+        open={isOpen}
+        setIsOpen={setIsOpen}
+        count={count}
+        setCount={setCount}
+      />
     </>
   )
 }

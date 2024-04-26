@@ -10,8 +10,8 @@ export default function Navbar({ sectionRefs, category, rootRef }) {
   const navLinks = useRef([])
   const entries = useObserver(sectionRefs, {
     root: rootRef.current[0],
-    rootMargin: '-30% 0px -18% 0px',
-    threshold: [0.2, 1],
+    rootMargin: '-50% 0px -50% 0px',
+    // threshold: [0.2, 0.5, 1],
   })
   const rootObserve = useObserver(rootRef, { threshold: [0.1, 0.2] })
 

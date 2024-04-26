@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Intro(props) {
   return (
-    <div className=''>
+    <div>
       <div className="section">
         <img src={props.img} className="img" alt="img" />
         <div className="op" />
