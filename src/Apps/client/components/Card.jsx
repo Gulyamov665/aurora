@@ -1,4 +1,5 @@
 import React from 'react'
+import CurrencyFormat from 'react-currency-format'
 
 export default function Card(props) {
   return (
@@ -8,7 +9,14 @@ export default function Card(props) {
         <div className="card__info">
           <div className="car__info--title">
             <h3>{props.name}</h3>
-            <p className="card__info--price">{props.price} сум</p>
+            <p className="card__info--price">
+              <CurrencyFormat
+                value={props.price}
+                displayType={'text'}
+                thousandSeparator={' '}
+                suffix={' Сум'}
+              />
+            </p>
           </div>
         </div>
       </div>

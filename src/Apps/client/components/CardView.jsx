@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { motion, AnimatePresence, useDragControls } from 'framer-motion'
 import RemoveIcon from '@mui/icons-material/Remove'
 import AddIcon from '@mui/icons-material/Add'
+import CurrencyFormat from 'react-currency-format'
 
 export default function CardView({ item, open, setIsOpen, count, setCount }) {
   const controls = useDragControls()
@@ -61,7 +62,12 @@ export default function CardView({ item, open, setIsOpen, count, setCount }) {
             <div className="card_view_price">
               <button className="btn btn-warning w-100 me-4">
                 <strong style={{ color: '#333333' }}>
-                  {item.price * count} сум
+                  <CurrencyFormat
+                    value={item.price * count}
+                    displayType={'text'}
+                    thousandSeparator={' '}
+                    suffix={' Сум'}
+                  />
                 </strong>
               </button>
 
