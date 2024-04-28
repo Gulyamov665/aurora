@@ -40,7 +40,6 @@ export default function Category({ search }) {
   return (
     <>
       {showStory && <Story setShowStory={setShowStory} showStory={showStory} />}
-
       <Promo promo={promo} setShowStory={setShowStory} />
       <div className="sticky-top">
         <Navbar

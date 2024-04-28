@@ -6,42 +6,43 @@ export default function Promo({ promo, setShowStory }) {
   return (
     <div>
       <div className="container">
-        <Swiper
-          slidesPerView="auto"
-          freeMode={true}
-          modules={[FreeMode]}
-          breakpoints={
-            {
-              // 320: {
-              //   slidesPerView: 'auto',
-              //   spaceBetween: 7,
-              // },
-              // 480: {
-              //   slidesPerView: 3,
-              // },
-              // 640: {
-              //   slidesPerView: 4,
-              // },
+        {promo.length > 0 && (
+          <Swiper
+            slidesPerView="auto"
+            freeMode={true}
+            modules={[FreeMode]}
+            breakpoints={
+              {
+                // 320: {
+                //   slidesPerView: 'auto',
+                //   spaceBetween: 7,
+                // },
+                // 480: {
+                //   slidesPerView: 3,
+                // },
+                // 640: {
+                //   slidesPerView: 4,
+                // },
+              }
             }
-          }
-          // modules={[Navigation, Autoplay]}
-          pagination={true}
-          className="scrollDiv"
-        >
-          {promo
-            ?.filter((promos) => promos.is_active)
-            .map((item) => (
-              <SwiperSlide key={item.id}>
-                <img
-                  className="imgScroll"
-                  onClick={() => setShowStory(true)}
-                  src={item.photo}
-                  alt="item.name"
-                />
-                <b className="text_promo">{item.name}</b>
-              </SwiperSlide>
-            ))}
-        </Swiper>
+            pagination={true}
+            className="scrollDiv"
+          >
+            {promo
+              ?.filter((promos) => promos.is_active)
+              .map((item) => (
+                <SwiperSlide key={item.id}>
+                  <img
+                    className="imgScroll"
+                    onClick={() => setShowStory(true)}
+                    src={item.photo}
+                    alt="item.name"
+                  />
+                  <b className="text_promo">{item.name}</b>
+                </SwiperSlide>
+              ))}
+          </Swiper>
+        )}
       </div>
     </div>
   )

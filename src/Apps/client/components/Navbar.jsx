@@ -56,18 +56,20 @@ export default function Navbar({ sectionRefs, category, rootRef }) {
         }}
       >
         <ChangeSlide position={activeIndex} />
-        {category.map((item, index) => (
-          <SwiperSlide key={item.id}>
-            <a
-              className="nav__link"
-              href={`#${index}`}
-              ref={(ref) => (navLinks.current[index] = ref)}
-            >
-              {item.name}
-            </a>
-            <div className="animation"></div>
-          </SwiperSlide>
-        ))}
+        {category
+          .filter((obj) => obj.is_active)
+          .map((item, index) => (
+            <SwiperSlide key={item.id}>
+              <a
+                className="nav__link"
+                href={`#${index}`}
+                ref={(ref) => (navLinks.current[index] = ref)}
+              >
+                {item.name}
+              </a>
+              <div className="animation"></div>
+            </SwiperSlide>
+          ))}
       </Swiper>
     </div>
   )
