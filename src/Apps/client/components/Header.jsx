@@ -38,6 +38,7 @@ const Header = ({ search, setSearch }) => {
             </Link>
           </div>
         )}
+        
 
         <div className="d-flex align-items-end justify-content-end">
 
@@ -56,3 +57,4 @@ const Header = ({ search, setSearch }) => {
 }
 
 export default Header
+

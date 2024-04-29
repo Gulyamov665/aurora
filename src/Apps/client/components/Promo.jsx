@@ -1,6 +1,7 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode } from 'swiper/modules'
+import main from '../static/Promo.module.scss'
 
 export default function Promo({ promo, setShowStory }) {
   return (
@@ -11,20 +12,20 @@ export default function Promo({ promo, setShowStory }) {
             slidesPerView="auto"
             freeMode={true}
             modules={[FreeMode]}
-            breakpoints={
-              {
-                // 320: {
-                //   slidesPerView: 'auto',
-                //   spaceBetween: 7,
-                // },
-                // 480: {
-                //   slidesPerView: 3,
-                // },
-                // 640: {
-                //   slidesPerView: 4,
-                // },
-              }
-            }
+            // breakpoints={
+            //   {
+            //     320: {
+            //       slidesPerView: 'auto',
+            //       spaceBetween: 7,
+            //     },
+            //     480: {
+            //       slidesPerView: 3,
+            //     },
+            //     640: {
+            //       slidesPerView: 4,
+            //     },
+            //   }
+            // }
             pagination={true}
             className="scrollDiv"
           >
@@ -33,12 +34,12 @@ export default function Promo({ promo, setShowStory }) {
               .map((item) => (
                 <SwiperSlide key={item.id}>
                   <img
-                    className="imgScroll"
+                    className={main.imgScroll}
                     onClick={() => setShowStory(true)}
                     src={item.photo}
                     alt="item.name"
                   />
-                  <b className="text_promo">{item.name}</b>
+                  <b className={main.text_promo}>{item.name}</b>
                 </SwiperSlide>
               ))}
           </Swiper>

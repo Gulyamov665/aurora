@@ -4,6 +4,7 @@ import { Navigation, FreeMode } from 'swiper/modules'
 import { useObserver } from '../../../hooks/useObserver'
 import { intersectionScrollSpyFunc } from '../../../Utils/scrollSpy'
 import { navbarResizeFunc } from '../../../Utils/navbarResize'
+import navbar from '../static/Navbar.module.scss'
 
 export default function Navbar({ sectionRefs, category, rootRef }) {
   const [activeIndex, setActiveIndex] = useState()
@@ -24,16 +25,16 @@ export default function Navbar({ sectionRefs, category, rootRef }) {
     return null
   }
 
-  useEffect(() => {
-    navbarResizeFunc(rootObserve)
-  }, [rootObserve])
+  // useEffect(() => {
+  //   navbarResizeFunc(rootObserve)
+  // }, [rootObserve])
 
   useEffect(() => {
     intersectionScrollSpyFunc(entries, navLinks, setActiveIndex)
   }, [entries])
 
   return (
-    <div id="nav" className="custom-navbar">
+    <div className={navbar.custom_navbar}>
       <Swiper
         slidesPerView={5}
         freeMode={true}

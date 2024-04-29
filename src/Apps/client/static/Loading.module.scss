@@ -34,21 +34,21 @@
   .spinner1{
     width: 100px;
     height: 100px;
-    border: 10px solid #fae100;
+    border: 10px solid #faa200;
     animation: spin 1s linear infinite;
   }
   
   .spinner2{
     width: 70px;
     height: 70px;
-    border: 10px solid #fae100;
+    border: 10px solid #faa200;
     animation: negative-spin 2s linear infinite;
   }
   
   .spinner3{
     width: 40px;
     height: 40px;
-    border: 10px solid #fae100;
+    border: 10px solid #faa200;
     animation: spin 4s linear infinite;
   }
   
@@ -73,7 +73,7 @@
   .loaderText {
     position: relative;
     top: 75%;
-    color: #fae100;
+    color: #faa200;
     font-weight: bold;
   }
   

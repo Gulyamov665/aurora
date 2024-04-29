@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { useGetProductsQuery } from '../../../store/user/productsApi'
 import { useGetCategoriesQuery } from '../../../store/user/categoryApi'
 import { useGetPromosQuery } from '../../../store/user/promoApi'

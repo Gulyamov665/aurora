@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { motion, AnimatePresence, useDragControls } from 'framer-motion'
 import RemoveIcon from '@mui/icons-material/Remove'
 import AddIcon from '@mui/icons-material/Add'
+import cardview from '../static/CardView.module.scss'
 
 export default function CardView({ item, open, setIsOpen, count, setCount }) {
   const controls = useDragControls()
@@ -20,7 +21,7 @@ export default function CardView({ item, open, setIsOpen, count, setCount }) {
     <AnimatePresence>
       {open && (
         <div>
-          <div className="card_modal" onClick={() => setIsOpen(!open)}></div>
+          <div className={cardview.card_modal} onClick={() => setIsOpen(!open)}></div>
 
           <motion.div
             drag="y"
@@ -38,27 +39,23 @@ export default function CardView({ item, open, setIsOpen, count, setCount }) {
             transition={{ duration: 0.3 }}
             style={{
               position: 'fixed',
-              // left: 0,
-              // right: 0,
               bottom: 0,
               background: 'white',
-              // padding: '20px',
-              // boxShadow: '0px -5px 10px rgba(0, 0, 0, 0.1)',
             }}
-            className="card_view_motion"
+            className={cardview.card_view_motion}
           >
-            <div className="card_view">
-              <img className="card_view_img" src={item.photo} alt="" />
+            <div className={cardview.card_view}>
+              <img className={cardview.card_view_img} src={item.photo} alt="" />
               <h2>
                 {item.name} <hr />
               </h2>
 
-              <div className="card_view_desc">
+              <div className={cardview.card_view_desc}>
                 <p>{item.description}</p>
               </div>
             </div>
 
-            <div className="card_view_price">
+            <div className={cardview.card_view_price}>
               <button className="btn btn-warning w-100 me-4">
                 <strong style={{ color: '#333333' }}>
                   {item.price * count} сум
@@ -70,7 +67,7 @@ export default function CardView({ item, open, setIsOpen, count, setCount }) {
                   className={
                     count > 1
                       ? 'btn text-danger '
-                      : 'btn text-light grey disabled'
+                      : `btn text-light ${cardview.grey} disabled`
                   }
                   onClick={() => setCount(count - 1)}
                 >

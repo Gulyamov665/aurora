@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from './Card'
+import products from '../static/Products.module.scss'
 
 export default function Products({
   menuItems,
@@ -15,7 +16,7 @@ export default function Products({
           .map((item, index) => (
             <div
               id={index}
-              className="section"
+              className={products.section}
               key={item.id}
               ref={(ref) => (sectionRefs.current[index] = ref)}
             >
