@@ -1,0 +1,243 @@
+.card {
+    border-radius: 15px !important;
+    border: 1px solid lavender;
+    margin: 10px 10px 10px 0;
+    box-shadow: 5px 5px 15px 5px rgba(230, 230, 250, 1);
+    margin-bottom: 30px;
+}
+.card__image {
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+    height: 170px;
+    object-fit: cover;
+    margin: 0 auto;
+}
+.card__info {
+    font-family: "Montserrat", sans-serif;
+    padding: 10px 10px 0 10px;
+}
+.card__info h3 {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: "Rubik", sans-serif;
+    padding-bottom: 20px;
+}
+.card__info p {
+    font-size: 16px;
+    font-weight: 600;
+    color: dimgrey;
+}
+
+
+/* Mobil-version */
+@media (min-width: 250px) and (max-width: 320px) {
+    .card {
+        border-radius: 15px !important;
+        border: 1px solid lavender;
+        margin: 10px 10px 10px 0;
+        box-shadow: 5px 5px 15px 5px rgba(230, 230, 250, 1);
+        margin-bottom: 30px;
+        height: 60%;
+    }
+    .card__image {
+        width: 100%;
+        border-radius: 15px 15px 0 0;
+        height: 80px;
+        object-fit: cover;
+        margin: 0 auto;
+    }
+    .card__info h3 {
+        font-size: 10px;
+        font-weight: 700;
+        font-family: "Rubik", sans-serif;
+    }
+    .card__info p {
+        font-size: 10px;
+        font-weight: 600;
+        color: dimgrey;
+        padding-bottom: 60px;
+    }
+}
+
+@media (min-width: 470px) and (max-width: 540px) {
+    .card {
+        border-radius: 15px !important;
+        border: 1px solid lavender;
+        margin: 10px 10px 10px 0;
+        box-shadow: 5px 5px 15px 5px rgba(230, 230, 250, 1);
+        margin-bottom: 30px;
+        height: 80%;
+    }
+    .card__image {
+        width: 100%;
+        border-radius: 15px 15px 0 0;
+        height: 100px;
+        object-fit: cover;
+        margin: 0 auto;
+    }
+    .card__info h3 {
+        font-size: 14.2px;
+        font-weight: 700;
+        font-family: "Rubik", sans-serif;
+        padding-bottom: 20px;
+    }
+    .card__info p {
+        font-size: 13px;
+        font-weight: 600;
+        color: dimgrey;
+    }
+}
+
+/* Iphone SE */
+@media (min-width: 360px) and (max-width: 400px) {
+    .card {
+        border-radius: 15px !important;
+        border: 1px solid lavender;
+        margin: 10px 10px 10px 0;
+        box-shadow: 5px 5px 15px 5px rgba(230, 230, 250, 1);
+        margin-bottom: 30px;
+        height: 80%;
+    }
+    .card__image {
+        width: 100%;
+        border-radius: 15px 15px 0 0;
+        height: 100px;
+        object-fit: cover;
+        margin: 0 auto;
+    }
+    .card__info h3 {
+        font-size: 14.2px;
+        font-weight: 700;
+        font-family: "Rubik", sans-serif;
+        padding-bottom: 20px;
+    }
+    .card__info p {
+        font-size: 13px;
+        font-weight: 600;
+        color: dimgrey;
+    }
+}
+
+/* Iphone XR */
+@media (min-width: 400px) and (max-width: 470px) {
+    .card {
+        border-radius: 15px !important;
+        border: 1px solid lavender;
+        margin: 10px 10px 10px 0;
+        box-shadow: 5px 5px 15px 5px rgba(230, 230, 250, 1);
+        margin-bottom: 30px;
+        height: 80%;
+    }
+    .card__image {
+        width: 100%;
+        border-radius: 15px 15px 0 0;
+        height: 100px;
+        object-fit: cover;
+        margin: 0 auto;
+
+    }
+    .card__info h3 {
+        font-size: 18px;
+        font-weight: 700;
+        font-family: "Rubik", sans-serif;
+        padding-bottom: 20px;
+    }
+    .card__info p {
+        font-size: 13px;
+        font-weight: 600;
+        color: dimgrey;
+        margin-bottom: 30px;
+    }
+}
+
+/* Ipad Mini */
+@media (min-width: 765px) and (max-width: 1024px) {
+    .card {
+        border-radius: 15px !important;
+        border: 1px solid lavender;
+        margin: 10px 10px 10px 0;
+        box-shadow: 5px 5px 15px 5px rgba(230, 230, 250, 1);
+        margin-bottom: 30px;
+        height: 80%;
+    }
+    .card__image {
+        width: 100%;
+        border-radius: 15px 15px 0 0;
+        height: 100px;
+        object-fit: cover;
+        margin: 0 auto;
+    }
+    .card__info h3 {
+        font-size: 14.2px;
+        font-weight: 700;
+        font-family: "Rubik", sans-serif;
+        padding-bottom: 20px;
+    }
+    .card__info p {
+        font-size: 13px;
+        font-weight: 600;
+        color: dimgrey;
+    }
+}
+
+/* Surface Duo */
+@media (min-width: 540px) and (max-width: 720px) {
+    .card {
+        border-radius: 15px !important;
+        border: 1px solid lavender;
+        margin: 10px 10px 10px 0;
+        box-shadow: 5px 5px 15px 5px rgba(230, 230, 250, 1);
+        margin-bottom: 30px;
+        height: 80%;
+    }
+    .card__image {
+        width: 100%;
+        border-radius: 15px 15px 0 0;
+        height: 100px;
+        object-fit: cover;
+        margin: 0 auto;
+    }
+    .card__info h3 {
+        font-size: 17.2px;
+        font-weight: 700;
+        font-family: "Rubik", sans-serif;
+        padding-bottom: 20px;
+    }
+    .card__info p {
+        font-size: 15px;
+        font-weight: 600;
+        color: dimgrey;
+    }
+}
+
+/* Galaxy Z Fold 5 */
+@media (min-width: 320px) and (max-width: 360px) {
+    .card {
+        border-radius: 15px !important;
+        border: 1px solid lavender;
+        margin: 10px 10px 10px 0;
+        box-shadow: 5px 5px 15px 5px rgba(230, 230, 250, 1);
+        margin-bottom: 30px;
+        height: 80%;
+    }
+    .card__image {
+        width: 100%;
+        border-radius: 15px 15px 0 0;
+        height: 100px;
+        object-fit: cover;
+        margin: 0 auto;
+    }
+    .card__info h3 {
+        font-size: 14.2px;
+        font-weight: 700;
+        font-family: "Rubik", sans-serif;
+        padding-bottom: 20px;
+    }
+    .card__info p {
+        font-size: 13px;
+        font-weight: 600;
+        color: dimgrey;
+    }
+}
+
+

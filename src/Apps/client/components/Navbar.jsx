@@ -1,34 +1,35 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
-import { Navigation, FreeMode } from 'swiper/modules'
-import { useObserver } from '../../../hooks/useObserver'
-import intersectionScrollSpyFunc from '../../../Utils/scrollSpy'
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Navigation, FreeMode } from "swiper/modules";
+import { useObserver } from "../../../hooks/useObserver";
+import intersectionScrollSpyFunc from "../../../Utils/scrollSpy";
+import navbar from '../static/Navbar.module.scss'
 
 export default function Navbar({ sectionRefs, category, rootRef }) {
-  const [activeIndex, setActiveIndex] = useState()
-  const navLinks = useRef([])
+  const [activeIndex, setActiveIndex] = useState();
+  const navLinks = useRef([]);
   const entries = useObserver(sectionRefs, {
     root: rootRef.current,
-    rootMargin: '-35% 0px -10% 0px',
+    rootMargin: "-35% 0px -10% 0px",
     threshold: [0.2, 0.5, 1],
-  })
+  });
 
   const ChangeSlide = ({ position }) => {
-    const swiper = useSwiper()
+    const swiper = useSwiper();
     useEffect(() => {
       if (swiper) {
-        swiper.slideTo(position - 1)
+        swiper.slideTo(position - 1);
       }
-    }, [swiper, position])
-    return null
-  }
+    }, [swiper, position]);
+    return null;
+  };
 
   useEffect(() => {
-    intersectionScrollSpyFunc(entries, navLinks, setActiveIndex)
-  }, [entries])
+    intersectionScrollSpyFunc(entries, navLinks, setActiveIndex);
+  }, [entries]);
 
   return (
-    <div className="custom-navbar">
+    <div className={navbar.custom_navbar}>
       <Swiper
         slidesPerView={5}
         freeMode={true}
@@ -60,10 +61,10 @@ export default function Navbar({ sectionRefs, category, rootRef }) {
             >
               {item.name}
             </a>
-            <div className="animation"></div>
+            <div className={navbar.animation}></div>
           </SwiperSlide>
         ))}
       </Swiper>
     </div>
-  )
+  );
 }

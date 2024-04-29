@@ -38,15 +38,16 @@ const Header = ({ search, setSearch }) => {
             </Link>
           </div>
         )}
+        
 
         <div className="d-flex align-items-end justify-content-end">
 
 
 
 
-        <div class={header.search_box }>
-            <button class={header.btn_search}> <span className={header.span}>Sea</span>rch</button>
-            <input type="text" class={header.input_search} placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)}/>
+        <div className={header.search_box }>
+            <button className={header.btn_search}> <span className={header.span}>Sea</span>rch</button>
+            <input type="text" className={header.input_search} placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)}/>
         </div>
         
         </div>
@@ -56,3 +57,4 @@ const Header = ({ search, setSearch }) => {
 }
 
 export default Header
+
