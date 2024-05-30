@@ -3,7 +3,6 @@ import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import { Navigation, FreeMode } from 'swiper/modules'
 import { useObserver } from '../../../hooks/useObserver'
 import { intersectionScrollSpyFunc } from '../../../Utils/scrollSpy'
-import { navbarResizeFunc } from '../../../Utils/navbarResize'
 
 export default function Navbar({ sectionRefs, category, rootRef }) {
   const [activeIndex, setActiveIndex] = useState()
@@ -12,7 +11,6 @@ export default function Navbar({ sectionRefs, category, rootRef }) {
     root: rootRef.current[0],
     rootMargin: '-50% 0px -50% 0px',
   })
-  const rootObserve = useObserver(rootRef, { threshold: [0.1, 0.2] })
 
   const ChangeSlide = ({ position }) => {
     const swiper = useSwiper()
@@ -23,10 +21,6 @@ export default function Navbar({ sectionRefs, category, rootRef }) {
     }, [swiper, position])
     return null
   }
-
-  useEffect(() => {
-    navbarResizeFunc(rootObserve)
-  }, [rootObserve])
 
   useEffect(() => {
     intersectionScrollSpyFunc(entries, navLinks, setActiveIndex)
