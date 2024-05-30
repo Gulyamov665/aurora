@@ -10,9 +10,11 @@ export default function Intro(props) {
           <img src={props.logo} className="img_logo" alt="logo" />
         </div>
       </div>
-      <div className="container container-sm mt-4">
-        <h1 className="texts">{props.name}</h1>
-        <p className="texts">{props.location}</p>
+      <div className="container container-sm mt-4 ">
+        <div className="name_container">
+          <h1 className="texts">{props.name}</h1>
+          <p className="texts">{props.location}</p>
+        </div>
       </div>
     </div>
   )
