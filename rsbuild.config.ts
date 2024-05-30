@@ -10,6 +10,9 @@ export default defineConfig({
     distPath: {
       root: 'build',
     },
+    sourceMap: {
+      js: 'source-map',
+    },
   },
 
   source: {

@@ -39,6 +39,7 @@ const AdminPromo = () => {
       }
       formData.append(key, value)
     })
+    
 
     await addPromos(formData).unwrap()
     reset()

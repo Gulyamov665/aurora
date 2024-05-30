@@ -97,6 +97,7 @@ function MenuModal({ restaurant, updatedItem, close }) {
                 name="price"
                 value={data.price}
                 onChange={handleChange}
+                required
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
