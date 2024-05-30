@@ -35,7 +35,9 @@ code {
   box-sizing: border-box;
 }
 
-/*Todo INTro_css________ */
+/* ######################################################### */
+/* ################---INTRO styless ---#################### */
+/* ######################################################### */
 .category {
   width: auto;
   background-color: aliceblue;
@@ -107,7 +109,10 @@ code {
   /* margin-left: 80px; */
 }
 
-/*Todo CARD_css________ */
+
+/* ######################################################### */
+/* ################---CARD styless ---#################### */
+/* ######################################################### */
 
 .card {
   border-radius: 15px !important;
@@ -304,7 +309,9 @@ code {
   }
 }
 
-/* todo navbar styless */
+/* ######################################################### */
+/* ################---Navbar styless ---#################### */
+/* ######################################################### */
 
 .fullNavBar {
   width: 100% !important;
@@ -445,42 +452,21 @@ code {
   /* background-color: #34495e; */
 
   .footer_style_text {
-    color: #797c80;
+    color: rgb(44, 44, 44);
     font-weight: 500;
 
     .footer_powered {
-      color: #46484c;
+      color: #1d1919;
       font-weight: 700;
       text-decoration: none;
     }
   }
 }
 
-/* .scrollspy-swiper-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
-.swiper-container {
-  width: 80%;
-  margin: 20px auto;
-}
-
-.swiper-slide {
-  text-align: center;
-  padding: 50px;
-  font-size: 30px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-} */
-
-/* .active {
-  width: auto;
-  background-color: #1abc9c;
-} */
-
-/* Login Page */
+/* ######################################################### */
+/* ################---Login page styless ---#################### */
+/* ######################################################### */
 
 .background {
   width: 100%;
@@ -534,29 +520,8 @@ code {
     }
   }
 }
-@media (min-width: 325px) and (max-width: 380px) {
-  .background {
-    .container {
-      width: 80% !important;
 
-      .login_logo {
-        width: 200px;
-      }
 
-      .login_text {
-        font-size: medium;
-      }
-
-      .footer {
-        font-size: small;
-
-        .footer_powered {
-          font-weight: 600;
-        }
-      }
-    }
-  }
-}
 
 @media (min-width: 480px) and (max-width: 768px) {
   .background {
@@ -603,121 +568,14 @@ code {
   }
 }
 
-/* .root {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #fff;
-}
 
-.section {
-  height: 100vh;
-  width: 100%;
-}
-
-.target {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #151419;
-  color: #fff;
-  font-weight: 900;
-  font-size: 20px;
-  width: 300px;
-  height: 200px;
-  border-radius: 5px;
-}
-
-.isVisible {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: #151419;
-  color: #fff;
-  font-size: 20px;
-  font-weight: 900;
-  padding: 40px;
-} */
-
-/* html {
-  scroll-behavior: smooth;
-} */
-/* .swiper-container {
-  width: 100%;
-}
-.swiper-slide {
-   padding: 10px;
-   width: 66vw!important;
-}
-.swiper-slide-active2 {
-  background-color: #95D5B2;
-  border-radius: 25px;
-}
-
-.swiper-container ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-.swiper-container a {
-  color: black;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-}
-.sticky {
-  position: sticky;
-  top: 0px;
-}
-section-nav {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.5rem;
-} */
-
+/*  */
 Swiper {
   background-color: #fafffc;
 }
 
 .round {
-  /* background-color: #efefef !important; */
   border-radius: 10px;
   margin-top: 10px;
 }
 
-@media (min-width: 330px) and (max-width: 380px) {
-  .background {
-    .container {
-      width: 5% !important;
-
-      .login_logo {
-        width: 10px;
-      }
-      .btn-search {
-        width: 60px;
-      }
-      .input-search {
-        width: 30px;
-      }
-
-      .login_text {
-        font-size: medium;
-      }
-      .footer {
-        font-size: medium;
-
-        .footer_powered {
-          font-weight: 400;
-        }
-      }
-    }
-  }
-}
