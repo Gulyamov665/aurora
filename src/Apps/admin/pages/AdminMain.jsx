@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from '../static/AdminMain.module.scss'
-import { Crop } from '@mui/icons-material'
 
 export default function AdminMain() {
   return (
@@ -30,7 +29,6 @@ export default function AdminMain() {
           </button>
         </div>
       </div>
-      <Crop src={'/img/12.jpg'} />
     </div>
   )
 }

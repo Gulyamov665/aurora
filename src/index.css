@@ -109,7 +109,6 @@ code {
   /* margin-left: 80px; */
 }
 
-
 /* ######################################################### */
 /* ################---CARD styless ---#################### */
 /* ######################################################### */
@@ -174,9 +173,9 @@ code {
 .card_view_img {
   /* padding: 10px; */
   width: 100%;
-  height: 400px;
+  height: 100%;
   border-radius: 20px 20px 0 0;
-  object-fit: cover;
+  /* object-fit: cover; */
 }
 
 .card_view h2 {
@@ -274,7 +273,7 @@ code {
     width: 100%;
     height: 300px;
     border-radius: 20px 20px 0 0;
-    object-fit: cover;
+    /* object-fit: cover; */
   }
 
   .card_view h2 {
@@ -463,7 +462,6 @@ code {
   }
 }
 
-
 /* ######################################################### */
 /* ################---Login page styless ---#################### */
 /* ######################################################### */
@@ -521,8 +519,6 @@ code {
   }
 }
 
-
-
 @media (min-width: 480px) and (max-width: 768px) {
   .background {
     .container {
@@ -568,7 +564,6 @@ code {
   }
 }
 
-
 /*  */
 Swiper {
   background-color: #fafffc;
@@ -578,4 +573,3 @@ Swiper {
   border-radius: 10px;
   margin-top: 10px;
 }
-

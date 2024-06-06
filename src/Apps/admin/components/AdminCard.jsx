@@ -5,6 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import BorderColorIcon from '@mui/icons-material/BorderColor'
 import { useDispatch } from 'react-redux'
 import { toggleUpdate } from '../../../store/appSlice'
+import { useNavigate } from 'react-router-dom'
 
 export default function AdminCard({
   item,
@@ -12,11 +13,13 @@ export default function AdminCard({
   onChange,
   setUpdatedItem,
 }) {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const handleClickTest = (item) => {
-    dispatch(toggleUpdate())
-    setUpdatedItem(item)
+  const updateProduct = (item) => {
+    // dispatch(toggleUpdate())
+    // setUpdatedItem(item)
+    navigate(`${item}`)
   }
 
   return (
@@ -24,7 +27,7 @@ export default function AdminCard({
       <div className={styles.title}>
         <h6>{item.name}</h6>
         <FormControlLabel
-          onClick={() => handleClickTest({ ...item })}
+          onClick={() => updateProduct(item.id)}
           control={<BorderColorIcon />}
         />
       </div>

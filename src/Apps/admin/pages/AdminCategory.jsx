@@ -8,7 +8,7 @@ import CategoryModal from '../../client/components/CategoryModal'
 import AddIcon from '@mui/icons-material/Add'
 import EditNoteIcon from '@mui/icons-material/EditNote'
 import { toggleCreate, toggleUpdate } from '@store/appSlice'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import {
   useGetProductsQuery,
   useUpdateProductMutation,
@@ -149,12 +149,12 @@ export default function AdminCategory() {
             data-bs-target="#create_mode"
             className={`${styles.col_1}`}
           >
-            <p
-              className="pt-5 text-center"
-              onClick={() => dispatch(toggleCreate())}
+            <Link
+              to={`/admin/${res}/add-product`}
+              style={{ textDecoration: 'none', color: 'black' }}
             >
-              Добавить Меню
-            </p>
+              <p className="pt-5 text-center">Добавить</p>
+            </Link>
             <MenuModal
               updatedItem={updatedItem}
               close={handleCloseModal}

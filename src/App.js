@@ -12,6 +12,8 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/HomePage';
 import Navbar from './Apps/client/components/Navbar';
 import AdminPromo from './Apps/admin/pages/AdminPromo';
+import { AddProduct } from './Apps/admin/modules/Product/components/AddProduct';
+import { UpdateProduct } from './Apps/admin/modules/Product/components/UpdateProduct';
 
 
 function App() {
@@ -22,7 +24,9 @@ function App() {
         <Route path='/admin/:res' element={<Admin />} >
           <Route path='main' element={<AdminMain />} />
           <Route path='menu' element={<AdminCategory />} />
+          <Route path='menu/:id' element={<UpdateProduct />} />
           <Route path='promo' element={<AdminPromo />} />
+          <Route path='add-product' element={<AddProduct />} />
         </Route>
 
         <Route path='*' element={<NotFound />} />
@@ -32,7 +36,6 @@ function App() {
         <Route path='login' element={<LoginPage />} />
 
         <Route path='vendor/:res' element={<Test />} >
-          {/* <Route path='story' element={<Story />} /> */}
         </Route>
 
       </Routes >

@@ -11,20 +11,6 @@ export default function Promo({ promo, setShowStory }) {
             slidesPerView="auto"
             freeMode={true}
             modules={[FreeMode]}
-            breakpoints={
-              {
-                // 320: {
-                //   slidesPerView: 'auto',
-                //   spaceBetween: 7,
-                // },
-                // 480: {
-                //   slidesPerView: 3,
-                // },
-                // 640: {
-                //   slidesPerView: 4,
-                // },
-              }
-            }
             pagination={true}
             className="scrollDiv"
           >
