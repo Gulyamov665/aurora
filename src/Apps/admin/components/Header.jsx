@@ -3,8 +3,9 @@ import { jwtDecode } from 'jwt-decode'
 import styles from './Header.module.scss'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Link } from 'react-router-dom'
-import { useQrCodeMutation } from '@store/admin/qrCode'
+import { useQrCodeMutation } from '../../../store/admin/qrCode'
 import { DownloadQr } from '../../../Utils/downloadQr'
+import logo from '../../../assets/transparent_logo.png'
 
 export default function Header({ sidebar }) {
   const [authTokens, setAuthTokens] = useState(() =>
@@ -41,11 +42,7 @@ export default function Header({ sidebar }) {
           fontSize="large"
           onClick={sidebar}
         />
-        <img
-          src="/img/transparent_logo.png"
-          className={styles.logo}
-          alt="img"
-        />
+        <img src={logo} className={styles.logo} alt="img" />
       </div>
       <div className="d-flex justify-content-between">
         {!isLoading ? (

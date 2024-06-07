@@ -15,7 +15,7 @@ export const productsApi = createApi({
 
         getProduct: build.query({
             query: id => `menus/${id}`,
-            providesTags: ['Products']
+            providesTags: ["Products"]
         }),
 
         addProduct: build.mutation({
@@ -37,7 +37,7 @@ export const productsApi = createApi({
         }),
 
         deleteProduct: build.mutation({
-            query: ({ id }) => ({
+            query: (id) => ({
                 url: `menus/${id}`,
                 method: 'DELETE',
             }),

@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { ProductForm } from './ProductForm'
-import CropModal from './CropModal'
+import { ProductForm } from '../components/ProductForm'
+import CropModal from '../components/CropModal'
 import { useAddProductMutation } from '../../../../../store/admin/productsApi'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -10,6 +10,7 @@ function AddProduct() {
   const { register, handleSubmit, reset } = useForm()
   const [addProduct] = useAddProductMutation()
   const { selectedCategory: category } = useSelector((state) => state.modals)
+  const { id: vendor } = useSelector((state) => state.vendor)
   const [img, setImg] = useState(null)
   const [cropData, setCropData] = useState(null)
   const navigate = useNavigate()
@@ -44,7 +45,7 @@ function AddProduct() {
 
     formData.append('crop', JSON.stringify(cropData))
     formData.append('category', +category)
-    formData.append('restaurant', 1)
+    formData.append('restaurant', vendor)
 
     await addProduct(formData).unwrap()
     reset()

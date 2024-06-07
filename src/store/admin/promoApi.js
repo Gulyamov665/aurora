@@ -15,7 +15,7 @@ export const promosApi = createApi({
         }),
 
         getPromo: build.query({
-            query: id => `promo/${id}`,
+            query: id => `promos/${id}`,
             providesTags: ['Promos']
         }),
 
@@ -36,7 +36,7 @@ export const promosApi = createApi({
             invalidatesTags: ['Promos']
         }),
         deletePromo: build.mutation({
-            query: ({ id }) => ({
+            query: (id) => ({
                 url: `promos/${id}`,
                 method: "DELETE",
             }),
@@ -46,4 +46,17 @@ export const promosApi = createApi({
 })
 
 
-export const { useGetPromosQuery, useAddPromosMutation, useUpdatePromoMutation } = promosApi
+export const { useGetPromosQuery, useAddPromosMutation, useUpdatePromoMutation, useGetPromoQuery, useDeletePromoMutation } = promosApi
+
+
+// http://localhost:8000/api/admins/promo/Olivia  ------->  GET filter by restaurant
+
+// http://localhost:8000/api/admins/promos/       ------->  GET all promos
+
+// http://localhost:8000/api/admins/promos/       ------->  POST for promo model
+
+// http://localhost:8000/api/admins/promos/int:pk ------->  GET only one promo by promo_id
+
+// http://localhost:8000/api/admins/promos/int:pk ------->  PUT update promo by promo_id
+
+// http://localhost:8000/api/admins/promos/int:pk ------->  DELETE delete promo by promo_id

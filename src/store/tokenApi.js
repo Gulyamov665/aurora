@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const baseURL = process.env.PUBLIC_BASE_URL
+const baseURL = import.meta.env.VITE_BASE_URL
 
 const getToken = () => {
     const authTokens = JSON.parse(localStorage.getItem('authTokens'));

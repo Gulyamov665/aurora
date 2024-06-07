@@ -29,6 +29,12 @@ export default function Category({ search }) {
     setCount(1)
   }
 
+  const handleViewPromo = (item) => {
+    console.log(item)
+    setIsOpen(!isOpen)
+    setViewItem(item)
+  }
+
   if (isLoading) {
     return <Loading />
   }
@@ -39,8 +45,7 @@ export default function Category({ search }) {
 
   return (
     <>
-      {showStory && <Story setShowStory={setShowStory} showStory={showStory} />}
-      <Promo promo={promo} setShowStory={setShowStory} />
+      <Promo promo={promo} handleViewPromo={handleViewPromo} />
       <div className="sticky-top">
         <Navbar
           sectionRefs={sectionRefs}
