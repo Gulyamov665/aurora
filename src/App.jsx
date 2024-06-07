@@ -12,7 +12,7 @@ import HomePage from './pages/HomePage'
 import LoginPage from './pages/HomePage'
 import Navbar from './Apps/client/components/Navbar'
 import AdminPromo from './Apps/admin/modules/promo/pages/AdminPromo'
-import AddProduct from './Apps/admin/modules/product/pages/AddProduct'
+// import AddProduct from './Apps/admin/modules/product/pages/AddProduct'
 import { UpdateProduct } from './Apps/admin/modules/product/pages/UpdateProduct'
 import AddPromo from './Apps/admin/modules/promo/pages/AddPromo'
 import UpdatePromo from './Apps/admin/modules/promo/pages/UpdatePromo'
@@ -26,7 +26,7 @@ function App() {
           <Route path="main" element={<AdminMain />} />
           <Route path="menu" element={<AdminCategory />} />
           <Route path="menu/:id" element={<UpdateProduct />} />
-          <Route path="add-product" element={<AddProduct />} />
+          {/* <Route path="add-product" element={<AddProduct />} /> */}
           <Route path="promo" element={<AdminPromo />} />
           <Route path="promo/:id" element={<UpdatePromo />} />
           <Route path="add-promo" element={<AddPromo />} />
