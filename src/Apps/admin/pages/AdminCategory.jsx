@@ -1,36 +1,33 @@
 import React, { useEffect, useState } from 'react'
-import useAxios from '../../../hooks/useAxios'
 import { useDispatch, useSelector } from 'react-redux'
 import AdminCard from '../components/AdminCard'
 import styles from '../static/AdminCategory.module.scss'
-import MenuModal from '../../client/components/MenuModal'
 import CategoryModal from '../../client/components/CategoryModal'
 import AddIcon from '@mui/icons-material/Add'
 import EditNoteIcon from '@mui/icons-material/EditNote'
-import { toggleCreate, toggleUpdate } from '@store/appSlice'
 import { Link, useParams } from 'react-router-dom'
 import {
   useGetProductsQuery,
   useUpdateProductMutation,
-} from '@store/admin/productsApi'
+} from '../../../store/admin/productsApi'
 import {
   useAddCategoryMutation,
   useGetCategoriesQuery,
   useUpdateOrderMutation,
   useDeleteCategoryMutation,
   useUpdateCategoryMutation,
-} from '@store/admin/categoryApi'
+} from '../../../store/admin/categoryApi'
 
 import { toast } from 'react-toastify'
 import ReorderPage from '../components/ReorderPage'
+import { useLoadQuery } from '../../../store/admin/vendorApi'
+import { getVendorId } from '../../../store/admin/slices/vendorSlice'
 
 export default function AdminCategory() {
   const { res } = useParams()
-  const { restData } = useAxios(`category_get`)
-  const rest = restData && restData.id
+  const { data: vendor } = useLoadQuery(res)
   const [showModalCategory, setShowModalCategory] = useState(false)
   const [newCategory, setNewCategory] = useState('')
-  const [updatedItem, setUpdatedItem] = useState(null)
   const { data: menuItems } = useGetProductsQuery(res)
   const { data: category } = useGetCategoriesQuery(res)
   const [items, setItems] = useState([])
@@ -39,18 +36,14 @@ export default function AdminCategory() {
   const [updateOrder] = useUpdateOrderMutation()
   const [updateCategory] = useUpdateCategoryMutation()
   const [deleteCategory] = useDeleteCategoryMutation()
-  const { createModal, selectedCategory: select } = useSelector(
-    (state) => state.modals
-  )
+  const { selectedCategory: select } = useSelector((state) => state.modals)
   const [editCategory, setEditCategory] = useState(false)
   const [changeItem, setChangeItem] = useState(null)
   const dispatch = useDispatch()
 
-  const handleCloseModal = () => {
-    createModal ? dispatch(toggleCreate()) : dispatch(toggleUpdate())
-  }
-
-  //todo WebHook, setWebHook,
+  useEffect(() => {
+    if (vendor) dispatch(getVendorId(vendor?.id))
+  }, [vendor, dispatch])
 
   const handleActiveToggle = async (item) => {
     delete item.photo
@@ -66,7 +59,7 @@ export default function AdminCategory() {
 
   const handleCategory = async () => {
     const categoryItem = {
-      restaurant: rest,
+      restaurant: vendor.id,
       name: newCategory,
     }
 
@@ -155,11 +148,6 @@ export default function AdminCategory() {
             >
               <p className="pt-5 text-center">Добавить</p>
             </Link>
-            <MenuModal
-              updatedItem={updatedItem}
-              close={handleCloseModal}
-              restaurant={rest}
-            />
           </div>
         )}
         {select &&
@@ -167,7 +155,6 @@ export default function AdminCategory() {
             ?.filter((obj) => obj.category === select)
             .map((item) => (
               <AdminCard
-                setUpdatedItem={setUpdatedItem}
                 key={item.id}
                 item={item}
                 isActive={item.is_active}

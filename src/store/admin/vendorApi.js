@@ -8,8 +8,10 @@ export const vendorApi = createApi({
     baseQuery,
 
     endpoints: build => ({
-        load : build.query({
-            query : () => 'res'
+        load: build.query({
+            query: (params) => `restaurants/${params}`
         })
     })
 })
+
+export const { useLoadQuery } = vendorApi

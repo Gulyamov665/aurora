@@ -9,18 +9,12 @@
 
   .add_promo{
     width: 15.95%;
-    border: 2px solid red;
-    border-radius: 15px;
-    padding: 15px;
-    margin: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(159, 228, 159);
-    border: 2px solid rgb(159, 228, 159);
-    color: white;
-    font-weight: 700;
-    font-size: 50px;
+    margin-left: 5px;
+    // width: 24% !important;
+    height: 110px;
+    border: 2px solid green !important;
+    border-radius: 5px;
+    margin-top: 8px;
   }
 
   .card_promo {
@@ -51,7 +45,19 @@
   }
 }
 
+.col_1 {
+  margin-left: 5px;
+  width: 24% !important;
+  height: 110px;
+  border: 2px solid green !important;
+  border-radius: 5px;
+  margin-top: 8px;
+}
+
 @media (min-width: 320px) and (max-width: 420px) {
+  .col_1 {
+    width: 100% !important;
+  }
   .container_promo {
     width: 80%;
     height: 200px;
@@ -100,6 +106,9 @@
 }
 
 @media (min-width: 421px) and (max-width: 768px) {
+  .col_1 {
+    width: 100% !important;
+  }
   .container_promo {
     width: 80%;
     height: 200px;
@@ -149,3 +158,7 @@
     }
   }
 }
+
+
+
+

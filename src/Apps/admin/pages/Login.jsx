@@ -3,6 +3,7 @@ import { jwtDecode } from 'jwt-decode'
 import { useNavigate } from 'react-router-dom'
 import { useGetTokenMutation } from '../../../store/tokenApi'
 import { toast } from 'react-toastify'
+import logo from '../../../assets/transparent_logo.png'
 
 //todo reactHook form
 
@@ -51,11 +52,7 @@ export default function Login() {
     <div className="background d-flex align-items-center">
       <div className="container text-center">
         <form onSubmit={submitFunc}>
-          <img
-            className="mb-4 login_logo"
-            src="img/transparent_logo.png"
-            alt="logo"
-          />
+          <img className="mb-4 login_logo" src={logo} alt="logo" />
           <h1 className="h4 mb-3 fw-normal login_text">Вход в сервис</h1>
 
           <div className="form-floating mb-1">

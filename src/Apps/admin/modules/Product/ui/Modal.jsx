@@ -5,7 +5,9 @@ import Modal from 'react-bootstrap/Modal'
 function StaticModal({ children, title, trigger }) {
   const [show, setShow] = useState(false)
 
-  const handleClose = () => setShow(false)
+  const handleClose = () => {
+    setShow(false)
+  }
 
   useEffect(() => {
     if (trigger) {

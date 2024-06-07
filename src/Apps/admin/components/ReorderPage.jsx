@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Reorder.module.scss'
 import { useDispatch } from 'react-redux'
 import { Reorder } from 'framer-motion'
-import { selectedCategory } from '@store/appSlice'
+import { selectedCategory } from '../../../store/appSlice'
 import EditNoteIcon from '@mui/icons-material/EditNote'
 
 export default function ReorderPage({

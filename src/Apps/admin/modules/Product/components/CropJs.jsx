@@ -1,9 +1,8 @@
 import React, { useRef } from 'react'
-import Cropper, { ReactCropperElement } from 'react-cropper'
+import Cropper from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
 
 const CropJs = ({ src, setCropData }) => {
-  
   const cropperRef = useRef(null)
 
   const onCrop = () => {
@@ -14,8 +13,8 @@ const CropJs = ({ src, setCropData }) => {
 
   return (
     <Cropper
-      src={src && src}
-      style={{ width: '100%', objectFit: 'contain' }}
+      src={src}
+      style={{ width: '100%' }}
       // Cropper.js options
       initialAspectRatio={16 / 9}
       aspectRatio={16 / 9}
@@ -24,7 +23,7 @@ const CropJs = ({ src, setCropData }) => {
       crop={onCrop}
       ref={cropperRef}
       rotatable={true}
-      modal={true}
+      // modal={true}
     />
   )
 }
