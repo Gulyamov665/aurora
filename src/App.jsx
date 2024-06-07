@@ -18,6 +18,7 @@ import AddPromo from './Apps/admin/modules/promo/pages/AddPromo'
 import UpdatePromo from './Apps/admin/modules/promo/pages/UpdatePromo'
 
 function App() {
+  console.log('first')
   const location = useLocation()
   return (
     <>
