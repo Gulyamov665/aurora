@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import Test from './Apps/client/pages/Test'
 import Admin from './Apps/admin/pages/Admin'
 import AdminCategory from './Apps/admin/pages/AdminCategory'
@@ -12,22 +12,20 @@ import HomePage from './pages/HomePage'
 import LoginPage from './pages/HomePage'
 import Navbar from './Apps/client/components/Navbar'
 import AdminPromo from './Apps/admin/modules/promo/pages/AdminPromo'
-// import { UpdateProduct } from './Apps/admin/modules/product/pages/UpdateProduct'
-// import { AddProduct } from './Apps/admin/modules/product/pages/AddProduct'
+import UpdateProduct from './Apps/admin/modules/product/pages/UpdateProduct'
+import AddProduct from './Apps/admin/modules/product/pages/AddProduct'
 import AddPromo from './Apps/admin/modules/promo/pages/AddPromo'
 import UpdatePromo from './Apps/admin/modules/promo/pages/UpdatePromo'
 
 function App() {
-  console.log('first')
-  const location = useLocation()
   return (
     <>
-      <Routes location={location} key={location.pathname}>
+      <Routes>
         <Route path="/admin/:res" element={<Admin />}>
           <Route path="main" element={<AdminMain />} />
           <Route path="menu" element={<AdminCategory />} />
-          {/* <Route path="menu/:id" element={<UpdateProduct />} />
-          <Route path="add-product" element={<AddProduct />} /> */}
+          <Route path="menu/:id" element={<UpdateProduct />} />
+          <Route path="add-product" element={<AddProduct />} />
           <Route path="promo" element={<AdminPromo />} />
           <Route path="promo/:id" element={<UpdatePromo />} />
           <Route path="add-promo" element={<AddPromo />} />

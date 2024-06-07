@@ -38,8 +38,8 @@ function AddPromo() {
         return [...value].forEach((item) => formData.append(key, item))
       }
       formData.append(key, value)
-      formData.append('crop', JSON.stringify(cropData))
     })
+    formData.append('crop', JSON.stringify(cropData))
 
     await addPromos(formData).unwrap()
     reset()
