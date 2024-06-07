@@ -30,7 +30,6 @@ export default function Category({ search }) {
   }
 
   const handleViewPromo = (item) => {
-    console.log(item)
     setIsOpen(!isOpen)
     setViewItem(item)
   }
