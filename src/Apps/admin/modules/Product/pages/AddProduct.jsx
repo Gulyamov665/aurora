@@ -71,4 +71,4 @@ function AddProduct() {
   )
 }
 
-export { AddProduct }
+export default AddProduct
