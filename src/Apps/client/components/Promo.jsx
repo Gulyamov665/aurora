@@ -18,11 +18,9 @@ export default function Promo({ promo, handleViewPromo }) {
               },
               375: {
                 slidesPerView: 2,
-                // spaceBetween: 4,
               },
               425: {
                 slidesPerView: 2.5,
-                // spaceBetween: 4,
               },
               480: {
                 slidesPerView: 3,
