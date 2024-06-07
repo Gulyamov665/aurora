@@ -91,4 +91,4 @@ function UpdateProduct() {
   )
 }
 
-export { UpdateProduct }
+export default UpdateProduct
