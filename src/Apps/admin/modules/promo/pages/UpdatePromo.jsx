@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PromoForm from '../components/PromoForm'
-import CropModal from '../../product/components/CropModal'
+import CropModal from '../../Product/components/CropModal'
 import { useForm } from 'react-hook-form'
 import {
   useDeletePromoMutation,

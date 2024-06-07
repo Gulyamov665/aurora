@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useLoadQuery } from '../../../../../store/admin/vendorApi'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAddPromosMutation } from '../../../../../store/admin/promoApi'
-import CropModal from '../../product/components/CropModal'
+import CropModal from '../../Product/components/CropModal'
 
 function AddPromo() {
   const { res } = useParams()
