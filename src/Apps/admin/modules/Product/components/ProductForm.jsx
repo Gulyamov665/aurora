@@ -35,6 +35,7 @@ function ProductForm({ register, handleSubmit, product, handleFileChange }) {
           <label htmlFor="">выберите изображение</label>
           <input
             type="file"
+            accept="image/png, image/jpg"
             className="form-control"
             {...register('photo')}
             onChange={handleFileChange}

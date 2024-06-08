@@ -4,7 +4,7 @@ export default function Intro(props) {
   return (
     <div>
       <div className="section">
-        <img src={props.img} className="img" alt="img" />
+        <img src={props.img} loading='lazy' className="img" alt="img" />
         <div className="op" />
         <div className="img_log">
           <img src={props.logo} className="img_logo" alt="logo" />

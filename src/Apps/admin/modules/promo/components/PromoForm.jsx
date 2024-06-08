@@ -31,6 +31,7 @@ function PromoForm({ register, handleSubmit, handle, handleFile }) {
         <label htmlFor="">изображение</label>
         <input
           className="form-control"
+          accept="image/png, image/jpg"
           type="file"
           {...register('photo')}
           onChange={handleFile}
