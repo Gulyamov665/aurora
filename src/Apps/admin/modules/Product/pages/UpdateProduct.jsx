@@ -27,9 +27,9 @@ function UpdateProduct() {
     }
   }, [product, reset])
 
-  if (isLoading) {
-    return <Loading />
-  }
+  // if (isLoading) {
+  //   return <Loading />
+  // }
   const handleFileChangeUpdate = (e) => {
     const file = e.target.files[0]
     if (file) {
@@ -63,6 +63,7 @@ function UpdateProduct() {
 
   return (
     <div className="container">
+      {isLoading && <Loading />}
       <div className="d-flex justify-content-between">
         <button
           className="btn btn-success mt-3 mb-3"

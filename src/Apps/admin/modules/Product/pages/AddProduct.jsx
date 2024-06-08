@@ -5,10 +5,11 @@ import CropModal from '../components/CropModal'
 import { useAddProductMutation } from '../../../../../store/admin/productsApi'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import Loading from '../../../../client/components/Loading'
 
 function AddProduct() {
   const { register, handleSubmit, reset } = useForm()
-  const [addProduct] = useAddProductMutation()
+  const [addProduct, { isLoading }] = useAddProductMutation()
   const { selectedCategory: category } = useSelector((state) => state.modals)
   const { id: vendor } = useSelector((state) => state.vendor)
   const [img, setImg] = useState(null)
@@ -54,6 +55,7 @@ function AddProduct() {
 
   return (
     <div className="container">
+      {isLoading && <Loading />}
       <button
         className="btn btn-success mt-3 mb-3"
         onClick={() => navigate(-1)}

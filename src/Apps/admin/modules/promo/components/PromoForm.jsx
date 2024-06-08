@@ -13,7 +13,7 @@ function PromoForm({ register, handleSubmit, handle, handleFile }) {
         <textarea
           className="form-control"
           type="text"
-          {...register('descriptiion')}
+          {...register('description')}
         />
       </div>
 

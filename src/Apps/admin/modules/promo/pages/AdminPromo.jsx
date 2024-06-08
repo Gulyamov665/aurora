@@ -32,7 +32,7 @@ const AdminPromo = () => {
           to={`/admin/${res}/add-promo`}
           style={{ textDecoration: 'none', color: 'black' }}
         >
-          <p className="pt-5 text-center">Добавить</p>
+          <p className="text-center">Добавить</p>
         </Link>
       </div>
 
