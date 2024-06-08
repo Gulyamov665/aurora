@@ -8,7 +8,7 @@ export default function Promo({ promo, handleViewPromo }) {
       <div className="container">
         {promo.length > 0 && (
           <Swiper
-            slidesPerView="auto"
+            slidesPerView={4}
             freeMode={true}
             modules={[FreeMode]}
             breakpoints={{
@@ -26,7 +26,11 @@ export default function Promo({ promo, handleViewPromo }) {
                 slidesPerView: 3,
               },
               640: {
-                slidesPerView: 4,
+                slidesPerView: 3,
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 15,
               },
             }}
             pagination={true}
