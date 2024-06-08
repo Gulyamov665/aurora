@@ -45,7 +45,12 @@ export default function CardView({ item, open, setIsOpen, count, setCount }) {
             className="card_view_motion"
           >
             <div className="card_view">
-              <img className="card_view_img" src={item.photo} alt="" />
+              <img
+                className="card_view_img"
+                loading="lazy"
+                src={item.photo}
+                alt=""
+              />
               <h2>
                 {item.name} <hr />
               </h2>

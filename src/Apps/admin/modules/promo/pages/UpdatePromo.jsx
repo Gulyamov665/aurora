@@ -71,7 +71,14 @@ function UpdatePromo() {
           вернуться
         </button>
 
-        <button className="btn btn-danger mt-3 mb-3" onClick={handleDelete}>
+        <button
+          className={
+            loadingData
+              ? 'btn btn-danger mt-3 mb-3 disabled'
+              : 'btn btn-danger mt-3 mb-3'
+          }
+          onClick={handleDelete}
+        >
           удалить
         </button>
       </div>

@@ -9,7 +9,6 @@ import CardView from './CardView'
 import Promo from './Promo'
 import Navbar from './Navbar'
 import Products from './Products'
-import Story from './Story'
 
 export default function Category({ search }) {
   const { res } = useParams()
@@ -20,7 +19,6 @@ export default function Category({ search }) {
   const rootSection = useRef([])
   const [isOpen, setIsOpen] = useState(false)
   const [viewItem, setViewItem] = useState(null)
-  const [showStory, setShowStory] = useState(false)
   const [count, setCount] = useState(1)
 
   const handleView = (item) => {
@@ -74,6 +72,7 @@ export default function Category({ search }) {
             category={category}
             sectionRefs={sectionRefs}
             handleView={handleView}
+            isLoading={isLoading}
           />
         )}
       </div>
