@@ -27,6 +27,12 @@ function UpdatePromo() {
     }
   }, [promo, reset])
 
+  useEffect(() => {
+    if (!img) {
+      reset({ photo: null })
+    }
+  }, [img])
+
   const loadingData = isLoading || deleteLoading || dataLoading
 
   const handleFileChangeUpdate = (e) => {

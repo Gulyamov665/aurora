@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PromoForm from '../components/PromoForm'
 import { useForm } from 'react-hook-form'
 import { useLoadQuery } from '../../../../../store/admin/vendorApi'
@@ -9,13 +9,18 @@ import Loading from '../../../../client/components/Loading'
 
 function AddPromo() {
   const { res } = useParams()
-  console.log(res)
   const { data: vendor } = useLoadQuery(res)
   const [addPromos, { isLoading }] = useAddPromosMutation()
   const { register, handleSubmit, reset } = useForm()
   const [img, setImg] = useState(null)
   const [cropData, setCropData] = useState('')
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!img) {
+      reset({ photo: null })
+    }
+  }, [img])
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]
@@ -53,7 +58,7 @@ function AddPromo() {
           className="btn btn-success mt-3 mb-3"
           onClick={() => navigate(-1)}
         >
-          вернутся
+          вернуться
         </button>
         <PromoForm
           register={register}
@@ -63,7 +68,7 @@ function AddPromo() {
         />
       </div>
 
-      <CropModal img={img} setCropData={setCropData} />
+      <CropModal img={img} setImg={setImg} setCropData={setCropData} />
     </>
   )
 }

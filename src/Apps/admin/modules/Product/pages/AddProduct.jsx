@@ -22,6 +22,12 @@ function AddProduct() {
     }
   }, [category])
 
+  useEffect(() => {
+    if (!img) {
+      reset({ photo: null })
+    }
+  }, [img])
+
   const handleFileChange = (e) => {
     const file = e.target.files[0]
     if (file) {
@@ -43,8 +49,9 @@ function AddProduct() {
 
       formData.append(key, value)
     })
-
-    formData.append('crop', JSON.stringify(cropData))
+    if (data.photo) {
+      formData.append('crop', JSON.stringify(cropData))
+    }
     formData.append('category', +category)
     formData.append('restaurant', vendor)
 
@@ -60,7 +67,7 @@ function AddProduct() {
         className="btn btn-success mt-3 mb-3"
         onClick={() => navigate(-1)}
       >
-        вернутся
+        вернуться
       </button>
       <ProductForm
         register={register}
@@ -68,7 +75,7 @@ function AddProduct() {
         product={addProductHandler}
         handleFileChange={handleFileChange}
       />
-      <CropModal img={img} setCropData={setCropData} />
+      <CropModal img={img} setImg={setImg} setCropData={setCropData} />
     </div>
   )
 }

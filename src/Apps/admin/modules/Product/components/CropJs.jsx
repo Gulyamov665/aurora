@@ -14,16 +14,16 @@ const CropJs = ({ src, setCropData }) => {
   return (
     <Cropper
       src={src}
-      style={{ width: '100%' }}
+      style={{ width: '100%', objectFit: 'contain', height: '100%' }}
       // Cropper.js options
       initialAspectRatio={16 / 9}
       aspectRatio={16 / 9}
       guides={true}
-      viewMode={0}
+      viewMode={1}
       crop={onCrop}
       ref={cropperRef}
       rotatable={true}
-      // modal={true}
+      modal={true}
     />
   )
 }

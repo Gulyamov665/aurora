@@ -21,6 +21,12 @@ function UpdateProduct() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    if (!img) {
+      reset({ photo: null })
+    }
+  }, [img])
+
+  useEffect(() => {
     if (product) {
       const { photo, ...rest } = product
       reset(rest)
@@ -84,6 +90,7 @@ function UpdateProduct() {
         img={img}
         setCropData={setCropData}
         handleFileChange={handleFileChangeUpdate}
+        setImg={setImg}
       />
     </div>
   )

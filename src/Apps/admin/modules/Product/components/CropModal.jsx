@@ -5,7 +5,11 @@ import { CropJs } from './CropJs'
 function CropModal({ img, setCropData, setImg }) {
   return (
     <div>
-      <StaticModal title={'Изображение'} trigger={img}>
+      <StaticModal
+        title={'Изображение'}
+        trigger={img}
+        setImg={setImg}
+      >
         <CropJs src={img} setCropData={setCropData} />
       </StaticModal>
     </div>
