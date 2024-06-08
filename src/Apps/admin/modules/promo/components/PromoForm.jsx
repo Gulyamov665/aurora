@@ -10,7 +10,11 @@ function PromoForm({ register, handleSubmit, handle, handleFile }) {
 
       <div>
         <label htmlFor="">информация</label>
-        <textarea className="form-control" type="text" {...register('info')} />
+        <textarea
+          className="form-control"
+          type="text"
+          {...register('descriptiion')}
+        />
       </div>
 
       <div>

@@ -13,6 +13,7 @@ const AdminPromo = () => {
 
   //Toggle update function
   const updatePromo = async (item) => {
+    console.log(item)
     delete item.photo
     const updatePromo = {
       ...item,
