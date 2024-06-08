@@ -19,7 +19,12 @@ function PromoForm({ register, handleSubmit, handle, handleFile }) {
 
       <div>
         <label htmlFor="">цена</label>
-        <input className="form-control" type="number" {...register('price')} />
+        <input
+          className="form-control"
+          type="number"
+          {...register('price')}
+          required
+        />
       </div>
 
       <div>

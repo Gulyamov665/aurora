@@ -5,18 +5,17 @@ import { useLoadQuery } from '../../../../../store/admin/vendorApi'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAddPromosMutation } from '../../../../../store/admin/promoApi'
 import CropModal from '../../Product/components/CropModal'
+import Loading from '../../../../client/components/Loading'
 
 function AddPromo() {
   const { res } = useParams()
   console.log(res)
   const { data: vendor } = useLoadQuery(res)
-  const [addPromos] = useAddPromosMutation()
+  const [addPromos, { isLoading }] = useAddPromosMutation()
   const { register, handleSubmit, reset } = useForm()
   const [img, setImg] = useState(null)
   const [cropData, setCropData] = useState('')
   const navigate = useNavigate()
-
-  console.log(cropData)
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]
@@ -43,10 +42,12 @@ function AddPromo() {
 
     await addPromos(formData).unwrap()
     reset()
+    navigate(-1)
   }
 
   return (
     <>
+      {isLoading && <Loading />}
       <div className="container">
         <button
           className="btn btn-success mt-3 mb-3"

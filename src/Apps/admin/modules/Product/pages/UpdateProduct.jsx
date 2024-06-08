@@ -27,9 +27,7 @@ function UpdateProduct() {
     }
   }, [product, reset])
 
-  // if (isLoading) {
-  //   return <Loading />
-  // }
+
   const handleFileChangeUpdate = (e) => {
     const file = e.target.files[0]
     if (file) {

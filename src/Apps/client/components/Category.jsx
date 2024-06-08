@@ -35,7 +35,7 @@ export default function Category({ search }) {
   }
 
   if (isLoading) {
-    return <Loading />
+    return <Loading main={true} />
   }
 
   if (isError) {

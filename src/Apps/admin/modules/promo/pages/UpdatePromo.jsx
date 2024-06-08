@@ -8,12 +8,13 @@ import {
   useUpdatePromoMutation,
 } from '../../../../../store/admin/promoApi'
 import { useNavigate, useParams } from 'react-router-dom'
+import Loading from '../../../../client/components/Loading'
 
 function UpdatePromo() {
   const { id } = useParams()
-  const { data: promo } = useGetPromoQuery(id)
-  const [updatePromo] = useUpdatePromoMutation()
-  const [deletePromo] = useDeletePromoMutation()
+  const { data: promo, isLoading: dataLoading } = useGetPromoQuery(id)
+  const [updatePromo, { isLoading }] = useUpdatePromoMutation()
+  const [deletePromo, { isLoading: deleteLoading }] = useDeletePromoMutation()
   const { register, handleSubmit, reset } = useForm()
   const [img, setImg] = useState(null)
   const [cropData, setCropData] = useState(null)
@@ -25,6 +26,8 @@ function UpdatePromo() {
       reset(rest)
     }
   }, [promo, reset])
+
+  const loadingData = isLoading || deleteLoading || dataLoading
 
   const handleFileChangeUpdate = (e) => {
     const file = e.target.files[0]
@@ -59,6 +62,7 @@ function UpdatePromo() {
 
   return (
     <div className="container">
+      {loadingData && <Loading />}
       <div className="d-flex justify-content-between">
         <button
           className="btn btn-success mt-3 mb-3"
