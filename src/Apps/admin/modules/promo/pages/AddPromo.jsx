@@ -41,7 +41,7 @@ function AddPromo() {
     formData.append('restaurant', vendor.id)
     Object.entries(data).forEach(([key, value]) => {
       if (key === 'photo') {
-        return [...value].forEach((item) => formData.append(key, item))
+        return formData.append('photo', file)
       }
       formData.append(key, value)
     })

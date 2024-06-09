@@ -17,6 +17,7 @@ function UpdatePromo() {
   const [deletePromo, { isLoading: deleteLoading }] = useDeletePromoMutation()
   const { register, handleSubmit, reset } = useForm()
   const [img, setImg] = useState(null)
+  const [file, setFile] = useState(null)
   const [cropData, setCropData] = useState(null)
   const navigate = useNavigate()
 
@@ -38,6 +39,7 @@ function UpdatePromo() {
   const handleFileChangeUpdate = (e) => {
     const file = e.target.files[0]
     if (file) {
+      setFile(file)
       const reader = new FileReader()
       reader.onload = () => {
         setImg(reader.result)
@@ -50,7 +52,7 @@ function UpdatePromo() {
     let formData = new FormData()
     Object.entries(data).forEach(([key, value]) => {
       if (key === 'photo') {
-        return [...value].forEach((item) => formData.append(key, item))
+        return formData.append('photo', file)
       }
       formData.append(key, value)
     })

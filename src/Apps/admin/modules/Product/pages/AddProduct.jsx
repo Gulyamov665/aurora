@@ -43,8 +43,6 @@ function AddProduct() {
   }
 
   const addProductHandler = async (data) => {
-    console.log(data.photo)
-    console.log(cropData)
     let formData = new FormData()
 
     formData.append('crop', JSON.stringify(cropData))
