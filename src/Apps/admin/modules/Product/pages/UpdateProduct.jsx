@@ -93,6 +93,16 @@ function UpdateProduct() {
         setImg={setImg}
         cropData={cropData}
       />
+
+      {product && (
+        <div className="mt-5 mb-5">
+          <img
+            src={product.photo}
+            style={{ width: '100%', borderRadius: '20px' }}
+            alt=""
+          />
+        </div>
+      )}
     </div>
   )
 }

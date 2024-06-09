@@ -9,7 +9,6 @@ export default function Products({
   handleView,
   isLoading,
 }) {
-  console.log(isLoading)
   return (
     <>
       {menuItems.length > 0 &&

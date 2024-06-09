@@ -14,7 +14,7 @@ const CropJs = ({ src, setCropData }) => {
   return (
     <Cropper
       src={src}
-      style={{ width: '100%', height: '100%' }}
+      style={{ width: '100%', maxHeight: '70dvh', }}
       // Cropper.js options
       initialAspectRatio={16 / 9}
       aspectRatio={16 / 9}
