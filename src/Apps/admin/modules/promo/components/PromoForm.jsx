@@ -1,6 +1,6 @@
 import React from 'react'
 
-function PromoForm({ register, handleSubmit, handle, handleFile }) {
+function PromoForm({ register, handleSubmit, handle, handleFile, button }) {
   return (
     <form onSubmit={handleSubmit(handle)}>
       <div>
@@ -37,7 +37,7 @@ function PromoForm({ register, handleSubmit, handle, handleFile }) {
           onChange={handleFile}
         />
       </div>
-      <button className="btn btn-primary mt-3">добавить</button>
+      <button className="btn btn-primary mt-3">{button}</button>
     </form>
   )
 }

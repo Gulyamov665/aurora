@@ -12,8 +12,9 @@ import Loading from '../../../../client/components/Loading'
 
 function UpdateProduct() {
   const params = useParams()
-  const { data: product, isLoading } = useGetProductQuery(params.id)
-  const [updateProduct] = useUpdateProductMutation()
+  const { data: product, isLoading: dLoading } = useGetProductQuery(params.id)
+  const [updateProduct, { isLoading: updateLoading }] =
+    useUpdateProductMutation()
   const [deleteProduct] = useDeleteProductMutation()
   const { register, handleSubmit, reset } = useForm()
   const [img, setImg] = useState(null)
@@ -32,6 +33,8 @@ function UpdateProduct() {
       reset(rest)
     }
   }, [product, reset])
+
+  const isLoading = dLoading || updateLoading
 
   const handleFileChangeUpdate = (e) => {
     const file = e.target.files[0]
@@ -85,6 +88,7 @@ function UpdateProduct() {
         handleSubmit={handleSubmit}
         product={updateProductHandler}
         handleFileChange={handleFileChangeUpdate}
+        button={'изменить'}
       />
       <CropModal
         img={img}

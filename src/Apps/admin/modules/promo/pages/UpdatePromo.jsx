@@ -94,12 +94,17 @@ function UpdatePromo() {
         handleSubmit={handleSubmit}
         handle={updatePromoHandler}
         handleFile={handleFileChangeUpdate}
+        button={'изменить'}
       />
 
       <CropModal img={img} setCropData={setCropData} cropData={cropData} />
       {promo && (
         <div className="mt-5 mb-5">
-          <img src={promo.photo} style={{ width: '100%', borderRadius: '20px' }} alt="" />
+          <img
+            src={promo.photo}
+            style={{ width: '100%', borderRadius: '20px' }}
+            alt=""
+          />
         </div>
       )}
     </div>

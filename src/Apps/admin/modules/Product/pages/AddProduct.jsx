@@ -14,6 +14,7 @@ function AddProduct() {
   const { selectedCategory: category } = useSelector((state) => state.modals)
   const { id: vendor } = useSelector((state) => state.vendor)
   const [img, setImg] = useState(null)
+  const [file, setFile] = useState(null)
   const [cropData, setCropData] = useState(null)
   const navigate = useNavigate()
 
@@ -22,8 +23,6 @@ function AddProduct() {
       navigate(-1)
     }
   }, [category])
-
-  console.log(cropData)
 
   useEffect(() => {
     if (!img) {
@@ -34,6 +33,7 @@ function AddProduct() {
   const handleFileChange = (e) => {
     const file = e.target.files[0]
     if (file) {
+      setFile(file)
       const reader = new FileReader()
       reader.onload = () => {
         setImg(reader.result)
@@ -43,21 +43,23 @@ function AddProduct() {
   }
 
   const addProductHandler = async (data) => {
+    console.log(data.photo)
+    console.log(cropData)
     let formData = new FormData()
+
+    formData.append('crop', JSON.stringify(cropData))
+    formData.append('category', +category)
+    formData.append('restaurant', vendor)
 
     Object.entries(data).forEach(([key, value]) => {
       if (key === 'photo') {
-        return [...value].forEach((item) => formData.append(key, item))
+        return formData.append('photo', file)
       }
 
       formData.append(key, value)
     })
-    formData.append('category', +category)
-    formData.append('restaurant', vendor)
 
-    formData.append('crop', JSON.stringify(cropData))
     await addProduct(formData).unwrap()
-
     reset()
     toast.success('Позиция добавлена')
     navigate(-1)
@@ -77,6 +79,7 @@ function AddProduct() {
         handleSubmit={handleSubmit}
         product={addProductHandler}
         handleFileChange={handleFileChange}
+        button={'добавить'}
       />
       <CropModal
         cropData={cropData}

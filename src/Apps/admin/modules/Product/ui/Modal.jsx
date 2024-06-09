@@ -13,18 +13,19 @@ function StaticModal({ children, title, trigger, setImg, cropData }) {
     }
   }, [trigger])
 
+  //Проверяем не пустой ли state cropData
   const handleClose = () => {
-    //Проверяем не пустой ли state cropData
     if (!cropData) return toast.error('Не указан размер изображения')
     setShow(false)
+    setImg(trigger)
   }
 
-  //очищаем state картинки
+  // очищаем state картинки после нажатия кнопки отмены в модальном окне
   const cleanImgState = () => {
     if (trigger) {
       setImg(null)
-      setShow(false)
-    }
+      }
+    setShow(false)
   }
 
   return (
