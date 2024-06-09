@@ -3,6 +3,7 @@ import InstagramIcon from '@mui/icons-material/Instagram'
 import TelegramIcon from '@mui/icons-material/Telegram'
 
 export default function Intro({ data }) {
+  console.log(data)
   return (
     <div>
       <div className="section">
@@ -15,7 +16,7 @@ export default function Intro({ data }) {
       <div className="container container-sm mt-4 ">
         <div className="name_container">
           <h1 className="texts">{data.name}</h1>
-          <p className="texts">{data.location}</p>
+          <p className="texts">{data.adress}</p>
 
           <div>
             {data.instagramm && (
