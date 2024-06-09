@@ -9,9 +9,19 @@ export const vendorApi = createApi({
 
     endpoints: build => ({
         load: build.query({
-            query: (params) => `restaurants/${params}`
+            query: (params) => `restaurants/${params}`,
+            providesTags: ['vendor']
+        }),
+        update: build.mutation({
+            query: ({ body, vendor }) => ({
+                url: `restaurants/${vendor}`,
+                method: 'PUT',
+                body
+            }),
+            invalidatesTags: ['vendor']
         })
     })
+
 })
 
-export const { useLoadQuery } = vendorApi
+export const { useLoadQuery, useUpdateMutation } = vendorApi

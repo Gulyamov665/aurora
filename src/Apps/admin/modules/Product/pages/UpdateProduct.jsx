@@ -51,13 +51,13 @@ function UpdateProduct() {
 
   const updateProductHandler = async (data) => {
     let formData = new FormData()
+    formData.append('crop', JSON.stringify(cropData))
     Object.entries(data).forEach(([key, value]) => {
       if (key === 'photo') {
         return formData.append('photo', file)
       }
       formData.append(key, value)
     })
-    formData.append('crop', JSON.stringify(cropData))
     await updateProduct({ body: formData, updatedItem: Number(params.id) })
     navigate(-1)
   }

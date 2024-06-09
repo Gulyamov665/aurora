@@ -16,13 +16,14 @@ import UpdateProduct from './Apps/admin/modules/Product/pages/UpdateProduct'
 import AddProduct from './Apps/admin/modules/Product/pages/AddProduct'
 import AddPromo from './Apps/admin/modules/promo/pages/AddPromo'
 import UpdatePromo from './Apps/admin/modules/promo/pages/UpdatePromo'
+import Vendor from './Apps/admin/modules/vendor/pages/Vendor'
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/admin/:res" element={<Admin />}>
-          <Route path="main" element={<AdminMain />} />
+          <Route path="main" element={<Vendor />} />
           <Route path="menu" element={<AdminCategory />} />
           <Route path="menu/:id" element={<UpdateProduct />} />
           <Route path="add-product" element={<AddProduct />} />

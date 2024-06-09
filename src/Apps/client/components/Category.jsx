@@ -32,9 +32,7 @@ export default function Category({ search }) {
     setViewItem(item)
   }
 
-  if (isLoading) {
-    return <Loading main={true} />
-  }
+  if (isLoading) return <Loading main={true} />
 
   if (isError) {
     return <p>Error not found page </p>

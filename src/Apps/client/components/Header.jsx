@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { Link } from 'react-router-dom'
 import header from '../static/Header.module.scss'
+import logo from '../../../assets/transparent_logo.png'
 
 const Header = ({ search, setSearch }) => {
   const [authTokens, setAuthTokens] = useState(() =>
@@ -20,17 +21,15 @@ const Header = ({ search, setSearch }) => {
   }, [authTokens])
 
   return (
-    <header className={`${header.header_backgroud} py-3 rounded-bottom mb-3 border-bottom header_backgroud`}>
+    <header
+      className={`${header.header_backgroud} py-3 rounded-bottom mb-3 border-bottom header_backgroud`}
+    >
       <div
         className="container-fluid d-grid gap-3 align-items-center"
         style={{ gridTemplateColumns: '1fr 2fr' }}
       >
         {!vendor ? (
-          <img
-            src="/img/transparent_logo.png"
-            style={{ width: 150 }}
-            alt="logo"
-          />
+          <img src={logo} style={{ width: 150 }} alt="logo" />
         ) : (
           <div>
             <Link to={`/admin/${vendor}/menu`}>
@@ -40,15 +39,19 @@ const Header = ({ search, setSearch }) => {
         )}
 
         <div className="d-flex align-items-end justify-content-end">
-
-
-
-
-        <div className={header.search_box }>
-            <button className={header.btn_search}> <span className={header.span}>Sea</span>rch</button>
-            <input type="text" className={header.input_search} placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)}/>
-        </div>
-        
+          <div className={header.search_box}>
+            <button className={header.btn_search}>
+              {' '}
+              <span className={header.span}>Sea</span>rch
+            </button>
+            <input
+              type="text"
+              className={header.input_search}
+              placeholder="Search..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
         </div>
       </div>
     </header>
