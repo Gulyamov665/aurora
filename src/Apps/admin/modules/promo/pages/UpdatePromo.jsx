@@ -22,17 +22,17 @@ function UpdatePromo() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    if (!img) {
+      reset({ photo: null })
+    }
+  }, [img])
+
+  useEffect(() => {
     if (promo) {
       const { photo, ...rest } = promo
       reset(rest)
     }
   }, [promo, reset])
-
-  useEffect(() => {
-    if (!img) {
-      reset({ photo: null })
-    }
-  }, [img])
 
   const loadingData = isLoading || deleteLoading || dataLoading
 
@@ -49,13 +49,15 @@ function UpdatePromo() {
   }
 
   const updatePromoHandler = async (data) => {
+    const { photo, ...res } = data
+
     let formData = new FormData()
-    Object.entries(data).forEach(([key, value]) => {
-      if (key === 'photo') {
-        return formData.append('photo', file)
-      }
+    Object.entries(res).forEach(([key, value]) => {
       formData.append(key, value)
     })
+    if (file) {
+      formData.append('photo', file)
+    }
     formData.append('crop', JSON.stringify(cropData))
     await updatePromo({ body: formData, id: Number(id) })
     navigate(-1)
@@ -99,7 +101,12 @@ function UpdatePromo() {
         button={'изменить'}
       />
 
-      <CropModal img={img} setCropData={setCropData} cropData={cropData} />
+      <CropModal
+        img={img}
+        setCropData={setCropData}
+        cropData={cropData}
+        setImg={setImg}
+      />
       {promo && (
         <div className="mt-5 mb-5">
           <img
