@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
+import { toast } from 'react-toastify'
 
-function StaticModal({ children, title, trigger, setImg }) {
+function StaticModal({ children, title, trigger, setImg, cropData }) {
   const [show, setShow] = useState(false)
 
   // trigger product image
@@ -13,6 +14,8 @@ function StaticModal({ children, title, trigger, setImg }) {
   }, [trigger])
 
   const handleClose = () => {
+    //Проверяем не пустой ли state cropData
+    if (!cropData) return toast.error('Не указан размер изображения')
     setShow(false)
   }
 

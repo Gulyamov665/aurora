@@ -96,7 +96,7 @@ function UpdatePromo() {
         handleFile={handleFileChangeUpdate}
       />
 
-      <CropModal img={img} setCropData={setCropData} />
+      <CropModal img={img} setCropData={setCropData} cropData={cropData} />
     </div>
   )
 }

@@ -9,9 +9,10 @@
 .backgroundLoaderTransparent {
   position: fixed;
   z-index: 300;
-  background-color: transparent;
+  background-color: #ffffff89;
   width: 100%;
   height: 100%;
+  z-index: 1000;
 }
 
 .loader {

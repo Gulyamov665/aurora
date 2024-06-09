@@ -91,6 +91,7 @@ function UpdateProduct() {
         setCropData={setCropData}
         handleFileChange={handleFileChangeUpdate}
         setImg={setImg}
+        cropData={cropData}
       />
     </div>
   )

@@ -6,6 +6,7 @@ import { useAddProductMutation } from '../../../../../store/admin/productsApi'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../../../../client/components/Loading'
+import { toast } from 'react-toastify'
 
 function AddProduct() {
   const { register, handleSubmit, reset } = useForm()
@@ -21,6 +22,8 @@ function AddProduct() {
       navigate(-1)
     }
   }, [category])
+
+  console.log(cropData)
 
   useEffect(() => {
     if (!img) {
@@ -49,14 +52,14 @@ function AddProduct() {
 
       formData.append(key, value)
     })
-    if (data.photo) {
-      formData.append('crop', JSON.stringify(cropData))
-    }
     formData.append('category', +category)
     formData.append('restaurant', vendor)
 
+    formData.append('crop', JSON.stringify(cropData))
     await addProduct(formData).unwrap()
+
     reset()
+    toast.success('Позиция добавлена')
     navigate(-1)
   }
 
@@ -75,7 +78,12 @@ function AddProduct() {
         product={addProductHandler}
         handleFileChange={handleFileChange}
       />
-      <CropModal img={img} setImg={setImg} setCropData={setCropData} />
+      <CropModal
+        cropData={cropData}
+        img={img}
+        setImg={setImg}
+        setCropData={setCropData}
+      />
     </div>
   )
 }

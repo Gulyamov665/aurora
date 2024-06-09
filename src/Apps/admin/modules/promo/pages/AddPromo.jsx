@@ -68,7 +68,12 @@ function AddPromo() {
         />
       </div>
 
-      <CropModal img={img} setImg={setImg} setCropData={setCropData} />
+      <CropModal
+        img={img}
+        setImg={setImg}
+        setCropData={setCropData}
+        cropData={cropData}
+      />
     </>
   )
 }
