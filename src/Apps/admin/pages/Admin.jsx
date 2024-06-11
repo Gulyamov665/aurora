@@ -50,7 +50,11 @@ export default function Admin() {
       icon: <RedeemIcon sx={{ fontSize: 35 }} />,
       link: 'promo',
     },
-    { text: 'Заказы', icon: <BorderColorIcon sx={{ fontSize: 35 }} /> },
+    {
+      text: 'Заказы',
+      icon: <BorderColorIcon sx={{ fontSize: 35 }} />,
+      link: 'orders',
+    },
   ]
 
   return (

@@ -5,7 +5,7 @@ import TelegramIcon from '@mui/icons-material/Telegram'
 export default function Intro({ data }) {
   console.log(data)
   return (
-    <div>
+    <div className="">
       <div className="section">
         <img src={data.photo} loading="lazy" className="img" alt="img" />
         <div className="op" />

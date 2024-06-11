@@ -49,10 +49,10 @@ function UpdatePromo() {
   }
 
   const updatePromoHandler = async (data) => {
-    const { photo, ...res } = data
+    const { photo, ...rest } = data
 
     let formData = new FormData()
-    Object.entries(res).forEach(([key, value]) => {
+    Object.entries(rest).forEach(([key, value]) => {
       formData.append(key, value)
     })
     if (file) {
