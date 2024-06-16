@@ -19,7 +19,7 @@ export default function Header({ sidebar }) {
   const [vendor, setVendor] = useState()
 
   const qrCodeGenerate = async () => {
-    await qrCode({ quantity: 10 })
+    await qrCode({ quantity: 1 })
     await DownloadQr(authTokens?.access)
   }
 
