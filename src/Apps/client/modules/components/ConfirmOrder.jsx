@@ -5,6 +5,7 @@ import { useSendMessageMutation } from '../../../../store/user/dispatcherApi'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useLoadQuery } from '../../../../store/admin/vendorApi'
 import { removeCartItems } from '../../../../store/cartSlice'
+import { toast } from 'react-toastify'
 
 function ConfirmOrder() {
   const { table, res } = useParams()
@@ -25,6 +26,7 @@ function ConfirmOrder() {
       await dispatcher(order)
       dispatch(removeCartItems())
       navigate(-1)
+      toast.success('Заказ отправлен')
       return
     }
     console.log('Заказы не доступны')
