@@ -1,15 +1,17 @@
 import React from 'react'
 import CurrencyFormat from 'react-currency-format'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useSendMessageMutation } from '../../../../store/user/dispatcherApi'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useLoadQuery } from '../../../../store/admin/vendorApi'
+import { removeCartItems } from '../../../../store/cartSlice'
 
 function ConfirmOrder() {
   const { table, res } = useParams()
   const { items, totalPrice } = useSelector((state) => state.cart)
-  const [dispatcher, { isLoading }] = useSendMessageMutation()
   const { data = [] } = useLoadQuery(res)
+  const [dispatcher, { isLoading }] = useSendMessageMutation()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleOrders = async () => {
@@ -21,6 +23,7 @@ function ConfirmOrder() {
         chat_id: data.orders_chat_id,
       }
       await dispatcher(order)
+      dispatch(removeCartItems())
       navigate(-1)
       return
     }
