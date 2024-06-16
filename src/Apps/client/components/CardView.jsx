@@ -3,9 +3,13 @@ import { motion, AnimatePresence, useDragControls } from 'framer-motion'
 import RemoveIcon from '@mui/icons-material/Remove'
 import AddIcon from '@mui/icons-material/Add'
 import CurrencyFormat from 'react-currency-format'
+import { useDispatch } from 'react-redux'
+import { addCartItem } from '../../../store/cartSlice'
 
 export default function CardView({ item, open, setIsOpen, count, setCount }) {
   const controls = useDragControls()
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (open) {
@@ -16,6 +20,17 @@ export default function CardView({ item, open, setIsOpen, count, setCount }) {
       document.body.classList.remove('modal-open')
     }
   }, [open])
+
+  const addToCart = (item) => {
+    const cartItem = {
+      ...item,
+      count: count,
+    }
+    dispatch(addCartItem(cartItem))
+    setIsOpen(false)
+  }
+
+
 
   return (
     <AnimatePresence>
@@ -61,7 +76,10 @@ export default function CardView({ item, open, setIsOpen, count, setCount }) {
             </div>
 
             <div className="card_view_price">
-              <button className="btn btn-warning w-100 me-4">
+              <button
+                className="btn btn-warning w-100 me-4"
+                onClick={() => addToCart(item)}
+              >
                 <strong style={{ color: '#333333' }}>
                   <CurrencyFormat
                     value={item.price * count}

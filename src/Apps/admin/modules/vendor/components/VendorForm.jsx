@@ -28,6 +28,33 @@ function VendorForm({ register, handleSubmit, handleUpdate }) {
           {...register('instagramm')}
         />
       </div>
+      <div>
+        <label htmlFor="">Чат id заказов</label>
+        <input
+          className="form-control"
+          type="text"
+          {...register('orders_chat_id')}
+          disabled
+        />
+      </div>
+      <div>
+        <label htmlFor="">Чат id вызов официанта</label>
+        <input
+          className="form-control"
+          type="text"
+          {...register('waiter_chat_id')}
+          disabled
+        />
+      </div>
+      <div>
+        <label htmlFor="">Доступ к заказам</label>
+        <input
+          className="form-control"
+          type="text"
+          {...register('availability_orders')}
+          disabled
+        />
+      </div>
       <button className="btn btn-success mt-3">сохранить</button>
     </form>
   )

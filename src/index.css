@@ -567,3 +567,9 @@ code {
   border-radius: 10px;
   margin-top: 10px;
 }
+
+.ordersPageBtn {
+  box-shadow: 1px 5px 12px -12px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 1px 5px 12px -12px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 5px 12px -12px rgba(0, 0, 0, 0.75);
+}

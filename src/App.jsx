@@ -18,6 +18,8 @@ import AddPromo from './Apps/admin/modules/promo/pages/AddPromo'
 import UpdatePromo from './Apps/admin/modules/promo/pages/UpdatePromo'
 import Vendor from './Apps/admin/modules/vendor/pages/Vendor'
 import Orders from './Apps/admin/modules/orders/pages/Orders'
+import OrdersPage from './Apps/client/modules/pages/OrdersPage'
+import ClientMainPage from './Apps/client/pages/ClientMainPage'
 
 function App() {
   return (
@@ -40,7 +42,10 @@ function App() {
         <Route path="home" element={<HomePage />} />
         <Route path="login" element={<LoginPage />} />
 
-        <Route path="vendor/:res" element={<Test />}></Route>
+        <Route path="vendor/:res/:table?" element={<Test />}>
+          <Route index element={<ClientMainPage />} />
+          <Route path="orders/" element={<OrdersPage />} />
+        </Route>
       </Routes>
 
       <ToastContainer />

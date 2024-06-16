@@ -1,9 +1,19 @@
 import React from 'react'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import TelegramIcon from '@mui/icons-material/Telegram'
+import { useWaiterCallMutation } from '../../../store/user/dispatcherApi'
+import { useParams } from 'react-router-dom'
 
 export default function Intro({ data }) {
-  console.log(data)
+  const { table } = useParams()
+  const [callWaiter, { isLoading }] = useWaiterCallMutation()
+
+  const handleCallWaiter = async () => {
+    if (data.waiter_chat_id) {
+      return await callWaiter({ table, chat_id: data.waiter_chat_id })
+    }
+    console.log('вызов официанта не доступен в этом заведении')
+  }
   return (
     <div className="">
       <div className="section">
@@ -40,6 +50,19 @@ export default function Intro({ data }) {
               </a>
             )}
           </div>
+          {isLoading ? (
+            <button className="btn btn-warning mt-3" >
+              <span
+                className="spinner-border spinner-border-sm"
+                aria-hidden="true"
+              ></span>
+            </button>
+          ) : (
+            <button className="btn btn-warning mt-3" onClick={handleCallWaiter}>
+              {' '}
+              Вызвать официанта
+            </button>
+          )}
         </div>
       </div>
     </div>

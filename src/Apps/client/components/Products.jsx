@@ -37,10 +37,12 @@ export default function Products({
                           >
                             {!isLoading ? (
                               <Card
-                                img={filteredObj.photo}
+                                id={filteredObj.id}
+                                photo={filteredObj.photo}
                                 name={filteredObj.name}
                                 desc={filteredObj.description}
                                 price={filteredObj.price}
+                                {...filteredObj}
                               />
                             ) : (
                               <Skeleton />

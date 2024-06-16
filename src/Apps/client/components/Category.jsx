@@ -2,13 +2,14 @@ import React, { useRef, useState } from 'react'
 import { useGetProductsQuery } from '../../../store/user/productsApi'
 import { useGetCategoriesQuery } from '../../../store/user/categoryApi'
 import { useGetPromosQuery } from '../../../store/user/promoApi'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import Card from './Card'
 import Loading from './Loading'
 import CardView from './CardView'
 import Promo from './Promo'
 import Navbar from './Navbar'
 import Products from './Products'
+import CartBtn from './CartBtn'
 
 export default function Category({ search }) {
   const { res } = useParams()
@@ -81,6 +82,9 @@ export default function Category({ search }) {
         count={count}
         setCount={setCount}
       />
+      <Link to={'orders'} style={{ color: 'black' }}>
+        <CartBtn />
+      </Link>
     </>
   )
 }

@@ -19,7 +19,7 @@ export const DownloadQr = async (token) => {
 
         const link = document.createElement('a')
         link.href = url
-        link.setAttribute('download', `image.jpg`)
+        link.setAttribute('download', `qr.zip`)
         document.body.appendChild(link)
 
         link.click()

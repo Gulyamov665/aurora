@@ -3,6 +3,7 @@ import { jwtDecode } from 'jwt-decode'
 import { Link } from 'react-router-dom'
 import header from '../static/Header.module.scss'
 import logo from '../../../assets/transparent_logo.png'
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 
 const Header = ({ search, setSearch }) => {
   const [authTokens, setAuthTokens] = useState(() =>
@@ -37,8 +38,7 @@ const Header = ({ search, setSearch }) => {
             </Link>
           </div>
         )}
-
-        <div className="d-flex align-items-end justify-content-end">
+        <div className="d-flex align-items-center justify-content-end">
           <div className={header.search_box}>
             <button className={header.btn_search}>
               {' '}

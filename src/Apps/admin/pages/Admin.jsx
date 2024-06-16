@@ -19,9 +19,9 @@ export default function Admin() {
     JSON.parse(localStorage.getItem('sidebar')) ?? true
   )
 
-  const qrCodeLocal = localStorage.getItem('qrCode')
-    ? JSON.parse(localStorage.getItem('qrCode'))
-    : null
+  // const qrCodeLocal = localStorage.getItem('qrCode')
+  //   ? JSON.parse(localStorage.getItem('qrCode'))
+  //   : null
 
   const handleExit = () => {
     localStorage.removeItem('authTokens')
@@ -72,7 +72,7 @@ export default function Admin() {
             transition={{ duration: 0.3 }}
           >
             <div className={`${styles.section_0} text-center`}>
-              <img src={qrCodeLocal} className={styles.qrcode} />
+              {/* <img src={qrCodeLocal} className={styles.qrcode} /> */}
             </div>
             <div className="d-flex flex-column ms-2">
               {buttonsInfo.map(({ text, icon, link }, index) => (
