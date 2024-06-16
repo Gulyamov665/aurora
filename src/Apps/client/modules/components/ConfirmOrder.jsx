@@ -2,7 +2,7 @@ import React from 'react'
 import CurrencyFormat from 'react-currency-format'
 import { useSelector } from 'react-redux'
 import { useSendMessageMutation } from '../../../../store/user/dispatcherApi'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useLoadQuery } from '../../../../store/admin/vendorApi'
 
 function ConfirmOrder() {
@@ -10,6 +10,7 @@ function ConfirmOrder() {
   const { items, totalPrice } = useSelector((state) => state.cart)
   const [dispatcher, { isLoading }] = useSendMessageMutation()
   const { data = [] } = useLoadQuery(res)
+  const navigate = useNavigate()
 
   const handleOrders = async () => {
     if (data.availability_orders && data.orders_chat_id) {
@@ -20,6 +21,7 @@ function ConfirmOrder() {
         chat_id: data.orders_chat_id,
       }
       await dispatcher(order)
+      navigate(-1)
       return
     }
     console.log('Заказы не доступны')
