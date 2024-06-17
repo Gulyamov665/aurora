@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 import { useQrCodeMutation } from '../../../store/admin/qrCode'
 import { DownloadQr } from '../../../Utils/downloadQr'
 import logo from '../../../assets/transparent_logo.png'
-import Loading from '../../client/components/Loading'
 
 export default function Header({ sidebar }) {
   const [authTokens, setAuthTokens] = useState(() =>
@@ -15,7 +14,7 @@ export default function Header({ sidebar }) {
       : null
   )
 
-  const [qrCode, { data, isLoading, isSuccess }] = useQrCodeMutation()
+  const [qrCode, { isLoading }] = useQrCodeMutation()
   const [vendor, setVendor] = useState()
 
   const qrCodeGenerate = async () => {
@@ -23,7 +22,6 @@ export default function Header({ sidebar }) {
     await DownloadQr(authTokens?.access)
   }
 
-  // if (isSuccess) localStorage.setItem('qrCode', JSON.stringify(data.image_path))
 
   useEffect(() => {
     if (authTokens) {

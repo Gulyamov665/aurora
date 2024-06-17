@@ -3,6 +3,7 @@ import InstagramIcon from '@mui/icons-material/Instagram'
 import TelegramIcon from '@mui/icons-material/Telegram'
 import { useWaiterCallMutation } from '../../../store/user/dispatcherApi'
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 export default function Intro({ data }) {
   const { table } = useParams()
@@ -10,7 +11,9 @@ export default function Intro({ data }) {
 
   const handleCallWaiter = async () => {
     if (data.waiter_chat_id) {
-      return await callWaiter({ table, chat_id: data.waiter_chat_id })
+      await callWaiter({ table, chat_id: data.waiter_chat_id })
+      toast.success('Запрос отправлен')
+      return
     }
     console.log('вызов официанта не доступен в этом заведении')
   }
@@ -51,7 +54,7 @@ export default function Intro({ data }) {
             )}
           </div>
           {isLoading ? (
-            <button className="btn btn-warning mt-3" >
+            <button className="btn btn-warning mt-3">
               <span
                 className="spinner-border spinner-border-sm"
                 aria-hidden="true"
