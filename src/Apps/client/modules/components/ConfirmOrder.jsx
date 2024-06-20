@@ -16,12 +16,13 @@ function ConfirmOrder() {
   const navigate = useNavigate()
 
   const handleOrders = async () => {
-    if (data.availability_orders && data.orders_chat_id) {
+    if (data.orders_chat_id) {
       const order = {
         items,
         totalPrice,
         table,
         chat_id: data.orders_chat_id,
+        availability: data.availability_orders,
       }
       await dispatcher(order)
       dispatch(removeCartItems())
