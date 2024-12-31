@@ -4,6 +4,8 @@ import TelegramIcon from '@mui/icons-material/Telegram'
 import { useWaiterCallMutation } from '../../../store/user/dispatcherApi'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import Snowfall from 'react-snowfall'
+import snowFlake_img from '../../../assets/snowFlakes.png'
 
 export default function Intro({ data }) {
   const { table } = useParams()
@@ -20,6 +22,9 @@ export default function Intro({ data }) {
   return (
     <div className="">
       <div className="section">
+        <div className="snowFall">
+          <Snowfall color="white" snowflakeCount={100} />
+        </div>
         <img src={data.photo} loading="lazy" className="img" alt="img" />
         <div className="op" />
         <div className="img_log">

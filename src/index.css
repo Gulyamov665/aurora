@@ -76,6 +76,12 @@ code {
   position: relative;
   z-index: 1;
 }
+.snowFall{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 4;
+}
 
 .img_log {
   width: 150px;

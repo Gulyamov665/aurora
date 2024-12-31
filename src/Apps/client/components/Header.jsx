@@ -3,7 +3,7 @@ import { jwtDecode } from 'jwt-decode'
 import { Link } from 'react-router-dom'
 import header from '../static/Header.module.scss'
 import logo from '../../../assets/transparent_logo.png'
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
+import newYearLogo from '../../../assets/transparent_logo_new_year.png'
 
 const Header = ({ search, setSearch }) => {
   const [authTokens, setAuthTokens] = useState(() =>
@@ -30,7 +30,9 @@ const Header = ({ search, setSearch }) => {
         style={{ gridTemplateColumns: '1fr 2fr' }}
       >
         {!vendor ? (
-          <img src={logo} style={{ width: 150 }} alt="logo" />
+          <div>
+            <img src={newYearLogo} style={{ width: 150 }} alt="logo" />
+          </div>
         ) : (
           <div>
             <Link to={`/admin/${vendor}/menu`}>
