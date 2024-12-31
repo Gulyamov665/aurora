@@ -12,11 +12,9 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-function OrderedProducts() {
+export default function OrderedProducts() {
   const { items } = useSelector((state) => state.cart)
   const navigate = useNavigate()
-
-  console.log(items)
   const dispatch = useDispatch()
 
   const removeItems = () => {
@@ -89,5 +87,3 @@ function OrderedProducts() {
     </div>
   )
 }
-
-export default OrderedProducts

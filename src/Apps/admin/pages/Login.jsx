@@ -36,16 +36,18 @@ export default function Login() {
   }
 
   useEffect(() => {
-    if (isSuccess) {
-      const dataDecode = jwtDecode(data.access)
-      localStorage.setItem('authTokens', JSON.stringify(data))
-      setAuthTokens(data)
-      setUser(dataDecode)
-      history(`/admin/${dataDecode.vendor}`)
-      toast.success(
-        `Добро пожаловать ${dataDecode.first_name} ${dataDecode.last_name}`
-      )
+    if (!isSuccess) {
+      return
     }
+    
+    const dataDecode = jwtDecode(data.access)
+    localStorage.setItem('authTokens', JSON.stringify(data))
+    setAuthTokens(data)
+    setUser(dataDecode)
+    history(`/admin/${dataDecode.vendor}`)
+    toast.success(
+      `Добро пожаловать ${dataDecode.first_name} ${dataDecode.last_name}`
+    )
   }, [isSuccess, isError, authTokens])
 
   return (

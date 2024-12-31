@@ -30,7 +30,6 @@ function ConfirmOrder() {
       toast.success('Заказ отправлен')
       return
     }
-    console.log('Заказы не доступны')
   }
 
   return (
