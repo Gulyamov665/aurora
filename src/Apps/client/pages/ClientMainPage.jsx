@@ -5,11 +5,12 @@ import Intro from '../components/Intro'
 import Category from '../components/Category'
 import Footer from '../components/Footer'
 import Loading from '../components/Loading'
+import { useSelector } from 'react-redux'
 
 function ClientMainPage() {
   const { res } = useParams()
   const { data: vendor = [], isLoading } = useLoadQuery(res)
-  const [search, setSearch] = useState('')
+  const { search } = useSelector((state) => state.modals)
 
   if (isLoading) return <Loading />
 

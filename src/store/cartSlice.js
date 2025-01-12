@@ -4,7 +4,8 @@ import { calcTotalPrice } from "../Utils/calc";
 
 const initialState = {
     totalPrice: 0,
-    items: []
+    items: [],
+    search: '',
 }
 
 
@@ -45,6 +46,7 @@ const cartSlice = createSlice({
 
             state.totalPrice = calcTotalPrice(state.items);
         },
+       
     }
 })
 
