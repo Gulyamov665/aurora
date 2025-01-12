@@ -20,18 +20,18 @@ export default function Intro({ data }) {
     console.log('вызов официанта не доступен в этом заведении')
   }
   return (
-    <div className="">
-      <div className="section">
-        <div className="snowFall">
-          <Snowfall color="white" snowflakeCount={100} />
-        </div>
+    <div className="container container-sm">
+      <div className="intro-page">
+        <div className="snowFall"></div>
         <img src={data.photo} loading="lazy" className="img" alt="img" />
-        <div className="op" />
+        <div className="opacity-block" />
         <div className="img_log">
           <img src={data.logo} className="img_logo" alt="logo" />
         </div>
       </div>
-      <div className="container container-sm mt-4 ">
+      <Snowfall color="white" snowflakeCount={100} />
+
+      <div className="mt-4 ">
         <div className="name_container">
           <h1 className="texts">{data.name}</h1>
           <p className="texts">{data.adress}</p>
