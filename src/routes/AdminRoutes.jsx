@@ -1,14 +1,14 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import Admin from '../Apps/admin/pages/Admin'
-import Vendor from '../Apps/admin/modules/vendor/pages/Vendor'
-import Orders from '../Apps/admin/modules/orders/pages/Orders'
-import AdminCategory from '../Apps/admin/pages/AdminCategory'
-import UpdateProduct from '../Apps/admin/modules/Product/pages/UpdateProduct'
-import AddProduct from '../Apps/admin/modules/Product/pages/AddProduct'
-import AdminPromo from '../Apps/admin/modules/promo/pages/AdminPromo'
-import UpdatePromo from '../Apps/admin/modules/promo/pages/UpdatePromo'
-import AddPromo from '../Apps/admin/modules/promo/pages/AddPromo'
+import Admin from '../apps/admin/pages/Admin'
+import Vendor from '../apps/admin/modules/vendor/pages/Vendor'
+import Orders from '../apps/admin/modules/orders/pages/Orders'
+import AdminCategory from '../apps/admin/pages/AdminCategory'
+import UpdateProduct from '../apps/admin/modules/Product/pages/UpdateProduct'
+import AddProduct from '../apps/admin/modules/Product/pages/AddProduct'
+import AdminPromo from '../apps/admin/modules/promo/pages/AdminPromo'
+import UpdatePromo from '../apps/admin/modules/promo/pages/UpdatePromo'
+import AddPromo from '../apps/admin/modules/promo/pages/AddPromo'
 
 export default function AdminRoutes() {
   return (
