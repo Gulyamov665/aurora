@@ -28,7 +28,7 @@ export default function Intro({ data }) {
           <img src={data.logo} className="img_logo" alt="logo" />
         </div>
       </div>
-      <Snowfall color="white" snowflakeCount={100} />
+      {/* <Snowfall color="white" snowflakeCount={100} /> */}
 
       <div className="mt-4 ">
         <div className="name_container">
