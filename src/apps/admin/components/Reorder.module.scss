@@ -1,0 +1,27 @@
+.but_col {
+    width: 100%;
+    background-color: transparent !important;
+    border-color: #210638 !important;
+    color: #22272f !important;
+    font-weight: 500 !important;
+    list-style: none;
+}
+
+.but_col_active {
+    border-color: #210638 !important;
+    background-color: #210638 !important;
+    color: #ffffff !important;
+}
+
+.button_name{
+    
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.button_text{
+    font-size: 14px;
+}
+
+

@@ -1,0 +1,142 @@
+.restaurant {
+  width: 80%;
+  margin: 0 auto;
+}
+.restaurant_container {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+.restaurant_image {
+  width: 100%;
+  height: 560px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.restaurant_card {
+  width: 100%;
+  text-align: center;
+  
+
+  h2 {
+    font-family: 'Josefin Sans', serif;
+    font-weight: 700;
+    font-size: 25px;
+    color: #363636;
+    padding: 8px 0 ;
+    margin: 0;
+  }
+
+
+  .restaurant_input{
+    margin-right: 10px;
+    
+  }
+
+  .restaurant_input input {
+    width: 100%;
+    height: 40px;
+    background-color: #210638;
+    border: 2px solid #d5b83644;
+    border-radius: 5px;
+    font-weight: 700;
+    color: #ffffff;
+    transition: 0.3s;
+    margin-bottom: 2px;
+    
+
+  }
+  .restaurant_input ::placeholder{
+    color: #c9c9c9a7;
+    font-weight: 400;
+    
+  }
+  .restaurant_input input:active {
+    transition: 0.3s;
+  }
+}
+  .button_form{
+    // width: 30%;
+    text-align: end;
+  }
+// .restaurant_card {
+//   width: 70%;
+
+//   h2 {
+//     font-family: 'Josefin Sans', serif;
+//     font-weight: 700;
+//     font-size: 40px;
+//     color: #d8c2ed;
+//   }
+//   .restaurant_input input {
+//     width: 20%;
+//     height: 25px;
+//     background-color: #210638;
+//     border: 2px solid #d5b83644;
+//     border-radius: 5px;
+//     color: #d8c2ed;
+//     transition: 0.3s;
+//   }
+//   .restaurant_input input:active {
+//     transition: 0.3s;
+//   }
+// }
+
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .restaurant {
+    width: 70%;
+    margin: 0 auto;
+  }
+  .restaurant_container {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 10px;
+  }
+  .restaurant_image {
+    width: 90%;
+    height: 250px;
+  }
+
+  .restaurant_card {
+    width: 100%;
+    text-align: center;
+  
+    h2 {
+      font-family: 'Josefin Sans', serif;
+      font-weight: 700;
+      font-size: 25px;
+      color: #363636;
+      padding: 8px 0 ;
+      margin: 0;
+    }
+    .restaurant_input{
+      width: 90%;
+    }
+    .restaurant_input input {
+      width: 100%;
+      height: 40px;
+      background-color: #210638;
+      border: 2px solid #d5b83644;
+      border-radius: 5px;
+      font-weight: 700;
+      color: #ffffff;
+      transition: 0.3s;
+      
+      margin-bottom: 2px;
+
+    }
+    .restaurant_input ::placeholder{
+      color: #c9c9c9a7;
+      font-weight: 400;
+      
+    }
+    .restaurant_input input:active {
+      transition: 0.3s;
+    }
+  }
+}

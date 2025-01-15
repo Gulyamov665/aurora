@@ -1,0 +1,40 @@
+.col_1 {
+  background-color: #ffffff;
+  width: 24%;
+  height: 110px;
+  border-radius: 10px;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 14px;
+}
+
+.iosBtn {
+  padding-left: 14px;
+}
+
+@media (max-width: 420px) {
+  .col_1 {
+    width: 100%;
+  }
+}
+
+@media (min-width: 421px) and (max-width: 520px) {
+  .col_1 {
+    width: 100%;
+  }
+}
+@media (min-width: 521px) and (max-width: 768px) {
+  .col_1 {
+    width: 48%;
+  }
+}

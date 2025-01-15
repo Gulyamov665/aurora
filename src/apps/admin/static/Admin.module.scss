@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+.parent {
+  width: 100%;
+  display: flex;
+}
+
+.section1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 15%;
+  height: 100vh;
+  background-color: #210638;
+  position: fixed;
+  top: 60;
+  // transition: 1s;
+  z-index: 9999;
+}
+
+.section_0{
+  height: 180px !important;
+}
+
+.qrcode{
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+}
+
+.buttons {
+  width: 180px !important;
+  color: #ffffff !important;
+  font-family: 'Josefin Sans', sans-serif !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  transition: 0.3s;
+}
+
+.div {
+  display: flex;
+  align-items: center;
+}
+
+.buttons:hover {
+  background-color: #0da5ab !important;
+  color: #fff !important;
+  transition: 0.3s;
+}
+
+.arrow {
+  cursor: pointer;
+  padding-bottom: 10px;
+  margin: 0 auto;
+  color: #5c4272;
+  transition: 0.3s;
+}
+
+@media (min-width: 320px) and (max-width: 420px) {
+  .sectionMini {
+    width: 20%;
+  }
+
+  .section1 {
+    width: 48%;
+    height: 100%;
+    z-index: 9999;
+  }
+
+  .buttons {
+    width: 160px !important;
+  }
+}
+@media (min-width: 421px) and (max-width: 768px) {
+  .sectionMini {
+    width: 20%;
+  }
+
+  .section1 {
+    width: 48%;
+    height: 100%;
+    z-index: 9999;
+  }
+
+  .buttons {
+    width: 160px !important;
+  }
+}
