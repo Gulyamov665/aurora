@@ -14,7 +14,8 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Login />} />
 
-        {/*client and admin routes  */}
+        {/*client and admin routes 1 */}
+
         <Route path="/admin/:res/*" element={<AdminRoutes />} />
         <Route path="vendor/:res/:table?/*" element={<VendorRoutes />} />
       </Routes>
