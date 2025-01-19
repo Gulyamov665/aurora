@@ -4,14 +4,19 @@ import { Link } from 'react-router-dom'
 import header from '../static/Header.module.scss'
 import logo from '../../../assets/transparent_logo.png'
 import newYearLogo from '../../../assets/transparent_logo_new_year.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { productSearch } from '../../../store/appSlice'
 
-const Header = ({ search, setSearch }) => {
+const Header = () => {
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem('authTokens')
       ? JSON.parse(localStorage.getItem('authTokens'))
       : null
   )
   const [vendor, setVendor] = useState(null)
+  const { search } = useSelector((state) => state.modals)
+  const dispatch = useDispatch()
+
 
   useEffect(() => {
     if (authTokens) {
@@ -51,7 +56,7 @@ const Header = ({ search, setSearch }) => {
               className={header.input_search}
               placeholder="Search..."
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => dispatch(productSearch(e.target.value))}
             />
           </div>
         </div>

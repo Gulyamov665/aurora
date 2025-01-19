@@ -1,7 +1,7 @@
 import React from 'react'
 import CurrencyFormat from 'react-currency-format'
 import { useDispatch, useSelector } from 'react-redux'
-import { useSendMessageMutation } from '../../../../store/user/dispatcherApi'
+import { useSendMessageMutation } from '../../../../store/user/api/dispatcherApi'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useLoadQuery } from '../../../../store/admin/vendorApi'
 import { removeCartItems } from '../../../../store/cartSlice'

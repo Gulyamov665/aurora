@@ -1,11 +1,10 @@
 import React from 'react'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import TelegramIcon from '@mui/icons-material/Telegram'
-import { useWaiterCallMutation } from '../../../store/user/dispatcherApi'
+import { useWaiterCallMutation } from '../../../store/user/api/dispatcherApi'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Snowfall from 'react-snowfall'
-import snowFlake_img from '../../../assets/snowFlakes.png'
 
 export default function Intro({ data }) {
   const { table } = useParams()

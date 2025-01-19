@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
-import { useGetProductsQuery } from '../../../store/user/productsApi'
-import { useGetCategoriesQuery } from '../../../store/user/categoryApi'
-import { useGetPromosQuery } from '../../../store/user/promoApi'
+import { useGetProductsQuery } from '../../../store/user/api/productsApi'
+import { useGetCategoriesQuery } from '../../../store/user/api/categoryApi'
+import { useGetPromosQuery } from '../../../store/user/api/promoApi'
 import { useParams, Link } from 'react-router-dom'
 import Card from './Card'
 import Loading from './Loading'
@@ -11,7 +11,7 @@ import Navbar from './Navbar'
 import Products from './Products'
 import CartBtn from './CartBtn'
 
-export default function Category({ search }) {
+export default function Category({search}) {
   const { res } = useParams()
   const { data: category = [] } = useGetCategoriesQuery(res)
   const { data: menuItems = [], isLoading, isError } = useGetProductsQuery(res)
@@ -39,6 +39,8 @@ export default function Category({ search }) {
     return <p>Error not found page </p>
   }
 
+  
+
   return (
     <>
       <Promo promo={promo} handleViewPromo={handleViewPromo} />
@@ -58,7 +60,7 @@ export default function Category({ search }) {
             .map((searchItem) => (
               <div key={searchItem.id} onClick={() => handleView(searchItem)}>
                 <Card
-                  img={searchItem.photo}
+                  photo={searchItem.photo}
                   name={searchItem.name}
                   desc={searchItem.description}
                   price={searchItem.price}

@@ -9,6 +9,7 @@ const appSlice = createSlice({
         createModal: false,
         updateModal: false,
         selectedCategory: null,
+        search: ''
     },
     reducers: {
         toggleCreate(state) {
@@ -19,6 +20,9 @@ const appSlice = createSlice({
         },
         selectedCategory(state, action) {
             state.selectedCategory = action.payload
+        },
+        productSearch(state, action) {
+            state.search = action.payload
         }
     },
 
@@ -27,6 +31,6 @@ const appSlice = createSlice({
 )
 
 
-export const { toggleCreate, toggleUpdate, selectedCategory, removeData } = appSlice.actions
+export const { toggleCreate, toggleUpdate, selectedCategory, removeData, productSearch } = appSlice.actions
 
 export default appSlice.reducer

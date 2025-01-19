@@ -166,27 +166,27 @@ code {
 .card_view_motion {
   margin: 0 auto;
   width: 50%;
-  height: 77%;
+  height: 550px;
   background-color: #ffff;
-  border-radius: 20px 20px 0 0;
+  border-radius: 20px 20px 20px 20px;
   z-index: 99999999;
   position: fixed;
   scroll-behavior: initial;
   bottom: 0;
   left: 0;
   right: 0;
+  top: 17%;
 }
 
 .card_view_img {
   /* padding: 10px; */
   width: 100%;
-  height: 100%;
+  height: 350px;
   border-radius: 20px 20px 0 0;
   object-fit: cover;
 }
 
 .card_view h2 {
-  /* background: #dbdbdb95; */
   padding: 5px;
   margin: 0;
   color: #333333;
@@ -200,6 +200,8 @@ code {
 .card_view_desc {
   font-size: 15px;
   height: auto;
+  min-height: 75px;
+  max-height: 75px;
   margin: 0;
   overflow: auto;
   padding: 0 5px;
@@ -278,6 +280,7 @@ code {
     width: 100%;
     top: auto;
     height: auto;
+    border-radius: 20px 20px 0 0;
   }
   .card_view_img {
     width: 100%;

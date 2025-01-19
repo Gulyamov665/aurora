@@ -16,13 +16,13 @@ import { productsApi } from "./admin/productsApi";
 import { categoriesApi } from "./admin/categoryApi";
 import { tokenApi } from "./tokenApi";
 import { promosApi } from "./admin/promoApi";
-import { categoriesApiUser } from "./user/categoryApi";
-import { productsApiUser } from "./user/productsApi";
-import { promosApiUser } from "./user/promoApi";
+import { categoriesApiUser } from "./user/api/categoryApi";
+import { productsApiUser } from "./user/api/productsApi";
+import { promosApiUser } from "./user/api/promoApi";
 import { qrCodeApi } from "./admin/qrCode";
 import { vendorApi } from "./admin/vendorApi";
 import cartSlice from "./cartSlice";
-import { dispatcher } from "./user/dispatcherApi";
+import { dispatcher } from "./user/api/dispatcherApi";
 
 
 const rootReducer = combineReducers({

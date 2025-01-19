@@ -30,8 +30,6 @@ export default function CardView({ item, open, setIsOpen, count, setCount }) {
     setIsOpen(false)
   }
 
-
-
   return (
     <AnimatePresence>
       {open && (
@@ -66,12 +64,14 @@ export default function CardView({ item, open, setIsOpen, count, setCount }) {
                 src={item.photo}
                 alt=""
               />
-              <h2>
-                {item.name} <hr />
-              </h2>
+              <div className="container card_description_name">
+                <h2>
+                  {item.name} <hr />
+                </h2>
 
-              <div className="card_view_desc">
-                <p>{item.description}</p>
+                <div className="card_view_desc">
+                  <p>{item.description}</p>
+                </div>
               </div>
             </div>
 
