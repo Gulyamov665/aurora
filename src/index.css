@@ -250,7 +250,12 @@ code {
   font-weight: 400 !important;
   color: #21201f !important;
 }
-
+@media (min-width: 320px) and (max-width: 425px) {
+    .dropdownStyle {
+      width: 220px !important;
+      font-size: 13px !important;
+    }
+}
 @media (min-width: 320px) and (max-width: 480px) {
 
   .dropdownStyle {
