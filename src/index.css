@@ -104,9 +104,8 @@ code {
 .name_container {
   padding: 10px;
   width: 100%;
-  /* border: 1px solid black; */
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   box-shadow: 5px 5px 15px 5px rgb(223, 221, 221);
   background: #ffffff;
 }

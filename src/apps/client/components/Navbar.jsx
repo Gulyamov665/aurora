@@ -46,7 +46,7 @@ export default function Navbar({ sectionRefs, category, rootRef }) {
             slidesPerView: 3,
           },
           640: {
-            slidesPerView: 10,
+            slidesPerView: 6,
             spaceBetween: 5
           },
         }}
