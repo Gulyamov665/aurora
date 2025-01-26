@@ -16,7 +16,7 @@ export default function Navbar({ sectionRefs, category, rootRef }) {
     const swiper = useSwiper()
     useEffect(() => {
       if (swiper) {
-        swiper.slideTo(position - 1)
+        swiper.slideTo(position -1)
       }
     }, [swiper, position])
     return null
@@ -29,7 +29,7 @@ export default function Navbar({ sectionRefs, category, rootRef }) {
   return (
     <div id="nav" className="custom-navbar container">
       <Swiper
-        slidesPerView={10}
+        slidesPerView={6}
         // spaceBetween={0}
         freeMode={true}
         pagination={{

@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 import header from '../static/Header.module.scss'
 import logo from '../../../assets/transparent_logo.png'
 import newYearLogo from '../../../assets/transparent_logo_new_year.png'
-import { useDispatch, useSelector } from 'react-redux'
-import { productSearch } from '../../../store/appSlice'
+import { useSelector } from 'react-redux'
 import LocationDropdown from './LocationDropdown'
+import userIcon from '../../../assets/user-icon.png'
 
 const Header = () => {
   const [authTokens, setAuthTokens] = useState(() =>
@@ -16,7 +16,6 @@ const Header = () => {
   )
   const [vendor, setVendor] = useState(null)
   const { search } = useSelector((state) => state.modals)
-  const dispatch = useDispatch()
 
   useEffect(() => {
     if (authTokens) {
@@ -69,6 +68,17 @@ const Header = () => {
             />
           </div>
         </div> */}
+        <div
+          className="bg-light"
+          style={{
+            width: 40,
+            height: 40,
+            textAlign: 'center',
+            borderRadius: '50%',
+          }}
+        >
+          <img src={userIcon} alt="" width={30} height={30} />
+        </div>
       </div>
     </header>
   )
