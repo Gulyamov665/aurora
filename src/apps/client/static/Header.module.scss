@@ -4,9 +4,10 @@
   border: 0 transparent;
   box-shadow: 5px 5px 5px 5px rgb(238, 238, 238);
 }
-.header_container{
+.header_container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 /* End-Header */
 
@@ -93,7 +94,7 @@
 
 // user icon style start
 
-.user_icon{
+.user_icon {
   background-color: #ffffff;
   width: 40px;
   height: 40px;
@@ -102,8 +103,7 @@
   padding-top: 3px;
 }
 
-
-// user icon style end 
+// user icon style end
 
 /* Mobil version */
 @media screen and (max-width: 455px) and (max-height: 626px) {
