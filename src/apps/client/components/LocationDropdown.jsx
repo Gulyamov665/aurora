@@ -8,9 +8,10 @@ function LocationDropdown({ items }) {
     setSelectedItem(eventKey)
     console.log(`Selected item: ${eventKey}`)
   }
+
   return (
-    <Dropdown onSelect={handleSelect} drop='end'>
-      <Dropdown.Toggle variant="light" id="dropdown-basic"  className='w-50'>
+    <Dropdown onSelect={handleSelect} >
+      <Dropdown.Toggle variant="light" id="dropdown-basic" className='w-50 dropdownStyle'>
         {selectedItem || 'Указать локацию'}
       </Dropdown.Toggle>
 
@@ -20,7 +21,7 @@ function LocationDropdown({ items }) {
             {item.name}
           </Dropdown.Item>
         ))}
-        <Dropdown.Item>Something else</Dropdown.Item>
+        <Dropdown.Item >Something else</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   )
