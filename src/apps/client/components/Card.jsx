@@ -26,24 +26,24 @@ export default function Card(props) {
         />
         <div className="card__info">
           <div className="car__info--title">
-            <h3>{props.name}</h3>
-            <p className="card__info--price">
+          <p className="card__info--price">
               <CurrencyFormat
                 value={props.price}
                 displayType={'text'}
                 thousandSeparator={' '}
-                suffix={' Сум'}
+                suffix={' сум'}
               />
             </p>
+            <h3>{props.name}</h3>
           </div>
         </div>
         <div style={{ textAlign: 'center' }}>
           <button
-            className="btn btn-warning mb-2"
-            style={{ width: '95%' }}
+            className="btn card-btn-order"
+            // style={{ width: '90%', marginBottom: "10px" }}
             onClick={addToCart}
           >
-            <b>добавить</b>
+            <b>+ Добавить</b>
           </button>
         </div>
       </div>

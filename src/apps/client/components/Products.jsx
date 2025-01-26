@@ -23,6 +23,7 @@ export default function Products({
             >
               <div className="container">
                 <h2 className="cat_name pt-4">{item.name}</h2>
+
                 <hr />
                 <div className="row">
                   {menuItems
