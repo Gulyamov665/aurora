@@ -58,14 +58,14 @@ export default function Intro({ data }) {
             )}
           </div>
           {isLoading ? (
-            <button className="btn btn-warning mt-3">
+            <button className="btn btn-waiter mt-3">
               <span
                 className="spinner-border spinner-border-sm"
                 aria-hidden="true"
               ></span>
             </button>
           ) : (
-            <button className="btn btn-warning mt-3" onClick={handleCallWaiter}>
+            <button className="btn btn-waiter mt-3" onClick={handleCallWaiter}>
               {' '}
               Вызвать официанта
             </button>
