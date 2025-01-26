@@ -9,12 +9,12 @@ function LocationDropdown({ items }) {
     console.log(`Selected item: ${eventKey}`)
   }
   return (
-    <Dropdown onSelect={handleSelect} color='white' drop='down'>
-      <Dropdown.Toggle variant="dark" id="dropdown-basic">
-        {selectedItem || 'Choose location'}
+    <Dropdown onSelect={handleSelect}>
+      <Dropdown.Toggle variant="light" id="dropdown-basic" className='w-50'>
+        {selectedItem || 'Указать локацию'}
       </Dropdown.Toggle>
 
-      <Dropdown.Menu>
+      <Dropdown.Menu className='w-50'>
         {items.map((item) => (
           <Dropdown.Item key={item.id} eventKey={item.id}>
             {item.name}
