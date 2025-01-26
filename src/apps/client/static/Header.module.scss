@@ -1,11 +1,12 @@
 /* Header */
 .header_backgroud {
-  // background: rgb(235, 232, 220);
-  // background: linear-gradient(251deg, rgb(147, 168, 204) 19%, #34495e 75%);
   background: #f5f4f2;
-  // background: #f3f3f3;
   border: 0 transparent;
   box-shadow: 5px 5px 5px 5px rgb(238, 238, 238);
+}
+.header_container{
+  display: flex;
+  justify-content: space-between;
 }
 /* End-Header */
 
@@ -89,6 +90,20 @@
   transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
 }
 /* End-Seach */
+
+// user icon style start
+
+.user_icon{
+  background-color: #ffffff;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  padding-top: 3px;
+}
+
+
+// user icon style end 
 
 /* Mobil version */
 @media screen and (max-width: 455px) and (max-height: 626px) {

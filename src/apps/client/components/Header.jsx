@@ -37,8 +37,8 @@ const Header = () => {
       className={`${header.header_backgroud} py-2 mb-2 header_backgroud`}
     >
       <div
-        className="container d-grid gap-3 align-items-center"
-        style={{ gridTemplateColumns: '1fr 2fr' }}
+        className={`${header.header_container} container`}
+   
       >
         {!vendor ? (
           <div>
@@ -69,13 +69,7 @@ const Header = () => {
           </div>
         </div> */}
         <div
-          className="bg-light"
-          style={{
-            width: 40,
-            height: 40,
-            textAlign: 'center',
-            borderRadius: '50%',
-          }}
+          className={`${header.user_icon}`}
         >
           <img src={userIcon} alt="" width={30} height={30} />
         </div>
