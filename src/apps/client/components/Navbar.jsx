@@ -27,9 +27,10 @@ export default function Navbar({ sectionRefs, category, rootRef }) {
   }, [entries])
 
   return (
-    <div id="nav" className="custom-navbar">
+    <div id="nav" className="custom-navbar container">
       <Swiper
-        slidesPerView={5}
+        slidesPerView={10}
+        // spaceBetween={0}
         freeMode={true}
         pagination={{
           clickable: true,
@@ -45,7 +46,8 @@ export default function Navbar({ sectionRefs, category, rootRef }) {
             slidesPerView: 3,
           },
           640: {
-            slidesPerView: 5,
+            slidesPerView: 10,
+            spaceBetween: 5
           },
         }}
       >

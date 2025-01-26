@@ -35,15 +35,15 @@ const Header = () => {
 
   return (
     <header
-      className={`${header.header_backgroud} py-3 rounded-bottom mb-3 border-bottom header_backgroud`}
+      className={`${header.header_backgroud} py-2 mb-2 header_backgroud`}
     >
       <div
-        className="container-fluid d-grid gap-3 align-items-center"
+        className="container d-grid gap-3 align-items-center"
         style={{ gridTemplateColumns: '1fr 2fr' }}
       >
         {!vendor ? (
           <div>
-            <img src={newYearLogo} style={{ width: 150 }} alt="logo" />
+            <img src={newYearLogo} style={{ width: 32 }} alt="logo" />
           </div>
         ) : (
           <div>
