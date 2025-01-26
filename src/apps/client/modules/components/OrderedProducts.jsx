@@ -11,6 +11,7 @@ import {
 } from '../../../../store/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import Map from '../map/Maps'
 
 export default function OrderedProducts() {
   const { items } = useSelector((state) => state.cart)
@@ -84,6 +85,7 @@ export default function OrderedProducts() {
           </div>
         ))}
       </div>
+      <Map />
     </div>
   )
 }

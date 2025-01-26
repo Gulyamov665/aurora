@@ -7,6 +7,7 @@ import Footer from '../components/Footer'
 import Loading from '../components/Loading'
 import { useSelector } from 'react-redux'
 
+
 function ClientMainPage() {
   const { res } = useParams()
   const { data: vendor = [], isLoading } = useLoadQuery(res)

@@ -6,6 +6,7 @@ import logo from '../../../assets/transparent_logo.png'
 import newYearLogo from '../../../assets/transparent_logo_new_year.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { productSearch } from '../../../store/appSlice'
+import LocationDropdown from './LocationDropdown'
 
 const Header = () => {
   const [authTokens, setAuthTokens] = useState(() =>
@@ -17,7 +18,6 @@ const Header = () => {
   const { search } = useSelector((state) => state.modals)
   const dispatch = useDispatch()
 
-
   useEffect(() => {
     if (authTokens) {
       setVendor(jwtDecode(authTokens.access).vendor)
@@ -25,6 +25,13 @@ const Header = () => {
       setVendor('')
     }
   }, [authTokens])
+
+  const items = [
+    { id: 1, name: 'item1' },
+    { id: 2, name: 'item2' },
+    { id: 3, name: 'item2' },
+    { id: 4, name: 'item2' },
+  ]
 
   return (
     <header
@@ -45,11 +52,13 @@ const Header = () => {
             </Link>
           </div>
         )}
-        <div className="d-flex align-items-center justify-content-end">
+        <LocationDropdown items={items} />
+
+        {/* <div className="d-flex align-items-center justify-content-end">
           <div className={header.search_box}>
             <button className={header.btn_search}>
               {' '}
-              <span className={header.span}>Sea</span>rch
+              <span className={header.span}>Search</span>
             </button>
             <input
               type="text"
@@ -59,7 +68,7 @@ const Header = () => {
               onChange={(e) => dispatch(productSearch(e.target.value))}
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </header>
   )
