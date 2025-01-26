@@ -11,7 +11,7 @@ function LocationDropdown({ items }) {
 
   return (
     <Dropdown onSelect={handleSelect} >
-      <Dropdown.Toggle variant="light" id="dropdown-basic" className='w-50 dropdownStyle'>
+      <Dropdown.Toggle variant="light" id="dropdown-basic" className=' dropdownStyle'  >
         {selectedItem || 'Указать локацию'}
       </Dropdown.Toggle>
 
