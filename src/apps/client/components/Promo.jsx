@@ -29,7 +29,7 @@ export default function Promo({ promo, handleViewPromo }) {
                 slidesPerView: 3,
               },
               768: {
-                slidesPerView: 3,
+                slidesPerView: 4,
                 spaceBetween: 15,
               },
             }}
@@ -44,7 +44,7 @@ export default function Promo({ promo, handleViewPromo }) {
                   onClick={() => handleViewPromo(item)}
                 >
                   <img className="imgScroll" src={item.photo} alt="item.name" />
-                  <b className="text_promo">{item.name}</b>
+                  {/* <b className="text_promo">{item.name}</b> */}
                 </SwiperSlide>
               ))}
           </Swiper>
