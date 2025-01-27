@@ -77,7 +77,7 @@ export default function CardView({ item, open, setIsOpen, count, setCount }) {
 
             <div className="card_view_price">
               <button
-                className="btn btn-warning w-100 me-4"
+                className="btn btn-warning w-100 me-4 btnStyle"
                 onClick={() => addToCart(item)}
               >
                 <strong style={{ color: '#333333' }}>
