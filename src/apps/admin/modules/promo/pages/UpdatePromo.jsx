@@ -73,7 +73,7 @@ function UpdatePromo() {
   return (
     <div className="container">
       {loadingData && <Loading />}
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between ">
         <button
           className="btn btn-success mt-3 mb-3"
           onClick={() => navigate(-1)}

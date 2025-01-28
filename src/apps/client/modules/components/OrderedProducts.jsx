@@ -25,7 +25,7 @@ export default function OrderedProducts() {
   return (
     <div>
       <div style={{ marginBottom: 90 }}>
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between a">
           <div className="mx-3" onClick={() => navigate(-1)}>
             <ArrowBackIcon sx={{ fontSize: '30px' }} />
           </div>

@@ -35,21 +35,23 @@ function ConfirmOrder() {
   return (
     <div>
       <div
-        className="d-flex justify-content-between align-items-center"
+        className="d-flex justify-content-between  align-items-center"
         style={{
           width: '90%',
           height: 70,
           position: 'fixed',
           bottom: '20px',
           left: '50%',
-          background: '#34495e',
+          background: '#b6b6b6',
           transform: 'translateX(-50%)',
           borderRadius: 20,
           padding: 20,
           zIndex: 10000,
           margin: 'auto',
           cursor: 'pointer',
-          color: 'wheat',
+          color: '#fff',
+          fontWeight: 'bold',
+          fontSize: '18px'
         }}
       >
         <div>
@@ -62,14 +64,14 @@ function ConfirmOrder() {
         </div>
         <div>
           {isLoading ? (
-            <button className={'btn btn-warning'}>
+            <button className={'btnOrderStyleLoad btn-warning'}>
               <span
                 className="spinner-border spinner-border-sm"
                 aria-hidden="true"
               ></span>
             </button>
           ) : (
-            <button className={'btn btn-warning'} onClick={handleOrders}>
+            <button className={'btnOrderStyle btn-warning'} onClick={handleOrders}>
               Заказать
             </button>
           )}
