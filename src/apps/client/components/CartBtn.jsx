@@ -17,7 +17,7 @@ function CartBtn() {
           position: 'fixed',
           bottom: '20px',
           left: '50%',
-          background: '#34495e',
+          background: '#b6b6b6',
           transform: 'translateX(-50%)',
           borderRadius: 20,
           padding: 20,
@@ -27,8 +27,8 @@ function CartBtn() {
         }}
         className=" d-flex justify-content-between align-items-center"
       >
-        <b style={{ color: 'wheat' }}>Корзина</b>
-        <b style={{ color: 'wheat' }}>
+        <b style={{ color: 'white', fontSize : '18px' }}>Корзина</b>
+        <b style={{ color: 'white', fontSize : '18px' }}>
           <CurrencyFormat
             value={totalPrice}
             displayType={'text'}

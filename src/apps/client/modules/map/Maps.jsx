@@ -84,10 +84,13 @@ function Map() {
             left: '10px',
             zIndex: 1000,
             padding: '10px',
-            background: 'white',
+            background: '#e7e7e7',
             border: '1px solid black',
             borderRadius: '5px',
             cursor: 'pointer',
+            border: 'none',
+            boxShadow: '0px 0px 10px 0px gray'
+            
           }}
         >
           Определить местоположение
