@@ -85,7 +85,6 @@ function Map() {
             zIndex: 1000,
             padding: '10px',
             background: '#e7e7e7',
-            border: '1px solid black',
             borderRadius: '5px',
             cursor: 'pointer',
             border: 'none',
