@@ -1,0 +1,50 @@
+.form-box {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+.form-box input {
+  font-size: 1em;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  width: 100%;
+  font-family: inherit;
+  padding: 0 10px;
+  height: 40px;
+  border-color: #b8bdc9;
+}
+.form-box input:hover {
+  border-color: rgba(46, 105, 255, 0.5);
+  box-shadow: 0 0 0 2px rgba(46, 105, 255, 0.25);
+}
+
+.form-box span {
+  cursor: pointer;
+  color: blue;
+}
+
+.form-box p{
+  margin: 10px 0;
+}
+.form-button {
+  min-width: 180px;
+  height: 3em;
+  font-size: 16px;
+  font-weight: normal;
+  font-family: inherit;
+  color: #fff;
+  border-color: #0a1551;
+  background-color: #0a1551;
+  border: 1px solid;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 13px 0;
+}
+
+.form-button:hover {
+  border-color: rgba(10, 21, 81, 0.8);
+  background-color: rgba(10, 21, 81, 0.8);
+}

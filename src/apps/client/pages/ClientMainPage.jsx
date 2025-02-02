@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useLoadQuery } from '../../../store/admin/vendorApi'
 import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import Intro from '../components/Intro'
 import Category from '../components/Category'
-import Footer from '../components/Footer'
 import Loading from '../components/Loading'
-import { useSelector } from 'react-redux'
-
 
 function ClientMainPage() {
   const { res } = useParams()
@@ -16,11 +14,10 @@ function ClientMainPage() {
   if (isLoading) return <Loading />
 
   return (
-    <div>
+    <>
       <Intro data={vendor} />
       <Category search={search} />
-      <Footer />
-    </div>
+    </>
   )
 }
 

@@ -8,10 +8,10 @@ import {
   addCartItem,
   minusItem,
   removeCartItems,
-} from '../../../../store/cartSlice'
+} from '../../../../../store/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import Map from '../map/Maps'
+import Map from '../../map/Maps'
 
 export default function OrderedProducts() {
   const { items } = useSelector((state) => state.cart)
