@@ -33,13 +33,8 @@ const Header = () => {
   ]
 
   return (
-    <header
-      className={`${header.header_backgroud} py-2 mb-2 header_backgroud`}
-    >
-      <div
-        className={`${header.header_container} container`}
-   
-      >
+    <header className={`${header.header_backgroud} py-2 mb-2 header_backgroud`}>
+      <div className={`${header.header_container} container`}>
         {!vendor ? (
           <div>
             <img src={newYearLogo} style={{ width: 32 }} alt="logo" />
@@ -52,27 +47,11 @@ const Header = () => {
           </div>
         )}
         <LocationDropdown items={items} />
-
-        {/* <div className="d-flex align-items-center justify-content-end">
-          <div className={header.search_box}>
-            <button className={header.btn_search}>
-              {' '}
-              <span className={header.span}>Search</span>
-            </button>
-            <input
-              type="text"
-              className={header.input_search}
-              placeholder="Search..."
-              value={search}
-              onChange={(e) => dispatch(productSearch(e.target.value))}
-            />
+        <Link to={{ pathname: '/login' }} state={{ from: location.pathname }}>
+          <div className={`${header.user_icon}`}>
+            <img src={userIcon} alt="" width={30} height={30} />
           </div>
-        </div> */}
-        <div
-          className={`${header.user_icon}`}
-        >
-          <img src={userIcon} alt="" width={30} height={30} />
-        </div>
+        </Link>
       </div>
     </header>
   )
