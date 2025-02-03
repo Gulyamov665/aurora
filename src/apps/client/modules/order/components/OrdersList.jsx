@@ -48,7 +48,7 @@ export default function OrdersList() {
           </div>
         ) : (
           <div className="text-center">
-            <img src={emptyCart} alt="cart" width={400} height={400} />
+            <img src={emptyCart} alt="cart" className={styles['empty-cart']} />
             <p>
               <b>Ваша корзина пока пуста</b>
             </p>
