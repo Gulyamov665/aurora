@@ -8,7 +8,7 @@ function CartBtn() {
 
   const id = document.getElementById('cartBtn')
   return (
-    items.length > 0 &&
+    false &&
     createPortal(
       <div
         style={{

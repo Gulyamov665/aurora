@@ -9,7 +9,7 @@ const appSlice = createSlice({
         createModal: false,
         updateModal: false,
         selectedCategory: null,
-        search: ''
+        search: '',
     },
     reducers: {
         toggleCreate(state) {
@@ -23,7 +23,7 @@ const appSlice = createSlice({
         },
         productSearch(state, action) {
             state.search = action.payload
-        }
+        },
     },
 
 }

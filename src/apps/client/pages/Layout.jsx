@@ -1,13 +1,14 @@
 import React from 'react'
 import Header from '../components/Header'
-import Footer from '../components/Footer'
+
+import NavbarBottomPage from '../modules/navbarBottom/pages/NavbarBottomPage'
 
 export default function Layout({ children }) {
   return (
     <>
       <Header />
-      <div className="min-vh-100dvh">{children}</div>
-      <Footer />
+      <div className="venLayout">{children}</div>
+      <NavbarBottomPage />
     </>
   )
 }

@@ -9,7 +9,7 @@ export default function VendorRoutes() {
     <Layout>
       <Routes>
         <Route index element={<ClientMainPage />} />
-        <Route path="/orders" element={<OrdersPage />} />
+        <Route path="/cart" element={<OrdersPage />} />
       </Routes>
     </Layout>
   )

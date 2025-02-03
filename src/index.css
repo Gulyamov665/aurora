@@ -481,7 +481,9 @@ code {
 .min-vh-100dvh {
   min-height: 100dvh;
 }
-
+.venLayout{
+  margin-bottom: 80px;
+}
 
 .swiper-wrapper {
   width: auto !important;
