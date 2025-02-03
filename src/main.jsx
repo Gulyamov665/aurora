@@ -13,7 +13,12 @@ import App from './App'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <BrowserRouter>
+  <BrowserRouter
+    future={{
+      v7_relativeSplatPath: true,
+      v7_startTransition: true,
+    }}
+  >
     <Provider store={store}>
       <PersistGate loading={'Loading...'} persistor={persistor}>
         <App />
