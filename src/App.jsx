@@ -25,8 +25,8 @@ function App() {
 
         {/*client and admin routes 2 */}
 
-        <Route path="/admin/:res/*" element={<AdminRoutes />} />
-        <Route path="/vendor/:res/*" element={<VendorRoutes />} />
+        <Route path="admin/:res/*" element={<AdminRoutes />} />
+        <Route path="vendor/:res/*" element={<VendorRoutes />} />
       </Routes>
 
       <ToastContainer />

@@ -8,13 +8,13 @@ export default function NavbarBottom({ icons }) {
       <div className="container">
         <div className={styles['icons-list']}>
           {icons.map((item) => (
-            <div className={styles['list-item']} key={item.title}>
-              <Link to={item.link} className={styles['list-links']}>
+            <Link to={item.link} className={styles['list-links']}>
+              <div className={styles['list-item']} key={item.title}>
                 <div>{item.counter ? <span>{item.counter}</span> : null}</div>
                 {item.icon}
                 <p>{item.title}</p>
-              </Link>
-            </div>
+              </div>
+            </Link>
           ))}
         </div>
       </div>

@@ -6,11 +6,11 @@ import Layout from '../apps/client/pages/Layout'
 
 export default function VendorRoutes() {
   return (
-    <Layout>
-      <Routes>
+    <Routes>
+      <Route path="/" element={<Layout />}>
         <Route index element={<ClientMainPage />} />
-        <Route path="/cart" element={<OrdersPage />} />
-      </Routes>
-    </Layout>
+        <Route path="cart" element={<OrdersPage />} />
+      </Route>
+    </Routes>
   )
 }

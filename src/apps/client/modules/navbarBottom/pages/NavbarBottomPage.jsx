@@ -19,23 +19,23 @@ export default function NavbarBottomPage() {
     {
       icon: <RestaurantMenuOutlinedIcon sx={options} />,
       title: 'Меню',
-      link: `${venUrl}${res}/`,
+      link: '..',
     },
     {
       icon: <ShoppingCartOutlinedIcon sx={options} />,
       title: 'Корзина',
-      link: `${venUrl}${res}/cart`,
+      link: `cart`,
       counter: items.length,
     },
     {
       icon: <DeliveryDiningOutlinedIcon sx={options} />,
       title: 'Заказы',
-      link: `${venUrl}${res}/orders`,
+      link: `orders`,
     },
     {
       icon: <AssignmentIndOutlinedIcon sx={options} />,
       title: 'Профиль',
-      link: `${venUrl}${res}/profile`,
+      link: `profile`,
     },
   ]
   return (
