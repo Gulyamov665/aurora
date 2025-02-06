@@ -9,6 +9,21 @@ declare module '*.module.scss' {
 }
 
 declare module '*.png' {
-  const value: string 
+  const value: string
+  export default value
+}
+
+declare module '*.css' {
+  const value: string
+  export default value
+}
+
+declare module '*/css' {
+  const value: string
+  export default value
+}
+
+declare module 'swiper/css/pagination' {
+  const value: string
   export default value
 }

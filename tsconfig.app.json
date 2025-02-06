@@ -24,7 +24,13 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    "baseUrl": "./", // Указывает корневую директорию для алиасов
+    "paths": {
+      "@store/*": ["src/store/*"], // Алиас для store
+      "@/*": ["src/*"] // Алиас для корня src
+    }
   },
-  "include": ["src"]
+  "include": ["src", "global.d.ts", "vite-env.d.ts"]
 }

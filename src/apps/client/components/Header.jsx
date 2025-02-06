@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { Link } from 'react-router-dom'
 import header from '../static/Header.module.scss'
-import logo from '../../../assets/transparent_logo.png'
+// import logo from '../../../assets/transparent_logo.png'
 import newYearLogo from '../../../assets/transparent_logo_new_year.png'
 import { useSelector } from 'react-redux'
 import LocationDropdown from './LocationDropdown'
 import userIcon from '../../../assets/user-icon.png'
+
 
 const Header = () => {
   const [authTokens, setAuthTokens] = useState(() =>
