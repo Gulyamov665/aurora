@@ -10,6 +10,8 @@ export default function VendorRoutes() {
       <Route path="/" element={<Layout />}>
         <Route index element={<ClientMainPage />} />
         <Route path="cart" element={<OrdersPage />} />
+        <Route path="orders" element={<OrdersPage />} />
+        <Route path="profile" element={<OrdersPage />} />
       </Route>
     </Routes>
   )
