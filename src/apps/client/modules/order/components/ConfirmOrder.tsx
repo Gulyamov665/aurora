@@ -7,6 +7,7 @@ import { useLoadQuery } from '@store/admin/vendorApi'
 import { removeCartItems } from '@store/cartSlice'
 import { RootState } from '@store/index'
 
+
 function ConfirmOrder() {
   const { table, res } = useParams()
   const { items, totalPrice } = useSelector((state: RootState) => state.cart)

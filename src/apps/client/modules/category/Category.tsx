@@ -8,7 +8,7 @@ import Card from "../../components/Card";
 import Loading from "../../components/Loading";
 import CardView from "../../components/CardView";
 import Promo from "../../components/Promo";
-import Navbar from "../../components/Navbar";
+import Navbar from "../navbar/Navbar";
 import Products from "../../components/Products";
 import CartBtn from "../../components/CartBtn";
 
@@ -17,7 +17,7 @@ const Category: FC<CategoryProps> = ({ search }) => {
   const { data: category = [] } = useGetCategoriesQuery(res);
   const { data: menuItems = [], isLoading, isError } = useGetProductsQuery(res);
   const { data: promo = [] } = useGetPromosQuery(res);
-  const sectionRefs = useRef([]);
+  const sectionRefs = useRef<HTMLDivElement[]>([]);
   const rootSection = useRef<HTMLDivElement[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [viewItem, setViewItem] = useState(null);
