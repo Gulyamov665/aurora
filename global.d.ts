@@ -13,6 +13,10 @@ declare module '*.png' {
   export default value
 }
 
+declare module '*.jpg' {
+  const value: string
+  export default value
+}
 declare module '*.css' {
   const value: string
   export default value
@@ -24,6 +28,11 @@ declare module '*/css' {
 }
 
 declare module 'swiper/css/pagination' {
+  const value: string
+  export default value
+}
+
+declare module 'react-currency-format' {
   const value: string
   export default value
 }

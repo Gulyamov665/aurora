@@ -1,9 +1,14 @@
-import React from 'react'
+import { FC } from 'react'
 import CurrencyFormat from 'react-currency-format'
 import RemoveIcon from '@mui/icons-material/Remove'
 import AddIcon from '@mui/icons-material/Add'
+import { OrderProductsProps } from '../types/orderTypes'
 
-export default function OrderProducts({ product, increase, decrease }) {
+const OrderProducts: FC<OrderProductsProps> = ({
+  product,
+  increase,
+  decrease,
+}) => {
   return (
     <div
       className="d-flex justify-content-between align-items-center "
@@ -48,3 +53,5 @@ export default function OrderProducts({ product, increase, decrease }) {
     </div>
   )
 }
+
+export default OrderProducts

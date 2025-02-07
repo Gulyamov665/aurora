@@ -1,15 +1,15 @@
-import React from 'react'
 import CurrencyFormat from 'react-currency-format'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { useSendMessageMutation } from '../../../../../store/user/api/dispatcherApi'
-import { useLoadQuery } from '../../../../../store/admin/vendorApi'
-import { removeCartItems } from '../../../../../store/cartSlice'
+import { useSendMessageMutation } from '@store/user/api/dispatcherApi'
+import { useLoadQuery } from '@store/admin/vendorApi'
+import { removeCartItems } from '@store/cartSlice'
+import { RootState } from '@store/index'
 
 function ConfirmOrder() {
   const { table, res } = useParams()
-  const { items, totalPrice } = useSelector((state) => state.cart)
+  const { items, totalPrice } = useSelector((state: RootState) => state.cart)
   const { data = [] } = useLoadQuery(res)
   const [dispatcher, { isLoading }] = useSendMessageMutation()
   const dispatch = useDispatch()
@@ -51,7 +51,7 @@ function ConfirmOrder() {
           cursor: 'pointer',
           color: '#fff',
           fontWeight: 'bold',
-          fontSize: '18px'
+          fontSize: '18px',
         }}
       >
         <div>
@@ -71,7 +71,10 @@ function ConfirmOrder() {
               ></span>
             </button>
           ) : (
-            <button className={'btnOrderStyle btn-warning'} onClick={handleOrders}>
+            <button
+              className={'btnOrderStyle btn-warning'}
+              onClick={handleOrders}
+            >
               Заказать
             </button>
           )}

@@ -1,9 +1,4 @@
-import React from 'react'
-import {
-  addCartItem,
-  minusItem,
-  removeCartItems,
-} from '../../../../../store/cartSlice'
+import { addCartItem, minusItem, removeCartItems } from '@store/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
@@ -12,9 +7,13 @@ import OrderProducts from './OrderProducts'
 import emptyCart from '../../../../../assets/emptyCard.jpg'
 import Map from '../../map/Maps'
 import styles from '../assets/Orders.module.scss'
+import { RootState } from '@store/index'
+import { ProductType } from '../types/orderTypes'
 
 export default function OrdersList() {
-  const { items } = useSelector((state) => state.cart)
+  const items = useSelector<RootState, ProductType[]>(
+    (state: RootState) => state.cart.items
+  )
   const navigate = useNavigate()
   const dispatch = useDispatch()
 

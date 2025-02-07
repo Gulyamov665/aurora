@@ -3,7 +3,7 @@ import { useLoadQuery } from '../../../store/admin/vendorApi'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Intro from '../components/Intro'
-import Category from '../components/Category'
+import Category from '../modules/category/Category'
 import Loading from '../components/Loading'
 
 function ClientMainPage() {
