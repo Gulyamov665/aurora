@@ -32,7 +32,7 @@ declare module 'swiper/css/pagination' {
   export default value
 }
 
-declare module 'react-currency-format' {
-  const value: string
-  export default value
-}
+// declare module 'react-currency-format' {
+//   const value: string
+//   export default value
+// }
