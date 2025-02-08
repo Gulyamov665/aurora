@@ -1,35 +1,31 @@
-import { addCartItem, minusItem, removeCartItems } from '@store/cartSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import DeleteIcon from '@mui/icons-material/Delete'
-import OrderProducts from './OrderProducts'
-import emptyCart from '../../../../../assets/emptyCard.jpg'
+import { addCartItem, cart, minusItem, removeCartItems } from "@store/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import DeleteIcon from "@mui/icons-material/Delete";
+import OrderProducts from "./OrderProducts";
+import emptyCart from "../../../../../assets/emptyCard.jpg";
 // import Map from '../../map/Maps'
-import styles from '../assets/Orders.module.scss'
-import { RootState } from '@store/index'
-import { ProductType } from '../types/orderTypes'
+import styles from "../assets/Orders.module.scss";
 
 export default function OrdersList() {
-  const items = useSelector<RootState, ProductType[]>(
-    (state: RootState) => state.cart.items
-  )
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const { items } = useSelector(cart);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const removeItems = () => {
-    if (confirm('Удалить все товари из корзины ?')) dispatch(removeCartItems())
-  }
+    if (confirm("Удалить все товари из корзины ?")) dispatch(removeCartItems());
+  };
 
   return (
     <div>
-      <div className={styles['page']}>
-        <div className={styles['buttons-box']}>
+      <div className={styles["page"]}>
+        <div className={styles["buttons-box"]}>
           <div className="mx-3" onClick={() => navigate(-1)}>
-            <ArrowBackIcon sx={{ fontSize: '30px' }} />
+            <ArrowBackIcon sx={{ fontSize: "30px" }} />
           </div>
           {items.length > 0 && (
-            <div onClick={removeItems} style={{ cursor: 'pointer' }}>
+            <div onClick={removeItems} style={{ cursor: "pointer" }}>
               <DeleteIcon />
             </div>
           )}
@@ -47,7 +43,7 @@ export default function OrdersList() {
           </div>
         ) : (
           <div className="text-center">
-            <img src={emptyCart} alt="cart" className={styles['empty-cart']} />
+            <img src={emptyCart} alt="cart" className={styles["empty-cart"]} />
             <p>
               <b>Ваша корзина пока пуста</b>
             </p>
@@ -56,5 +52,5 @@ export default function OrdersList() {
       </div>
       {/* <Map /> */}
     </div>
-  )
+  );
 }

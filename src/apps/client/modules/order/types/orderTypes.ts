@@ -4,7 +4,6 @@ export type ProductType = {
   photo: string
   price: number
   count: number
-
 }
 
 export type OrderProductsProps = {
