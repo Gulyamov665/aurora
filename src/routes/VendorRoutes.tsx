@@ -1,8 +1,7 @@
-import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import ClientMainPage from '../apps/client/pages/ClientMainPage'
+import ClientMainPage from '../apps/client/pages/ClientMainPage.jsx'
 import OrdersPage from '../apps/client/modules/order/pages/OrdersPage.tsx'
-import Layout from '../apps/client/pages/Layout'
+import Layout from '../apps/client/pages/Layout.jsx'
 
 export default function VendorRoutes() {
   return (
