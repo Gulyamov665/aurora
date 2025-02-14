@@ -1,8 +1,8 @@
 import styles from "../../auth/assets/AuthForm.module.scss";
 import { Link } from "react-router-dom";
-import { RegisterPageType } from "../types";
+import { RegisterType } from "../types";
 
-export default function Register({ register, handleSubmit, state, onSubmit }: RegisterPageType) {
+export default function Register({ register, handleSubmit, state, onSubmit }: RegisterType) {
   return (
     <form className="text-center" onSubmit={handleSubmit(onSubmit)}>
       <h1>Регистрация</h1>
@@ -23,7 +23,9 @@ export default function Register({ register, handleSubmit, state, onSubmit }: Re
         </Link>
       </p>
 
-      <button className={styles["form-button"]}>Продолжить</button>
+      <button type="submit" className={styles["form-button"]}>
+        Продолжить
+      </button>
     </form>
   );
 }

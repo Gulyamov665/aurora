@@ -10,7 +10,6 @@ import Auth from "./apps/client/modules/auth/pages/Auth";
 
 function App() {
   const { state } = useLocation();
-  
 
   return (
     <>

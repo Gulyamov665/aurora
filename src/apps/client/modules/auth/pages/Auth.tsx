@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styles from "../assets/AuthForm.module.scss";
 import Login from "../components/Login";
@@ -11,7 +11,7 @@ const Auth: FC<AuthType> = ({ state }) => {
 
   const navigate = useNavigate();
 
-  const submit = (data: DataType): void => {
+  const submit: SubmitHandler<DataType> = (data): void => {
     console.log(data);
   };
   return (
@@ -21,7 +21,7 @@ const Auth: FC<AuthType> = ({ state }) => {
         sx={{ fontSize: "30px", cursor: "pointer", marginBottom: "20px" }}
       />
       <div className={`${styles["form-box"]} card`}>
-        <Login register={register} handleSubmit={handleSubmit(submit)} state={state} />
+        <Login register={register} handleSubmit={handleSubmit} submit={submit} state={state} />
       </div>
     </div>
   );

@@ -4,8 +4,9 @@ import styles from "../../auth/assets/AuthForm.module.scss";
 import Register from "../components/Register";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { FormValuesType, RegistrationPageType } from "../types";
+import { FC } from "react";
 
-export default function RegistrationPage({ state }: RegistrationPageType) {
+const RegistrationPage: FC<RegistrationPageType> = ({ state }) => {
   const { register, handleSubmit } = useForm<FormValuesType>();
   const navigate = useNavigate();
 
@@ -24,4 +25,6 @@ export default function RegistrationPage({ state }: RegistrationPageType) {
       </div>
     </div>
   );
-}
+};
+
+export default RegistrationPage;
