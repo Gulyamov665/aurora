@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { calcTotalPrice } from "../Utils/calc";
 import { CartType } from "./user/types";
 import { RootState } from "@store/index";
-import { ProductType } from "@/apps/client/modules/order/types/orderTypes";
+import { ProductType } from "@/apps/client/features/order/types/orderTypes";
 
 const initialState: CartType = {
   totalPrice: 0,

@@ -5,8 +5,8 @@ import Login from "./apps/admin/pages/Login";
 import "react-toastify/dist/ReactToastify.css";
 import AdminRoutes from "./routes/AdminRoutes";
 import VendorRoutes from "./routes/VendorRoutes";
-import RegistrationPage from "./apps/client/modules/registration/pages/RegistrationPage";
-import Auth from "./apps/client/modules/auth/pages/Auth";
+import RegistrationPage from "./apps/client/features/registration/pages/RegistrationPage";
+import Auth from "./apps/client/features/auth/pages/Auth";
 
 function App() {
   const { state } = useLocation();

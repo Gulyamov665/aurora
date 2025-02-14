@@ -1,4 +1,4 @@
-import { ProductType } from "@/apps/client/modules/order/types/orderTypes";
+import { ProductType } from "@/apps/client/features/order/types/orderTypes";
 
 export type CartType = {
   totalPrice: number;

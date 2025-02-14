@@ -1,6 +1,6 @@
-import Header from '../components/Header'
-import { Outlet } from 'react-router-dom'
-import NavbarBottomPage from '../modules/navbarBottom/pages/NavbarBottomPage'
+import Header from "../components/Header";
+import { Outlet } from "react-router-dom";
+import NavbarBottomPage from "../features/navbarBottom/pages/NavbarBottomPage";
 
 export default function Layout() {
   return (
@@ -11,5 +11,5 @@ export default function Layout() {
       </div>
       <NavbarBottomPage />
     </>
-  )
+  );
 }
