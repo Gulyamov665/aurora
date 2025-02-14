@@ -6,9 +6,13 @@ export type FormValuesType = {
   phone_number: string;
 };
 
-export type RegistrationPageType = {
+export type RegisterPageType = {
   register: UseFormRegister<FormValuesType>;
   handleSubmit: UseFormHandleSubmit<FormValuesType>;
-  state: { from: string };
   onSubmit: SubmitHandler<FormValuesType>;
+  state: { from: string };
+};
+
+export type RegistrationPageType = {
+  state: { from: string };
 };

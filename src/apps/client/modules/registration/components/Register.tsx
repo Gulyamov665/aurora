@@ -1,8 +1,8 @@
 import styles from "../../auth/assets/AuthForm.module.scss";
 import { Link } from "react-router-dom";
-import { RegistrationPageType } from "../types";
+import { RegisterPageType } from "../types";
 
-export default function Register({ register, handleSubmit, state, onSubmit }: RegistrationPageType) {
+export default function Register({ register, handleSubmit, state, onSubmit }: RegisterPageType) {
   return (
     <form className="text-center" onSubmit={handleSubmit(onSubmit)}>
       <h1>Регистрация</h1>
