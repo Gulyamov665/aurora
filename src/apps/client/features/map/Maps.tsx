@@ -3,7 +3,7 @@ import { GoogleMap, Libraries, LoadScriptNext, MarkerF } from "@react-google-map
 
 const containerStyle = {
   width: "100%",
-  height: "500px",
+  height: "100dvh",
 };
 
 const defaultCenter = {
@@ -69,38 +69,40 @@ function Map() {
   console.log(mapCenter);
 
   return (
-    <LoadScriptNext googleMapsApiKey={apiKey} libraries={libraries}>
-      <div style={{ position: "relative" }}>
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={currentPosition}
-          zoom={16}
-          onLoad={handleMapLoad}
-          options={mapOptions}
-          onCenterChanged={handleMapCenterChanged}
-          onDragEnd={() => console.log("onDragEnd", mapCenter)}
-        >
-          <MarkerF position={mapCenter} />
-        </GoogleMap>
-        <button
-          onClick={handleGeolocation}
-          style={{
-            position: "absolute",
-            top: "10px",
-            left: "10px",
-            zIndex: 1000,
-            padding: "10px",
-            background: "#e7e7e7",
-            borderRadius: "5px",
-            cursor: "pointer",
-            border: "none",
-            boxShadow: "0px 0px 10px 0px gray",
-          }}
-        >
-          Определить местоположение
-        </button>
-      </div>
-    </LoadScriptNext>
+    <div>
+      <LoadScriptNext googleMapsApiKey={apiKey} libraries={libraries}>
+        <div style={{ position: "relative" }}>
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={currentPosition}
+            zoom={16}
+            onLoad={handleMapLoad}
+            options={mapOptions}
+            onCenterChanged={handleMapCenterChanged}
+            onDragEnd={() => console.log("onDragEnd", mapCenter)}
+          >
+            <MarkerF position={mapCenter} />
+          </GoogleMap>
+          <button
+            onClick={handleGeolocation}
+            style={{
+              position: "absolute",
+              top: "10px",
+              left: "10px",
+              zIndex: 1000,
+              padding: "10px",
+              background: "#e7e7e7",
+              borderRadius: "5px",
+              cursor: "pointer",
+              border: "none",
+              boxShadow: "0px 0px 10px 0px gray",
+            }}
+          >
+            Определить местоположение
+          </button>
+        </div>
+      </LoadScriptNext>
+    </div>
   );
 }
 

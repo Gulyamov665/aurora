@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-import ClientMainPage from "../apps/client/pages/ClientMainPage.jsx";
-import OrdersPage from "../apps/client/features/order/pages/OrdersPage.tsx";
-import Layout from "../apps/client/pages/Layout.jsx";
+import Map from "@/apps/client/features/map/Maps.tsx";
+import Layout from "@/apps/client/pages/Layout.tsx";
+import OrdersPage from "@/apps/client/features/order/pages/OrdersPage.js";
+import ClientMainPage from "@/apps/client/pages/ClientMainPage";
 
 export default function VendorRoutes() {
   return (
@@ -11,6 +12,7 @@ export default function VendorRoutes() {
         <Route path="cart" element={<OrdersPage />} />
         <Route path="orders" element={<OrdersPage />} />
         <Route path="profile" element={<OrdersPage />} />
+        <Route path="maps" element={<Map />} />
       </Route>
     </Routes>
   );

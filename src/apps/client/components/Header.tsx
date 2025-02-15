@@ -3,10 +3,10 @@ import { jwtDecode, JwtPayload } from "jwt-decode";
 import { Link } from "react-router-dom";
 import header from "../static/Header.module.scss";
 // import logo from '../../../assets/transparent_logo.png'
-import newYearLogo from "../../../assets/transparent_logo_new_year.png";
+import newYearLogo from "@/assets/transparent_logo_new_year.png";
 
 import LocationDropdown from "./LocationDropdown";
-import userIcon from "../../../assets/user-icon.png";
+import userIcon from "@/assets/user-icon.png";
 
 interface CustomJwtPayload extends JwtPayload {
   vendor: string;
@@ -38,9 +38,11 @@ const Header: FC = () => {
     <header className={`${header.header_backgroud} py-2 mb-2 header_backgroud`}>
       <div className={`${header.header_container} container`}>
         {!vendor ? (
-          <div>
-            <img src={newYearLogo} style={{ width: 32 }} alt="logo" />
-          </div>
+          <Link to={"."}>
+            <div>
+              <img src={newYearLogo} style={{ width: 32 }} alt="logo" />
+            </div>
+          </Link>
         ) : (
           <div>
             <Link to={`/admin/${vendor}/menu`}>

@@ -1,5 +1,6 @@
 import { useState, FC } from "react";
 import { Dropdown } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 type LocationType = {
   id: number;
@@ -12,8 +13,12 @@ type LocationDropdownProps = {
 
 const LocationDropdown: FC<LocationDropdownProps> = ({ items }) => {
   const [selectedItem, setSelectedItem] = useState("");
+  const navigate = useNavigate();
 
   const handleSelect = (eventKey: string | null) => {
+    if (eventKey === "newLocation") {
+      return navigate("maps");
+    }
     if (eventKey) setSelectedItem(eventKey);
     console.log(`Selected item: ${eventKey}`);
   };
@@ -24,13 +29,14 @@ const LocationDropdown: FC<LocationDropdownProps> = ({ items }) => {
         {selectedItem || "Указать локацию"}
       </Dropdown.Toggle>
 
-      <Dropdown.Menu className="w-50">
+      <Dropdown.Menu className="w-100">
         {items.map((item) => (
           <Dropdown.Item key={item.id} eventKey={item.id}>
             {item.name}
           </Dropdown.Item>
         ))}
-        <Dropdown.Item>Something else</Dropdown.Item>
+
+        <Dropdown.Item eventKey={"newLocation"}>Добавить локацию</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );

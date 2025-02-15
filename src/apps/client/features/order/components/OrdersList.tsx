@@ -4,9 +4,8 @@ import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import OrderProducts from "./OrderProducts";
-import emptyCart from "../../../../../assets/emptyCard.jpg";
+import emptyCart from "@/assets/emptyCard.jpg";
 import styles from "../assets/Orders.module.scss";
-import Map from "../../map/Maps";
 
 export default function OrdersList() {
   const { items } = useSelector(cart);
@@ -50,7 +49,6 @@ export default function OrdersList() {
           </div>
         )}
       </div>
-      <Map />
     </div>
   );
 }
