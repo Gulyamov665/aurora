@@ -1,53 +1,59 @@
-import React, { useCallback, useRef, useState } from 'react'
-import { GoogleMap, LoadScriptNext, MarkerF } from '@react-google-maps/api'
-
+import { useCallback, useRef, useState } from "react";
+import { GoogleMap, Libraries, LoadScriptNext, MarkerF } from "@react-google-maps/api";
 
 const containerStyle = {
-  width: '100%',
-  height: '500px',
-}
+  width: "100%",
+  height: "500px",
+};
 
 const defaultCenter = {
   lat: 39.7467565,
   lng: 64.4111207,
-}
+};
 
-const libraries = ['places']
+const libraries: Libraries = ["places"];
 
 function Map() {
-  const [currentPosition, setCurrentPosition] = useState(defaultCenter)
-  const [mapCenter, setMapCenter] = useState(defaultCenter)
-  const mapRef = useRef(null)
+  const [currentPosition, setCurrentPosition] = useState(defaultCenter);
+  const [mapCenter, setMapCenter] = useState(defaultCenter);
+  const mapRef = useRef<google.maps.Map>(null);
 
-  const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+  const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
   const handleMapCenterChanged = useCallback(() => {
     if (mapRef.current) {
-      const newCenter = mapRef.current.getCenter()
-      setMapCenter({
-        lat: newCenter.lat(),
-        lng: newCenter.lng(),
-      })
+      const newCenter = mapRef.current.getCenter();
+
+      if (newCenter) {
+        setMapCenter({
+          lat: newCenter.lat(),
+          lng: newCenter.lng(),
+        });
+      }
     }
-  }, [])
+  }, []);
+
+  const handleMapLoad = (map: google.maps.Map) => {
+    mapRef.current = map;
+  };
 
   const handleGeolocation = () => {
     if (!navigator.geolocation) {
-      alert('Ваш браузер не поддерживает Geolocation API.')
-      return
+      alert("Ваш браузер не поддерживает Geolocation API.");
+      return;
     }
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const { latitude, longitude } = position.coords
-        setCurrentPosition({ lat: latitude, lng: longitude })
-        console.log(currentPosition)
+        const { latitude, longitude } = position.coords;
+        setCurrentPosition({ lat: latitude, lng: longitude });
+        console.log(currentPosition);
       },
       (error) => {
-        alert('Не удалось получить местоположение: ' + error.message)
+        alert("Не удалось получить местоположение: " + error.message);
       }
-    )
-  }
+    );
+  };
 
   const mapOptions = {
     scrollwheel: true, // Включить скролл колесиком мыши
@@ -57,46 +63,45 @@ function Map() {
     streetViewControl: false, // Отключаем уличный вид для мобильных устройств
     fullscreenControl: false, // Отключаем полноэкранный режим на мобильных устройствах
     disableDoubleClickZoom: true, // Отключаем зумирование на двойной клик
-    gestureHandling: 'greedy',
-  }
+    gestureHandling: "greedy",
+  };
 
-  console.log(mapCenter)
+  console.log(mapCenter);
 
   return (
     <LoadScriptNext googleMapsApiKey={apiKey} libraries={libraries}>
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: "relative" }}>
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={currentPosition}
           zoom={16}
-          onLoad={(map) => (mapRef.current = map)}
+          onLoad={handleMapLoad}
           options={mapOptions}
           onCenterChanged={handleMapCenterChanged}
-          onDragEnd={() => console.log('onDragEnd',mapCenter)}
+          onDragEnd={() => console.log("onDragEnd", mapCenter)}
         >
           <MarkerF position={mapCenter} />
         </GoogleMap>
         <button
           onClick={handleGeolocation}
           style={{
-            position: 'absolute',
-            top: '10px',
-            left: '10px',
+            position: "absolute",
+            top: "10px",
+            left: "10px",
             zIndex: 1000,
-            padding: '10px',
-            background: '#e7e7e7',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            border: 'none',
-            boxShadow: '0px 0px 10px 0px gray'
-            
+            padding: "10px",
+            background: "#e7e7e7",
+            borderRadius: "5px",
+            cursor: "pointer",
+            border: "none",
+            boxShadow: "0px 0px 10px 0px gray",
           }}
         >
           Определить местоположение
         </button>
       </div>
     </LoadScriptNext>
-  )
+  );
 }
 
-export default Map
+export default Map;
