@@ -1,4 +1,4 @@
-import { addCartItem, cart, minusItem, removeCartItems } from "@store/cartSlice";
+import { cart, removeCartItems } from "@store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -6,11 +6,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import OrderProducts from "./OrderProducts";
 import emptyCart from "@/assets/emptyCard.jpg";
 import styles from "../assets/Orders.module.scss";
+import { useActions } from "@/hooks/useActions";
 
 export default function OrdersList() {
   const { items } = useSelector(cart);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { addCartItem, minusItem } = useActions();
 
   const removeItems = () => {
     if (confirm("Удалить все товари из корзины ?")) dispatch(removeCartItems());
@@ -35,8 +37,8 @@ export default function OrdersList() {
               <OrderProducts
                 product={product}
                 key={product.id}
-                increase={() => dispatch(addCartItem(product))}
-                decrease={() => dispatch(minusItem(product))}
+                increase={() => addCartItem(product)}
+                decrease={() => minusItem(product)}
               />
             ))}
           </div>
