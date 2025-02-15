@@ -13,7 +13,7 @@ interface CustomJwtPayload extends JwtPayload {
 }
 
 const Header: FC = () => {
-  const [authTokens, setAuthTokens] = useState(() => {
+  const [authTokens] = useState(() => {
     const authTokens = localStorage.getItem("authTokens");
     return authTokens ? JSON.parse(authTokens) : null;
   });
