@@ -1,8 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import appReducer from "./appSlice";
-import vendorReducer from "./admin/slices/vendorSlice";
 import { productsApi } from "./admin/productsApi";
 import { categoriesApi } from "./admin/categoryApi";
 import { tokenApi } from "./tokenApi";
@@ -12,14 +9,21 @@ import { productsApiUser } from "./user/api/productsApi";
 import { promosApiUser } from "./user/api/promoApi";
 import { qrCodeApi } from "./admin/qrCode";
 import { vendorApi } from "./admin/vendorApi";
-import cartSlice from "./cartSlice";
 import { dispatcher } from "./user/api/dispatcherApi";
-// import listenerMiddleware from "./listenerMidd";
+import { userRegistration } from "./user/api/userRegistrationApi";
+import cartSlice from "./cartSlice";
+import storage from "redux-persist/lib/storage";
+import appReducer from "./appSlice";
+import vendorReducer from "./admin/slices/vendorSlice";
+import authState from "./user/slices/authSlice";
+
+import registrationMiddleware from "./registrationMiddleware";
 
 const rootReducer = combineReducers({
   cart: cartSlice,
   modals: appReducer,
   vendor: vendorReducer,
+  authState,
   [productsApi.reducerPath]: productsApi.reducer,
   [categoriesApi.reducerPath]: categoriesApi.reducer,
   [tokenApi.reducerPath]: tokenApi.reducer,
@@ -30,6 +34,7 @@ const rootReducer = combineReducers({
   [qrCodeApi.reducerPath]: qrCodeApi.reducer,
   [vendorApi.reducerPath]: vendorApi.reducer,
   [dispatcher.reducerPath]: dispatcher.reducer,
+  [userRegistration.reducerPath]: userRegistration.reducer,
 });
 
 const persistConfig = {
@@ -58,8 +63,9 @@ const store = configureStore({
       promosApiUser.middleware,
       qrCodeApi.middleware,
       vendorApi.middleware,
-      dispatcher.middleware
-      // listenerMiddleware,
+      dispatcher.middleware,
+      registrationMiddleware,
+      userRegistration.middleware
     ),
 });
 

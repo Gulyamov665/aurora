@@ -1,18 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap");
 body {
   margin: 0;
   /* background-color: #e6e4e4 !important; */
   background-color: #ffffff !important;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .modal-open {
@@ -37,9 +35,8 @@ code {
 .dropdownStyle {
   box-shadow: 0px 0px 10px 0px rgb(182, 182, 182);
 
-  width: 300px ;
+  width: 300px;
 }
-
 
 /* ######################################################### */
 /* ################---INTRO styless ---#################### */
@@ -119,7 +116,7 @@ code {
 }
 
 .texts {
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   font-weight: 600;
   /* margin-left: 80px; */
 }
@@ -137,23 +134,56 @@ code {
 
 .card {
   border-radius: 15px 15px 25px 25px !important;
-  /* border: 1px solid lavender; */
-  margin: 10px 10px 10px 0;
-  /* box-shadow: 5px 5px 15px 5px rgba(230, 230, 250, 1); */
   box-shadow: 5px 5px 15px 5px rgb(223, 221, 221);
   margin-bottom: 30px;
 }
-
+.image-container {
+  position: relative;
+  width: 100%;
+  height: auto; /* Фиксированная высота для контейнера */
+  border-radius: 15px 15px 0 0;
+  overflow: hidden;
+}
 .card__image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 15px 15px 0 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.skeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 15px 15px 0 0;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* .card__image {
   width: 100%;
   border-radius: 15px 15px 0 0;
   height: 180px;
   object-fit: cover;
   margin: 0 auto;
-}
+  transition: opacity 0.3s ease-in-out;
+} */
 
 .card__info {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding: 10px 10px 0 10px;
 }
 
@@ -253,8 +283,6 @@ code {
     border-radius: 22px;
   }
 
-
-
   .grey {
     background-color: #9c9b9b;
     font-weight: 700;
@@ -286,14 +314,17 @@ code {
   font-weight: 400 !important;
   color: #21201f !important;
 }
+
+.card-btn-order:hover {
+  background-color: rgb(240, 238, 235) !important;
+}
 @media (min-width: 320px) and (max-width: 425px) {
-    .dropdownStyle {
-      width: 220px !important;
-      font-size: 13px !important;
-    }
+  .dropdownStyle {
+    width: 220px !important;
+    font-size: 13px !important;
+  }
 }
 @media (min-width: 320px) and (max-width: 480px) {
-
   .dropdownStyle {
     width: 170px;
     font-size: 12px !important;
@@ -476,12 +507,10 @@ code {
   margin-right: 5px;
 }
 
-
-
 .min-vh-100dvh {
   min-height: 100dvh;
 }
-.venLayout{
+.venLayout {
   margin-bottom: 80px;
 }
 
@@ -571,7 +600,7 @@ code {
 
     .login_text {
       color: #ffffff;
-      font-family: 'Montserrat', sans-serif;
+      font-family: "Montserrat", sans-serif;
       font-size: large;
     }
 

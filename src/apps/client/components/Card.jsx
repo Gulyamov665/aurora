@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { addCartItem } from "../../../store/cartSlice";
 import { useDispatch } from "react-redux";
 
 export default function Card(props) {
+  const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch();
 
   const addToCart = (event) => {
@@ -18,7 +19,17 @@ export default function Card(props) {
   return (
     <>
       <div className="card">
-        <img className="card__image" loading="lazy" src={props.photo} alt={props.name} />
+        {!isLoaded && <div className="skeleton" />}
+
+        <img
+          className="card__image"
+          loading="lazy"
+          src={props.photo}
+          alt={props.name}
+          onLoad={() => setIsLoaded(true)}
+          style={{ opacity: isLoaded ? 1 : 0 }}
+        />
+
         <div className="card__info">
           <div className="car__info--title">
             <p className="card__info--price">

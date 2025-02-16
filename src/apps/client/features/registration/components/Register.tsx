@@ -1,31 +1,24 @@
-import styles from "../../auth/assets/AuthForm.module.scss";
-import { Link } from "react-router-dom";
+import { FC } from "react";
 import { RegisterType } from "../types";
+import RegCodeStep from "./RegCodeStep";
+import RegForm from "./RegDataStep";
 
-export default function Register({ register, handleSubmit, state, onSubmit }: RegisterType) {
+const Register: FC<RegisterType> = ({ register, handleSubmit, state, onSubmit, regStep, codeRequestSubmit }) => {
   return (
-    <form className="text-center" onSubmit={handleSubmit(onSubmit)}>
-      <h1>Регистрация</h1>
-      <div className="mt-3">
-        <input type="text" id="name" {...register("name")} placeholder="Имя" />
-      </div>
-      <div className="mt-3">
-        <input type="text" id="last_name" {...register("last_name")} placeholder="Фамилия" />
-      </div>
-      <div className="mt-3">
-        <input type="text" className="" id="phone_number" {...register("phone_number")} placeholder="Номер телефона" />
-      </div>
+    <>
+      {regStep === 0 && <RegForm register={register} handleSubmit={handleSubmit} state={state} onSubmit={onSubmit} />}
 
-      <p>
-        Уже есть аккаунт ?{" "}
-        <Link to="/login" state={state}>
-          <span>Войти</span>
-        </Link>
-      </p>
+      {regStep === 1 && (
+        <RegCodeStep register={register} handleSubmit={handleSubmit} codeRequestSubmit={codeRequestSubmit} />
+      )}
 
-      <button type="submit" className={styles["form-button"]}>
-        Продолжить
-      </button>
-    </form>
+      {regStep === 2 && (
+        <div className="text-center">
+          <h2>Вы успешно зарегистрировались</h2>
+        </div>
+      )}
+    </>
   );
-}
+};
+
+export default Register;
