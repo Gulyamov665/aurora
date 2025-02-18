@@ -1,4 +1,11 @@
-import { UseFormRegister, UseFormHandleSubmit, SubmitHandler } from "react-hook-form";
+import {
+  UseFormRegister,
+  UseFormHandleSubmit,
+  SubmitHandler,
+  Control,
+  UseFormStateReturn,
+  UseFormTrigger,
+} from "react-hook-form";
 
 export type FormValuesType = {
   username: string;
@@ -21,15 +28,13 @@ export type RegDataType = {
   register: UseFormRegister<FormValuesType>;
   handleSubmit: UseFormHandleSubmit<FormValuesType>;
   onSubmit: SubmitHandler<FormValuesType>;
+  control: Control<FormValuesType>;
+  formState: UseFormStateReturn<FormValuesType>;
+  trigger: UseFormTrigger<FormValuesType>;
   state: { from: string };
 };
 export type RegisterType = {
-  register: UseFormRegister<any>;
-  handleSubmit: UseFormHandleSubmit<any>;
-  onSubmit: SubmitHandler<FormValuesType>;
-  codeRequestSubmit: SubmitHandler<RequestFormValuesType>;
   state: { from: string };
-  regStep: number;
 };
 
 export type RegistrationPageType = {

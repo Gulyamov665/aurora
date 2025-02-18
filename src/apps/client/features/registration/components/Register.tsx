@@ -1,15 +1,44 @@
 import { FC } from "react";
-import { RegisterType } from "../types";
+import { FormValuesType, RegisterType, RequestFormValuesType } from "../types";
+import { useCodeRequestMutation, useRegistrationMutation } from "@store/user/api/userRegistrationApi";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { authState } from "@store/user/slices/authSlice";
 import RegCodeStep from "./RegCodeStep";
 import RegForm from "./RegDataStep";
 
-const Register: FC<RegisterType> = ({ register, handleSubmit, state, onSubmit, regStep, codeRequestSubmit }) => {
+const Register: FC<RegisterType> = ({ state }) => {
+  const { register, handleSubmit, control, formState, trigger } = useForm<FormValuesType>({ mode: "all" });
+  const { register: codeRegister, handleSubmit: codeSubmit } = useForm<RequestFormValuesType>();
+  const [registration] = useRegistrationMutation();
+  const [codeRequest] = useCodeRequestMutation();
+  const { regStep, userId } = useSelector(authState);
+
+  const submit: SubmitHandler<FormValuesType> = async (data) => {
+    const phone = data.phone.replace(/\s/g, "");
+
+    await registration({ ...data, phone });
+  };
+
+  const codeRequestSubmit: SubmitHandler<RequestFormValuesType> = async (data) => {
+    await codeRequest({ id: userId, code: data });
+  };
   return (
     <>
-      {regStep === 0 && <RegForm register={register} handleSubmit={handleSubmit} state={state} onSubmit={onSubmit} />}
+      {regStep === 0 && (
+        <RegForm
+          register={register}
+          handleSubmit={handleSubmit}
+          state={state}
+          onSubmit={submit}
+          control={control}
+          formState={formState}
+          trigger={trigger}
+        />
+      )}
 
       {regStep === 1 && (
-        <RegCodeStep register={register} handleSubmit={handleSubmit} codeRequestSubmit={codeRequestSubmit} />
+        <RegCodeStep register={codeRegister} handleSubmit={codeSubmit} codeRequestSubmit={codeRequestSubmit} />
       )}
 
       {regStep === 2 && (
