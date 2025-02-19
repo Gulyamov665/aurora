@@ -5,10 +5,10 @@ export type ProductType = {
   price: number;
   count: number;
   description?: string;
-  is_active: boolean;
-  restaurant: number;
-  availability: boolean;
-  category: number;
+  is_active?: boolean;
+  restaurant?: number;
+  availability?: boolean;
+  category?: number;
 };
 
 export type OrderProductsProps = {
