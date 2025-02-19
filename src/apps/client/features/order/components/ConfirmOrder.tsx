@@ -1,4 +1,4 @@
-import CurrencyFormat from "react-currency-format";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -55,7 +55,7 @@ function ConfirmOrder() {
         }}
       >
         <div>
-          <CurrencyFormat value={totalPrice} displayType={"text"} thousandSeparator={" "} suffix={" Сум"} />{" "}
+          {/* <CurrencyFormat value={totalPrice} displayType={"text"} thousandSeparator={" "} suffix={" Сум"} />{" "} */}
         </div>
         <div>
           {isLoading ? (
