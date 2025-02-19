@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
-    "@types/react": "^18.0.0",
+    "@types/react": "^19.0.0",
     "@types/react-currency-format": "^1.0.4",
     "@types/react-dom": "^19.0.3",
     "@types/react-input-mask": "^3.0.6",

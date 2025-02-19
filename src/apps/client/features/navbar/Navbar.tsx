@@ -2,14 +2,14 @@ import { useState, useEffect, useRef, FC } from "react";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import { Navigation, FreeMode } from "swiper/modules";
 import { useObserver } from "../../../../hooks/useObserver";
-import { intersectionScrollSpyFunc } from "../../../../Utils/scrollSpy";
+import { intersectionScrollSpyFunc } from "../../../../Utils/scrollSpy.ts";
 import { NavbarProps } from "./types";
 
 const Navbar: FC<NavbarProps> = ({ sectionRefs, category, rootRef }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const navLinks = useRef<HTMLAnchorElement[]>([]);
   const entries = useObserver(sectionRefs, {
-    root: rootRef.current[0],
+    root: rootRef && rootRef.current[0],
     rootMargin: "-50% 0px -50% 0px",
   });
 
