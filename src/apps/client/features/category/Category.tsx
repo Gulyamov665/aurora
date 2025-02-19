@@ -57,7 +57,16 @@ const Category: FC<CategoryProps> = ({ search }) => {
             .filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
             .map((searchItem) => (
               <div key={searchItem.id} onClick={() => handleView(searchItem)}>
-                <Card id={searchItem.id} photo={searchItem.photo} name={searchItem.name} price={searchItem.price} />
+                <Card
+                  id={searchItem.id}
+                  photo={searchItem.photo}
+                  name={searchItem.name}
+                  price={searchItem.price}
+                  is_active={searchItem.is_active}
+                  restaurant={searchItem.restaurant}
+                  availability={searchItem.availability}
+                  category={searchItem.category}
+                />
               </div>
             ))
         ) : (

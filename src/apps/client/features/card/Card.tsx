@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { CardType, CartItem } from "./types";
 import CurrencyFormat from "react-currency-format";
 
-const Card: FC<CardType> = ({ id, photo, name, price }) => {
+const Card: FC<CardType> = ({ id, photo, name, price, is_active, restaurant, availability, category }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch();
 
@@ -15,6 +15,10 @@ const Card: FC<CardType> = ({ id, photo, name, price }) => {
       photo,
       name,
       price,
+      is_active,
+      restaurant,
+      availability,
+      category,
       count: 1,
     };
     dispatch(addCartItem(cartItem));

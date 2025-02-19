@@ -37,6 +37,10 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
                               photo={filteredObj.photo}
                               name={filteredObj.name}
                               price={filteredObj.price}
+                              is_active={filteredObj.is_active}
+                              restaurant={filteredObj.restaurant}
+                              availability={filteredObj.availability}
+                              category={filteredObj.category}
                             />
                           </div>
                         )
