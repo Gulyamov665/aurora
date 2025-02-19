@@ -9,7 +9,7 @@ import Loading from "../../components/Loading";
 import CardView from "../../components/CardView";
 import Promo from "../../components/Promo";
 import Navbar from "../navbar/Navbar";
-import Products from "../../components/Products";
+import Products from "../products/Products";
 import CartBtn from "../../components/CartBtn";
 
 const Category: FC<CategoryProps> = ({ search }) => {

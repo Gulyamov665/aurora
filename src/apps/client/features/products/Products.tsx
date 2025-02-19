@@ -1,6 +1,6 @@
 import { FC } from "react";
-import Card from "../features/card/Card";
-import { ProductsProps } from "../features/products/types";
+import Card from "../card/Card";
+import { ProductsProps } from "./types";
 
 const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleView }) => {
   return (

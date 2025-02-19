@@ -1,11 +1,10 @@
 import { useState, useEffect, FC } from "react";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 import { Link } from "react-router-dom";
-import header from "../static/Header.module.scss";
+import header from "./assets/Header.module.scss";
 // import logo from '../../../assets/transparent_logo.png'
 import newYearLogo from "@/assets/transparent_logo_new_year.png";
-
-import LocationDropdown from "./LocationDropdown";
+import LocationDropdown from "../../components/LocationDropdown";
 import userIcon from "@/assets/user-icon.png";
 
 interface CustomJwtPayload extends JwtPayload {
