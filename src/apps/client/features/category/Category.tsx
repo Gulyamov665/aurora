@@ -1,9 +1,10 @@
-import { useRef, useState, FC } from "react";
-import { useGetProductsQuery } from "../../../../store/user/api/productsApi";
-import { useGetCategoriesQuery } from "../../../../store/user/api/categoryApi";
-import { useGetPromosQuery } from "../../../../store/user/api/promoApi";
+import { useRef, useState, FC, useCallback, useMemo } from "react";
+import { useGetProductsQuery } from "@/store/user/api/productsApi";
+import { useGetCategoriesQuery } from "@/store/user/api/categoryApi";
+import { useGetPromosQuery } from "@/store/user/api/promoApi";
 import { useParams, Link } from "react-router-dom";
 import { CategoryProps } from "./types";
+import { ProductType } from "./types";
 import Card from "../card/Card";
 import Loading from "../../components/Loading";
 import CardView from "../../components/CardView";
@@ -20,19 +21,23 @@ const Category: FC<CategoryProps> = ({ search }) => {
   const sectionRefs = useRef<HTMLDivElement[]>([]);
   const rootSection = useRef<HTMLDivElement[]>([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [viewItem, setViewItem] = useState(null);
+  const [viewItem, setViewItem] = useState<ProductType | null>(null);
   const [count, setCount] = useState(1);
 
-  const handleView = (item: any) => {
-    setIsOpen(!isOpen);
+  const handleView = useCallback((item: ProductType) => {
+    setIsOpen((prev) => !prev);
     setViewItem(item);
     setCount(1);
-  };
+  }, []);
 
-  const handleViewPromo = (item: any) => {
-    setIsOpen(!isOpen);
+  const handleViewPromo = useCallback((item: ProductType) => {
+    setIsOpen((prev) => !prev);
     setViewItem(item);
-  };
+  }, []);
+
+  const filteredMenuItems = useMemo(() => {
+    return menuItems.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
+  }, [menuItems, search]);
 
   if (isLoading) return <Loading main={true} />;
 
@@ -53,22 +58,11 @@ const Category: FC<CategoryProps> = ({ search }) => {
         }}
       >
         {search ? (
-          menuItems
-            .filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
-            .map((searchItem) => (
-              <div key={searchItem.id} onClick={() => handleView(searchItem)}>
-                <Card
-                  id={searchItem.id}
-                  photo={searchItem.photo}
-                  name={searchItem.name}
-                  price={searchItem.price}
-                  is_active={searchItem.is_active}
-                  restaurant={searchItem.restaurant}
-                  availability={searchItem.availability}
-                  category={searchItem.category}
-                />
-              </div>
-            ))
+          filteredMenuItems.map((searchItem) => (
+            <div key={searchItem.id} onClick={() => handleView(searchItem)}>
+              <Card {...searchItem} />
+            </div>
+          ))
         ) : (
           <Products menuItems={menuItems} category={category} sectionRefs={sectionRefs} handleView={handleView} />
         )}
