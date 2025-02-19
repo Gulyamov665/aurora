@@ -4,7 +4,11 @@ export type ProductType = {
   photo: string;
   price: number;
   count: number;
-  description: string;
+  description?: string;
+  is_active: boolean;
+  restaurant: number;
+  availability: boolean;
+  category: number;
 };
 
 export type OrderProductsProps = {

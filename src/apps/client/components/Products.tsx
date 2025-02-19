@@ -1,13 +1,8 @@
-import Card from './Card'
-import Skeleton from './ContentLoader'
+import { FC } from "react";
+import Card from "../features/card/Card";
+import { ProductsProps } from "../features/products/types";
 
-export default function Products({
-  menuItems,
-  category,
-  sectionRefs,
-  handleView,
-  isLoading,
-}) {
+const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleView }) => {
   return (
     <>
       {menuItems.length > 0 &&
@@ -15,10 +10,12 @@ export default function Products({
           .filter((obj) => obj.is_active)
           .map((item, index) => (
             <div
-              id={index}
+              id={index.toString()}
               className="section"
               key={item.id}
-              ref={(ref) => (sectionRefs.current[index] = ref)}
+              ref={(ref) => {
+                if (ref) sectionRefs.current[index] = ref;
+              }}
             >
               <div className="container">
                 <h2 className="cat_name pt-4">{item.name}</h2>
@@ -35,18 +32,12 @@ export default function Products({
                             key={filteredObj.id}
                             className="col-6 col-sm-6 col-md-4 col-lg-3"
                           >
-                            {!isLoading ? (
-                              <Card
-                                id={filteredObj.id}
-                                photo={filteredObj.photo}
-                                name={filteredObj.name}
-                                desc={filteredObj.description}
-                                price={filteredObj.price}
-                                {...filteredObj}
-                              />
-                            ) : (
-                              <Skeleton />
-                            )}
+                            <Card
+                              id={filteredObj.id}
+                              photo={filteredObj.photo}
+                              name={filteredObj.name}
+                              price={filteredObj.price}
+                            />
                           </div>
                         )
                     )}
@@ -55,5 +46,7 @@ export default function Products({
             </div>
           ))}
     </>
-  )
-}
+  );
+};
+
+export default Products;

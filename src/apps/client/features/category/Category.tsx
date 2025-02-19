@@ -4,7 +4,7 @@ import { useGetCategoriesQuery } from "../../../../store/user/api/categoryApi";
 import { useGetPromosQuery } from "../../../../store/user/api/promoApi";
 import { useParams, Link } from "react-router-dom";
 import { CategoryProps } from "./types";
-import Card from "../../components/Card";
+import Card from "../card/Card";
 import Loading from "../../components/Loading";
 import CardView from "../../components/CardView";
 import Promo from "../../components/Promo";
@@ -57,22 +57,11 @@ const Category: FC<CategoryProps> = ({ search }) => {
             .filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
             .map((searchItem) => (
               <div key={searchItem.id} onClick={() => handleView(searchItem)}>
-                <Card
-                  photo={searchItem.photo}
-                  name={searchItem.name}
-                  desc={searchItem.description}
-                  price={searchItem.price}
-                />
+                <Card id={searchItem.id} photo={searchItem.photo} name={searchItem.name} price={searchItem.price} />
               </div>
             ))
         ) : (
-          <Products
-            menuItems={menuItems}
-            category={category}
-            sectionRefs={sectionRefs}
-            handleView={handleView}
-            isLoading={isLoading}
-          />
+          <Products menuItems={menuItems} category={category} sectionRefs={sectionRefs} handleView={handleView} />
         )}
       </div>
       <CardView item={viewItem} open={isOpen} setIsOpen={setIsOpen} count={count} setCount={setCount} />
