@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 import { ProductType } from "../../category/types";
 
 export type CardType = {
@@ -15,16 +14,16 @@ export type CardType = {
 export type CardViewProps = {
   item: ProductType | null;
   open: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsOpen: (value: boolean) => void;
   count: number;
-  setCount: Dispatch<SetStateAction<number>>;
+  setCount: (count: number) => void;
 };
 
 export type CardViewContentProps = {
   addToCart: (item: ProductType) => void;
   item: ProductType;
   count: number;
-  setCount: React.Dispatch<SetStateAction<number>>;
+  setCount: (count: number) => void;
 };
 
 export interface CartItem extends CardType {
