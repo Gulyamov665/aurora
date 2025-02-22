@@ -1,4 +1,6 @@
-export default function Footer() {
+import { FC } from "react";
+
+const Footer: FC = () => {
   return (
     <>
       <footer className="py-3 footer_style mt-5">
@@ -25,16 +27,17 @@ export default function Footer() {
           </li>
         </ul>
         <p className="text-center footer_style_text">
-          © 2024 Powered by{' '}
+          © 2024 Powered by{" "}
           <a href="https://t.me/mgulyamov" className="footer_powered">
             Gulyamov
-          </a>{' '}
-          and{' '}
+          </a>{" "}
+          and{" "}
           <a href="https://t.me/Bomuratov" className="footer_powered">
             Bomuratov
           </a>
         </p>
       </footer>
     </>
-  )
-}
+  );
+};
+export default Footer;

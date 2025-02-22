@@ -1,23 +1,23 @@
-import React from 'react'
-import InstagramIcon from '@mui/icons-material/Instagram'
-import TelegramIcon from '@mui/icons-material/Telegram'
-import { useWaiterCallMutation } from '../../../store/user/api/dispatcherApi'
-import { useParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import Snowfall from 'react-snowfall'
+import React from "react";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import TelegramIcon from "@mui/icons-material/Telegram";
+import { useWaiterCallMutation } from "../../../store/user/api/dispatcherApi";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import Snowfall from "react-snowfall";
 
 export default function Intro({ data }) {
-  const { table } = useParams()
-  const [callWaiter, { isLoading }] = useWaiterCallMutation()
+  const { table } = useParams();
+  const [callWaiter, { isLoading }] = useWaiterCallMutation();
 
   const handleCallWaiter = async () => {
     if (data.waiter_chat_id) {
-      await callWaiter({ table, chat_id: data.waiter_chat_id })
-      toast.success('Запрос отправлен')
-      return
+      await callWaiter({ table, chat_id: data.waiter_chat_id });
+      toast.success("Запрос отправлен");
+      return;
     }
-    console.log('вызов официанта не доступен в этом заведении')
-  }
+    console.log("вызов официанта не доступен в этом заведении");
+  };
   return (
     <div className="container container-sm">
       <div className="intro-page">
@@ -41,14 +41,14 @@ export default function Intro({ data }) {
                 href={data.instagramm}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ textDecoration: 'none', color: 'black' }}
+                style={{ textDecoration: "none", color: "black" }}
               >
                 <InstagramIcon style={{ marginRight: 5 }} />
               </a>
             )}
             {data.telegram && (
               <a
-                style={{ textDecoration: 'none', color: 'black' }}
+                style={{ textDecoration: "none", color: "black" }}
                 href={data.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -59,19 +59,16 @@ export default function Intro({ data }) {
           </div>
           {isLoading ? (
             <button className="btn btn-waiter mt-3">
-              <span
-                className="spinner-border spinner-border-sm"
-                aria-hidden="true"
-              ></span>
+              <span className="spinner-border spinner-border-sm" aria-hidden="true"></span>
             </button>
           ) : (
             <button className="btn btn-waiter mt-3" onClick={handleCallWaiter}>
-              {' '}
+              {" "}
               Вызвать официанта
             </button>
           )}
         </div>
       </div>
     </div>
-  )
+  );
 }

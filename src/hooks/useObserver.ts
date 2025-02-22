@@ -12,7 +12,11 @@ export const useObserver = (refs: ObserverRefs, options: IntersectionObserverIni
     refs.current.forEach((sec) => {
       observer.observe(sec);
     });
-  }, [refs]);
+
+    return () => {
+      observer.disconnect(); // Очистка при размонтировании
+    };
+  }, [refs.current]);
 
   return observerTarget;
 };
