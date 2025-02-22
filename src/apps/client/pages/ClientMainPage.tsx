@@ -1,21 +1,21 @@
-import React from "react";
 import { useLoadQuery } from "../../../store/admin/vendorApi";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Intro from "../components/Intro";
+import { modals } from "@store/appSlice";
+import Intro from "../features/intro/Intro";
 import Category from "../features/category/Category";
 import Loading from "../features/loading/Loading";
 
 function ClientMainPage() {
-  const { res } = useParams();
-  const { data: vendor = [], isLoading } = useLoadQuery(res);
-  const { search } = useSelector((state) => state.modals);
+  const { res = "" } = useParams();
+  const { data, isLoading } = useLoadQuery(res);
+  const { search } = useSelector(modals);
 
-  if (isLoading) return <Loading />;
+  if (isLoading || !data) return <Loading />;
 
   return (
     <>
-      <Intro data={vendor} />
+      <Intro data={data} />
       <Category search={search} />
     </>
   );

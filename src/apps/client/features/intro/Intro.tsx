@@ -1,12 +1,13 @@
-import React from "react";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TelegramIcon from "@mui/icons-material/Telegram";
-import { useWaiterCallMutation } from "../../../store/user/api/dispatcherApi";
+import { useWaiterCallMutation } from "../../../../store/user/api/dispatcherApi";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Snowfall from "react-snowfall";
+import { FC } from "react";
+import { IntroType } from "./types";
 
-export default function Intro({ data }) {
+const Intro: FC<IntroType> = ({ data }) => {
   const { table } = useParams();
   const [callWaiter, { isLoading }] = useWaiterCallMutation();
 
@@ -23,7 +24,7 @@ export default function Intro({ data }) {
     <div className="container container-sm">
       <div className="intro-page">
         <div className="snowFall"></div>
-        <img src={data.photo} loading="lazy" className="img" alt="img" />
+        <img src={data && data.photo} loading="lazy" className="img" alt="img" />
         <div className="opacity-block" />
         <div className="img_log">
           <img src={data.logo} className="img_logo" alt="logo" />
@@ -72,4 +73,6 @@ export default function Intro({ data }) {
       </div>
     </div>
   );
-}
+};
+
+export default Intro;

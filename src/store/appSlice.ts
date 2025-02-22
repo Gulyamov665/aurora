@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from ".";
 
 const appSlice = createSlice({
   name: "modals",
@@ -26,6 +27,8 @@ const appSlice = createSlice({
     },
   },
 });
+
+export const modals = (state: RootState) => state.modals;
 
 export const { toggleCreate, toggleUpdate, selectedCategory, productSearch } = appSlice.actions;
 
