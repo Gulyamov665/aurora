@@ -1,8 +1,9 @@
-import React from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { FreeMode } from 'swiper/modules'
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode } from "swiper/modules";
+import { FC } from "react";
+import { PromoTypes } from "./types";
 
-export default function Promo({ promo, handleViewPromo }) {
+const Promo: FC<PromoTypes> = ({ promo, handleViewPromo }) => {
   const breakpoints = {
     320: {
       slidesPerView: 1.8,
@@ -24,7 +25,7 @@ export default function Promo({ promo, handleViewPromo }) {
       slidesPerView: 4,
       spaceBetween: 15,
     },
-  }
+  };
 
   return (
     <div>
@@ -39,12 +40,9 @@ export default function Promo({ promo, handleViewPromo }) {
             className="scrollDiv"
           >
             {promo
-              ?.filter((promos) => promos.is_active)
+              .filter((promos) => promos.is_active)
               .map((item) => (
-                <SwiperSlide
-                  key={item.id}
-                  onClick={() => handleViewPromo(item)}
-                >
+                <SwiperSlide key={item.id} onClick={() => handleViewPromo(item)}>
                   <img className="imgScroll" src={item.photo} alt="item.name" />
                 </SwiperSlide>
               ))}
@@ -52,5 +50,7 @@ export default function Promo({ promo, handleViewPromo }) {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default Promo;

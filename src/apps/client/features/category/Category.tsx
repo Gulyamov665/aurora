@@ -8,7 +8,7 @@ import { ProductType } from "./types";
 import Card from "../card/Card";
 import Loading from "../loading/Loading";
 import CardView from "../card/CardView";
-import Promo from "../../components/Promo";
+import Promo from "../promo/Promo";
 import Navbar from "../navbar/Navbar";
 import Products from "../products/Products";
 import CartBtn from "../../components/CartBtn";
