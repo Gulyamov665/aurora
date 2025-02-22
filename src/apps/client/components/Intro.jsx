@@ -18,6 +18,7 @@ export default function Intro({ data }) {
     }
     console.log("вызов официанта не доступен в этом заведении");
   };
+
   return (
     <div className="container container-sm">
       <div className="intro-page">

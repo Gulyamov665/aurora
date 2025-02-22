@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Intro from "../components/Intro";
 import Category from "../features/category/Category";
-import Loading from "../components/Loading";
+import Loading from "../features/loading/Loading";
 
 function ClientMainPage() {
   const { res } = useParams();

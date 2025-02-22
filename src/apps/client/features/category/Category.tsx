@@ -6,7 +6,7 @@ import { useParams, Link } from "react-router-dom";
 import { CategoryProps } from "./types";
 import { ProductType } from "./types";
 import Card from "../card/Card";
-import Loading from "../../components/Loading";
+import Loading from "../loading/Loading";
 import CardView from "../card/CardView";
 import Promo from "../../components/Promo";
 import Navbar from "../navbar/Navbar";
