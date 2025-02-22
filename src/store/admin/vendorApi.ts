@@ -9,6 +9,8 @@ type Vendor = {
   instagramm: string;
   telegram: string;
   logo: string;
+  orders_chat_id: number;
+  availability_orders: boolean;
 };
 
 export const vendorApi = createApi({
@@ -17,7 +19,7 @@ export const vendorApi = createApi({
   baseQuery,
 
   endpoints: (build) => ({
-    load: build.query<Vendor | null, string>({
+    load: build.query<Vendor, string>({
       query: (params) => `restaurants/${params}`,
       providesTags: ["vendor"],
     }),

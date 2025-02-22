@@ -1,4 +1,3 @@
-
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -8,14 +7,16 @@ import { removeCartItems } from "@store/cartSlice";
 import { RootState } from "@store/index";
 
 function ConfirmOrder() {
-  const { table, res } = useParams();
+  const { table, res = "" } = useParams();
   const { items: items, totalPrice } = useSelector((state: RootState) => state.cart);
-  const { data = [] } = useLoadQuery(res);
+  const { data } = useLoadQuery(res);
   const [dispatcher, { isLoading }] = useSendMessageMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleOrders = async () => {
+    if (!data) return;
+
     if (data.orders_chat_id) {
       const order = {
         items,
