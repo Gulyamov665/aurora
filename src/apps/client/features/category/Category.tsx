@@ -7,7 +7,7 @@ import { CategoryProps } from "./types";
 import { ProductType } from "./types";
 import Card from "../card/Card";
 import Loading from "../../components/Loading";
-import CardView from "../../components/CardView";
+import CardView from "../card/CardView";
 import Promo from "../../components/Promo";
 import Navbar from "../navbar/Navbar";
 import Products from "../products/Products";
