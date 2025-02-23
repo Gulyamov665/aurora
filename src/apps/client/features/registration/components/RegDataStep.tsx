@@ -2,12 +2,23 @@ import { Link } from "react-router-dom";
 import { RegDataType } from "../types";
 import { Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask";
-// import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import styles from "../assets/Registration.module.scss";
 import { useState } from "react";
 
-export default function RegForm({ register, handleSubmit, state, onSubmit, control, formState, trigger }: RegDataType) {
+export default function RegForm({
+  register,
+  handleSubmit,
+  state,
+  onSubmit,
+  control,
+  formState,
+  trigger,
+  watch,
+}: RegDataType) {
   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+  const password = watch("password_1");
+
   return (
     <form className="text-center" onSubmit={handleSubmit(onSubmit)}>
       <h1>Регистрация</h1>
@@ -64,26 +75,39 @@ export default function RegForm({ register, handleSubmit, state, onSubmit, contr
           )}
         />
       </div>
-      <div
-        className={`${styles["inputs-container"]} ${styles["password"]} ${showPassword ? styles["show-password"] : ""}`}
-        onClick={() => setShowPassword(!showPassword)}
-      >
+
+      <div className={`${styles["inputs-container"]} ${styles["password"]}`}>
         <input
           type={showPassword ? "text" : "password"}
           id="password1"
           {...register("password_1", { required: "Это поле обязательно для заполнения" })}
           placeholder="Пароль"
         />
-      </div>
-      <div className={styles["inputs-container"]}>
-        <input
-          type="password"
-          id="password2"
-          {...register("password_2", { required: "Это поле обязательно для заполнения" })}
-          placeholder="Повторите пароль"
-        />
+        <span
+          className={`${showPassword ? styles["show-pass"] : styles["hide"]}`}
+          onClick={() => setShowPassword(!showPassword)}
+        ></span>
       </div>
 
+      <div className={`${styles["inputs-container"]} ${styles["password"]}`}>
+        <input
+          type={showPassword2 ? "text" : "password"}
+          id="password2"
+          {...register("password_2", {
+            required: "Это поле обязательно для заполнения",
+            validate: (value) => value === password || "Пароли не совпадают",
+          })}
+          placeholder="Повторите пароль"
+        />
+        <span
+          className={`${showPassword2 ? styles["show-pass"] : styles["hide"]}`}
+          onClick={() => setShowPassword2(!showPassword2)}
+        ></span>
+      </div>
+      {/* <p className={formState.errors.password_2 ? :styles["error-message"]}>{formState.errors.password_2 && formState.errors.password_2.message}</p> */}
+      <div className={`${styles["error-message"]} ${formState.errors.password_2 ? styles["show"] : ""}`}>
+        {formState.errors.password_2 && formState.errors.password_2.message}
+      </div>
       <p>
         Уже есть аккаунт ?{" "}
         <Link to="/login" state={state}>

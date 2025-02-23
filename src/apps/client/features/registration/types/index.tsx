@@ -5,6 +5,7 @@ import {
   Control,
   UseFormStateReturn,
   UseFormTrigger,
+  UseFormWatch,
 } from "react-hook-form";
 
 export type FormValuesType = {
@@ -32,6 +33,8 @@ export type RegDataType = {
   control: Control<FormValuesType>;
   formState: UseFormStateReturn<FormValuesType>;
   trigger: UseFormTrigger<FormValuesType>;
+  watch: UseFormWatch<FormValuesType>;
+  error: string;
   state: { from: string };
 };
 export type RegisterType = {

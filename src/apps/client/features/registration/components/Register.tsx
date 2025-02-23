@@ -8,11 +8,11 @@ import RegCodeStep from "./RegCodeStep";
 import RegForm from "./RegDataStep";
 
 const Register: FC<RegisterType> = ({ state }) => {
-  const { register, handleSubmit, control, formState, trigger } = useForm<FormValuesType>({ mode: "all" });
+  const { register, handleSubmit, control, formState, trigger, watch } = useForm<FormValuesType>({ mode: "onTouched" });
   const { register: codeRegister, handleSubmit: codeSubmit } = useForm<RequestFormValuesType>();
   const [registration] = useRegistrationMutation();
   const [codeRequest] = useCodeRequestMutation();
-  const { regStep, userId, botLink } = useSelector(authState);
+  const { regStep, userId, botLink, error } = useSelector(authState);
 
   const submit: SubmitHandler<FormValuesType> = async (data) => {
     await registration(data);
@@ -33,6 +33,8 @@ const Register: FC<RegisterType> = ({ state }) => {
           control={control}
           formState={formState}
           trigger={trigger}
+          watch={watch}
+          error={error}
         />
       )}
 

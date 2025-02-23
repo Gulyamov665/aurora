@@ -5,6 +5,7 @@
   color: red;
   opacity: 0; /* Начальная прозрачность */
   // height: 0; /* Начальная высота */
+  max-height: 10px;
   overflow: hidden; /* Скрываем содержимое */
   transition:
     opacity 0.4s ease,
@@ -14,39 +15,35 @@
 .error-message.show {
   opacity: 1; /* Полная видимость */
   // height: auto; /* Автоматическая высота */
+  max-height: 50px;
   transition: opacity 0.4s ease;
 }
 
 .inputs-container {
   height: 45px;
   margin-top: 20px;
-  // position: relative;
-}
-
-.inputs-container.password {
   position: relative;
 }
 
-.inputs-container.password input {
-  padding-right: 40px; /* Оставляем место для иконки */
-}
-
-.inputs-container.password::after {
-  content: "";
+.inputs-container .show-pass,
+.inputs-container .hide {
+  display: block; /* Делаем span блочным */
+  width: 24px;
+  height: 24px;
   position: absolute;
   right: 10px;
   top: 50%;
-  width: 24px;
-  height: 24px;
   transform: translateY(-50%);
   cursor: pointer;
-  background-color: #999;
-  mask-image: url("../../../../../assets/view.svg"); /* Путь к SVG */
-  mask-size: cover;
+  background-size: cover;
 }
 
-.inputs-container.password.show-password::after {
-  mask-image: url("../../../../../assets/hide.svg");
+.inputs-container .show-pass {
+  background-image: url("../../../../../assets/hide.svg");
+}
+
+.inputs-container .hide {
+  background-image: url("../../../../../assets/view.svg");
 }
 
 .form-button {
