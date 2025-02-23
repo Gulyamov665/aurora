@@ -34,7 +34,10 @@ export type RegDataType = {
   formState: UseFormStateReturn<FormValuesType>;
   trigger: UseFormTrigger<FormValuesType>;
   watch: UseFormWatch<FormValuesType>;
-  error: string;
+  error: {
+    message: string;
+    code: string;
+  };
   state: { from: string };
 };
 export type RegisterType = {

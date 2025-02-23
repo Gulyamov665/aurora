@@ -14,6 +14,7 @@ export default function RegForm({
   formState,
   trigger,
   watch,
+  error,
 }: RegDataType) {
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
@@ -118,6 +119,8 @@ export default function RegForm({
       <button type="submit" className={`${styles["form-button"]} ${!formState.isValid ? "disabled" : ""} `}>
         Продолжить
       </button>
+
+      {error && <p>{error.message}</p>}
     </form>
   );
 }

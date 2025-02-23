@@ -2,7 +2,7 @@ import { FC } from "react";
 import styles from "../../auth/assets/AuthForm.module.scss";
 import { RequestType } from "../types";
 
-const RegCodeStep: FC<RequestType> = ({ register, handleSubmit, codeRequestSubmit, botLink, error }) => {
+const RegCodeStep: FC<RequestType> = ({ register, handleSubmit, codeRequestSubmit, botLink }) => {
   return (
     <form className="text-center" onSubmit={handleSubmit(codeRequestSubmit)}>
       <h5>Подтвердите код отправленный вам телеграм ботом</h5>
@@ -15,7 +15,6 @@ const RegCodeStep: FC<RequestType> = ({ register, handleSubmit, codeRequestSubmi
       <button type="submit" className={styles["form-button"]}>
         Отправить
       </button>
-      {error && <p>{error}</p>}
     </form>
   );
 };

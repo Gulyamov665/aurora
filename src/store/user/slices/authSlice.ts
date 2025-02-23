@@ -7,7 +7,10 @@ const userAuth = createSlice({
     regStep: 0,
     userId: "",
     botLink: "",
-    error: "",
+    error: {
+      message: "",
+      code: "",
+    },
   },
   reducers: {
     regStepChange(state, action) {
