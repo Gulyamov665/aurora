@@ -15,7 +15,8 @@ const Register: FC<RegisterType> = ({ state }) => {
   const { regStep, userId, botLink, error } = useSelector(authState);
 
   const submit: SubmitHandler<FormValuesType> = async (data) => {
-    await registration(data);
+    const username = data.username.toLowerCase();
+    await registration({ ...data, username });
   };
 
   const codeRequestSubmit: SubmitHandler<RequestFormValuesType> = async (data) => {
