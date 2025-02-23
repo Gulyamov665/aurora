@@ -36,7 +36,7 @@ export type RegDataType = {
   watch: UseFormWatch<FormValuesType>;
   error: {
     message: string;
-    code: string;
+    code: number;
   };
   state: { from: string };
 };

@@ -18,7 +18,6 @@ const Register: FC<RegisterType> = ({ state }) => {
     await registration(data);
   };
 
-  console.log(botLink);
   const codeRequestSubmit: SubmitHandler<RequestFormValuesType> = async (data) => {
     await codeRequest({ id: userId, code: data });
   };

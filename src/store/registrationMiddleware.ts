@@ -10,22 +10,14 @@ listenerMiddleware.startListening({
     listenerApi.dispatch(userId(action.payload.id));
     listenerApi.dispatch(botLinkAction(action.payload.bot_link));
     listenerApi.dispatch(regStepChange(1));
-    console.log("change step");
   },
 });
 
 listenerMiddleware.startListening({
   matcher: userRegistration.endpoints.registration.matchRejected,
   effect: async (action, listenerApi) => {
-    console.error("Ошибка при регистрации:", action);
-    console.log(action);
-    // Можно получить сообщение об ошибке из action.error
-    const errorMessage = action.error?.message || "Что-то пошло не так";
-
+    const errorMessage = action.payload?.data || "Что-то пошло не так";
     listenerApi.dispatch(regError(errorMessage));
-
-    // // Показываем уведомление (если есть соответствующий механизм)
-    // listenerApi.dispatch(showNotification({ type: "error", message: errorMessage }));
   },
 });
 

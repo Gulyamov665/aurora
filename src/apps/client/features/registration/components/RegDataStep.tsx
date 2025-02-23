@@ -105,10 +105,15 @@ export default function RegForm({
           onClick={() => setShowPassword2(!showPassword2)}
         ></span>
       </div>
-      {/* <p className={formState.errors.password_2 ? :styles["error-message"]}>{formState.errors.password_2 && formState.errors.password_2.message}</p> */}
+
       <div className={`${styles["error-message"]} ${formState.errors.password_2 ? styles["show"] : ""}`}>
         {formState.errors.password_2 && formState.errors.password_2.message}
       </div>
+      
+      <div className={`${styles["error-message"]} ${error.message ? styles["show"] : ""}`}>
+        <p>{error && error.message}</p>
+      </div>
+
       <p>
         Уже есть аккаунт ?{" "}
         <Link to="/login" state={state}>
@@ -119,8 +124,6 @@ export default function RegForm({
       <button type="submit" className={`${styles["form-button"]} ${!formState.isValid ? "disabled" : ""} `}>
         Продолжить
       </button>
-
-      {error && <p>{error.message}</p>}
     </form>
   );
 }

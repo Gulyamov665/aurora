@@ -9,7 +9,7 @@ const userAuth = createSlice({
     botLink: "",
     error: {
       message: "",
-      code: "",
+      code: 0,
     },
   },
   reducers: {
