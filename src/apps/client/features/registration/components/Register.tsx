@@ -12,14 +12,13 @@ const Register: FC<RegisterType> = ({ state }) => {
   const { register: codeRegister, handleSubmit: codeSubmit } = useForm<RequestFormValuesType>();
   const [registration] = useRegistrationMutation();
   const [codeRequest] = useCodeRequestMutation();
-  const { regStep, userId } = useSelector(authState);
+  const { regStep, userId, botLink } = useSelector(authState);
 
   const submit: SubmitHandler<FormValuesType> = async (data) => {
-    const phone = data.phone.replace(/\s/g, "");
-
-    await registration({ ...data, phone });
+    await registration(data);
   };
 
+  console.log(botLink);
   const codeRequestSubmit: SubmitHandler<RequestFormValuesType> = async (data) => {
     await codeRequest({ id: userId, code: data });
   };
@@ -38,7 +37,12 @@ const Register: FC<RegisterType> = ({ state }) => {
       )}
 
       {regStep === 1 && (
-        <RegCodeStep register={codeRegister} handleSubmit={codeSubmit} codeRequestSubmit={codeRequestSubmit} />
+        <RegCodeStep
+          register={codeRegister}
+          handleSubmit={codeSubmit}
+          codeRequestSubmit={codeRequestSubmit}
+          botLink={botLink}
+        />
       )}
 
       {regStep === 2 && (

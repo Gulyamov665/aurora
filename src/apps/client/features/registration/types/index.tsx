@@ -22,6 +22,7 @@ export type RequestType = {
   register: UseFormRegister<RequestFormValuesType>;
   handleSubmit: UseFormHandleSubmit<RequestFormValuesType>;
   codeRequestSubmit: SubmitHandler<RequestFormValuesType>;
+  botLink: string;
 };
 
 export type RegDataType = {

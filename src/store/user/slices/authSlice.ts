@@ -6,6 +6,7 @@ const userAuth = createSlice({
   initialState: {
     regStep: 0,
     userId: "",
+    botLink: "",
   },
   reducers: {
     regStepChange(state, action) {
@@ -14,10 +15,13 @@ const userAuth = createSlice({
     userId(state, action) {
       state.userId = action.payload;
     },
+    botLinkAction(state, action) {
+      state.botLink = action.payload;
+    },
   },
 });
 
 export const authState = (state: RootState) => state.authState;
 
-export const { regStepChange, userId } = userAuth.actions;
+export const { regStepChange, userId, botLinkAction } = userAuth.actions;
 export default userAuth.reducer;

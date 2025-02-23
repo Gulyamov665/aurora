@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import header from "./assets/Header.module.scss";
 // import logo from '../../../assets/transparent_logo.png'
 import newYearLogo from "@/assets/transparent_logo_new_year.png";
-import LocationDropdown from "../../components/LocationDropdown";
+import LocationDropdown from "../map/components/LocationDropdown";
 import userIcon from "@/assets/user-icon.png";
 
 interface CustomJwtPayload extends JwtPayload {

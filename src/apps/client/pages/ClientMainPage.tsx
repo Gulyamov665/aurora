@@ -11,8 +11,9 @@ function ClientMainPage() {
   const { data, isLoading } = useLoadQuery(res);
   const { search } = useSelector(modals);
 
-  if (isLoading || !data) return <Loading />;
+  if (isLoading) return <Loading />;
 
+  if (!data) return <div className="text-center">Ничего не найдено</div>;
   return (
     <>
       <Intro data={data} />

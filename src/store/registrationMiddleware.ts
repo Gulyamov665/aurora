@@ -1,6 +1,6 @@
 import { userRegistration } from "./user/api/userRegistrationApi"; // Импорт API
 import listenerMiddleware from "./user/listenerMiddleware";
-import { regStepChange, userId } from "./user/slices/authSlice"; // Импорт экшена для изменения regStep
+import { regStepChange, userId, botLinkAction } from "./user/slices/authSlice"; // Импорт экшена для изменения regStep
 
 listenerMiddleware.startListening({
   matcher: userRegistration.endpoints.registration.matchFulfilled, // Слушаем экшен регистрации
@@ -8,6 +8,7 @@ listenerMiddleware.startListening({
     console.log("Запрос регистрации отправлен:", action);
 
     listenerApi.dispatch(userId(action.payload.id));
+    listenerApi.dispatch(botLinkAction(action.payload.bot_link));
     listenerApi.dispatch(regStepChange(1));
     console.log("change step");
   },

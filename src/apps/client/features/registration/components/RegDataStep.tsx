@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import { RegDataType } from "../types";
 import { Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask";
-
+// import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import styles from "../assets/Registration.module.scss";
+import { useState } from "react";
 
 export default function RegForm({ register, handleSubmit, state, onSubmit, control, formState, trigger }: RegDataType) {
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <form className="text-center" onSubmit={handleSubmit(onSubmit)}>
       <h1>Регистрация</h1>
@@ -41,7 +43,7 @@ export default function RegForm({ register, handleSubmit, state, onSubmit, contr
           rules={{
             required: "Это поле обязательно для заполнения",
             pattern: {
-              value: /^\+998 \d{2} \d{3}-\d{2}-\d{2}$/,
+              value: /^\+998\d{2}\d{3}\d{2}\d{2}$/,
               message: "Введите корректный номер телефона",
             },
           }}
@@ -49,7 +51,7 @@ export default function RegForm({ register, handleSubmit, state, onSubmit, contr
             <>
               <IMaskInput
                 {...field}
-                mask="+998 00 000-00-00"
+                mask="+998000000000"
                 placeholder="Номер телефона"
                 onAccept={(value) => field.onChange(value)}
                 onBlur={() => trigger("phone")}
@@ -62,11 +64,24 @@ export default function RegForm({ register, handleSubmit, state, onSubmit, contr
           )}
         />
       </div>
-      <div className={styles["inputs-container"]}>
-        <input type="password" id="password1" {...register("password_1")} placeholder="Пароль" />
+      <div
+        className={`${styles["inputs-container"]} ${styles["password"]} ${showPassword ? styles["show-password"] : ""}`}
+        onClick={() => setShowPassword(!showPassword)}
+      >
+        <input
+          type={showPassword ? "text" : "password"}
+          id="password1"
+          {...register("password_1", { required: "Это поле обязательно для заполнения" })}
+          placeholder="Пароль"
+        />
       </div>
       <div className={styles["inputs-container"]}>
-        <input type="password" id="password2" {...register("password_2")} placeholder="Повторите пароль" />
+        <input
+          type="password"
+          id="password2"
+          {...register("password_2", { required: "Это поле обязательно для заполнения" })}
+          placeholder="Повторите пароль"
+        />
       </div>
 
       <p>

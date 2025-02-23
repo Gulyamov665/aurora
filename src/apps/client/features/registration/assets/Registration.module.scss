@@ -20,6 +20,33 @@
 .inputs-container {
   height: 45px;
   margin-top: 20px;
+  // position: relative;
+}
+
+.inputs-container.password {
+  position: relative;
+}
+
+.inputs-container.password input {
+  padding-right: 40px; /* Оставляем место для иконки */
+}
+
+.inputs-container.password::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background-color: #999;
+  mask-image: url("../../../../../assets/view.svg"); /* Путь к SVG */
+  mask-size: cover;
+}
+
+.inputs-container.password.show-password::after {
+  mask-image: url("../../../../../assets/hide.svg");
 }
 
 .form-button {
