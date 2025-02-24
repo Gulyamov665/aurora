@@ -7,7 +7,7 @@ export default function Login({ register, handleSubmit, submit, state }: AuthDat
     <form className="text-center" onSubmit={handleSubmit(submit)}>
       <h1>Войти</h1>
       <div className="mt-3">
-        <input type="text" id="login" {...register("login")} placeholder="Логин" />
+        <input type="text" id="login" {...register("email")} placeholder="Логин" />
       </div>
       <div className="mt-3">
         <input type="password" id="password" {...register("password")} placeholder="Пароль" />

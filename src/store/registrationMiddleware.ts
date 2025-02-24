@@ -1,3 +1,4 @@
+import { userAuth } from "./user/api/userAuthApi";
 import { userRegistration } from "./user/api/userRegistrationApi"; // Импорт API
 import listenerMiddleware from "./user/listenerMiddleware";
 import { regStepChange, userId, botLinkAction, regError } from "./user/slices/authSlice"; // Импорт экшена для изменения regStep
@@ -26,6 +27,16 @@ listenerMiddleware.startListening({
   effect: async (action, listenerApi) => {
     console.log("Запрос регистрации отправлен patch:", action);
     listenerApi.dispatch(regStepChange(2));
+  },
+});
+
+listenerMiddleware.startListening({
+  matcher: userAuth.endpoints.auth.matchFulfilled,
+  effect: async (action) => {
+    const { access, refresh } = action.payload;
+
+    localStorage.setItem("token", access);
+    localStorage.setItem("refresh", refresh);
   },
 });
 

@@ -4,7 +4,7 @@ export type AuthType = {
   state: { from: string };
 };
 export type DataType = {
-  login: string;
+  email: string;
   password: string;
 };
 
