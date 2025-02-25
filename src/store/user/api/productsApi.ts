@@ -7,7 +7,7 @@ export const productsApiUser = createApi({
   baseQuery,
   endpoints: (build) => ({
     getProducts: build.query<ProductType[], string>({
-      query: (res) => `menu/${res}`,
+      query: (res) => `menu?restaurant__name=${res}`,
     }),
     addProduct: build.mutation<ProductType, Partial<ProductType>>({
       query: (body) => ({

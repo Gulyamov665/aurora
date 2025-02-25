@@ -1,7 +1,7 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
-const admins = "admins/";
+// const admins = "admins/";
 
 const getToken = () => {
   const authTokensString = localStorage.getItem("authTokens");
@@ -13,7 +13,7 @@ const getToken = () => {
 };
 
 export const baseQuery = fetchBaseQuery({
-  baseUrl: baseURL + admins,
+  baseUrl: baseURL ,
   prepareHeaders: (headers) => {
     const token = getToken();
     if (token) {

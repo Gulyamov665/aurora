@@ -3,11 +3,11 @@ import { baseQuery } from "../apiConfig";
 
 type Vendor = {
   waiter_chat_id: number;
-  photo: string;
+  background_photo: string;
   name: string;
-  adress: string;
-  instagramm: string;
-  telegram: string;
+  address: string;
+  instagram_link: string;
+  telegram_link: string;
   logo: string;
   orders_chat_id: number;
   availability_orders: boolean;
@@ -20,7 +20,7 @@ export const vendorApi = createApi({
 
   endpoints: (build) => ({
     load: build.query<Vendor, string>({
-      query: (params) => `restaurants/${params}`,
+      query: (params) => `restaurant/${params}/`,
       providesTags: ["vendor"],
     }),
     update: build.mutation({

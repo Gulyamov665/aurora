@@ -25,7 +25,7 @@ export default function Login() {
     const password = e.target.password.value;
 
     await getToken({
-      username: username,
+      email: username,
       password: password,
     });
   };
