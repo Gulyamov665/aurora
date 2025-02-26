@@ -32,5 +32,6 @@ export const productsApiUser = createApi({
   }),
 });
 
+
 export const { useGetProductsQuery, useAddProductMutation, useUpdateProductMutation, useDeleteProductMutation } =
   productsApiUser;
