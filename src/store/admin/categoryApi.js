@@ -10,7 +10,7 @@ export const categoriesApi = createApi({
 
     endpoints: build => ({
         getCategories: build.query({
-            query: res => `category/${res}`,
+            query: res => `category?restaurant__name=${res}`,
             providesTags: ['Categories']
         }),
         addCategory: build.mutation({
