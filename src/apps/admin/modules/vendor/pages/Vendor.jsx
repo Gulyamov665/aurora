@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import VendorForm from "../components/VendorForm";
 import { useParams } from "react-router-dom";
-import { useLoadQuery, useUpdateMutation } from "../../../../../store/admin/vendorApi";
+import { useLoadQuery, useUpdateMutation } from "../../../../../store/admin/api/vendorApi";
 import { useForm } from "react-hook-form";
 
 function Vendor() {

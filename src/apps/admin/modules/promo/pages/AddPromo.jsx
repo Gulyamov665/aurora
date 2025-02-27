@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PromoForm from "../components/PromoForm";
 import { useForm } from "react-hook-form";
-import { useLoadQuery } from "../../../../../store/admin/vendorApi";
+import { useLoadQuery } from "../../../../../store/admin/api/vendorApi";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAddPromosMutation } from "../../../../../store/admin/promoApi";
+import { useAddPromosMutation } from "../../../../../store/admin/api/promoApi";
 import CropModal from "../../Product/components/CropModal";
 import Loading from "../../../../client/features/loading/Loading";
 

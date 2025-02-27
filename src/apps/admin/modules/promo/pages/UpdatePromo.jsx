@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import PromoForm from "../components/PromoForm";
 import CropModal from "../../Product/components/CropModal";
 import { useForm } from "react-hook-form";
-import { useDeletePromoMutation, useGetPromoQuery, useUpdatePromoMutation } from "../../../../../store/admin/promoApi";
+import {
+  useDeletePromoMutation,
+  useGetPromoQuery,
+  useUpdatePromoMutation,
+} from "../../../../../store/admin/api/promoApi";
 import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../../../../client/features/loading/Loading";
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { useGetProductsQuery } from "@/store/admin/productsApi"
+import { useGetProductsQuery } from "@store/admin/api/productsApi"
 import { useParams } from "react-router-dom"
 
 

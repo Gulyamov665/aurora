@@ -1,4 +1,4 @@
-import { useLoadQuery } from "../../../store/admin/vendorApi";
+import { useLoadQuery } from "../../../store/admin/api/vendorApi";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { modals } from "@store/appSlice";

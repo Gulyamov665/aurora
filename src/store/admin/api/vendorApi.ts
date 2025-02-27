@@ -1,5 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "../apiConfig";
+import { baseQuery } from "../../apiConfig";
 
 type Vendor = {
   waiter_chat_id: number;

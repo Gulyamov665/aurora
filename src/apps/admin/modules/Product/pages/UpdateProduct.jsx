@@ -5,7 +5,7 @@ import {
   useDeleteProductMutation,
   useGetProductQuery,
   useUpdateProductMutation,
-} from "../../../../../store/admin/productsApi";
+} from "../../../../../store/admin/api/productsApi";
 import { useNavigate, useParams } from "react-router-dom";
 import CropModal from "../components/CropModal";
 import Loading from "../../../../client/features/loading/Loading";

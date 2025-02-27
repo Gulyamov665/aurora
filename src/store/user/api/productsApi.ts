@@ -1,5 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "../../apiConfigUser";
+import { baseQuery } from "../apiConfigUser";
 import { ProductType } from "../types";
 
 export const productsApiUser = createApi({
@@ -31,7 +31,6 @@ export const productsApiUser = createApi({
     }),
   }),
 });
-
 
 export const { useGetProductsQuery, useAddProductMutation, useUpdateProductMutation, useDeleteProductMutation } =
   productsApiUser;

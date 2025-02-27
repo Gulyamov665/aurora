@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { ProductForm } from "../components/ProductForm";
 import CropModal from "../components/CropModal";
-import { useAddProductMutation } from "../../../../../store/admin/productsApi";
+import { useAddProductMutation } from "../../../../../store/admin/api/productsApi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../../client/features/loading/Loading";

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSendMessageMutation } from "@store/user/api/dispatcherApi";
-import { useLoadQuery } from "@store/admin/vendorApi";
+import { useLoadQuery } from "@store/admin/api/vendorApi";
 import { removeCartItems } from "@store/cartSlice";
 import { RootState } from "@store/index";
 
