@@ -5,7 +5,7 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 
 const getToken = () => {
   const authTokensString = localStorage.getItem("authTokens");
-  
+
   if (authTokensString) {
     const authTokens = JSON.parse(authTokensString);
     return authTokens ? `Bearer ${authTokens.access}` : "";
@@ -13,7 +13,7 @@ const getToken = () => {
 };
 
 export const baseQuery = fetchBaseQuery({
-  baseUrl: baseURL ,
+  baseUrl: baseURL,
   prepareHeaders: (headers) => {
     const token = getToken();
     if (token) {

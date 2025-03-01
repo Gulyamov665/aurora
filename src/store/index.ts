@@ -11,13 +11,14 @@ import { qrCodeApi } from "./admin/api/qrCode.js";
 import { vendorApi } from "./admin/api/vendorApi.js";
 import { dispatcher } from "./user/api/dispatcherApi";
 import { userRegistration } from "./user/api/userRegistrationApi";
+import { userAuth } from "./user/api/userAuthApi.js";
+import { registerMiddleware } from "./middlewares/registrationMiddleware.js";
+import { authMiddleware } from "./middlewares/authMiddleware.js";
 import cartSlice from "./cartSlice";
 import storage from "redux-persist/lib/storage";
 import appReducer from "./appSlice";
 import vendorReducer from "./admin/slices/vendorSlice";
 import authState from "./user/slices/authSlice";
-
-import registrationMiddleware from "./registrationMiddleware";
 
 const rootReducer = combineReducers({
   cart: cartSlice,
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   [vendorApi.reducerPath]: vendorApi.reducer,
   [dispatcher.reducerPath]: dispatcher.reducer,
   [userRegistration.reducerPath]: userRegistration.reducer,
+  [userAuth.reducerPath]: userAuth.reducer,
 });
 
 const persistConfig = {
@@ -64,8 +66,10 @@ const store = configureStore({
       qrCodeApi.middleware,
       vendorApi.middleware,
       dispatcher.middleware,
-      registrationMiddleware,
-      userRegistration.middleware
+      userRegistration.middleware,
+      userAuth.middleware,
+      registerMiddleware,
+      authMiddleware
     ),
 });
 

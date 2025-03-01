@@ -109,7 +109,7 @@ export default function RegForm({
       <div className={`${styles["error-message"]} ${formState.errors.password_2 ? styles["show"] : ""}`}>
         {formState.errors.password_2 && formState.errors.password_2.message}
       </div>
-      
+
       <div className={`${styles["error-message"]} ${error.message ? styles["show"] : ""}`}>
         <p>{error && error.message}</p>
       </div>

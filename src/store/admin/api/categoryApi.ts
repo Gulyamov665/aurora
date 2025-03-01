@@ -21,7 +21,7 @@ export const categoriesApi = createApi({
     }),
     updateOrder: build.mutation({
       query: (body) => ({
-        url: "categories/update_order/",
+        url: "category/update_order/",
         method: "POST",
         body,
       }),

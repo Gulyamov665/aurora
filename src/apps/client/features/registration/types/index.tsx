@@ -1,3 +1,4 @@
+import { CodeRequest, RegistrationMutation } from "@store/user/api/userRegistrationApi";
 import {
   UseFormRegister,
   UseFormHandleSubmit,
@@ -42,6 +43,15 @@ export type RegDataType = {
 };
 export type RegisterType = {
   state: { from: string };
+  regStep: number;
+  userId: string;
+  botLink: string;
+  error: {
+    message: string;
+    code: number;
+  };
+  registration: RegistrationMutation[0];
+  codeRequest: CodeRequest[0];
 };
 
 export type RegistrationPageType = {

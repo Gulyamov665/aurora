@@ -19,7 +19,7 @@ export const categoriesApiUser = createApi({
     }),
     updateOrder: build.mutation<CategoryType, Partial<CategoryType>>({
       query: (body) => ({
-        url: "categories/update_order/",
+        url: "category/update_order/",
         method: "POST",
         body,
       }),

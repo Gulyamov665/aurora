@@ -6,6 +6,8 @@ import header from "./assets/Header.module.scss";
 import newYearLogo from "@/assets/transparent_logo_new_year.png";
 import LocationDropdown from "../map/components/LocationDropdown";
 import userIcon from "@/assets/user-icon.png";
+import { useSelector } from "react-redux";
+import { authState } from "@store/user/slices/authSlice";
 
 interface CustomJwtPayload extends JwtPayload {
   vendor: string;
@@ -17,6 +19,7 @@ const Header: FC = () => {
     return authTokens ? JSON.parse(authTokens) : null;
   });
   const [vendor, setVendor] = useState<string>("");
+  const { isUser } = useSelector(authState);
 
   useEffect(() => {
     if (authTokens) {
@@ -50,11 +53,13 @@ const Header: FC = () => {
           </div>
         )}
         <LocationDropdown items={items} />
+        {!isUser &&
         <Link to={{ pathname: "/login" }} state={{ from: location.pathname }}>
           <div className={`${header.user_icon}`}>
             <img src={userIcon} alt="" width={30} height={30} />
           </div>
         </Link>
+        }
       </div>
     </header>
   );

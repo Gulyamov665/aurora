@@ -26,6 +26,13 @@
   color: blue;
 }
 
+.btn-span {
+  color: white !important;
+}
+.btn-span-spinner {
+  color: #0a1551 !important;
+}
+
 .form-box p {
   margin: 10px 0;
 }
@@ -47,4 +54,25 @@
 .form-button:hover {
   border-color: rgba(10, 21, 81, 0.8);
   background-color: rgba(10, 21, 81, 0.8);
+}
+
+.error-message {
+  margin: 0;
+  font-size: small;
+  text-align: left;
+  color: red;
+  opacity: 0; /* Начальная прозрачность */
+  // height: 0; /* Начальная высота */
+  max-height: 10px;
+  overflow: hidden; /* Скрываем содержимое */
+  transition:
+    opacity 0.4s ease,
+    height 0.4s ease; /* Плавные переходы */
+}
+
+.error-message.show {
+  opacity: 1; /* Полная видимость */
+  // height: auto; /* Автоматическая высота */
+  max-height: 50px;
+  transition: opacity 0.4s ease;
 }
