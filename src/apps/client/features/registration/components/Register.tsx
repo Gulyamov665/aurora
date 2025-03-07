@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { FormValuesType, RegisterType, RequestFormValuesType } from "../types";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { RegStepSuccess } from "./RegStepSuccess";
 import RegCodeStep from "./RegCodeStep";
 import RegForm from "./RegDataStep";
-import { RegStepSuccess } from "./RegStepSuccess";
 
 const Register: FC<RegisterType> = ({ state, regStep, userId, botLink, error, registration, codeRequest }) => {
   const { register, handleSubmit, control, formState, trigger, watch } = useForm<FormValuesType>({ mode: "onTouched" });

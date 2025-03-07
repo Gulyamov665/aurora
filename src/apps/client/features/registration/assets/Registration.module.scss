@@ -67,6 +67,10 @@
 }
 
 .success-image {
-  margin: 10px 20px;
-  background-image: url("../../../../../assets/status.svg");
+  max-width: 400px;
+}
+
+.success-image img {
+  max-width: 200px;
+  padding: 20px;
 }

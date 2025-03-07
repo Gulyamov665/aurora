@@ -3,11 +3,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Navigate, useNavigate } from "react-router-dom";
 import { AuthType, DataType } from "../types";
 import { useAuthMutation } from "@store/user/api/userAuthApi";
+import { useSelector } from "react-redux";
+import { authState } from "@store/user/slices/authSlice";
 import styles from "../assets/AuthForm.module.scss";
 import Login from "../components/Login";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useSelector } from "react-redux";
-import { authState } from "@store/user/slices/authSlice";
 
 const Auth: FC<AuthType> = ({ state }) => {
   const { register, handleSubmit, formState } = useForm<DataType>();
