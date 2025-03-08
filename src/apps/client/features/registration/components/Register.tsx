@@ -1,22 +1,21 @@
 import { FC } from "react";
-import { FormValuesType, RegisterType, RequestFormValuesType } from "../types";
+import { FormValuesType, RegisterType } from "../types";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { RegStepSuccess } from "./RegStepSuccess";
-import RegCodeStep from "./RegCodeStep";
+
 import RegForm from "./RegDataStep";
 
-const Register: FC<RegisterType> = ({ state, regStep, userId, botLink, error, registration, codeRequest }) => {
+const Register: FC<RegisterType> = ({ state, regStep, error, registration }) => {
   const { register, handleSubmit, control, formState, trigger, watch } = useForm<FormValuesType>({ mode: "onTouched" });
-  const { register: codeRegister, handleSubmit: codeSubmit } = useForm<RequestFormValuesType>();
+  // const { register: codeRegister, handleSubmit: codeSubmit } = useForm<RequestFormValuesType>();
 
   const submit: SubmitHandler<FormValuesType> = async (data) => {
-    const username = data.username.toLowerCase();
-    await registration({ ...data, username });
+    await registration({ ...data });
   };
 
-  const codeRequestSubmit: SubmitHandler<RequestFormValuesType> = async (data) => {
-    await codeRequest({ id: userId, code: data });
-  };
+  // const codeRequestSubmit: SubmitHandler<RequestFormValuesType> = async (data) => {
+  //   await codeRequest({ id: userId, code: data });
+  // };
   return (
     <>
       {regStep === 0 && (
@@ -33,16 +32,16 @@ const Register: FC<RegisterType> = ({ state, regStep, userId, botLink, error, re
         />
       )}
 
-      {regStep === 1 && (
+      {/* {regStep === 1 && (
         <RegCodeStep
           register={codeRegister}
           handleSubmit={codeSubmit}
           codeRequestSubmit={codeRequestSubmit}
           botLink={botLink}
         />
-      )}
+      )} */}
 
-      {regStep === 2 && <RegStepSuccess />}
+      {regStep === 1 && <RegStepSuccess />}
     </>
   );
 };

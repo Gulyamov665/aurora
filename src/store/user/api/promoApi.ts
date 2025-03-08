@@ -8,7 +8,7 @@ export const promosApiUser = createApi({
 
   endpoints: (build) => ({
     getPromos: build.query({
-      query: (res) => `promo/${res}`,
+      query: (res) => `client/promo/${res}`,
       providesTags: ["Promos"],
     }),
   }),

@@ -10,7 +10,8 @@ import {
 } from "react-hook-form";
 
 export type FormValuesType = {
-  username: string;
+  first_name: string;
+  last_name: string;
   email: string;
   phone: string;
   password_1: string;

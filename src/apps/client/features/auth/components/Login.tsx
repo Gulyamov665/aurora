@@ -8,13 +8,13 @@ export default function Login({ register, handleSubmit, submit, state, isLoading
       <h1>Войти</h1>
       <div className="mt-3">
         <input
-          type="text"
+          type="tel"
           id="phone"
-          {...register("email", { required: "Это поле обязательно для заполнения" })}
+          {...register("phone", { required: "Это поле обязательно для заполнения" })}
           placeholder="Номер телефона"
         />
-        <div className={`${styles["error-message"]} ${formState.errors.email ? styles["show"] : ""}`}>
-          {formState.errors.email && formState.errors.email.message}
+        <div className={`${styles["error-message"]} ${formState.errors.phone ? styles["show"] : ""}`}>
+          {formState.errors.phone && formState.errors.phone.message}
         </div>
       </div>
       <div className="mt-3">

@@ -20,7 +20,7 @@ export const vendorApi = createApi({
 
   endpoints: (build) => ({
     load: build.query<Vendor, string>({
-      query: (params) => `restaurant/${params}/`,
+      query: (params) => `admins/restaurants/${params}`,
       providesTags: ["vendor"],
     }),
     update: build.mutation({

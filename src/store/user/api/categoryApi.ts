@@ -8,11 +8,11 @@ export const categoriesApiUser = createApi({
 
   endpoints: (build) => ({
     getCategories: build.query<CategoryType[], string>({
-      query: (res) => `category?restaurant__name=${res}`,
+      query: (res) => `/client/category/${res}`,
     }),
     addCategory: build.mutation<CategoryType, Partial<CategoryType>>({
       query: (body) => ({
-        url: "category",
+        url: "/client/categorys",
         method: "POST",
         body,
       }),
@@ -27,7 +27,7 @@ export const categoriesApiUser = createApi({
 
     updateCategory: build.mutation<CategoryType, Partial<CategoryType>>({
       query: (body) => ({
-        url: "category/",
+        url: "/client/categorys",
         method: "PUT",
         body,
       }),

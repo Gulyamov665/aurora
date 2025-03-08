@@ -26,16 +26,30 @@ export default function RegForm({
       <div className={styles["inputs-container"]}>
         <input
           type="text"
-          id="username"
-          {...register("username", {
+          id="first_name"
+          {...register("first_name", {
             required: "Это поле обязательно для заполнения",
-            onBlur: () => trigger("username"),
           })}
           placeholder="Имя"
         />
         {
-          <div className={`${styles["error-message"]} ${formState.errors.username ? styles["show"] : ""}`}>
-            {formState.errors.username && formState.errors.username.message}
+          <div className={`${styles["error-message"]} ${formState.errors.first_name ? styles["show"] : ""}`}>
+            {formState.errors.first_name && formState.errors.first_name.message}
+          </div>
+        }
+      </div>
+      <div className={styles["inputs-container"]}>
+        <input
+          type="text"
+          id="last_name"
+          {...register("last_name", {
+            required: "Это поле обязательно для заполнения",
+          })}
+          placeholder="Фамилия"
+        />
+        {
+          <div className={`${styles["error-message"]} ${formState.errors.last_name ? styles["show"] : ""}`}>
+            {formState.errors.last_name && formState.errors.last_name.message}
           </div>
         }
       </div>

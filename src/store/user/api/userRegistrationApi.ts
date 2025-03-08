@@ -14,7 +14,7 @@ export const userRegistration = createApi({
   endpoints: (build) => ({
     registration: build.mutation<RegistrationResponseType, Partial<RegistrationRequestType>>({
       query: (body) => ({
-        url: "auth/register",
+        url: "v1/auth/register",
         method: "POST",
         body,
       }),
