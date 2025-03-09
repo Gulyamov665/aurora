@@ -1,7 +1,7 @@
 import { useRef, useState, FC, useCallback, useMemo } from "react";
-import { useGetProductsQuery } from "@/store/user/api/productsApi";
-import { useGetCategoriesQuery } from "@/store/user/api/categoryApi";
-import { useGetPromosQuery } from "@/store/user/api/promoApi";
+import { useGetProductsQuery } from "@/store/admin/api/productsApi";
+import { useGetCategoriesQuery } from "@/store/admin/api/categoryApi";
+import { useGetPromosQuery } from "@/store/admin/api/promoApi";
 import { useParams, Link } from "react-router-dom";
 import { CategoryProps } from "./types";
 import { ProductType } from "./types";
@@ -36,7 +36,7 @@ const Category: FC<CategoryProps> = ({ search }) => {
   }, []);
 
   const filteredMenuItems = useMemo(() => {
-    return menuItems.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
+    return menuItems.filter((item: ProductType) => item.name.toLowerCase().includes(search.toLowerCase()));
   }, [menuItems, search]);
 
   if (isLoading) return <Loading main={true} />;
@@ -58,7 +58,7 @@ const Category: FC<CategoryProps> = ({ search }) => {
         }}
       >
         {search ? (
-          filteredMenuItems.map((searchItem) => (
+          filteredMenuItems.map((searchItem: ProductType) => (
             <div key={searchItem.id} onClick={() => handleView(searchItem)}>
               <Card {...searchItem} />
             </div>

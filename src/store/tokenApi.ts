@@ -30,7 +30,7 @@ export const tokenApi = createApi({
   endpoints: (build) => ({
     getToken: build.mutation({
       query: (body) => ({
-        url: "auth/vendor/login",
+        url: "v1/auth/user/login",
         method: "POST",
         body,
       }),

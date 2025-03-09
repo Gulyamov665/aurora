@@ -8,12 +8,12 @@ export const categoriesApi = createApi({
 
   endpoints: (build) => ({
     getCategories: build.query({
-      query: (res) => `category?restaurant__name=${res}`,
+      query: (res) => `v1/category/?restaurant__name=${res}`,
       providesTags: ["Categories"],
     }),
     addCategory: build.mutation({
       query: (body) => ({
-        url: "categorys",
+        url: "v1/category/",
         method: "POST",
         body,
       }),
@@ -21,7 +21,7 @@ export const categoriesApi = createApi({
     }),
     updateOrder: build.mutation({
       query: (body) => ({
-        url: "category/update_order/",
+        url: "v1/category/update_order/",
         method: "POST",
         body,
       }),
@@ -30,7 +30,7 @@ export const categoriesApi = createApi({
 
     updateCategory: build.mutation({
       query: ({ body, id }) => ({
-        url: `categorys/${id}`,
+        url: `v1/category/${id}/`,
         method: "PUT",
         body,
       }),
@@ -39,7 +39,7 @@ export const categoriesApi = createApi({
 
     deleteCategory: build.mutation({
       query: ({ id }) => ({
-        url: `categorys/${id}`,
+        url: `v1/category/${id}/`,
         method: "DELETE",
       }),
       invalidatesTags: ["Categories"],

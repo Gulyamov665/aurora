@@ -8,18 +8,18 @@ export const promosApi = createApi({
 
   endpoints: (build) => ({
     getPromos: build.query({
-      query: (res) => `promo/${res}`,
+      query: (res) => `v1/promo/?restaurant__name=${res}`,
       providesTags: ["Promos"],
     }),
 
     getPromo: build.query({
-      query: (id) => `promos/${id}`,
+      query: (id) => `v1/promos/${id}`,
       providesTags: ["Promos"],
     }),
 
     addPromos: build.mutation({
       query: (body) => ({
-        url: "promos",
+        url: "v1/promo/",
         method: "POST",
         body,
       }),
@@ -27,7 +27,7 @@ export const promosApi = createApi({
     }),
     updatePromo: build.mutation({
       query: ({ body, id }) => ({
-        url: `promos/${id}`,
+        url: `v1/promo/${id}`,
         method: "PUT",
         body,
       }),
@@ -35,7 +35,7 @@ export const promosApi = createApi({
     }),
     deletePromo: build.mutation({
       query: (id) => ({
-        url: `promos/${id}`,
+        url: `v1/promo/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Promos"],

@@ -7,18 +7,18 @@ export const productsApi = createApi({
   baseQuery,
   endpoints: (build) => ({
     getProducts: build.query({
-      query: (res) => `menu?restaurant__name=${res}`,
+      query: (res) => `v1/menu/?restaurant__name=${res}`,
       providesTags: ["Products"],
     }),
 
     getProduct: build.query({
-      query: (id) => `menu/${id}`,
+      query: (id) => `v1/menu/${id}`,
       providesTags: ["Products"],
     }),
 
     addProduct: build.mutation({
       query: (body) => ({
-        url: "menu/",
+        url: "v1/menu/",
         method: "POST",
         body,
       }),
@@ -27,7 +27,7 @@ export const productsApi = createApi({
 
     updateProduct: build.mutation({
       query: ({ body, updatedItem }) => ({
-        url: `menu/${updatedItem}/`,
+        url: `v1/menu/${updatedItem}/`,
         method: "PUT",
         body,
       }),
@@ -36,7 +36,7 @@ export const productsApi = createApi({
 
     deleteProduct: build.mutation({
       query: (id) => ({
-        url: `menu/${id}`,
+        url: `v1/menu/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Products"],
