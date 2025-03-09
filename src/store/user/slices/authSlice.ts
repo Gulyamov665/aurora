@@ -7,7 +7,7 @@ const initialState: AuthState = {
   regStep: 0,
   userId: "",
   botLink: "",
-  isUser: decodeToken(),
+  isUser: decodeToken() || null,
   error: {
     message: "",
     code: 0,
@@ -30,7 +30,7 @@ const userAuth = createSlice({
     regError(state, action: PayloadAction<ErrorType>) {
       state.error = action.payload;
     },
-    setUser(state, action: PayloadAction<IsUserType>) {
+    setUser(state, action: PayloadAction<IsUserType | null>) {
       state.isUser = action.payload;
     },
   },

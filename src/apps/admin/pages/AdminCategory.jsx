@@ -5,20 +5,20 @@ import styles from "../static/AdminCategory.module.scss";
 import CategoryModal from "../../client/components/CategoryModal";
 import AddIcon from "@mui/icons-material/Add";
 import EditNoteIcon from "@mui/icons-material/EditNote";
-import { Link, useParams } from "react-router-dom";
-import { useGetProductsQuery, useUpdateProductMutation } from "../../../store/admin/api/productsApi.js";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useGetProductsQuery, useUpdateProductMutation } from "@store/admin/api/productsApi.js";
 import {
   useAddCategoryMutation,
   useGetCategoriesQuery,
   useUpdateOrderMutation,
   useDeleteCategoryMutation,
   useUpdateCategoryMutation,
-} from "../../../store/admin/api/categoryApi.js";
+} from "@store/admin/api/categoryApi.js";
 
 import { toast } from "react-toastify";
 import ReorderPage from "../components/ReorderPage";
-import { useLoadQuery } from "../../../store/admin/api/vendorApi.js";
-import { getVendorId } from "../../../store/admin/slices/vendorSlice";
+import { useLoadQuery } from "@store/admin/api/vendorApi.js";
+import { getVendorId } from "@store/admin/slices/vendorSlice";
 
 export default function AdminCategory() {
   const { res } = useParams();

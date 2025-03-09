@@ -6,27 +6,30 @@ import { Link } from "react-router-dom";
 import { useQrCodeMutation } from "../../../store/admin/api/qrCode";
 import { DownloadQr } from "../../../Utils/downloadQr";
 import logo from "../../../assets/transparent_logo.png";
+import { useSelector } from "react-redux";
+import { authState } from "@store/user/slices/authSlice";
 
 export default function Header({ sidebar }) {
-  const [authTokens, setAuthTokens] = useState(() =>
-    localStorage.getItem("authTokens") ? JSON.parse(localStorage.getItem("authTokens")) : null
-  );
+  // const [authTokens, setAuthTokens] = useState(() =>
+  //   localStorage.getItem("authTokens") ? JSON.parse(localStorage.getItem("authTokens")) : null
+  // );
+  const { isUser } = useSelector(authState);
 
   const [qrCode, { isLoading }] = useQrCodeMutation();
-  const [vendor, setVendor] = useState();
+  // const [vendor, setVendor] = useState();
 
   const qrCodeGenerate = async () => {
     await qrCode({ quantity: 1 });
     await DownloadQr(authTokens?.access);
   };
 
-  useEffect(() => {
-    if (authTokens) {
-      setVendor(jwtDecode(authTokens.access).vendor);
-    } else {
-      setVendor("");
-    }
-  }, [authTokens]);
+  // useEffect(() => {
+  //   if (authTokens) {
+  //     setVendor(jwtDecode(authTokens.access).vendor);
+  //   } else {
+  //     setVendor("");
+  //   }
+  // }, [authTokens]);
 
   return (
     <header className={`${styles.header} sticky-top`}>
@@ -51,7 +54,7 @@ export default function Header({ sidebar }) {
           </button>
         )}
 
-        <Link to={`/vendor/${vendor}`}>
+        <Link to={`/vendor/${isUser?.vendor}`}>
           <button className={`btn btn-info ${styles.btn_size}`}>
             <span style={{ color: "white" }}>Предпросмотр</span>
           </button>

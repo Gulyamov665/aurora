@@ -8,11 +8,19 @@ import AddProduct from "../apps/admin/modules/Product/pages/AddProduct";
 import AdminPromo from "../apps/admin/modules/promo/pages/AdminPromo";
 import UpdatePromo from "../apps/admin/modules/promo/pages/UpdatePromo";
 import AddPromo from "../apps/admin/modules/promo/pages/AddPromo";
+import ProtectedRoute from "./ProtectedRoute";
 
 export default function AdminRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Admin />}>
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Admin />
+          </ProtectedRoute>
+        }
+      >
         <Route path="main" element={<Vendor />} />
         <Route path="orders" element={<Orders />} />
         <Route path="menu" element={<AdminCategory />} />

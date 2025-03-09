@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import styles from "../static/Admin.module.scss";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
@@ -7,19 +7,21 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import RedeemIcon from "@mui/icons-material/Redeem";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import Header from "../components/Header";
+import { useDispatch } from "react-redux";
+import { setUser } from "@store/user/slices/authSlice";
+import { useGetOrdersQuery } from "@store/admin/api/express";
 
 export default function Admin() {
-  const navigate = useNavigate();
-  const [authTokens, setAuthTokens] = useState(() =>
-    localStorage.getItem("authTokens") ? JSON.parse(localStorage.getItem("authTokens")) : null
-  );
-  const [sidebarWidth, setSidebarWidth] = useState(JSON.parse(localStorage.getItem("sidebar")) ?? true);
+  const dispatch = useDispatch();
+  const sidebar = localStorage.getItem("sidebar");
+  const [sidebarWidth, setSidebarWidth] = useState(sidebar ? JSON.parse(sidebar) : true);
+  const { data } = useGetOrdersQuery({});
 
   const handleExit = () => {
-    localStorage.removeItem("authTokens");
-    setAuthTokens(null);
-    navigate("/");
+    localStorage.removeItem("token");
+    dispatch(setUser(null));
   };
+  console.log(data);
 
   const handleSidebar = () => {
     setSidebarWidth(!sidebarWidth);
@@ -29,12 +31,12 @@ export default function Admin() {
   const buttonsInfo = [
     {
       text: "Заведение",
-      icon: <RestaurantMenuIcon color="white" sx={{ fontSize: 35 }} />,
+      icon: <RestaurantMenuIcon sx={{ fontSize: 35 }} />,
       link: "main",
     },
     {
       text: "Меню",
-      icon: <MenuBookIcon color="white" sx={{ fontSize: 35 }} />,
+      icon: <MenuBookIcon sx={{ fontSize: 35 }} />,
       link: "menu",
     },
     {

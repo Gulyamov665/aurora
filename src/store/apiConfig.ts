@@ -1,15 +1,12 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
 const baseURL = import.meta.env.VITE_BASE_URL;
-// const admins = "admins/";
 
 const getToken = () => {
-  const authTokensString = localStorage.getItem("authTokens");
-
+  const authTokensString = localStorage.getItem("token");
   if (authTokensString) {
-    const authTokens = JSON.parse(authTokensString);
-    return authTokens ? `Bearer ${authTokens.access}` : "";
+    return `Bearer ${authTokensString}`;
   }
+  return "";
 };
 
 export const baseQuery = fetchBaseQuery({

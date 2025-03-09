@@ -1,24 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { useGetTokenMutation } from "../../../store/tokenApi";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { authState } from "@store/user/slices/authSlice";
+import { useAuthMutation } from "@store/user/api/userAuthApi";
 import logo from "../../../assets/transparent_logo.png";
-
-//todo reactHook form
+import { useEffect } from "react";
 
 export default function Login() {
-  const [getToken, { data, isSuccess, isError, isLoading }] = useGetTokenMutation();
-  const [authTokens, setAuthTokens] = useState(() =>
-    localStorage.getItem("authTokens") ? JSON.parse(localStorage.getItem("authTokens")) : null
-  );
-  const [user, setUser] = useState(() =>
-    localStorage.getItem("authTokens") ? jwtDecode(localStorage.getItem("authTokens")) : null
-  );
+  const [getToken, { isError, isLoading, isSuccess }] = useAuthMutation();
+  const { isUser } = useSelector(authState);
+  const navigate = useNavigate();
 
-  const history = useNavigate();
-
-  const submitFunc = async (e) => {
+  const submitFunc = async (e: any) => {
     e.preventDefault();
 
     const username = e.target.username.value;
@@ -31,17 +24,11 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if (!isSuccess) {
-      return;
+    if (isUser) {
+      navigate(`/admin/${isUser?.vendor}`);
+      toast.success(`Добро пожаловать`);
     }
-
-    const dataDecode = jwtDecode(data.access);
-    localStorage.setItem("authTokens", JSON.stringify(data));
-    setAuthTokens(data);
-    setUser(dataDecode);
-    history(`/admin/${dataDecode.vendor}`);
-    toast.success(`Добро пожаловать ${dataDecode.first_name} ${dataDecode.last_name}`);
-  }, [isSuccess, isError, authTokens]);
+  }, [isUser]);
 
   return (
     <div className="background d-flex align-items-center">

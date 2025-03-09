@@ -19,6 +19,7 @@ import storage from "redux-persist/lib/storage";
 import appReducer from "./appSlice";
 import vendorReducer from "./admin/slices/vendorSlice";
 import authState from "./user/slices/authSlice";
+import { testExpress } from "./admin/api/express.js";
 
 const rootReducer = combineReducers({
   cart: cartSlice,
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   [dispatcher.reducerPath]: dispatcher.reducer,
   [userRegistration.reducerPath]: userRegistration.reducer,
   [userAuth.reducerPath]: userAuth.reducer,
+  [testExpress.reducerPath]: testExpress.reducer,
 });
 
 const persistConfig = {
@@ -69,7 +71,8 @@ const store = configureStore({
       userRegistration.middleware,
       userAuth.middleware,
       registerMiddleware,
-      authMiddleware
+      authMiddleware,
+      testExpress.middleware
     ),
 });
 
