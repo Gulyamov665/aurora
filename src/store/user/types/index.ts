@@ -21,4 +21,40 @@ export type RegistrationResponseType = {
   bot_link: string;
 };
 
+export interface UserType {
+  email: string;
+  exp: number;
+  iat: number;
+  is_user: boolean;
+  is_vendor: boolean;
+  jti: string;
+  token_type: string;
+  user_id: number;
+  vendor: null | string;
+}
+
+export interface ErrorType {
+  message: string;
+  code: number;
+}
+
+export interface IsUserType {
+  token_type: string;
+  exp: number;
+  iat: number;
+  jti: string;
+  user_id: number;
+  email: string;
+  is_user: boolean;
+  is_vendor: boolean;
+  vendor: string | null;
+}
+export type AuthState = {
+  regStep: number;
+  userId: string;
+  botLink: string;
+  isUser: Partial<IsUserType> | null;
+  error: ErrorType;
+};
+
 export type { ProductType };

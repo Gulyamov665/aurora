@@ -1,23 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@store/index";
+import { AuthState, ErrorType, IsUserType } from "../types";
+import { decodeToken } from "@/Utils/decodeToken";
 
-interface ErrorType {
-  message: string;
-  code: number;
-}
+const initialState: AuthState = {
+  regStep: 0,
+  userId: "",
+  botLink: "",
+  isUser: decodeToken(),
+  error: {
+    message: "",
+    code: 0,
+  },
+};
 
 const userAuth = createSlice({
   name: "authState",
-  initialState: {
-    regStep: 0,
-    userId: "",
-    botLink: "",
-    isUser: !!localStorage.getItem("token") || false,
-    error: {
-      message: "",
-      code: 0,
-    },
-  },
+  initialState,
   reducers: {
     regStepChange(state, action) {
       state.regStep = action.payload;
@@ -31,7 +30,7 @@ const userAuth = createSlice({
     regError(state, action: PayloadAction<ErrorType>) {
       state.error = action.payload;
     },
-    setUser(state, action) {
+    setUser(state, action: PayloadAction<IsUserType>) {
       state.isUser = action.payload;
     },
   },
