@@ -7,7 +7,7 @@ import logo from "../../../assets/transparent_logo.png";
 import { useEffect } from "react";
 
 export default function Login() {
-  const [getToken, { isError, isLoading, isSuccess }] = useAuthMutation();
+  const [getToken, { isError, isLoading }] = useAuthMutation();
   const { isUser } = useSelector(authState);
   const navigate = useNavigate();
 
