@@ -57,4 +57,42 @@ export type AuthState = {
   error: ErrorType;
 };
 
+export type VendorInfoType = {
+  waiter_chat_id: number;
+  background_photo: string;
+  name: string;
+  address: string;
+  instagram_link: string;
+  telegram_link: string;
+  logo: string;
+  orders_chat_id: number;
+  availability_orders: boolean;
+};
+
+export type UpdateMutationType = {
+  body: Partial<VendorInfoType>;
+  vendor: string;
+};
+
+type OrderProduct = {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+};
+
+export type OrdersType = {
+  id: number;
+  created_at: string;
+  updated_at: string;
+  created_by: string | null;
+  total_price: string;
+  lat: string;
+  long: string;
+  user_id: number;
+  restaurant: number;
+  products: OrderProduct[];
+  status: string;
+};
+
 export type { ProductType };

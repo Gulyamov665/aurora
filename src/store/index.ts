@@ -14,12 +14,12 @@ import { userRegistration } from "./user/api/userRegistrationApi";
 import { userAuth } from "./user/api/userAuthApi.js";
 import { registerMiddleware } from "./middlewares/registrationMiddleware.js";
 import { authMiddleware } from "./middlewares/authMiddleware.js";
+import { ordersApi } from "./admin/api/orders";
 import cartSlice from "./cartSlice";
 import storage from "redux-persist/lib/storage";
 import appReducer from "./appSlice";
 import vendorReducer from "./admin/slices/vendorSlice";
 import authState from "./user/slices/authSlice";
-import { testExpress } from "./admin/api/express.js";
 
 const rootReducer = combineReducers({
   cart: cartSlice,
@@ -38,7 +38,7 @@ const rootReducer = combineReducers({
   [dispatcher.reducerPath]: dispatcher.reducer,
   [userRegistration.reducerPath]: userRegistration.reducer,
   [userAuth.reducerPath]: userAuth.reducer,
-  [testExpress.reducerPath]: testExpress.reducer,
+  [ordersApi.reducerPath]: ordersApi.reducer,
 });
 
 const persistConfig = {
@@ -72,7 +72,7 @@ const store = configureStore({
       userAuth.middleware,
       registerMiddleware,
       authMiddleware,
-      testExpress.middleware
+      ordersApi.middleware
     ),
 });
 

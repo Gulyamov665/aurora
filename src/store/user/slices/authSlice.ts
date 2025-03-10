@@ -33,10 +33,14 @@ const userAuth = createSlice({
     setUser(state, action: PayloadAction<IsUserType | null>) {
       state.isUser = action.payload;
     },
+    logout(state) {
+      localStorage.removeItem("token");
+      state.isUser = null;
+    },
   },
 });
 
 export const authState = (state: RootState) => state.authState;
 
-export const { regStepChange, userId, botLinkAction, regError, setUser } = userAuth.actions;
+export const { regStepChange, userId, botLinkAction, regError, setUser, logout } = userAuth.actions;
 export default userAuth.reducer;

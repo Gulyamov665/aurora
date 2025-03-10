@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Admin from "../apps/admin/pages/Admin";
+import Admin from "../apps/admin/modules/layout/pages/Admin";
 import Vendor from "../apps/admin/modules/vendor/pages/Vendor";
 import Orders from "../apps/admin/modules/orders/pages/Orders";
 import AdminCategory from "../apps/admin/pages/AdminCategory";

@@ -1,15 +1,12 @@
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
 import { useAuthMutation } from "@store/user/api/userAuthApi";
 import logo from "../../../assets/transparent_logo.png";
-import { useEffect } from "react";
 
 export default function Login() {
   const [getToken, { isError, isLoading }] = useAuthMutation();
   const { isUser } = useSelector(authState);
-  const navigate = useNavigate();
 
   const submitFunc = async (e: any) => {
     e.preventDefault();
@@ -23,12 +20,9 @@ export default function Login() {
     });
   };
 
-  useEffect(() => {
-    if (isUser) {
-      navigate(`/admin/${isUser?.vendor}`);
-      toast.success(`Добро пожаловать`);
-    }
-  }, [isUser]);
+  if (isUser) {
+    return <Navigate to={`/admin/${isUser?.vendor}`} />;
+  }
 
   return (
     <div className="background d-flex align-items-center">

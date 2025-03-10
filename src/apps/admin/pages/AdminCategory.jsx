@@ -5,7 +5,7 @@ import styles from "../static/AdminCategory.module.scss";
 import CategoryModal from "../../client/components/CategoryModal";
 import AddIcon from "@mui/icons-material/Add";
 import EditNoteIcon from "@mui/icons-material/EditNote";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetProductsQuery, useUpdateProductMutation } from "@store/admin/api/productsApi.js";
 import {
   useAddCategoryMutation,

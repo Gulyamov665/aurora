@@ -1,35 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
-import styles from "./Header.module.scss";
-import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import { useQrCodeMutation } from "../../../store/admin/api/qrCode";
 import { DownloadQr } from "../../../Utils/downloadQr";
-import logo from "../../../assets/transparent_logo.png";
 import { useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
+import styles from "./Header.module.scss";
+import MenuIcon from "@mui/icons-material/Menu";
+import logo from "../../../assets/transparent_logo.png";
 
 export default function Header({ sidebar }) {
-  // const [authTokens, setAuthTokens] = useState(() =>
-  //   localStorage.getItem("authTokens") ? JSON.parse(localStorage.getItem("authTokens")) : null
-  // );
   const { isUser } = useSelector(authState);
-
   const [qrCode, { isLoading }] = useQrCodeMutation();
-  // const [vendor, setVendor] = useState();
 
   const qrCodeGenerate = async () => {
     await qrCode({ quantity: 1 });
     await DownloadQr(authTokens?.access);
   };
-
-  // useEffect(() => {
-  //   if (authTokens) {
-  //     setVendor(jwtDecode(authTokens.access).vendor);
-  //   } else {
-  //     setVendor("");
-  //   }
-  // }, [authTokens]);
 
   return (
     <header className={`${styles.header} sticky-top`}>

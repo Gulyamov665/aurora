@@ -1,17 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "../../apiConfig";
-
-type Vendor = {
-  waiter_chat_id: number;
-  background_photo: string;
-  name: string;
-  address: string;
-  instagram_link: string;
-  telegram_link: string;
-  logo: string;
-  orders_chat_id: number;
-  availability_orders: boolean;
-};
+import { UpdateMutationType, VendorInfoType } from "@store/user/types";
 
 export const vendorApi = createApi({
   reducerPath: "vendorApi",
@@ -19,13 +8,13 @@ export const vendorApi = createApi({
   baseQuery,
 
   endpoints: (build) => ({
-    load: build.query<Vendor, string>({
+    load: build.query<VendorInfoType, string>({
       query: (params) => `admins/restaurants/${params}`,
       providesTags: ["vendor"],
     }),
-    update: build.mutation({
+    update: build.mutation<VendorInfoType, UpdateMutationType>({
       query: ({ body, vendor }) => ({
-        url: `restaurants/${vendor}`,
+        url: `admins/restaurants/${vendor}`,
         method: "PUT",
         body,
       }),

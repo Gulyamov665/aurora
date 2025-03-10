@@ -7,7 +7,6 @@ import RegForm from "./RegDataStep";
 
 const Register: FC<RegisterType> = ({ state, regStep, error, registration }) => {
   const { register, handleSubmit, control, formState, trigger, watch } = useForm<FormValuesType>({ mode: "onTouched" });
-  // const { register: codeRegister, handleSubmit: codeSubmit } = useForm<RequestFormValuesType>();
 
   const submit: SubmitHandler<FormValuesType> = async (data) => {
     await registration({ ...data });

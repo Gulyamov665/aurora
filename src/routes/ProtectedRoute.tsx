@@ -1,5 +1,5 @@
 import { JSX, useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authState, setUser } from "@store/user/slices/authSlice";
 
@@ -24,7 +24,7 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   }, [dispatch, navigate]);
 
   if (!isUser || redirect) {
-    return <Navigate to="/" />;
+    return navigate("/");
   }
 
   return children;

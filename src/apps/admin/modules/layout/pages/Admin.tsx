@@ -1,55 +1,22 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import styles from "../static/Admin.module.scss";
-import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
-import RedeemIcon from "@mui/icons-material/Redeem";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
-import Header from "../components/Header";
-import { useDispatch } from "react-redux";
-import { setUser } from "@store/user/slices/authSlice";
-import { useGetOrdersQuery } from "@store/admin/api/express";
+// import { useGetOrdersQuery } from "@store/admin/api/express";
+import { buttonsInfo } from "../components/ButtonsList";
+import { useActions } from "@/hooks/useActions";
+import Header from "../../../components/Header";
+import styles from "../assets/Admin.module.scss";
 
 export default function Admin() {
-  const dispatch = useDispatch();
   const sidebar = localStorage.getItem("sidebar");
   const [sidebarWidth, setSidebarWidth] = useState(sidebar ? JSON.parse(sidebar) : true);
-  const { data } = useGetOrdersQuery({});
-
-  const handleExit = () => {
-    localStorage.removeItem("token");
-    dispatch(setUser(null));
-  };
-  console.log(data);
+  const { logout } = useActions();
+  // const { data } = useGetOrdersQuery({});
 
   const handleSidebar = () => {
     setSidebarWidth(!sidebarWidth);
     localStorage.setItem("sidebar", JSON.stringify(!sidebarWidth));
   };
-
-  const buttonsInfo = [
-    {
-      text: "Заведение",
-      icon: <RestaurantMenuIcon sx={{ fontSize: 35 }} />,
-      link: "main",
-    },
-    {
-      text: "Меню",
-      icon: <MenuBookIcon sx={{ fontSize: 35 }} />,
-      link: "menu",
-    },
-    {
-      text: "Акции",
-      icon: <RedeemIcon sx={{ fontSize: 35 }} />,
-      link: "promo",
-    },
-    {
-      text: "Заказы",
-      icon: <BorderColorIcon sx={{ fontSize: 35 }} />,
-      link: "orders",
-    },
-  ];
 
   return (
     <>
@@ -75,14 +42,14 @@ export default function Admin() {
                       <span className="">{text}</span>
                     </div>
                   ) : (
-                    <React.Fragment>{icon}</React.Fragment>
+                    <>{icon}</>
                   )}
                 </Link>
               ))}
             </div>
 
             <div className={styles.arrow}>
-              <button className="btn btn-danger" onClick={handleExit}>
+              <button className="btn btn-danger" onClick={() => logout()}>
                 <strong>Выход</strong>
               </button>
             </div>

@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { OrdersType } from "@store/user/types";
 
 const getToken = () => {
   const authTokensString = localStorage.getItem("token");
@@ -20,16 +21,16 @@ export const baseQuery = fetchBaseQuery({
   },
 });
 
-export const testExpress = createApi({
-  reducerPath: "express",
-  tagTypes: ["express"],
+export const ordersApi = createApi({
+  reducerPath: "orders",
+  tagTypes: ["orders"],
   baseQuery,
 
   endpoints: (build) => ({
-    getOrders: build.query({
+    getOrders: build.query<OrdersType[], void>({
       query: () => "/orders",
     }),
   }),
 });
 
-export const { useGetOrdersQuery } = testExpress;
+export const { useGetOrdersQuery } = ordersApi;
