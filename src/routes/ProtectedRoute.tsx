@@ -1,9 +1,12 @@
 import { JSX, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authState, setUser } from "@store/user/slices/authSlice";
+interface ProtectedRouteProps {
+  children: JSX.Element;
+}
 
-const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { isUser } = useSelector(authState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,7 +27,11 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   }, [dispatch, navigate]);
 
   if (!isUser || redirect) {
-    return navigate("/");
+    return (
+      <div style={{ height: "100dvh", width: "100%", background: "#210638" }}>
+        <Navigate to="/" />
+      </div>
+    );
   }
 
   return children;
