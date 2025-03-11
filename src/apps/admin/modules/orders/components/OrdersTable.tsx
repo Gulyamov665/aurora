@@ -1,11 +1,12 @@
 import { FC, useState } from "react";
-import { Table, TableHead, TableRow, TableCell, TableBody } from "@mui/material";
-import { TableSortLabel, Card, CardContent, Typography, IconButton, Chip } from "@mui/material";
-import { Person, MonetizationOn, Receipt, Close, Kitchen } from "@mui/icons-material";
-import { Visibility, DoneOutline, AccessTime } from "@mui/icons-material";
+import { Table, TableHead, TableRow, TableCell, TableBody, Box } from "@mui/material";
+import { TableSortLabel, Card, CardContent, Typography, IconButton } from "@mui/material";
+import { Person, MonetizationOn, Receipt, ErrorOutline } from "@mui/icons-material";
+import { Visibility } from "@mui/icons-material";
 import { OrderKey, OrdersTableProps } from "../types";
+import { getStatusChip } from "./Statuses";
 
-const OrdersTable: FC<OrdersTableProps> = ({ data = [] }) => {
+const OrdersTable: FC<OrdersTableProps> = ({ data }) => {
   const [sortBy, setSortBy] = useState<OrderKey>("id");
   const [order, setOrder] = useState<"asc" | "desc">("asc");
 
@@ -15,22 +16,23 @@ const OrdersTable: FC<OrdersTableProps> = ({ data = [] }) => {
     setSortBy(key);
   };
 
-  const getStatusChip = (status: any) => {
-    switch (status) {
-      case "completed":
-        return <Chip label="Готово" color="success" icon={<DoneOutline />} />;
-      case "pending":
-        return <Chip label="Ожидание" color="secondary" icon={<AccessTime />} />;
-      case "canceled":
-        return <Chip label="Отменено" color="error" icon={<Close />} />;
-      case "prepare":
-        return <Chip label="Готовиться" color="warning" icon={<Kitchen />} />;
-      default:
-        return <Chip label="Неизвестно" />;
-    }
-  };
+  if (!data?.data) {
+    return (
+      <Box sx={{ mt: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Card
+          sx={{ mb: 3, p: 2, display: "flex", flexDirection: "column", alignItems: "center", width: 400 }}
+          elevation={3}
+        >
+          <ErrorOutline sx={{ fontSize: 40, color: "error.main" }} />
+          <Typography variant="h6" align="center" sx={{ mt: 1 }}>
+            Нет доступных заказов
+          </Typography>
+        </Card>
+      </Box>
+    );
+  }
 
-  const sortedOrders = [...data].sort((a, b) => {
+  const sortedOrders = [...data?.data].sort((a, b) => {
     const aValue = a[sortBy];
     const bValue = b[sortBy];
     if (aValue == null || bValue == null) {
@@ -45,7 +47,7 @@ const OrdersTable: FC<OrdersTableProps> = ({ data = [] }) => {
   });
 
   return (
-    <Card elevation={6} sx={{ mt: 3 }}>
+    <Card elevation={6} sx={{ mt: 3, mb: 4 }}>
       <CardContent>
         <Typography variant="h6" gutterBottom>
           Заказы

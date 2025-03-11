@@ -95,4 +95,11 @@ export type OrdersType = {
   status: string;
 };
 
+export type OrdersData = {
+  data: OrdersType[];
+  last_page: number;
+  page: number;
+  total: number;
+};
+
 export type { ProductType };
