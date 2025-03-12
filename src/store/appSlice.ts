@@ -1,17 +1,39 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from ".";
+interface DeleteModalState {
+  open: boolean;
+  message: string;
+  type: string;
+  id: number | null;
+}
+
+interface AppState {
+  data: any[];
+  categoryData: any[];
+  removedData: any[];
+  createModal: boolean;
+  updateModal: boolean;
+  selectedCategory: any | null;
+  search: string;
+  deleteModal: DeleteModalState;
+  deleteConfirmed: boolean;
+}
+
+const initialState: AppState = {
+  data: [],
+  categoryData: [],
+  removedData: [],
+  createModal: false,
+  updateModal: false,
+  selectedCategory: null,
+  search: "",
+  deleteModal: { open: false, message: "", type: "", id: null },
+  deleteConfirmed: false,
+};
 
 const appSlice = createSlice({
   name: "modals",
-  initialState: {
-    data: [],
-    categoryData: [],
-    removedData: [],
-    createModal: false,
-    updateModal: false,
-    selectedCategory: null,
-    search: "",
-  },
+  initialState,
   reducers: {
     toggleCreate(state) {
       state.createModal = !state.createModal;
@@ -25,11 +47,34 @@ const appSlice = createSlice({
     productSearch(state, action) {
       state.search = action.payload;
     },
+    showDeleteModal: (state, action: PayloadAction<{ message: string; type: string; id: number | null }>) => {
+      state.deleteModal.open = true;
+      state.deleteModal.message = action.payload.message;
+      state.deleteModal.type = action.payload.type;
+      state.deleteModal.id = action.payload.id;
+    },
+    closeDeleteModal: (state) => {
+      state.deleteModal.open = false;
+      state.deleteModal.type = "";
+      state.deleteModal.id = null;
+      state.deleteConfirmed = false;
+    },
+    confirmDeletion: (state) => {
+      state.deleteConfirmed = true;
+    },
   },
 });
 
 export const modals = (state: RootState) => state.modals;
 
-export const { toggleCreate, toggleUpdate, selectedCategory, productSearch } = appSlice.actions;
+export const {
+  toggleCreate,
+  toggleUpdate,
+  selectedCategory,
+  productSearch,
+  showDeleteModal,
+  closeDeleteModal,
+  confirmDeletion,
+} = appSlice.actions;
 
 export default appSlice.reducer;

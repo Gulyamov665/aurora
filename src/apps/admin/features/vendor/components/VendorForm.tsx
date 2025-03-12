@@ -11,7 +11,7 @@ import {
   LockOpenOutlined,
 } from "@mui/icons-material";
 
-const VendorForm: FC<VendorFormType> = ({ register, handleSubmit, handleUpdate, isLoading }) => {
+const VendorForm: FC<VendorFormType> = ({ register, handleSubmit, handleUpdate, isLoading, isChanged }) => {
   return (
     <form onSubmit={handleSubmit(handleUpdate)}>
       <Box sx={{ maxWidth: 1200, mx: "auto", mt: 5 }}>
@@ -160,8 +160,13 @@ const VendorForm: FC<VendorFormType> = ({ register, handleSubmit, handleUpdate, 
                 "&:hover": {
                   background: "#3e0a6b",
                 },
+                "&.Mui-disabled": {
+                  backgroundColor: " rgba(237, 243, 245, 1)",
+                  color: " rgba(142, 157, 180, 1)",
+                  cursor: "not-allowed",
+                },
               }}
-              disabled={isLoading}
+              disabled={!isChanged}
             >
               {isLoading ? <CircularProgress size={24} sx={{ color: "white" }} /> : "Сохранить"}
             </Button>

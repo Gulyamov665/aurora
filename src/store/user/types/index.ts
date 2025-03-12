@@ -69,6 +69,8 @@ export type VendorInfoType = {
   availability_orders: boolean;
 };
 
+export type initialDataType = Omit<VendorInfoType, "background_photo" | "logo">;
+
 export type UpdateMutationType = {
   body: Partial<VendorInfoType>;
   vendor: string;

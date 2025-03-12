@@ -27,7 +27,7 @@ export default function PromoModal({
                 type="text"
                 autoFocus
                 placeholder="Пропишите название акции"
-                {...register('name', { required: true })}
+                // {...register('name', { required: true })}
               />
             </Form.Group>
             <Form.Group
@@ -39,7 +39,7 @@ export default function PromoModal({
                 as="textarea"
                 placeholder="Пропишите условия акции"
                 rows={3}
-                {...register('info', { required: true })}
+                // {...register('info', { required: true })}
                 defaultValue={'test'}
               />
             </Form.Group>
@@ -51,7 +51,7 @@ export default function PromoModal({
                 type="file"
                 accept="image"
                 autoFocus
-                {...register('photo')}
+                // {...register('photo')}
               />
             </Form.Group>
 
@@ -61,7 +61,7 @@ export default function PromoModal({
                 type="number"
                 autoFocus
                 placeholder="Пропишите цену акции"
-                {...register('price', { required: true })}
+                // {...register('price', { required: true })}
               />
             </Form.Group>
           </Form>
@@ -70,7 +70,7 @@ export default function PromoModal({
           <Button variant="danger" onClick={handleClose}>
             Отмена
           </Button>
-          <Button variant="success" onClick={handleSubmit(submit)}>
+          <Button variant="success" onClick={() => {}}>
             Добавить
           </Button>
         </Modal.Footer>

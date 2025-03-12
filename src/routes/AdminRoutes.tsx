@@ -1,13 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-import Admin from "../apps/admin/modules/layout/pages/Admin";
-import Vendor from "../apps/admin/modules/vendor/pages/Vendor";
-import Orders from "../apps/admin/modules/orders/pages/Orders";
+import Admin from "../apps/admin/features/layout/pages/Admin";
+import Vendor from "../apps/admin/features/vendor/pages/Vendor";
+import Orders from "../apps/admin/features/orders/pages/Orders";
 import AdminCategory from "../apps/admin/pages/AdminCategory";
-import UpdateProduct from "../apps/admin/modules/Product/pages/UpdateProduct";
-import AddProduct from "../apps/admin/modules/Product/pages/AddProduct";
-import AdminPromo from "../apps/admin/modules/promo/pages/AdminPromo";
-import UpdatePromo from "../apps/admin/modules/promo/pages/UpdatePromo";
-import AddPromo from "../apps/admin/modules/promo/pages/AddPromo";
+import UpdateProduct from "../apps/admin/features/Product/pages/UpdateProduct";
+import AddProduct from "../apps/admin/features/Product/pages/AddProduct";
+import AdminPromo from "../apps/admin/features/promo/pages/AdminPromo";
+import UpdatePromo from "../apps/admin/features/promo/pages/UpdatePromo";
+import AddPromo from "../apps/admin/features/promo/pages/AddPromo";
 import ProtectedRoute from "./ProtectedRoute";
 
 export default function AdminRoutes() {

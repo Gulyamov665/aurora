@@ -13,7 +13,7 @@ export const promosApi = createApi({
     }),
 
     getPromo: build.query({
-      query: (id) => `v1/promos/${id}`,
+      query: (id) => `v1/promo/${id}`,
       providesTags: ["Promos"],
     }),
 
@@ -27,7 +27,7 @@ export const promosApi = createApi({
     }),
     updatePromo: build.mutation({
       query: ({ body, id }) => ({
-        url: `v1/promo/${id}`,
+        url: `v1/promo/${id}/`,
         method: "PUT",
         body,
       }),

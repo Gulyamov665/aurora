@@ -6,4 +6,5 @@ export type VendorFormType = {
   handleSubmit: UseFormHandleSubmit<VendorInfoType>;
   handleUpdate: SubmitHandler<VendorInfoType>;
   isLoading: boolean;
+  isChanged: boolean;
 };

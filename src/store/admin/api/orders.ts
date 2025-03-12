@@ -3,7 +3,7 @@ import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError 
 import { OrdersData } from "@store/user/types";
 
 export const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:3000/api",
+  baseUrl: "https://backend.aurora-app.uz/api",
   prepareHeaders: (headers) => {
     const token = getToken();
     if (token) {

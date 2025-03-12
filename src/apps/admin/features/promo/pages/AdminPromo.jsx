@@ -1,19 +1,21 @@
 import React from "react";
 import styles from "../assets/AdminPromo.module.scss";
-import { useUpdatePromoMutation } from "../../../../../store/admin/api/promoApi";
-import { useGetPromosQuery } from "../../../../../store/admin/api/promoApi";
+import { useDeletePromoMutation, useUpdatePromoMutation } from "@store/admin/api/promoApi";
+import { useGetPromosQuery } from "@store/admin/api/promoApi";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Promos from "../components/Promos";
+import PromoList from "../components/PromoList";
+import { DeleteModal } from "@/apps/common/DeleteModal";
 
 const AdminPromo = () => {
   const { res } = useParams();
   const { data: promo = [] } = useGetPromosQuery(res);
   const [updatePromos] = useUpdatePromoMutation();
+  const [deletePromo, { isLoading: deleteLoading }] = useDeletePromoMutation();
 
   //Toggle update function
   const updatePromo = async (item) => {
-    console.log(item);
     delete item.photo;
     const updatePromo = {
       ...item,
@@ -34,6 +36,8 @@ const AdminPromo = () => {
       </div>
 
       <Promos data={promo} updatePromo={updatePromo} />
+      <PromoList promos={promo} updatePromo={updatePromo} deletePromo={deletePromo} />
+      <DeleteModal />
     </div>
   );
 };
