@@ -5,7 +5,7 @@ import { Promo, PromoListType } from "../types";
 import { useDelete } from "@/hooks/useDelete";
 import { PromoListStyle } from "../assets/PromoListStyle";
 
-import { CircularProgress, Typography, styled } from "@mui/material";
+import { Typography, styled } from "@mui/material";
 
 const LoaderWrapper = styled(Box)({
   position: "fixed",
