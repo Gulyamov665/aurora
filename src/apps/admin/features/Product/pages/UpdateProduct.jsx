@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { ProductForm } from "../components/ProductForm";
 import { useForm } from "react-hook-form";
-import {
-  useDeleteProductMutation,
-  useGetProductQuery,
-  useUpdateProductMutation,
-} from "../../../../../store/admin/api/productsApi";
+import { useDeleteProductMutation, useGetProductQuery, useUpdateProductMutation } from "@store/admin/api/productsApi";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { modals } from "@store/appSlice";
 import CropModal from "../components/CropModal";
 import Loading from "../../../../client/features/loading/Loading";
+import { useDelete } from "@/hooks/useDelete";
 
 function UpdateProduct() {
   const params = useParams();
@@ -20,6 +19,9 @@ function UpdateProduct() {
   const [file, setFile] = useState(null);
   const [cropData, setCropData] = useState(null);
   const navigate = useNavigate();
+  const { deleteConfirmed, deleteModal } = useSelector(modals);
+  const [open, setOpen] = useState(false);
+  const { deleteItem, confirmedId } = useDelete();
 
   useEffect(() => {
     if (!img) {
@@ -33,6 +35,12 @@ function UpdateProduct() {
       reset(rest);
     }
   }, [product, reset]);
+
+  useEffect(() => {
+    if (confirmedId) {
+      handleDelete();
+    }
+  }, [confirmedId]);
 
   const isLoading = dLoading || updateLoading;
 
@@ -62,11 +70,9 @@ function UpdateProduct() {
     navigate(-1);
   };
 
-  const handledelete = async () => {
-    if (window.confirm("вы действительно хотите удалить позицию")) {
-      await deleteProduct(params.id);
-      navigate(-1);
-    }
+  const handleDelete = async () => {
+    await deleteProduct(confirmedId);
+    navigate(-1);
   };
 
   return (
@@ -77,7 +83,10 @@ function UpdateProduct() {
           вернуться
         </button>
 
-        <button className="btn btn-danger mt-3 mb-3" onClick={handledelete}>
+        <button
+          className="btn btn-danger mt-3 mb-3"
+          onClick={() => deleteItem({ message: product.name, type: "product", id: product.id })}
+        >
           удалить
         </button>
       </div>

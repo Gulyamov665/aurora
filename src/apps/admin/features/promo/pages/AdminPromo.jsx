@@ -5,12 +5,11 @@ import { useGetPromosQuery } from "@store/admin/api/promoApi";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Promos from "../components/Promos";
-import PromoList from "../components/PromoList";
-import { DeleteModal } from "@/apps/common/DeleteModal";
+import PromoList, { LoadingScreen } from "../components/PromoList";
 
 const AdminPromo = () => {
   const { res } = useParams();
-  const { data: promo = [] } = useGetPromosQuery(res);
+  const { data: promo = [], isLoading } = useGetPromosQuery(res);
   const [updatePromos] = useUpdatePromoMutation();
   const [deletePromo, { isLoading: deleteLoading }] = useDeletePromoMutation();
 
@@ -27,6 +26,8 @@ const AdminPromo = () => {
     }).unwrap();
   };
 
+  if (isLoading) return <LoadingScreen />;
+
   return (
     <div className={`${styles.container_promo}`}>
       <div className={`${styles.add_promo}`}>
@@ -37,7 +38,6 @@ const AdminPromo = () => {
 
       <Promos data={promo} updatePromo={updatePromo} />
       <PromoList promos={promo} updatePromo={updatePromo} deletePromo={deletePromo} />
-      <DeleteModal />
     </div>
   );
 };

@@ -1,44 +1,48 @@
+import { FC } from "react";
+import { Button, Drawer, List, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { Link } from "react-router-dom";
 import { buttonsInfo } from "./ButtonsList";
-import { motion } from "framer-motion";
-import styles from "../assets/Admin.module.scss";
-import { FC } from "react";
 import { SideBarProps } from "../types";
 
-const Sidebar: FC<SideBarProps> = ({ handleSidebar, logout, sidebarWidth }) => {
+const Sidebar: FC<SideBarProps> = ({ open, logout, handleSidebar }) => {
   return (
-    <motion.div
-      className={styles.section1}
-      initial={{ x: -200 }}
-      animate={{ x: 0 }}
-      exit={{
-        x: -200,
-        opacity: 0,
-      }}
-      transition={{ duration: 0.3 }}
-    >
-      <div className={`${styles.section_0} text-center`}></div>
-      <div className="d-flex flex-column ms-2">
-        {buttonsInfo.map(({ text, icon, link }, index) => (
-          <Link key={index} to={link} onClick={handleSidebar} className={`${styles.buttons} text-start btn`}>
-            {sidebarWidth ? (
-              <div className={styles.div}>
-                <span className="me-3">{icon}</span>
-                <span className="">{text}</span>
-              </div>
-            ) : (
-              <>{icon}</>
-            )}
-          </Link>
-        ))}
-      </div>
+    <div>
+      <Drawer anchor="left" open={open} onClose={handleSidebar} PaperProps={{ style: { backgroundColor: "#210638" } }}>
+        <div style={{ width: 250, textAlign: "center", height: 180 }}></div>
+        <List sx={{ paddingLeft: 2, height: 500 }}>
+          {buttonsInfo.map(({ text, icon, link }, index) => (
+            <ListItemButton
+              sx={{
+                width: 180,
+                color: "#ffffff",
+                transition: "0.3s",
+                borderRadius: 2,
 
-      <div className={styles.arrow}>
-        <button className="btn btn-danger" onClick={() => logout()}>
-          <strong>Выход</strong>
-        </button>
-      </div>
-    </motion.div>
+                "&:hover": {
+                  backgroundColor: "#0da5ab", // Темнее при наведении
+                  color: "#ffffff",
+                  transition: "0.3s",
+                  borderRadius: 2,
+                },
+              }}
+              alignItems="center"
+              key={index}
+              component={Link}
+              to={link}
+              onClick={handleSidebar}
+            >
+              <ListItemIcon>{icon}</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          ))}
+        </List>
+        <div style={{ textAlign: "center", padding: 16 }}>
+          <Button variant="contained" color="error" onClick={logout}>
+            <strong>Выход</strong>
+          </Button>
+        </div>
+      </Drawer>
+    </div>
   );
 };
 

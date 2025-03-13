@@ -6,22 +6,22 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 export const buttonsInfo = [
   {
     text: "Заведение",
-    icon: <RestaurantMenuIcon sx={{ fontSize: 35 }} />,
+    icon: <RestaurantMenuIcon sx={{ fontSize: 35, color: "white" }} />,
     link: "main",
   },
   {
     text: "Меню",
-    icon: <MenuBookIcon sx={{ fontSize: 35 }} />,
+    icon: <MenuBookIcon sx={{ fontSize: 35, color: "white" }} />,
     link: "menu",
   },
   {
     text: "Акции",
-    icon: <RedeemIcon sx={{ fontSize: 35 }} />,
+    icon: <RedeemIcon sx={{ fontSize: 35, color: "white" }} />,
     link: "promo",
   },
   {
     text: "Заказы",
-    icon: <BorderColorIcon sx={{ fontSize: 35 }} />,
+    icon: <BorderColorIcon sx={{ fontSize: 35, color: "white" }} />,
     link: "orders",
   },
 ];

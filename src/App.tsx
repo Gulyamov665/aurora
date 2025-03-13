@@ -7,6 +7,7 @@ import AdminRoutes from "./routes/AdminRoutes";
 import VendorRoutes from "./routes/VendorRoutes";
 import RegistrationPage from "./apps/client/features/registration/pages/RegistrationPage";
 import Auth from "./apps/client/features/auth/pages/Auth";
+import { DeleteModal } from "./apps/common/DeleteModal";
 
 function App() {
   const { state } = useLocation();
@@ -22,13 +23,15 @@ function App() {
         <Route path="/register" element={<RegistrationPage state={state} />} />
         <Route path="/login" element={<Auth state={state} />} />
 
-        {/*client and admin routes 2 */}
-
+        {/*client and admin routes */}
         <Route path="admin/:res/*" element={<AdminRoutes />} />
         <Route path="vendor/:res/*" element={<VendorRoutes />} />
       </Routes>
 
+      
+      {/* global elements */}
       <ToastContainer />
+      <DeleteModal />
     </>
   );
 }
