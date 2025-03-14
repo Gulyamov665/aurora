@@ -1,0 +1,31 @@
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
+import { useActions } from "@/hooks/useActions";
+import Header from "../../../components/Header";
+import styles from "../assets/Admin.module.scss";
+// import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Sidebar";
+
+export default function Admin() {
+  const sidebar = localStorage.getItem("sidebar");
+
+  const { logout } = useActions();
+  const [open, setOpen] = useState(sidebar ? JSON.parse(sidebar) : true);
+
+  const handleSidebar = () => {
+    // setSidebarWidth(!sidebarWidth);
+    setOpen(!open);
+    localStorage.setItem("sidebar", JSON.stringify(!open));
+  };
+
+  return (
+    <>
+      <Header sidebar={handleSidebar} />
+      {/* {sidebarWidth && <Sidebar handleSidebar={handleSidebar} logout={logout} sidebarWidth={sidebarWidth} />} */}
+      <Sidebar open={open} logout={logout} handleSidebar={handleSidebar} />
+      <div className={styles.parent}>
+        <Outlet />
+      </div>
+    </>
+  );
+}

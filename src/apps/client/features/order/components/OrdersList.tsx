@@ -7,15 +7,22 @@ import OrderProducts from "./OrderProducts";
 import emptyCart from "@/assets/emptyCard.jpg";
 import styles from "../assets/Orders.module.scss";
 import { useActions } from "@/hooks/useActions";
+import { useDelete } from "@/hooks/useDelete";
+import { useEffect } from "react";
 
 export default function OrdersList() {
   const { items } = useSelector(cart);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { addCartItem, minusItem } = useActions();
+  const { deleteItem, confirmedId } = useDelete();
+
+  useEffect(() => {
+    if (confirmedId) dispatch(removeCartItems());
+  }, [confirmedId]);
 
   const removeItems = () => {
-    if (confirm("Удалить все товари из корзины ?")) dispatch(removeCartItems());
+    deleteItem({ message: "все товари из корзины ?", type: "orders", id: 1 });
   };
 
   return (
