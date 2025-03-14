@@ -1,7 +1,7 @@
 import { userAuth } from "@store/user/api/userAuthApi";
-import listenerMiddleware from "@store/user/listenerMiddleware";
 import { regError, setUser } from "@store/user/slices/authSlice";
 import { jwtDecode, JwtPayload } from "jwt-decode";
+import listenerMiddleware from "@store/user/listenerMiddleware";
 
 interface CustomJwtPayload extends JwtPayload {
   token_type: string;
@@ -23,6 +23,10 @@ listenerMiddleware.startListening({
     localStorage.setItem("refresh", refresh);
     const user = jwtDecode<CustomJwtPayload>(access);
     listenerApi.dispatch(setUser(user));
+    // const meResponse = await listenerApi.dispatch(userAuth.endpoints.me.initiate(user.user_id));
+    // if (meResponse?.data) {
+    //   listenerApi.dispatch(setUser(meResponse));
+    // }
   },
 });
 

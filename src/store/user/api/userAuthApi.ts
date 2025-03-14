@@ -18,7 +18,10 @@ export const userAuth = createApi({
         body,
       }),
     }),
+    me: build.query<number, number>({
+      query: (id) => `v1/auth/user/${id}`,
+    }),
   }),
 });
 
-export const { useAuthMutation } = userAuth;
+export const { useAuthMutation, useMeQuery } = userAuth;

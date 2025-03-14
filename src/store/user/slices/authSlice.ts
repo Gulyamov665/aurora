@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@store/index";
 import { AuthState, ErrorType, IsUserType } from "../types";
 import { decodeToken } from "@/Utils/decodeToken";
+// import { userAuth } from "../api/userAuthApi";
 
 const initialState: AuthState = {
   regStep: 0,
@@ -14,7 +15,7 @@ const initialState: AuthState = {
   },
 };
 
-const userAuth = createSlice({
+const userAuthState = createSlice({
   name: "authState",
   initialState,
   reducers: {
@@ -38,9 +39,26 @@ const userAuth = createSlice({
       state.isUser = null;
     },
   },
+  // extraReducers: (builder) => {
+  //   builder
+  //     .addCase(logout, (state) => {
+  //       console.log("Logout action dispatched");
+  //       localStorage.removeItem("token");
+  //       state.isUser = null;
+  //     })
+  //     .addMatcher(userAuth.endpoints.auth.matchPending, (state, action: PayloadAction<undefined>) => {
+  //       console.log("Pending action:", action.type);
+  //     })
+  //     .addMatcher(userAuth.endpoints.auth.matchFulfilled, (state, action: PayloadAction<{ accessToken: string }>) => {
+  //       console.log("Fulfilled action:", action.payload);
+  //     })
+  //     .addMatcher(userAuth.endpoints.auth.matchRejected, (state, action) => {
+  //       console.log("Rejected action:", action.payload);
+  //     });
+  // },
 });
 
 export const authState = (state: RootState) => state.authState;
 
-export const { regStepChange, userId, botLinkAction, regError, setUser, logout } = userAuth.actions;
-export default userAuth.reducer;
+export const { regStepChange, userId, botLinkAction, regError, setUser, logout } = userAuthState.actions;
+export default userAuthState.reducer;

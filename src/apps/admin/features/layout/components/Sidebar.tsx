@@ -37,7 +37,7 @@ const Sidebar: FC<SideBarProps> = ({ open, logout, handleSidebar }) => {
           ))}
         </List>
         <div style={{ textAlign: "center", padding: 16 }}>
-          <Button variant="contained" color="error" onClick={logout}>
+          <Button variant="contained" color="error" onClick={() => logout()}>
             <strong>Выход</strong>
           </Button>
         </div>

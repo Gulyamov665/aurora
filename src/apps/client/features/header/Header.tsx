@@ -13,8 +13,6 @@ const Header: FC = () => {
   const { isUser } = useSelector(authState);
   const { logout } = useActions();
 
-  console.log(isUser);
-
   const items = [
     { id: 1, name: "item1" },
     { id: 2, name: "item2" },

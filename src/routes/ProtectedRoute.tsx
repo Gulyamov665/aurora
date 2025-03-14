@@ -7,7 +7,7 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { isUser } = useSelector(authState);
+  const { isUser, error } = useSelector(authState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [redirect, setRedirect] = useState(false);
@@ -24,7 +24,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
-  }, [dispatch, navigate]);
+  }, [dispatch, navigate, error]);
 
   if (!isUser || redirect) {
     return (

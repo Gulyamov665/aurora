@@ -8,15 +8,17 @@ export type DataType = {
   password: string;
 };
 
+type errorType = {
+  message: string;
+  code: number;
+};
+
 export type AuthData = {
   register: UseFormRegister<DataType>;
   handleSubmit: UseFormHandleSubmit<DataType>;
   submit: SubmitHandler<DataType>;
   formState: UseFormStateReturn<DataType>;
   state: { from: string };
-  error?: {
-    code: number;
-    message: string;
-  };
+  error?: errorType | undefined;
   isLoading: boolean;
 };

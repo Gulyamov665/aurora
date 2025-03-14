@@ -5,6 +5,7 @@ import { AuthType, DataType } from "../types";
 import { useAuthMutation } from "@store/user/api/userAuthApi";
 import { useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
+import { parseError } from "@/Utils/parseError";
 import styles from "../assets/AuthForm.module.scss";
 import Login from "../components/Login";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -12,8 +13,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 const Auth: FC<AuthType> = ({ state }) => {
   const { register, handleSubmit, formState } = useForm<DataType>();
   const { isUser } = useSelector(authState);
-  const [userAuth, { isLoading }] = useAuthMutation();
-  const { error } = useSelector(authState);
+  const [userAuth, { isLoading, error }] = useAuthMutation();
   const navigate = useNavigate();
 
   const submit: SubmitHandler<DataType> = async (data) => {
@@ -37,7 +37,7 @@ const Auth: FC<AuthType> = ({ state }) => {
           submit={submit}
           state={state}
           isLoading={isLoading}
-          error={error}
+          error={parseError(error)}
           formState={formState}
         />
       </div>

@@ -20,6 +20,7 @@ import storage from "redux-persist/lib/storage";
 import appReducer from "./appSlice";
 import vendorReducer from "./admin/slices/vendorSlice";
 import authState from "./user/slices/authSlice";
+// import loggerMiddleware from "./loggerMiddleware.js";
 
 const rootReducer = combineReducers({
   cart: cartSlice,
@@ -72,7 +73,8 @@ const store = configureStore({
       userAuth.middleware,
       registerMiddleware,
       authMiddleware,
-      ordersApi.middleware
+      ordersApi.middleware,
+      // loggerMiddleware
     ),
 });
 
