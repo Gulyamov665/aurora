@@ -28,7 +28,6 @@ function App() {
         <Route path="vendor/:res/*" element={<VendorRoutes />} />
       </Routes>
 
-      
       {/* global elements */}
       <ToastContainer />
       <DeleteModal />
