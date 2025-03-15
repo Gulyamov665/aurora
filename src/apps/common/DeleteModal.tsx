@@ -15,7 +15,7 @@ export const DeleteModal = () => {
 
   return (
     <MaterialModal open={deleteModal.open} onClose={closeDeleteModal}>
-      <Typography variant="h6" textAlign="center" sx={{padding:2}}>
+      <Typography variant="h6" textAlign="center" sx={{padding:2, lineHeight:"24px"}}>
         Вы уверене что хотите удалить {deleteModal.message}
       </Typography>
       <Box display="flex" justifyContent="center" gap={2} mt={3}>

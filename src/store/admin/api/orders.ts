@@ -2,8 +2,10 @@ import { getToken } from "@/Utils/getToken";
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { OrdersData } from "@store/user/types";
 
+const url = import.meta.env.VITE_EXPRESS_URL;
+
 export const baseQuery = fetchBaseQuery({
-  baseUrl: "https://backend.aurora-app.uz/api",
+  baseUrl: url,
   prepareHeaders: (headers) => {
     const token = getToken();
     if (token) {

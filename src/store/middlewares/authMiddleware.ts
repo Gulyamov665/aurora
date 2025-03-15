@@ -23,7 +23,8 @@ listenerMiddleware.startListening({
     localStorage.setItem("refresh", refresh);
     const user = jwtDecode<CustomJwtPayload>(access);
     listenerApi.dispatch(setUser(user));
-    // const meResponse = await listenerApi.dispatch(userAuth.endpoints.me.initiate(user.user_id));
+    const meResponse = await listenerApi.dispatch(userAuth.endpoints.me.initiate(user.user_id));
+    console.log(meResponse);
     // if (meResponse?.data) {
     //   listenerApi.dispatch(setUser(meResponse));
     // }

@@ -21,21 +21,21 @@ export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout }) => {
 
   const settings = [
     {
-      title: "Profile",
+      title: "Профиль",
       action: () => {
         navigate("profile");
         handleCloseUserMenu();
       },
     },
     {
-      title: "Account",
+      title: "Аккаунт",
       action: () => {
         navigate("account");
         handleCloseUserMenu();
       },
     },
     {
-      title: "Logout",
+      title: "Выйти",
       action: () => {
         logout();
         handleCloseUserMenu();

@@ -19,7 +19,7 @@ const Sidebar: FC<SideBarProps> = ({ open, logout, handleSidebar }) => {
                 borderRadius: 2,
 
                 "&:hover": {
-                  backgroundColor: "#0da5ab", // Темнее при наведении
+                  backgroundColor: "#0da5ab",
                   color: "#ffffff",
                   transition: "0.3s",
                   borderRadius: 2,

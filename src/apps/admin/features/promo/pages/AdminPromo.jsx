@@ -5,7 +5,7 @@ import { useGetPromosQuery } from "@store/admin/api/promoApi";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Promos from "../components/Promos";
-import PromoList, { LoadingScreen } from "../components/PromoList";
+import PromoList from "../components/PromoList";
 
 const AdminPromo = () => {
   const { res } = useParams();
@@ -25,8 +25,6 @@ const AdminPromo = () => {
       id: item.id,
     }).unwrap();
   };
-
-  if (isLoading) return <LoadingScreen />;
 
   return (
     <div className={`${styles.container_promo}`}>

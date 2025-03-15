@@ -3,7 +3,7 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import { useWaiterCallMutation } from "../../../../store/user/api/dispatcherApi";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import Snowfall from "react-snowfall";
+// import Snowfall from "react-snowfall";
 import { FC } from "react";
 import { IntroType } from "./types";
 
@@ -30,7 +30,7 @@ const Intro: FC<IntroType> = ({ data }) => {
           <img src={data.logo} className="img_logo" alt="logo" />
         </div>
       </div>
-      <Snowfall color="white" snowflakeCount={100} />
+      {/* <Snowfall color="white" snowflakeCount={100} /> */}
 
       <div className="mt-4 ">
         <div className="name_container">

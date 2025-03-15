@@ -4,6 +4,7 @@ import NavbarBottomPage from "../features/navbarBottom/pages/NavbarBottomPage";
 
 export default function Layout() {
   // const location = useLocation();
+
   return (
     <>
       <Header />

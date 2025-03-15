@@ -7,8 +7,9 @@ import { useSelector } from "react-redux";
 import { IconItem } from "../interfaces/interface";
 import { cart } from "@store/cartSlice";
 
-export default function NavbarBottomPage() {
+const NavbarBottomPage = () => {
   const { items } = useSelector(cart);
+  const active = false;
 
   const options = { fontSize: 30 };
 
@@ -17,22 +18,26 @@ export default function NavbarBottomPage() {
       icon: <RestaurantMenuOutlinedIcon sx={options} />,
       title: "Меню",
       link: "..",
+      active: true,
     },
     {
       icon: <ShoppingCartOutlinedIcon sx={options} />,
       title: "Корзина",
       link: "cart",
       counter: items.length,
+      active: true,
     },
     {
       icon: <DeliveryDiningOutlinedIcon sx={options} />,
       title: "Заказы",
       link: "orders",
+      active,
     },
     {
       icon: <AssignmentIndOutlinedIcon sx={options} />,
       title: "Профиль",
       link: "profile",
+      active,
     },
   ];
 
@@ -41,4 +46,6 @@ export default function NavbarBottomPage() {
       <NavbarBottom icons={icons} />
     </div>
   );
-}
+};
+
+export default NavbarBottomPage;
