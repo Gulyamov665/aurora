@@ -1,3 +1,4 @@
+import { VendorInfoType } from "@store/user/types";
 import { JSX } from "react";
 
 export interface IconItem {
@@ -10,4 +11,8 @@ export interface IconItem {
 
 export interface NavbarBottomProps {
   icons: IconItem[];
+}
+
+export interface NavbarBottomPageProps {
+  data?: VendorInfoType;
 }

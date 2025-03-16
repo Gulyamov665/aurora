@@ -58,6 +58,7 @@ export type AuthState = {
 };
 
 export type VendorInfoType = {
+  id: number;
   waiter_chat_id: number;
   background_photo: string;
   name: string;

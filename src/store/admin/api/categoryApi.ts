@@ -11,6 +11,7 @@ export const categoriesApi = createApi({
       query: (res) => `v1/category/?restaurant__name=${res}`,
       providesTags: ["Categories"],
     }),
+
     addCategory: build.mutation({
       query: (body) => ({
         url: "v1/category/",

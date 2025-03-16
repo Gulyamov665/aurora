@@ -18,7 +18,8 @@ interface AppState {
   deleteModal: DeleteModalState;
   deleteConfirmed: boolean;
   isLoading: boolean;
-  count: number;
+  isRejected: boolean;
+  error: {} | null;
 }
 
 const initialState: AppState = {
@@ -32,7 +33,8 @@ const initialState: AppState = {
   deleteModal: { open: false, message: "", type: "", id: null },
   deleteConfirmed: false,
   isLoading: false,
-  count: 0,
+  isRejected: false,
+  error: null,
 };
 
 const appSlice = createSlice({
@@ -75,15 +77,13 @@ const appSlice = createSlice({
       .addMatcher(
         (action) => action.type.endsWith("/pending"),
         (state) => {
-          state.count += 1;
-          state.isLoading = true; // Пока есть хотя бы один `pending`, isLoading=true
+          state.isLoading = true;
         }
       )
       .addMatcher(
         (action) => action.type.endsWith("/fulfilled") || action.type.endsWith("/rejected"),
         (state) => {
-          state.count = Math.max(0, state.count - 1);
-          state.isLoading = state.count > 0;
+          state.isLoading = false;
         }
       );
   },

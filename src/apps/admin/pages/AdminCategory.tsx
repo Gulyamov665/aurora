@@ -1,51 +1,57 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useOutletContext } from "react-router-dom";
+import { useLazyGetProductsQuery } from "@store/admin/api/productsApi.js";
+import { useUpdateProductMutation } from "@store/admin/api/productsApi.js";
+import { useAddCategoryMutation, useGetCategoriesQuery } from "@store/admin/api/categoryApi.js";
+import { useUpdateOrderMutation, useDeleteCategoryMutation } from "@store/admin/api/categoryApi.js";
+import { useUpdateCategoryMutation } from "@store/admin/api/categoryApi.js";
+import { toast } from "react-toastify";
+import { modals } from "@store/appSlice";
+import { getVendorId } from "@store/admin/slices/vendorSlice";
+import { CategoryItemType } from ".";
+import { ProductType } from "@store/user/types";
+import ReorderPage from "../components/ReorderPage";
 import AdminCard from "../components/AdminCard";
 import styles from "../static/AdminCategory.module.scss";
 import CategoryModal from "../../client/components/CategoryModal";
 import AddIcon from "@mui/icons-material/Add";
 import EditNoteIcon from "@mui/icons-material/EditNote";
-import { Link, useParams } from "react-router-dom";
-import { useGetProductsQuery, useUpdateProductMutation } from "@store/admin/api/productsApi.js";
-import {
-  useAddCategoryMutation,
-  useGetCategoriesQuery,
-  useUpdateOrderMutation,
-  useDeleteCategoryMutation,
-  useUpdateCategoryMutation,
-} from "@store/admin/api/categoryApi.js";
-
-import { toast } from "react-toastify";
-import ReorderPage from "../components/ReorderPage";
-import { useLoadQuery } from "@store/admin/api/vendorApi.js";
-import { getVendorId } from "@store/admin/slices/vendorSlice";
+import { OutletContextType } from "@/apps/client/pages";
 
 export default function AdminCategory() {
-  const { res } = useParams();
-  const { data: vendor } = useLoadQuery(res);
+  const { data: vendor, res } = useOutletContext<OutletContextType>();
   const [showModalCategory, setShowModalCategory] = useState(false);
   const [newCategory, setNewCategory] = useState("");
-  const { data: menuItems } = useGetProductsQuery(res);
+  const [getProducts, { data: menuItems }] = useLazyGetProductsQuery();
   const { data: category } = useGetCategoriesQuery(res);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<CategoryItemType[] | []>([]);
   const [updateProduct] = useUpdateProductMutation();
   const [addCategory] = useAddCategoryMutation();
   const [updateOrder] = useUpdateOrderMutation();
   const [updateCategory] = useUpdateCategoryMutation();
   const [deleteCategory] = useDeleteCategoryMutation();
-  const { selectedCategory: select } = useSelector((state) => state.modals);
+  const { selectedCategory: categoryId } = useSelector(modals);
   const [editCategory, setEditCategory] = useState(false);
-  const [changeItem, setChangeItem] = useState(null);
+  const [changeItem, setChangeItem] = useState<CategoryItemType | null>(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (vendor) dispatch(getVendorId(vendor?.id));
+    if (vendor) dispatch(getVendorId(vendor.id));
   }, [vendor, dispatch]);
 
-  const handleActiveToggle = async (item) => {
-    delete item.photo;
+  useEffect(() => {
+    if (categoryId) getSelectedCategory(categoryId);
+  }, [categoryId]);
+
+  useEffect(() => {
+    setItems(category);
+  }, [category]);
+
+  const handleActiveToggle = async (item: ProductType) => {
+    const { photo, ...newItem } = item;
     const updatedItem = {
-      ...item,
+      newItem,
       is_active: !item.is_active,
     };
     await updateProduct({
@@ -56,7 +62,7 @@ export default function AdminCategory() {
 
   const handleCategory = async () => {
     const categoryItem = {
-      restaurant: vendor.id,
+      restaurant: vendor?.id,
       name: newCategory,
     };
 
@@ -65,24 +71,20 @@ export default function AdminCategory() {
     toast.success("Новая категория добавлена");
   };
 
-  useEffect(() => {
-    setItems(category);
-  }, [category]);
-
   const handleUpdataCategory = async () => {
     await updateCategory({
       body: {
         ...changeItem,
         name: newCategory,
       },
-      id: changeItem.id,
+      id: changeItem?.id,
     });
     setEditCategory(false);
   };
 
   const handleDeleteCategory = async () => {
     await deleteCategory({
-      id: changeItem.id,
+      id: changeItem?.id,
     });
     setEditCategory(false);
   };
@@ -90,6 +92,10 @@ export default function AdminCategory() {
   const updatePosition = async () => {
     const update = items.map((item) => item.id);
     await updateOrder(update);
+  };
+
+  const getSelectedCategory = async (id: number) => {
+    await getProducts({ res: res, category: id }, true);
   };
 
   return (
@@ -124,7 +130,8 @@ export default function AdminCategory() {
             updatePosition={updatePosition}
             items={items}
             setItems={setItems}
-            select={select}
+            select={categoryId}
+            getProducts={getSelectedCategory}
             setEditCategory={setEditCategory}
             setNewCategory={setNewCategory}
             setChangeItem={setChangeItem}
@@ -132,17 +139,17 @@ export default function AdminCategory() {
         </div>
       </div>
       <div className={styles.menuItems}>
-        {select && (
+        {categoryId && (
           <div role="button" data-bs-toggle="modal" data-bs-target="#create_mode" className={`${styles.col_1}`}>
             <Link to={`/admin/${res}/add-product`} style={{ textDecoration: "none", color: "black" }}>
               <p className="pt-5 text-center">Добавить</p>
             </Link>
           </div>
         )}
-        {select &&
+        {categoryId &&
           menuItems
-            ?.filter((obj) => obj.category === select)
-            .map((item) => (
+            ?.filter((obj: ProductType) => obj.category === categoryId)
+            .map((item: ProductType) => (
               <AdminCard
                 key={item.id}
                 item={item}

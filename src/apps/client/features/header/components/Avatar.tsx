@@ -5,6 +5,7 @@ import { UserAvatarProps } from "../types";
 
 export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout }) => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  
   const navigate = useNavigate();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {

@@ -11,8 +11,8 @@ import { useDelete } from "@/hooks/useDelete";
 
 function UpdateProduct() {
   const params = useParams();
-  const { data: product, isLoading: dLoading } = useGetProductQuery(params.id);
-  const [updateProduct, { isLoading: updateLoading }] = useUpdateProductMutation();
+  const { data: product } = useGetProductQuery(params.id);
+  const [updateProduct] = useUpdateProductMutation();
   const [deleteProduct] = useDeleteProductMutation();
   const { register, handleSubmit, reset } = useForm();
   const [img, setImg] = useState(null);
@@ -41,8 +41,6 @@ function UpdateProduct() {
       handleDelete();
     }
   }, [confirmedId]);
-
-  const isLoading = dLoading || updateLoading;
 
   const handleFileChangeUpdate = (e) => {
     const file = e.target.files[0];
@@ -77,7 +75,6 @@ function UpdateProduct() {
 
   return (
     <div className="container">
-      {isLoading && <Loading />}
       <div className="d-flex justify-content-between">
         <button className="btn btn-success mt-3 mb-3" onClick={() => navigate(-1)}>
           вернуться
