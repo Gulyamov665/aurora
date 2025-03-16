@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { useLazyGetProductsQuery } from "@store/admin/api/productsApi.js";
 import { useUpdateProductMutation } from "@store/admin/api/productsApi.js";
 import { useAddCategoryMutation, useGetCategoriesQuery } from "@store/admin/api/categoryApi.js";
@@ -8,20 +8,19 @@ import { useUpdateOrderMutation, useDeleteCategoryMutation } from "@store/admin/
 import { useUpdateCategoryMutation } from "@store/admin/api/categoryApi.js";
 import { toast } from "react-toastify";
 import { modals } from "@store/appSlice";
-import { useLoadQuery } from "@store/admin/api/vendorApi.js";
 import { getVendorId } from "@store/admin/slices/vendorSlice";
 import { CategoryItemType } from ".";
+import { ProductType } from "@store/user/types";
 import ReorderPage from "../components/ReorderPage";
 import AdminCard from "../components/AdminCard";
 import styles from "../static/AdminCategory.module.scss";
 import CategoryModal from "../../client/components/CategoryModal";
 import AddIcon from "@mui/icons-material/Add";
 import EditNoteIcon from "@mui/icons-material/EditNote";
-import { ProductType } from "@store/user/types";
+import { OutletContextType } from "@/apps/client/pages";
 
 export default function AdminCategory() {
-  const { res = "" } = useParams();
-  const { data: vendor } = useLoadQuery(res);
+  const { data: vendor, res } = useOutletContext<OutletContextType>();
   const [showModalCategory, setShowModalCategory] = useState(false);
   const [newCategory, setNewCategory] = useState("");
   const [getProducts, { data: menuItems }] = useLazyGetProductsQuery();
