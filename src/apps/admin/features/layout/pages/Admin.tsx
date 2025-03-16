@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { useActions } from "@/hooks/useActions";
 import { useSelector } from "react-redux";
 import { modals } from "@store/appSlice";
-import { LoadingScreen } from "@/apps/admin/loading/LoadingScreen";
+import { LoadingScreen } from "@/apps/admin/features/loading/LoadingScreen";
 import Header from "../../../components/Header";
 import styles from "../assets/Admin.module.scss";
 import Sidebar from "../components/Sidebar";
@@ -23,7 +23,10 @@ export default function Admin() {
     <>
       <Header sidebar={handleSidebar} />
       <Sidebar open={open} logout={logout} handleSidebar={handleSidebar} />
-      <div className={styles.parent}>{isLoading ? <LoadingScreen loading={isLoading} /> : <Outlet />}</div>
+      <div className={styles.parent}>
+        {isLoading && <LoadingScreen loading={isLoading} />}
+        {<Outlet />}
+      </div>
     </>
   );
 }

@@ -7,12 +7,14 @@ export const productsApi = createApi({
   baseQuery,
   endpoints: (build) => ({
     getProducts: build.query({
-      query: (res) => `v1/menu/?restaurant__name=${res}`,
+      query: ({ res, category }) =>
+        !category ? `v1/menu/?restaurant__name=${res}` : `v1/menu/?restaurant__name=${res}&category_id=${category}`,
       providesTags: ["Products"],
+      keepUnusedDataFor: 300,
     }),
 
     getProduct: build.query({
-      query: (id) => `v1/menu/${id}`,
+      query: (id) => `v1/menu/${id}/`,
       providesTags: ["Products"],
     }),
 
@@ -50,4 +52,5 @@ export const {
   useUpdateProductMutation,
   useDeleteProductMutation,
   useGetProductQuery,
+  useLazyGetProductsQuery,
 } = productsApi;

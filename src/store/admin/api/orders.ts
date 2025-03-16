@@ -27,7 +27,6 @@ const baseQueryWithInterceptor: BaseQueryFn<string | FetchArgs, unknown, FetchBa
     const errorData = result.error.data as { message: string };
     alert(`${errorData.message}! Попробуйте позже.`);
   }
-
   return result;
 };
 

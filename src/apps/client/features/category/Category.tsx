@@ -16,7 +16,7 @@ import CartBtn from "../../components/CartBtn";
 const Category: FC<CategoryProps> = ({ search }) => {
   const { res = "" } = useParams();
   const { data: category = [] } = useGetCategoriesQuery(res);
-  const { data: menuItems = [], isLoading, isError } = useGetProductsQuery(res);
+  const { data: menuItems = [], isLoading, isError } = useGetProductsQuery({ res: res });
   const { data: promo = [] } = useGetPromosQuery(res);
   const sectionRefs = useRef<HTMLDivElement[]>([]);
   const rootSection = useRef<HTMLDivElement[]>([]);

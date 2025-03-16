@@ -4,12 +4,14 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
 import NavbarBottom from "../components/NavbarBottom";
 import { useSelector } from "react-redux";
-import { IconItem } from "../interfaces/interface";
+import { IconItem, NavbarBottomPageProps } from "../interfaces/interface";
 import { cart } from "@store/cartSlice";
+import { FC } from "react";
 
-const NavbarBottomPage = () => {
+const NavbarBottomPage: FC<NavbarBottomPageProps> = ({ data }) => {
   const { items } = useSelector(cart);
-  const active = false;
+
+  const active = data?.availability_orders || false;
 
   const options = { fontSize: 30 };
 
