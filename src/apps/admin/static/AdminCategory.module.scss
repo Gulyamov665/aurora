@@ -1,6 +1,6 @@
 .category {
   width: 20%;
-  height: auto;
+  height: 100%;
   margin-top: 12px;
   padding-left: 5px;
   // display: none;
@@ -24,7 +24,7 @@
   list-style: none;
 }
 
-.button_name{
+.button_name {
   font-size: 14px;
   display: flex;
   justify-content: space-between;
@@ -38,7 +38,7 @@
 
 .menuItems {
   width: 85%;
- 
+  margin-bottom: 55px;
   padding: 53px 5px 10px;
   display: flex;
   flex-wrap: wrap;

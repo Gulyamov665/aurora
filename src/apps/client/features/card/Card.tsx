@@ -2,7 +2,7 @@ import { FC, useState, MouseEvent } from "react";
 import { addCartItem } from "../../../../store/cartSlice";
 import { useDispatch } from "react-redux";
 import { CardType, CartItem } from "./types";
-import CurrencyFormat from "react-currency-format";
+// import CurrencyFormat from "react-currency-format";
 
 const Card: FC<CardType> = ({ id, photo, name, price, is_active, restaurant, availability, category }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -41,7 +41,7 @@ const Card: FC<CardType> = ({ id, photo, name, price, is_active, restaurant, ava
         <div className="card__info">
           <div className="car__info--title">
             <p className="card__info--price">
-              <CurrencyFormat value={price} displayType={"text"} thousandSeparator={" "} suffix={" сум"} />
+              {/* <CurrencyFormat value={price} displayType={"text"} thousandSeparator={" "} suffix={" сум"} /> */}
             </p>
             <h3>{name}</h3>
           </div>

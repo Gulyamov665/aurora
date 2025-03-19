@@ -4,7 +4,7 @@ import IOSSwitch from "../../client/components/MuiSwitch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { useDispatch } from "react-redux";
-import { toggleUpdate } from "../../../store/appSlice";
+import { toggleUpdate } from "@store/appSlice";
 import { useNavigate } from "react-router-dom";
 
 export default function AdminCard({ item, isActive, onChange }) {
