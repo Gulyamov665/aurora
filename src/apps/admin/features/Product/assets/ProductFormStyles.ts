@@ -25,4 +25,21 @@ export const formBox = {
   },
 };
 
-export const card = { mb: 2, borderRadius: 2, boxShadow: 2 };
+export const card = {
+  mb: 2,
+  borderRadius: 2,
+  boxShadow: 2,
+  width: "440px",
+  height: "247px",
+  // maxHeight: "364px",
+  "@media (max-width: 1000px)": {
+    width: "100% !important",
+    height: "100% !important",
+  },
+};
+
+export const imgStyle = {
+  height: "auto",
+  width: "100%",
+  cursor: "pointer",
+};

@@ -62,7 +62,7 @@ const CropModalMaterial: React.FC<CropModalProps> = ({ children, title, trigger,
         {children}
       </DialogContent>
       <DialogActions sx={{ justifyContent: "center", gap: 2 }}>
-        <Button
+        {/* <Button
           onClick={handleClose}
           variant="contained"
           sx={{
@@ -75,7 +75,8 @@ const CropModalMaterial: React.FC<CropModalProps> = ({ children, title, trigger,
           }}
         >
           Coхранить
-        </Button>
+        </Button> */}
+
         <Button
           onClick={handleCancel}
           variant="outlined"
@@ -89,6 +90,23 @@ const CropModalMaterial: React.FC<CropModalProps> = ({ children, title, trigger,
           }}
         >
           Отмена
+        </Button>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={handleClose}
+          type="submit"
+          sx={{
+            minWidth: "120px",
+            fontWeight: "bold",
+            borderRadius: "8px",
+            // boxShadow: "0px 4px 10px rgba(0, 128, 0, 0.4)",
+            boxShadow: "0px 6px 15px rgba(0, 100, 0, 0.5)", // более тёмный зелёный
+
+            "&:hover": { backgroundColor: "#1b5e20" },
+          }}
+        >
+          Сохранить
         </Button>
       </DialogActions>
     </Dialog>

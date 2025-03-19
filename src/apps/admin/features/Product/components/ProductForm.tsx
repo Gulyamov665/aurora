@@ -1,9 +1,10 @@
 import { FC } from "react";
 import { ProductFormType } from "../types";
-import { Box, TextField, Button, Typography, Card, CardMedia, CardContent, IconButton } from "@mui/material";
+import { Box, TextField, Button, Typography, Card, CardContent, IconButton } from "@mui/material";
 import { Save, Delete, ArrowBack } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { card, formBox, header, inputsBox, mainBox } from "../assets/ProductFormStyles";
+import { card, formBox, header, imgStyle, inputsBox, mainBox } from "../assets/ProductFormStyles";
+import img from "@/assets/nophoto.jpg";
 
 export const ProductForm: FC<ProductFormType> = ({
   register,
@@ -63,13 +64,7 @@ export const ProductForm: FC<ProductFormType> = ({
             <Box>
               <Card sx={card}>
                 <label htmlFor="upload-image">
-                  <CardMedia
-                    component="img"
-                    width="300"
-                    height="300"
-                    image={productImage?.photo}
-                    sx={{ objectFit: "cover", cursor: "pointer" }}
-                  />
+                  <img src={productImage?.photo || img} style={imgStyle} />
                 </label>
                 <CardContent sx={{ padding: 0, paddingBottom: "0 !important" }}>
                   <input
@@ -89,9 +84,9 @@ export const ProductForm: FC<ProductFormType> = ({
             variant="contained"
             color="primary"
             startIcon={<Save />}
-            sx={{ padding: 1.5 }}
+            sx={{ padding: 1.5, backgroundColor: "#210648", ":hover": { backgroundColor: "#210660" } }}
           >
-            Сохранить изменения
+            Сохранить
           </Button>
         </Box>
       </form>

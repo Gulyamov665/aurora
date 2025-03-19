@@ -79,21 +79,6 @@ export default function AdminCategory() {
       </div>
       <div className={styles.menuItems}>
         {categoryId && (
-          // <div
-          //   role="button"
-          //   data-bs-toggle="modal"
-          //   data-bs-target="#create_mode"
-          //   className={`${styles.col_1}`}
-          //   onClick={() =>
-          //     setOpenAddModal({
-          //       type: "add-product",
-          //       vendorId: vendor.id,
-          //       categoryId: categoryId,
-          //     })
-          //   }
-          // >
-          //   <p className="pt-5 text-center">Добавить</p>
-          // </div>
           <Fab
             color="primary"
             aria-label="add"
@@ -104,7 +89,7 @@ export default function AdminCategory() {
                 categoryId: categoryId,
               })
             }
-            sx={{ position: "fixed", bottom: 35, right: 15 }}
+            sx={{ position: "fixed", bottom: 35, right: 15, backgroundColor: "#210648" }}
           >
             <AddIcon />
           </Fab>
