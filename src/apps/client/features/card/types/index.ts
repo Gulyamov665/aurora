@@ -26,6 +26,4 @@ export type CardViewContentProps = {
   setCount: (count: number) => void;
 };
 
-export interface CartItem extends CardType {
-  count: number;
-}
+

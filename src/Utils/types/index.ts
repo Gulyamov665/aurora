@@ -1,6 +1,6 @@
 export type CalcType = {
   price: number;
-  count: number;
+  quantity: number;
 };
 
 export type SpyType = (

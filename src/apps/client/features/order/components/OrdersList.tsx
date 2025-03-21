@@ -9,13 +9,16 @@ import styles from "../assets/Orders.module.scss";
 import { useActions } from "@/hooks/useActions";
 import { useDelete } from "@/hooks/useDelete";
 import { useEffect } from "react";
+import { useCreateOrderMutation } from "@store/admin/api/orders";
+import { Button } from "@mui/material";
 
 export default function OrdersList() {
   const { items } = useSelector(cart);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { addCartItem, minusItem } = useActions();
   const { deleteItem, confirmedId } = useDelete();
+  const [createOrder] = useCreateOrderMutation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (confirmedId) dispatch(removeCartItems());
@@ -23,6 +26,20 @@ export default function OrdersList() {
 
   const removeItems = () => {
     deleteItem({ message: "все товари из корзины ?", type: "orders", id: 1 });
+  };
+
+  const handleCreateOrder = async () => {
+    const itemsWithoutPhoto = items.map(({ photo, ...rest }) => rest);
+    const orderData = {
+      created_by: "User83",
+      lat: "40.7128",
+      long: "-74.0060",
+      user_id: 182,
+      restaurant: 73,
+      status: "pending",
+      products: itemsWithoutPhoto,
+    };
+    await createOrder(orderData).unwrap();
   };
 
   return (
@@ -57,6 +74,7 @@ export default function OrdersList() {
             </p>
           </div>
         )}
+        <Button onClick={handleCreateOrder}>Оформить заказ</Button>
       </div>
     </div>
   );
