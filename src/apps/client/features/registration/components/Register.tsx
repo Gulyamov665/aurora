@@ -12,9 +12,6 @@ const Register: FC<RegisterType> = ({ state, regStep, error, registration }) => 
     await registration({ ...data });
   };
 
-  // const codeRequestSubmit: SubmitHandler<RequestFormValuesType> = async (data) => {
-  //   await codeRequest({ id: userId, code: data });
-  // };
   return (
     <>
       {regStep === 0 && (
@@ -30,15 +27,6 @@ const Register: FC<RegisterType> = ({ state, regStep, error, registration }) => 
           error={error}
         />
       )}
-
-      {/* {regStep === 1 && (
-        <RegCodeStep
-          register={codeRegister}
-          handleSubmit={codeSubmit}
-          codeRequestSubmit={codeRequestSubmit}
-          botLink={botLink}
-        />
-      )} */}
 
       {regStep === 1 && <RegStepSuccess />}
     </>

@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAddPromosMutation } from "../../../../../store/admin/api/promoApi";
 import CropModal from "../../Product/components/CropModal";
 import Loading from "../../../../client/features/loading/Loading";
+// import PromoEdit from "../components/PromoEdite";
 
 function AddPromo() {
   const { res } = useParams();
@@ -66,6 +67,7 @@ function AddPromo() {
           handleFile={handleFileChange}
           button={"добавить"}
         />
+      {/* <PromoEdit /> */}
       </div>
 
       <CropModal img={img} setImg={setImg} setCropData={setCropData} cropData={cropData} />

@@ -13,7 +13,7 @@ export default function ReorderPage({
   setEditCategory,
   setNewCategory,
   setChangeItem,
-  getProducts,
+  setOpenAddModal,
 }) {
   const dispatch = useDispatch();
 

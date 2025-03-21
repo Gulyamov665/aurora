@@ -8,6 +8,7 @@ import VendorRoutes from "./routes/VendorRoutes";
 import RegistrationPage from "./apps/client/features/registration/pages/RegistrationPage";
 import Auth from "./apps/client/features/auth/pages/Auth";
 import { DeleteModal } from "./apps/common/DeleteModal";
+// import { CreateModal } from "./apps/admin/features/Product/pages/CreateModal";
 
 function App() {
   const { state } = useLocation();
@@ -31,6 +32,7 @@ function App() {
       {/* global elements */}
       <ToastContainer />
       <DeleteModal />
+      {/* <CreateModal /> */}
     </>
   );
 }

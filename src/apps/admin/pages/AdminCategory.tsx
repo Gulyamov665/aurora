@@ -1,44 +1,37 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useOutletContext } from "react-router-dom";
-import { useLazyGetProductsQuery } from "@store/admin/api/productsApi.js";
+import { useSelector } from "react-redux";
+import { useOutletContext } from "react-router-dom";
+import { useAddProductMutation, useLazyGetProductsQuery } from "@store/admin/api/productsApi.js";
 import { useUpdateProductMutation } from "@store/admin/api/productsApi.js";
 import { useAddCategoryMutation, useGetCategoriesQuery } from "@store/admin/api/categoryApi.js";
 import { useUpdateOrderMutation, useDeleteCategoryMutation } from "@store/admin/api/categoryApi.js";
 import { useUpdateCategoryMutation } from "@store/admin/api/categoryApi.js";
-import { toast } from "react-toastify";
 import { modals } from "@store/appSlice";
-import { getVendorId } from "@store/admin/slices/vendorSlice";
 import { CategoryItemType } from ".";
 import { ProductType } from "@store/user/types";
-import ReorderPage from "../components/ReorderPage";
+import { OutletContextType } from "@/apps/client/pages";
+import { useActions } from "@/hooks/useActions";
+import { CategoriesList } from "./CategoriesList";
+import { CreateModal } from "../features/Product/pages/CreateModal";
+import { Fab } from "@mui/material";
 import AdminCard from "../components/AdminCard";
 import styles from "../static/AdminCategory.module.scss";
-import CategoryModal from "../../client/components/CategoryModal";
 import AddIcon from "@mui/icons-material/Add";
-import EditNoteIcon from "@mui/icons-material/EditNote";
-import { OutletContextType } from "@/apps/client/pages";
 
 export default function AdminCategory() {
   const { data: vendor, res } = useOutletContext<OutletContextType>();
-  const [showModalCategory, setShowModalCategory] = useState(false);
-  const [newCategory, setNewCategory] = useState("");
   const [getProducts, { data: menuItems }] = useLazyGetProductsQuery();
   const { data: category } = useGetCategoriesQuery(res);
   const [items, setItems] = useState<CategoryItemType[] | []>([]);
   const [updateProduct] = useUpdateProductMutation();
+  const [addProduct] = useAddProductMutation();
   const [addCategory] = useAddCategoryMutation();
   const [updateOrder] = useUpdateOrderMutation();
   const [updateCategory] = useUpdateCategoryMutation();
   const [deleteCategory] = useDeleteCategoryMutation();
   const { selectedCategory: categoryId } = useSelector(modals);
-  const [editCategory, setEditCategory] = useState(false);
   const [changeItem, setChangeItem] = useState<CategoryItemType | null>(null);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (vendor) dispatch(getVendorId(vendor.id));
-  }, [vendor, dispatch]);
+  const { setOpenAddModal } = useActions();
 
   useEffect(() => {
     if (categoryId) getSelectedCategory(categoryId);
@@ -49,44 +42,14 @@ export default function AdminCategory() {
   }, [category]);
 
   const handleActiveToggle = async (item: ProductType) => {
-    const { photo, ...newItem } = item;
     const updatedItem = {
-      newItem,
+      ...item,
       is_active: !item.is_active,
     };
     await updateProduct({
       body: updatedItem,
-      updatedItem: item.id,
+      id: item.id,
     }).unwrap();
-  };
-
-  const handleCategory = async () => {
-    const categoryItem = {
-      restaurant: vendor?.id,
-      name: newCategory,
-    };
-
-    await addCategory(categoryItem).unwrap();
-    setShowModalCategory(!showModalCategory);
-    toast.success("Новая категория добавлена");
-  };
-
-  const handleUpdataCategory = async () => {
-    await updateCategory({
-      body: {
-        ...changeItem,
-        name: newCategory,
-      },
-      id: changeItem?.id,
-    });
-    setEditCategory(false);
-  };
-
-  const handleDeleteCategory = async () => {
-    await deleteCategory({
-      id: changeItem?.id,
-    });
-    setEditCategory(false);
   };
 
   const updatePosition = async () => {
@@ -101,62 +64,45 @@ export default function AdminCategory() {
   return (
     <>
       <div className={styles.category}>
-        <div className="col d-flex flex-column sticky-top">
-          <h4 className="text-center text-dark">Категории</h4>
-          <div className="btn-group">
-            <button
-              className={`btn mt-2 fs-sm-1 ${styles.but_col}`}
-              onClick={() => setShowModalCategory(!showModalCategory)}
-            >
-              <AddIcon />
-            </button>
-            <button className={`btn mt-2 fs-sm-1 ${styles.but_col}`}>
-              <EditNoteIcon />
-            </button>
-          </div>
-          <CategoryModal
-            showModalCategory={showModalCategory}
-            setShowModalCategory={setShowModalCategory}
-            newCategory={newCategory}
-            setNewCategory={setNewCategory}
-            handleCategory={handleCategory}
-            editCategory={editCategory}
-            setEditCategory={setEditCategory}
-            handleUpdataCategory={handleUpdataCategory}
-            handleDeleteCategory={handleDeleteCategory}
-          />
-
-          <ReorderPage
-            updatePosition={updatePosition}
-            items={items}
-            setItems={setItems}
-            select={categoryId}
-            getProducts={getSelectedCategory}
-            setEditCategory={setEditCategory}
-            setNewCategory={setNewCategory}
-            setChangeItem={setChangeItem}
-          />
-        </div>
+        <CategoriesList
+          updatePosition={updatePosition}
+          items={items}
+          setItems={setItems}
+          setChangeItem={setChangeItem}
+          categoryId={categoryId}
+          addCategory={addCategory}
+          vendor={vendor}
+          updateCategory={updateCategory}
+          deleteCategory={deleteCategory}
+          changeItem={changeItem}
+        />
       </div>
       <div className={styles.menuItems}>
         {categoryId && (
-          <div role="button" data-bs-toggle="modal" data-bs-target="#create_mode" className={`${styles.col_1}`}>
-            <Link to={`/admin/${res}/add-product`} style={{ textDecoration: "none", color: "black" }}>
-              <p className="pt-5 text-center">Добавить</p>
-            </Link>
-          </div>
+          <Fab
+            color="primary"
+            aria-label="add"
+            onClick={() =>
+              setOpenAddModal({
+                type: "add-product",
+                vendorId: vendor.id,
+                categoryId: categoryId,
+              })
+            }
+            sx={{ position: "fixed", bottom: 35, right: 15, backgroundColor: "#210648" }}
+          >
+            <AddIcon />
+          </Fab>
         )}
-        {categoryId &&
-          menuItems
-            ?.filter((obj: ProductType) => obj.category === categoryId)
-            .map((item: ProductType) => (
-              <AdminCard
-                key={item.id}
-                item={item}
-                isActive={item.is_active}
-                onChange={() => handleActiveToggle({ ...item })}
-              />
-            ))}
+        {menuItems?.map((item: ProductType) => (
+          <AdminCard
+            key={item.id}
+            item={item}
+            isActive={item.is_active}
+            onChange={() => handleActiveToggle({ ...item })}
+          />
+        ))}
+        <CreateModal fetch={addProduct} title="Добавить позицию" />
       </div>
     </>
   );

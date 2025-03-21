@@ -15,7 +15,7 @@ export const DeleteModal = () => {
 
   return (
     <MaterialModal open={deleteModal.open} onClose={closeDeleteModal}>
-      <Typography variant="h6" textAlign="center" sx={{padding:2, lineHeight:"24px"}}>
+      <Typography variant="h6" textAlign="center" sx={{ padding: 2, lineHeight: "24px" }}>
         Вы уверене что хотите удалить {deleteModal.message}
       </Typography>
       <Box display="flex" justifyContent="center" gap={2} mt={3}>
@@ -40,15 +40,17 @@ export const DeleteModal = () => {
             minWidth: "120px",
             fontWeight: "bold",
             borderRadius: "8px",
-            borderColor: "#b0bec5",
-            color: "#455a64",
-            backgroundColor: "#eceff1",
+            borderColor: "#90a4ae", // Чуть более глубокий серо-голубой
+            color: "#37474f", // Темнее для лучшего контраста
+            backgroundColor: "#f5f5f5", // Светло-серый с тёплым оттенком
+            boxShadow: "0px 4px 8px rgba(69, 90, 100, 0.3)", // Тень в цвет текста
             "&:hover": {
-              backgroundColor: "#cfd8dc",
+              backgroundColor: "#dbe2e5", // Чуть затемнённый фон при ховере
+              boxShadow: "0px 6px 12px rgba(69, 90, 100, 0.4)", // Более выраженная тень
             },
           }}
         >
-          Отмена
+          Закрыть
         </Button>
       </Box>
     </MaterialModal>

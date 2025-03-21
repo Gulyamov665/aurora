@@ -24,7 +24,9 @@
 //         </IconButton>
 //       </Box>
 
-//       <TextField fullWidth label="Название" name="name" value={formData.name} {...register("name")} sx={{ mb: 2 }} />
+//       <TextField fullWidth label="Название" name="name" value={formData.name} 
+//     //   {...register("name")}
+//        sx={{ mb: 2 }} />
 
 //       <TextField
 //         fullWidth
@@ -33,7 +35,7 @@
 //         multiline
 //         rows={3}
 //         value={formData.description}
-//         {...register("description")}
+//         // {...register("description")}
 //         sx={{ mb: 2 }}
 //       />
 
@@ -43,12 +45,14 @@
 //         name="price"
 //         type="number"
 //         // value={formData.price}
-//         {...register("price")}
+//         // {...register("price")}
 //         sx={{ mb: 2 }}
 //       />
 
 //       <Card sx={{ mb: 2, borderRadius: 2, boxShadow: 2 }}>
-//         <CardMedia component="img" height="200" image={formData.image} {...register("photo")} alt="Изображение акции" />
+//         <CardMedia component="img" height="200" image={formData.image} 
+//         // {...register("photo")}
+//          alt="Изображение акции" />
 //         <CardContent>
 //           <Button variant="contained" component="label" startIcon={<UploadFile />}>
 //             Загрузить новое

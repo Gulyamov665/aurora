@@ -22,7 +22,7 @@ const OrderProducts: FC<OrderProductsProps> = ({ product, increase, decrease }) 
             <IconButton color="primary" onClick={decrease}>
               <Remove />
             </IconButton>
-            <Typography variant="h6">{product.count}</Typography>
+            <Typography variant="h6">{product.quantity}</Typography>
             <IconButton color="primary" onClick={increase}>
               <Add />
             </IconButton>

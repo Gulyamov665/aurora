@@ -1,3 +1,7 @@
+// import { CartItem } from "@store/user/types";
+
+import { CartItem } from "@store/user/types";
+
 export type ProductType = {
   id: number;
   name: string;
@@ -12,7 +16,7 @@ export type ProductType = {
 };
 
 export type OrderProductsProps = {
-  product: ProductType;
+  product: CartItem;
   increase: () => void;
   decrease: () => void;
 };

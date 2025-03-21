@@ -13,7 +13,7 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
   const addToCart = (item: ProductType) => {
     const cartItem = {
       ...item,
-      count: count,
+      quantity: count,
     };
     dispatch(addCartItem(cartItem));
     setIsOpen(false);

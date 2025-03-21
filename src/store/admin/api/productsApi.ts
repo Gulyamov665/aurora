@@ -1,5 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "../../apiConfig";
+import { ProductType } from "@store/user/types";
 
 export const productsApi = createApi({
   reducerPath: "productsApi",
@@ -13,11 +14,29 @@ export const productsApi = createApi({
       keepUnusedDataFor: 300,
     }),
 
-    getProduct: build.query({
+    getProduct: build.query<ProductType, string>({
       query: (id) => `v1/menu/${id}/`,
       providesTags: ["Products"],
     }),
 
+    getImages: build.query({
+      query: ({ vendor, category }) => `v1/menu/thumb/?restaurant__name=${vendor}&category_id=${category}`,
+      providesTags: ["Products"],
+    }),
+
+    getImageById: build.query({
+      query: (productId) => `v1/menu/thumb/${productId}`,
+      providesTags: ["Products"],
+    }),
+
+    updateImage: build.mutation({
+      query: ({ body, productId }) => ({
+        url: `v1/menu/thumb/${productId}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["Products"],
+    }),
     addProduct: build.mutation({
       query: (body) => ({
         url: "v1/menu/",
@@ -28,8 +47,8 @@ export const productsApi = createApi({
     }),
 
     updateProduct: build.mutation({
-      query: ({ body, updatedItem }) => ({
-        url: `v1/menu/${updatedItem}/`,
+      query: ({ body, id }) => ({
+        url: `v1/menu/${id}/`,
         method: "PUT",
         body,
       }),
@@ -46,6 +65,9 @@ export const productsApi = createApi({
   }),
 });
 
+export type AddProductMutationType = ReturnType<typeof useAddProductMutation>;
+export type LoadImageMutation = ReturnType<typeof useUpdateImageMutation>;
+
 export const {
   useGetProductsQuery,
   useAddProductMutation,
@@ -53,4 +75,7 @@ export const {
   useDeleteProductMutation,
   useGetProductQuery,
   useLazyGetProductsQuery,
+  useGetImagesQuery,
+  useUpdateImageMutation,
+  useGetImageByIdQuery,
 } = productsApi;

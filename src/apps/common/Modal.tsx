@@ -34,8 +34,8 @@ export const MaterialModal: React.FC<PromoModalProps> = ({ open, onClose, childr
             <Close />
           </IconButton>
 
+          <Box>{children}</Box>
           {/* Контент, передаваемый через `children` */}
-          {children}
         </Box>
       </Fade>
     </Modal>

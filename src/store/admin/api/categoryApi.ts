@@ -48,6 +48,10 @@ export const categoriesApi = createApi({
   }),
 });
 
+export type CategoryMutationType = ReturnType<typeof useAddCategoryMutation>;
+export type UpdateCategoryType = ReturnType<typeof useUpdateCategoryMutation>;
+export type DeleteCategoryType = ReturnType<typeof useDeleteCategoryMutation>;
+
 export const {
   useGetCategoriesQuery,
   useAddCategoryMutation,

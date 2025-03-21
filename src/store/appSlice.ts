@@ -1,10 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from ".";
+
 interface DeleteModalState {
   open: boolean;
   message: string;
   type: string;
   id: number | null;
+}
+
+interface AddModalState {
+  open: boolean;
+  type: string;
+  vendorId: number | null;
+  categoryId?: number | null;
+  changeItem?: string;
 }
 
 interface AppState {
@@ -20,6 +29,7 @@ interface AppState {
   isLoading: boolean;
   isRejected: boolean;
   error: {} | null;
+  addModalState: AddModalState;
 }
 
 const initialState: AppState = {
@@ -35,6 +45,13 @@ const initialState: AppState = {
   isLoading: false,
   isRejected: false,
   error: null,
+  addModalState: {
+    open: false,
+    type: "",
+    vendorId: null,
+    categoryId: null,
+    changeItem: "",
+  },
 };
 
 const appSlice = createSlice({
@@ -71,6 +88,23 @@ const appSlice = createSlice({
     setIsLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
+    setOpenAddModal: (
+      state,
+      action: PayloadAction<{ vendorId: number; categoryId?: number; type: string; changeItem?: string }>
+    ) => {
+      state.addModalState.open = true;
+      state.addModalState.vendorId = action.payload.vendorId;
+      state.addModalState.categoryId = action.payload.categoryId;
+      state.addModalState.type = action.payload.type;
+      state.addModalState.changeItem = action.payload.changeItem;
+    },
+    onCloseAddModal: (state) => {
+      state.addModalState.open = false;
+      state.addModalState.vendorId = null;
+      state.addModalState.categoryId = null;
+      state.addModalState.type = "";
+      state.addModalState.changeItem = "";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -99,6 +133,8 @@ export const {
   showDeleteModal,
   closeDeleteModal,
   confirmDeletion,
+  setOpenAddModal,
+  onCloseAddModal,
 } = appSlice.actions;
 
 export default appSlice.reducer;
