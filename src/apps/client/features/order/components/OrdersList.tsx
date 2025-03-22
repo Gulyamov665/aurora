@@ -1,6 +1,6 @@
 import { cart, removeCartItems } from "@store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import OrderProducts from "./OrderProducts";
@@ -11,9 +11,11 @@ import { useDelete } from "@/hooks/useDelete";
 import { useEffect } from "react";
 import { useCreateOrderMutation } from "@store/admin/api/orders";
 import { Button } from "@mui/material";
+import { OutletContextType } from "@/apps/client/pages";
 
 export default function OrdersList() {
   const { items } = useSelector(cart);
+  const { data } = useOutletContext<OutletContextType>();
   const { addCartItem, minusItem } = useActions();
   const { deleteItem, confirmedId } = useDelete();
   const [createOrder] = useCreateOrderMutation();
@@ -35,7 +37,7 @@ export default function OrdersList() {
       lat: "40.7128",
       long: "-74.0060",
       user_id: 182,
-      restaurant: 73,
+      restaurant: data?.id,
       status: "pending",
       products: itemsWithoutPhoto,
     };
