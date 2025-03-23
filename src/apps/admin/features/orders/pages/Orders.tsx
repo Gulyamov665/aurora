@@ -15,15 +15,35 @@ const Orders: FC = () => {
 
   console.log(isLoading);
 
+  // useEffect(() => {
+  //   socket.on("new_order", (newOrder) => {
+  //     console.log("📦 Новый заказ по сокету:", newOrder);
+  //     console.log(data);
+  //     if (newOrder.restaurant === data.id) getOrders();
+  //   });
+
+  //   return () => {
+  //     socket.off("new_order");
+  //   };
+  // }, [data, socket]);
+
   useEffect(() => {
-    socket.on("new_order", (newOrder) => {
+    const handleNewOrder = (newOrder: any) => {
       console.log("📦 Новый заказ по сокету:", newOrder);
-      console.log(data);
-      if (newOrder.restaurant === data.id) getOrders();
-    });
+      if (newOrder.restaurant === data?.id) getOrders();
+    };
+
+    const handleUpdateOrder = (updatedOrder: any) => {
+      console.log("🔄 Обновление заказа по сокету:", updatedOrder);
+      if (updatedOrder.restaurant === data?.id) getOrders();
+    };
+
+    socket.on("new_order", handleNewOrder);
+    socket.on("update_order", handleUpdateOrder);
 
     return () => {
-      socket.off("new_order");
+      socket.off("new_order", handleNewOrder);
+      socket.off("update_order", handleUpdateOrder);
     };
   }, [data, socket]);
 
