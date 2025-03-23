@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Table, TableHead, TableRow, TableCell, TableBody, Box } from "@mui/material";
+import { Table, TableHead, TableRow, TableCell, TableBody } from "@mui/material";
 import { TableSortLabel, Card, CardContent, Typography, IconButton } from "@mui/material";
 import { Person, MonetizationOn, Receipt } from "@mui/icons-material";
 import { Visibility } from "@mui/icons-material";
