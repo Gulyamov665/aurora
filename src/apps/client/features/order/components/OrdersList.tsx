@@ -33,16 +33,15 @@ export default function OrdersList() {
   const handleCreateOrder = async () => {
     const itemsWithoutPhoto = items.map(({ photo, ...rest }) => rest);
     const orderData = {
-      created_by: "User83",
+      created_by: "Test User",
       lat: "40.7128",
       long: "-74.0060",
-      user_id: 182,
+      user_id: 2,
       restaurant: data.id,
-      status: "pending",
+      status: "new",
       products: itemsWithoutPhoto,
     };
     await createOrder(orderData).unwrap();
-    
   };
 
   return (

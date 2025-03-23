@@ -6,13 +6,14 @@ import { useOutletContext } from "react-router-dom";
 import { OutletContextType } from "@/apps/client/pages";
 
 const Orders: FC = () => {
-  // const { data } = useGetOrdersQuery();
   const { data } = useOutletContext<OutletContextType>();
   const [getOrders, { data: lazyData, isLoading }] = useLazyGetOrdersQuery();
 
   useEffect(() => {
-    getOrders();
-  }, []);
+    if (data) getOrders();
+  }, [data]);
+
+  console.log(isLoading);
 
   useEffect(() => {
     socket.on("new_order", (newOrder) => {
