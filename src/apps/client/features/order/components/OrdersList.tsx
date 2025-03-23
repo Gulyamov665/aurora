@@ -37,11 +37,12 @@ export default function OrdersList() {
       lat: "40.7128",
       long: "-74.0060",
       user_id: 182,
-      restaurant: data?.id,
+      restaurant: data.id,
       status: "pending",
       products: itemsWithoutPhoto,
     };
     await createOrder(orderData).unwrap();
+    
   };
 
   return (
@@ -76,7 +77,15 @@ export default function OrdersList() {
             </p>
           </div>
         )}
-        <Button onClick={handleCreateOrder}>Оформить заказ</Button>
+        <Button
+          onClick={handleCreateOrder}
+          fullWidth
+          variant="contained"
+          color="primary"
+          sx={{ padding: 1.5, backgroundColor: "#210648", ":hover": { backgroundColor: "#210660" } }}
+        >
+          Оформить заказ
+        </Button>
       </div>
     </div>
   );

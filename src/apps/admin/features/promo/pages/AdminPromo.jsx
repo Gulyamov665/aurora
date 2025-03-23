@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Promos from "../components/Promos";
 import PromoList from "../components/PromoList";
+import { LoadingScreen } from "../../loading/LoadingScreen";
 
 const AdminPromo = () => {
   const { res } = useParams();
@@ -25,6 +26,8 @@ const AdminPromo = () => {
       id: item.id,
     }).unwrap();
   };
+
+  if (isLoading) return <LoadingScreen loading={isLoading} />;
 
   return (
     <div className={`${styles.container_promo}`}>

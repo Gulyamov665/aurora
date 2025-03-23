@@ -1,12 +1,13 @@
 import { FC, useState } from "react";
 import { Table, TableHead, TableRow, TableCell, TableBody, Box } from "@mui/material";
 import { TableSortLabel, Card, CardContent, Typography, IconButton } from "@mui/material";
-import { Person, MonetizationOn, Receipt, ErrorOutline } from "@mui/icons-material";
+import { Person, MonetizationOn, Receipt } from "@mui/icons-material";
 import { Visibility } from "@mui/icons-material";
 import { OrderKey, OrdersTableProps } from "../types";
 import { getStatusChip } from "./Statuses";
+import { LoadingScreen } from "../../loading/LoadingScreen";
 
-const OrdersTable: FC<OrdersTableProps> = ({ data }) => {
+const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading }) => {
   const [sortBy, setSortBy] = useState<OrderKey>("id");
   const [order, setOrder] = useState<"asc" | "desc">("asc");
 
@@ -16,21 +17,7 @@ const OrdersTable: FC<OrdersTableProps> = ({ data }) => {
     setSortBy(key);
   };
 
-  if (!data?.data) {
-    return (
-      <Box sx={{ mt: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <Card
-          sx={{ mb: 3, p: 2, display: "flex", flexDirection: "column", alignItems: "center", width: 400 }}
-          elevation={3}
-        >
-          <ErrorOutline sx={{ fontSize: 40, color: "error.main" }} />
-          <Typography variant="h6" align="center" sx={{ mt: 1 }}>
-            Нет доступных заказов
-          </Typography>
-        </Card>
-      </Box>
-    );
-  }
+  if (!data?.data) return <LoadingScreen loading={isLoading} />;
 
   const sortedOrders = [...data?.data].sort((a, b) => {
     const aValue = a[sortBy];

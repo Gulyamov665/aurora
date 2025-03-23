@@ -6,18 +6,6 @@ import { io } from "socket.io-client";
 const url = import.meta.env.VITE_EXPRESS_URL;
 export const socket = io("https://backend.aurora-app.uz"); // Подключаем WebSocket
 
-// socket.on("connect", () => {
-//   console.log("✅ WebSocket подключен, ID:", socket.id);
-// });
-
-// socket.on("disconnect", () => {
-//   console.log("❌ WebSocket отключен");
-// });
-
-// socket.on("new_order", (newOrder) => {
-//   console.log("📦 Пришел новый заказ:", newOrder);
-// });
-
 export const baseQuery = fetchBaseQuery({
   baseUrl: url,
   prepareHeaders: (headers) => {
@@ -65,27 +53,3 @@ export const ordersApi = createApi({
 });
 
 export const { useGetOrdersQuery, useCreateOrderMutation, useLazyGetOrdersQuery } = ordersApi;
-
-// socket.on("new_order", (newOrder) => {
-// console.log(newOrder, "socket");
-// ordersApi.util.updateQueryData("getOrders", undefined, (draft) => {
-//   console.log(draft, "draft");
-//   if (Array.isArray(draft)) {
-//     draft.unshift(newOrder);
-//   }
-// });
-//   try {
-//     ordersApi.util.updateQueryData("getOrders", undefined, (draft) => {
-//       console.log("🔥 Текущее состояние draft:", draft);
-
-//       if (draft && Array.isArray(draft)) {
-//         draft.unshift(newOrder);
-//         console.log("✅ Заказ добавлен:", newOrder);
-//       } else {
-//         console.warn("❌ Ошибка: структура draft не соответствует ожиданиям", draft);
-//       }
-//     });
-//   } catch (error) {
-//     console.error("⚠️ Ошибка в updateQueryData:", error);
-//   }
-// });

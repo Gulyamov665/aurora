@@ -17,10 +17,11 @@ import { Fab } from "@mui/material";
 import AdminCard from "../components/AdminCard";
 import styles from "../static/AdminCategory.module.scss";
 import AddIcon from "@mui/icons-material/Add";
+import { LoadingScreen } from "../features/loading/LoadingScreen";
 
 export default function AdminCategory() {
   const { data: vendor, res } = useOutletContext<OutletContextType>();
-  const [getProducts, { data: menuItems }] = useLazyGetProductsQuery();
+  const [getProducts, { data: menuItems, isLoading: getProductLoading }] = useLazyGetProductsQuery();
   const { data: category } = useGetCategoriesQuery(res);
   const [items, setItems] = useState<CategoryItemType[] | []>([]);
   const [updateProduct] = useUpdateProductMutation();
@@ -78,6 +79,7 @@ export default function AdminCategory() {
         />
       </div>
       <div className={styles.menuItems}>
+        {getProductLoading && <LoadingScreen loading={getProductLoading} />}
         {categoryId && (
           <Fab
             color="primary"

@@ -8,9 +8,7 @@ import { OutletContextType } from "@/apps/client/pages";
 const Orders: FC = () => {
   // const { data } = useGetOrdersQuery();
   const { data } = useOutletContext<OutletContextType>();
-  const [getOrders, { data: lazyData }] = useLazyGetOrdersQuery();
-
-  console.log(data?.id);
+  const [getOrders, { data: lazyData, isLoading }] = useLazyGetOrdersQuery();
 
   useEffect(() => {
     getOrders();
@@ -19,17 +17,18 @@ const Orders: FC = () => {
   useEffect(() => {
     socket.on("new_order", (newOrder) => {
       console.log("📦 Новый заказ по сокету:", newOrder);
-      if (newOrder.restaurant === data?.id) getOrders();
+      console.log(data);
+      if (newOrder.restaurant === data.id) getOrders();
     });
 
     return () => {
       socket.off("new_order");
     };
-  }, [socket]);
+  }, [data, socket]);
 
   return (
     <div className="container">
-      <OrdersTable data={lazyData} />
+      <OrdersTable data={lazyData} isLoading={isLoading} />
     </div>
   );
 };

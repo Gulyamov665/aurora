@@ -4,4 +4,5 @@ export type OrderKey = keyof OrdersType;
 
 export interface OrdersTableProps {
   data: OrdersData | undefined;
+  isLoading: boolean;
 }
