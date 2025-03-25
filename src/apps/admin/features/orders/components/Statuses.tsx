@@ -10,7 +10,7 @@ export const getStatusChip = (status: string) => {
     case "pending":
       return <Chip label="Ожидание" color="secondary" icon={<AccessTime />} />;
     case "canceled":
-      return <Chip label="Отменено" color="error" icon={<Close />} />;
+      return <Chip label="Отменен" color="error" icon={<Close />} />;
     case "prepare":
       return <Chip label="Готовиться" color="warning" icon={<Kitchen />} />;
     default:

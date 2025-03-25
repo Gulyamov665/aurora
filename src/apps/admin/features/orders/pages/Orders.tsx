@@ -13,20 +13,6 @@ const Orders: FC = () => {
     if (data) getOrders();
   }, [data]);
 
-  console.log(isLoading);
-
-  // useEffect(() => {
-  //   socket.on("new_order", (newOrder) => {
-  //     console.log("📦 Новый заказ по сокету:", newOrder);
-  //     console.log(data);
-  //     if (newOrder.restaurant === data.id) getOrders();
-  //   });
-
-  //   return () => {
-  //     socket.off("new_order");
-  //   };
-  // }, [data, socket]);
-
   useEffect(() => {
     const handleNewOrder = (newOrder: any) => {
       console.log("📦 Новый заказ по сокету:", newOrder);
