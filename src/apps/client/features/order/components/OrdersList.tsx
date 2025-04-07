@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { useCreateOrderMutation } from "@store/admin/api/orders";
 import { Button } from "@mui/material";
 import { OutletContextType } from "@/apps/client/pages";
+import { authState } from "@store/user/slices/authSlice";
 
 export default function OrdersList() {
   const { items } = useSelector(cart);
@@ -19,6 +20,7 @@ export default function OrdersList() {
   const { addCartItem, minusItem } = useActions();
   const { deleteItem, confirmedId } = useDelete();
   const [createOrder] = useCreateOrderMutation();
+  const { isUser } = useSelector(authState);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -33,7 +35,7 @@ export default function OrdersList() {
   const handleCreateOrder = async () => {
     const itemsWithoutPhoto = items.map(({ photo, ...rest }) => rest);
     const orderData = {
-      created_by: "Test User",
+      created_by: isUser?.user_id,
       lat: "40.7128",
       long: "-74.0060",
       user_id: 2,
