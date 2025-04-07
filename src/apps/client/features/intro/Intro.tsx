@@ -27,7 +27,7 @@ const Intro: FC<IntroType> = ({ data }) => {
         <img src={data && data.background_photo} loading="lazy" className="img" alt="img" />
         <div className="opacity-block" />
         <div className="img_log">
-          <img src={data.logo} className="img_logo" alt="logo" />
+          <img src={data?.logo} className="img_logo" alt="logo" />
         </div>
       </div>
       {/* <Snowfall color="white" snowflakeCount={100} /> */}

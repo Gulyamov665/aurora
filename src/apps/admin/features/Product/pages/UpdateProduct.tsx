@@ -55,22 +55,22 @@ function UpdateProduct() {
   };
 
   const onSubmit: SubmitHandler<FormValuesType> = async (body) => {
+    delete body.photo;
     await updateProduct({ body, id });
   };
 
   return (
     <div className="container">
-      {productImage && (
-        <ProductForm
-          register={register}
-          handleSubmit={handleSubmit}
-          handleFileChange={handleFileChangeUpdate}
-          productImage={productImage}
-          onSubmit={onSubmit}
-          deleteItem={handleDeleteProduct}
-          watch={watch}
-        />
-      )}
+      <ProductForm
+        register={register}
+        handleSubmit={handleSubmit}
+        handleFileChange={handleFileChangeUpdate}
+        productImage={productImage}
+        onSubmit={onSubmit}
+        deleteItem={handleDeleteProduct}
+        watch={watch}
+      />
+
       <CropModal img={img} setCropData={setCropData} setImg={setImg} cropData={cropData} uploadImage={uploadImage} />
     </div>
   );

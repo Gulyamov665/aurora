@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { Table, TableHead, TableRow, TableCell, TableBody } from "@mui/material";
 import { TableSortLabel, Card, CardContent, Typography, IconButton } from "@mui/material";
 import { Person, MonetizationOn, Receipt } from "@mui/icons-material";
@@ -9,7 +9,7 @@ import { LoadingScreen } from "../../loading/LoadingScreen";
 
 const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading }) => {
   const [sortBy, setSortBy] = useState<OrderKey>("id");
-  const [order, setOrder] = useState<"asc" | "desc">("asc");
+  const [order, setOrder] = useState<"asc" | "desc">("desc");
 
   const handleSort = (key: OrderKey) => {
     const isAsc = sortBy === key && order === "asc";
@@ -17,9 +17,9 @@ const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading }) => {
     setSortBy(key);
   };
 
-  if (!data?.data) return <LoadingScreen loading={isLoading} />;
+  if (!data) return <LoadingScreen loading={isLoading} />;
 
-  const sortedOrders = [...data?.data].sort((a, b) => {
+  const sortedOrders = [...data.data].sort((a, b) => {
     const aValue = a[sortBy];
     const bValue = b[sortBy];
     if (aValue == null || bValue == null) {

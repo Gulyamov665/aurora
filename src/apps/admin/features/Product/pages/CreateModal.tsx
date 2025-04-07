@@ -39,23 +39,6 @@ export const CreateModal: FC<CreateModalType> = ({ fetch, title }) => {
         <form onSubmit={handleSubmit(submit)}>
           <TextField label="Название" variant="outlined" fullWidth {...register("name")} />
           <Box display="flex" justifyContent="center" gap={2} mt={3}>
-            {/* <Button
-              variant="outlined"
-              onClick={() => onCloseAddModal()}
-              sx={{
-                minWidth: "120px",
-                fontWeight: "bold",
-                borderRadius: "8px",
-                borderColor: "#b0bec5",
-                color: "#455a64",
-                backgroundColor: "#eceff1",
-                "&:hover": {
-                  backgroundColor: "#cfd8dc",
-                },
-              }}
-            >
-              Отмена
-            </Button> */}
             <Button
               variant="outlined"
               onClick={() => onCloseAddModal()}

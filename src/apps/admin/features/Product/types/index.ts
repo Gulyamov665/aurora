@@ -13,6 +13,7 @@ export type FormValuesType = {
   is_active: boolean;
   name: string;
   price: number;
+  photo?:string
 };
 
 export type ProductFormType = {

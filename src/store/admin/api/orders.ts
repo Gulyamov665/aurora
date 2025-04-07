@@ -5,6 +5,7 @@ import { io } from "socket.io-client";
 
 const url = import.meta.env.VITE_EXPRESS_URL;
 export const socket = io("https://backend.aurora-app.uz"); // Подключаем WebSocket
+// export const socket = io("http://localhost:3000"); // Подключаем WebSocket
 
 export const baseQuery = fetchBaseQuery({
   baseUrl: url,
@@ -38,8 +39,11 @@ export const ordersApi = createApi({
   baseQuery: baseQueryWithInterceptor,
 
   endpoints: (build) => ({
-    getOrders: build.query<OrdersData, void>({
-      query: () => "/orders",
+    getOrders: build.query<OrdersData, { vendorId: number; page: number; limit: number }>({
+      query: ({ vendorId, page, limit }) => ({
+        url: `/orders/${vendorId}`,
+        params: { page, limit },
+      }),
     }),
     createOrder: build.mutation({
       query: (body) => ({

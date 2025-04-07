@@ -3,7 +3,7 @@ import { addCartItem } from "../../../../store/cartSlice";
 import { useDispatch } from "react-redux";
 import { CardType } from "./types";
 import { CartItem } from "@store/user/types";
-// import CurrencyFormat from "react-currency-format";
+import { formatPrice } from "@/Utils/tools";
 
 const Card: FC<CardType> = ({ id, photo, name, price }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -37,9 +37,7 @@ const Card: FC<CardType> = ({ id, photo, name, price }) => {
 
         <div className="card__info">
           <div className="car__info--title">
-            <p className="card__info--price">
-              {/* <CurrencyFormat value={price} displayType={"text"} thousandSeparator={" "} suffix={" сум"} /> */}
-            </p>
+            {price && <p className="card__info--price">{formatPrice(price)} сум</p>}
             <h3>{name}</h3>
           </div>
         </div>
