@@ -1,6 +1,7 @@
-// import { CartItem } from "@store/user/types";
-
-import { CartItem } from "@store/user/types";
+import { CartItem, IsUserType, VendorInfoType } from "@store/user/types";
+import { MouseEvent } from "react";
+import { ProductData } from "../../products/types";
+import { addToCartMutationType, createOrderMutationType, decreaseItemMutationType } from "@store/admin/api/orders";
 
 export type ProductType = {
   id: number;
@@ -17,6 +18,27 @@ export type ProductType = {
 
 export type OrderProductsProps = {
   product: CartItem;
-  increase: () => void;
   decrease: () => void;
+  increase: (event: MouseEvent<HTMLButtonElement>, productData: ProductData) => void;
+};
+
+type OrderItems = {
+  products: CartItem[];
+  totalPrice: number;
+  user: number;
+  vendor: number;
+};
+
+export type OrderProps = {
+  data: VendorInfoType;
+  isUser: Partial<IsUserType> | null;
+  items: OrderItems;
+  decreaseItem: decreaseItemMutationType[0];
+  addToCart: addToCartMutationType[0];
+  createOrder: createOrderMutationType[0];
+};
+
+export type CostBoxType = {
+  handleCreateOrder: () => void;
+  items: OrderItems;
 };

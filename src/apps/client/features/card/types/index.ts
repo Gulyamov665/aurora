@@ -1,4 +1,6 @@
+import { MouseEvent } from "react";
 import { ProductType } from "../../category/types";
+import { ProductData } from "../../products/types";
 
 export type CardType = {
   id: number;
@@ -9,6 +11,7 @@ export type CardType = {
   restaurant: number;
   availability: boolean;
   category: number;
+  addToCart: (event: MouseEvent<HTMLButtonElement>, productData: ProductData) => Promise<void>;
 };
 
 export type CardViewProps = {
@@ -25,5 +28,3 @@ export type CardViewContentProps = {
   count: number;
   setCount: (count: number) => void;
 };
-
-

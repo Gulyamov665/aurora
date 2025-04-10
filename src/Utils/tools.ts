@@ -1,4 +1,6 @@
+import { CartItem } from "@store/user/types";
 import { ChangeEvent } from "react";
+import { AddToCartArgs } from "./types";
 
 /**
  * функция для отображения фото
@@ -27,7 +29,7 @@ export const showImage = (
  * Форматирует число в строку с разделением тысяч пробелами.
  * @param {number} price - Число, которое нужно отформатировать.
  * @returns {string} Отформатированная строка, где тысячи разделены пробелами.
- * 
+ *
  * @example
  * formatPrice(20000); // "20 000"
  * formatPrice(100000); // "100 000"
@@ -36,4 +38,28 @@ export const showImage = (
 
 export const formatPrice = (price: number): string => {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+};
+
+// путь поправь под себя
+
+export const handleAddToCart = async ({ event, productData, userId, restaurantId, addToCart }: AddToCartArgs) => {
+  try {
+    event.stopPropagation();
+
+    const cartItem: CartItem = {
+      ...productData,
+      quantity: 1,
+    };
+
+    const body = {
+      user_id: userId,
+      restaurant: restaurantId,
+      products: cartItem,
+    };
+
+    await addToCart(body);
+  } catch (error) {
+    console.error("Failed to add item to cart:", error);
+    // Можно сюда передать колбэк для алерта/тоаста
+  }
 };

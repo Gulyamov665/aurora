@@ -1,25 +1,10 @@
-import { FC, useState, MouseEvent } from "react";
-import { addCartItem } from "../../../../store/cartSlice";
-import { useDispatch } from "react-redux";
+import { FC, useState } from "react";
 import { CardType } from "./types";
-import { CartItem } from "@store/user/types";
+// import { CartItem } from "@store/user/types";
 import { formatPrice } from "@/Utils/tools";
 
-const Card: FC<CardType> = ({ id, photo, name, price }) => {
+const Card: FC<CardType> = ({ id, photo, name, price, addToCart }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const dispatch = useDispatch();
-
-  const addToCart = (event: MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    const cartItem: CartItem = {
-      id,
-      name,
-      price,
-      photo,
-      quantity: 1,
-    };
-    dispatch(addCartItem(cartItem));
-  };
 
   return (
     <>
@@ -42,7 +27,7 @@ const Card: FC<CardType> = ({ id, photo, name, price }) => {
           </div>
         </div>
         <div style={{ textAlign: "center" }}>
-          <button className="btn card-btn-order" onClick={addToCart}>
+          <button className="btn card-btn-order" onClick={(e) => addToCart(e, { id, name, price, photo })}>
             <b>+ Добавить</b>
           </button>
         </div>

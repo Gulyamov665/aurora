@@ -35,7 +35,7 @@ const baseQueryWithInterceptor: BaseQueryFn<string | FetchArgs, unknown, FetchBa
 
 export const ordersApi = createApi({
   reducerPath: "orders",
-  tagTypes: ["orders"],
+  tagTypes: ["orders", "cart"],
   baseQuery: baseQueryWithInterceptor,
 
   endpoints: (build) => ({
@@ -53,7 +53,41 @@ export const ordersApi = createApi({
       }),
       invalidatesTags: ["orders"],
     }),
+    getCart: build.query({
+      query: ({ user, vendorId }) => ({
+        url: `/cart?user_id=${user}&restaurant_id=${vendorId}`,
+      }),
+      providesTags: ["cart"],
+    }),
+    addToCart: build.mutation({
+      query: (body) => ({
+        url: "/cart/addToCart",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["cart"],
+    }),
+    decreaseItem: build.mutation({
+      query: (body) => ({
+        url: "/cart/decrease",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["cart"],
+    }),
   }),
 });
 
-export const { useGetOrdersQuery, useCreateOrderMutation, useLazyGetOrdersQuery } = ordersApi;
+export type addToCartMutationType = ReturnType<typeof useAddToCartMutation>;
+export type decreaseItemMutationType = ReturnType<typeof useDecreaseItemMutation>;
+export type getCart = ReturnType<typeof useGetCartQuery>;
+export type createOrderMutationType = ReturnType<typeof useCreateOrderMutation>;
+
+export const {
+  useGetOrdersQuery,
+  useCreateOrderMutation,
+  useLazyGetOrdersQuery,
+  useAddToCartMutation,
+  useGetCartQuery,
+  useDecreaseItemMutation,
+} = ordersApi;

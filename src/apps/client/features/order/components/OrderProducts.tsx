@@ -23,7 +23,7 @@ const OrderProducts: FC<OrderProductsProps> = ({ product, increase, decrease }) 
               <Remove />
             </IconButton>
             <Typography variant="h6">{product.quantity}</Typography>
-            <IconButton color="primary" onClick={increase}>
+            <IconButton color="primary" onClick={(e) => increase(e, { ...product })}>
               <Add />
             </IconButton>
           </CardActions>

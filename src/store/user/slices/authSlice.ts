@@ -39,23 +39,6 @@ const userAuthState = createSlice({
       state.isUser = null;
     },
   },
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(logout, (state) => {
-  //       console.log("Logout action dispatched");
-  //       localStorage.removeItem("token");
-  //       state.isUser = null;
-  //     })
-  //     .addMatcher(userAuth.endpoints.auth.matchPending, (state, action: PayloadAction<undefined>) => {
-  //       console.log("Pending action:", action.type);
-  //     })
-  //     .addMatcher(userAuth.endpoints.auth.matchFulfilled, (state, action: PayloadAction<{ accessToken: string }>) => {
-  //       console.log("Fulfilled action:", action.payload);
-  //     })
-  //     .addMatcher(userAuth.endpoints.auth.matchRejected, (state, action) => {
-  //       console.log("Rejected action:", action.payload);
-  //     });
-  // },
 });
 
 export const authState = (state: RootState) => state.authState;

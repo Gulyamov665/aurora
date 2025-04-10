@@ -1,26 +1,21 @@
-import { cart, removeCartItems } from "@store/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { FC, MouseEvent } from "react";
+import { removeCartItems } from "@store/cartSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDelete } from "@/hooks/useDelete";
+import { useEffect } from "react";
+import { CartItem } from "@store/user/types";
+import { handleAddToCart } from "@/Utils/tools";
+import { OrderProps } from "../types/orderTypes";
+import { CostBox } from "./CostBox";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import OrderProducts from "./OrderProducts";
 import emptyCart from "@/assets/emptyCard.jpg";
 import styles from "../assets/Orders.module.scss";
-import { useActions } from "@/hooks/useActions";
-import { useDelete } from "@/hooks/useDelete";
-import { useEffect } from "react";
-import { useCreateOrderMutation } from "@store/admin/api/orders";
-import { Button } from "@mui/material";
-import { OutletContextType } from "@/apps/client/pages";
-import { authState } from "@store/user/slices/authSlice";
 
-export default function OrdersList() {
-  const { items } = useSelector(cart);
-  const { data } = useOutletContext<OutletContextType>();
-  const { addCartItem, minusItem } = useActions();
+export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, decreaseItem, createOrder }) => {
   const { deleteItem, confirmedId } = useDelete();
-  const [createOrder] = useCreateOrderMutation();
-  const { isUser } = useSelector(authState);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -33,7 +28,7 @@ export default function OrdersList() {
   };
 
   const handleCreateOrder = async () => {
-    const itemsWithoutPhoto = items.map(({ photo, ...rest }) => rest);
+    const itemsWithoutPhoto = items.products.map(({ photo, ...rest }: CartItem) => rest);
     const orderData = {
       created_by: isUser?.user_id,
       lat: "40.7128",
@@ -46,6 +41,27 @@ export default function OrdersList() {
     await createOrder(orderData).unwrap();
   };
 
+  const increase = (event: MouseEvent<HTMLButtonElement>, productData: CartItem) => {
+    if (!isUser?.user_id || !data?.id) return;
+
+    handleAddToCart({
+      event,
+      productData,
+      userId: isUser?.user_id,
+      restaurantId: data.id,
+      addToCart,
+    });
+  };
+
+  const decrease = (product: CartItem) => {
+    if (!isUser?.user_id || !data?.id) return;
+    decreaseItem({
+      product_id: product.id,
+      user_id: isUser?.user_id,
+      restaurant_id: data.id,
+    });
+  };
+
   return (
     <div>
       <div className={styles["page"]}>
@@ -53,22 +69,23 @@ export default function OrdersList() {
           <div className="mx-3" onClick={() => navigate(-1)}>
             <ArrowBackIcon sx={{ fontSize: "30px" }} />
           </div>
-          {items.length > 0 && (
+          {items && (
             <div onClick={removeItems} style={{ cursor: "pointer" }}>
               <DeleteIcon />
             </div>
           )}
         </div>
-        {items.length > 0 ? (
+        {items && items?.products?.length > 0 ? (
           <div>
-            {items.map((product) => (
+            {items.products.map((product: CartItem) => (
               <OrderProducts
                 product={product}
                 key={product.id}
-                increase={() => addCartItem(product)}
-                decrease={() => minusItem(product)}
+                increase={increase}
+                decrease={() => decrease(product)}
               />
             ))}
+            <CostBox handleCreateOrder={handleCreateOrder} items={items} />
           </div>
         ) : (
           <div className="text-center">
@@ -78,16 +95,7 @@ export default function OrdersList() {
             </p>
           </div>
         )}
-        <Button
-          onClick={handleCreateOrder}
-          fullWidth
-          variant="contained"
-          color="primary"
-          sx={{ padding: 1.5, backgroundColor: "#210648", ":hover": { backgroundColor: "#210660" } }}
-        >
-          Оформить заказ
-        </Button>
       </div>
     </div>
   );
-}
+};

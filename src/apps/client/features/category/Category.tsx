@@ -5,7 +5,6 @@ import { useGetPromosQuery } from "@/store/admin/api/promoApi";
 import { useParams, Link } from "react-router-dom";
 import { CategoryProps } from "./types";
 import { ProductType } from "./types";
-import Card from "../card/Card";
 import Loading from "../loading/Loading";
 import CardView from "../card/CardView";
 import Promo from "../promo/Promo";
@@ -18,11 +17,11 @@ const Category: FC<CategoryProps> = ({ search }) => {
   const { data: category = [] } = useGetCategoriesQuery(res);
   const { data: menuItems = [], isLoading, isError } = useGetProductsQuery({ res: res });
   const { data: promo = [] } = useGetPromosQuery(res);
-  const sectionRefs = useRef<HTMLDivElement[]>([]);
-  const rootSection = useRef<HTMLDivElement[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [viewItem, setViewItem] = useState<ProductType | null>(null);
   const [count, setCount] = useState(1);
+  const sectionRefs = useRef<HTMLDivElement[]>([]);
+  const rootSection = useRef<HTMLDivElement[]>([]);
 
   const handleView = useCallback((item: ProductType) => {
     setIsOpen((prev) => !prev);
@@ -60,7 +59,7 @@ const Category: FC<CategoryProps> = ({ search }) => {
         {search ? (
           filteredMenuItems.map((searchItem: ProductType) => (
             <div key={searchItem.id} onClick={() => handleView(searchItem)}>
-              <Card {...searchItem} />
+              {/* <Card {...searchItem} /> */}
             </div>
           ))
         ) : (

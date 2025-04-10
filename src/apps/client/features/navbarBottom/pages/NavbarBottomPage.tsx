@@ -3,13 +3,18 @@ import DeliveryDiningOutlinedIcon from "@mui/icons-material/DeliveryDiningOutlin
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
 import NavbarBottom from "../components/NavbarBottom";
-import { useSelector } from "react-redux";
 import { IconItem, NavbarBottomPageProps } from "../interfaces/interface";
-import { cart } from "@store/cartSlice";
 import { FC } from "react";
+import { useGetCartQuery } from "@store/admin/api/orders";
+import { useSelector } from "react-redux";
+import { authState } from "@store/user/slices/authSlice";
 
 const NavbarBottomPage: FC<NavbarBottomPageProps> = ({ data }) => {
-  const { items } = useSelector(cart);
+  const { isUser } = useSelector(authState);
+  const { data: items } = useGetCartQuery(
+    { user: isUser?.user_id, vendorId: data?.id },
+    { skip: !data?.id || !isUser?.user_id }
+  );
 
   const active = data?.availability_orders || false;
 
@@ -26,7 +31,7 @@ const NavbarBottomPage: FC<NavbarBottomPageProps> = ({ data }) => {
       icon: <ShoppingCartOutlinedIcon sx={options} />,
       title: "Корзина",
       link: "cart",
-      counter: items.length,
+      counter: items?.products?.length,
       active: true,
     },
     {
