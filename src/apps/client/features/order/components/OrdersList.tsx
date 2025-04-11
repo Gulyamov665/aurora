@@ -1,6 +1,4 @@
 import { FC, MouseEvent } from "react";
-import { removeCartItems } from "@store/cartSlice";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useDelete } from "@/hooks/useDelete";
 import { useEffect } from "react";
@@ -14,17 +12,16 @@ import OrderProducts from "./OrderProducts";
 import emptyCart from "@/assets/emptyCard.jpg";
 import styles from "../assets/Orders.module.scss";
 
-export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, decreaseItem }) => {
+export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, decreaseItem, removeCart }) => {
   const { deleteItem, confirmedId } = useDelete();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (confirmedId) dispatch(removeCartItems());
+    if (confirmedId) removeCart(items.id).unwrap();
   }, [confirmedId]);
 
   const removeItems = () => {
-    deleteItem({ message: "все товари из корзины ?", type: "orders", id: 1 });
+    deleteItem({ message: "очистить корзину ?", type: "orders", id: 1 });
   };
 
   const toConfirmPage = () => {
@@ -56,7 +53,7 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
     <div>
       <div className={styles["page"]}>
         <div className={styles["buttons-box"]}>
-          <div className="mx-3" onClick={() => navigate(-1)}>
+          <div className="mx-3" onClick={() => navigate("..")}>
             <ArrowBackIcon sx={{ fontSize: "30px" }} />
           </div>
           {items && (

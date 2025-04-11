@@ -1,7 +1,7 @@
 import { CartItem, IsUserType, VendorInfoType } from "@store/user/types";
 import { MouseEvent } from "react";
 import { ProductData } from "../../products/types";
-import { addToCartMutationType, decreaseItemMutationType } from "@store/admin/api/orders";
+import { addToCartMutationType, decreaseItemMutationType, removeCartMutationType } from "@store/admin/api/orders";
 import { NavigateFunction } from "react-router-dom";
 
 export type ProductType = {
@@ -28,6 +28,7 @@ type OrderItems = {
   totalPrice: number;
   user: number;
   vendor: number;
+  id: number;
 };
 
 export type OrderProps = {
@@ -36,6 +37,7 @@ export type OrderProps = {
   items: OrderItems;
   decreaseItem: decreaseItemMutationType[0];
   addToCart: addToCartMutationType[0];
+  removeCart: removeCartMutationType[0];
 };
 
 export type CostBoxType = {
