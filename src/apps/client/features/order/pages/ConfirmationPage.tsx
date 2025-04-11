@@ -16,6 +16,7 @@ const OrderConfirmationPage: React.FC = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
+  console.log(items);
   const handleCreateOrder = async () => {
     const itemsWithoutPhoto = items.products.map(({ photo, ...rest }: CartItem) => rest);
     const orderData = {

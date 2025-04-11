@@ -51,7 +51,7 @@ export const ordersApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["orders"],
+      invalidatesTags: ["orders", "cart"],
     }),
     getCart: build.query({
       query: ({ user, vendorId }) => ({
