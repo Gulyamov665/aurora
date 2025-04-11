@@ -4,11 +4,11 @@ import { ProductData, ProductsProps } from "./types";
 import { useAddToCartMutation } from "@store/admin/api/orders";
 import { useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
-import { Link, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import { OutletContextType } from "../../pages";
 import { handleAddToCart } from "@/Utils/tools";
 import { MaterialModal } from "@/apps/common/Modal";
-import { Box, Button, Typography } from "@mui/material";
+
 import { GuestBox } from "./components/GuestBox";
 
 const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleView }) => {
