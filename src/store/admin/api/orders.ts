@@ -1,6 +1,6 @@
 import { getToken } from "@/Utils/getToken";
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
-import { OrdersData } from "@store/user/types";
+import { OrdersData, OrdersType } from "@store/user/types";
 import { io } from "socket.io-client";
 
 const url = import.meta.env.VITE_EXPRESS_URL;
@@ -45,7 +45,7 @@ export const ordersApi = createApi({
         params: { page, limit },
       }),
     }),
-    getMyOrders: build.query<OrdersData, { userId: number }>({
+    getMyOrders: build.query<OrdersType[], { userId: number | undefined }>({
       query: ({ userId }) => ({
         url: `/orders/me/${userId}`,
       }),
