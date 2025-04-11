@@ -6,16 +6,17 @@ interface PromoModalProps {
   open: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  minHeight?: number;
 }
 
-export const MaterialModal: React.FC<PromoModalProps> = ({ open, onClose, children }) => {
+export const MaterialModal: React.FC<PromoModalProps> = ({ open, onClose, children, minHeight = 200 }) => {
   return (
     <Modal open={open} onClose={onClose}>
       <Fade in={open} mountOnEnter unmountOnExit timeout={{ enter: 400, exit: 300 }}>
         <Box
           sx={{
             position: "absolute",
-            minHeight: 200,
+            minHeight: minHeight,
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",

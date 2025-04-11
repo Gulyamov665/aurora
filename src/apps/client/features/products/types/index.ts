@@ -15,3 +15,7 @@ export interface ProductData {
   photo: string;
   // quantity: number;
 }
+
+export type GuestBoxProps = {
+  setToRegPage: React.Dispatch<React.SetStateAction<boolean>>;
+};

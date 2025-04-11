@@ -1,17 +1,21 @@
-import { FC, useMemo, useCallback, MouseEvent } from "react";
+import { FC, useMemo, useCallback, MouseEvent, useState } from "react";
 import Card from "../card/Card";
 import { ProductData, ProductsProps } from "./types";
 import { useAddToCartMutation } from "@store/admin/api/orders";
 import { useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { OutletContextType } from "../../pages";
 import { handleAddToCart } from "@/Utils/tools";
+import { MaterialModal } from "@/apps/common/Modal";
+import { Box, Button, Typography } from "@mui/material";
+import { GuestBox } from "./components/GuestBox";
 
 const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleView }) => {
   const [addToCart] = useAddToCartMutation();
   const { data } = useOutletContext<OutletContextType>();
   const { isUser } = useSelector(authState);
+  const [toRegPage, setToRegPage] = useState(false);
 
   const activeCategories = useMemo(() => category.filter(({ is_active }) => is_active), [category]);
   const activeMenuItems = useMemo(() => menuItems.filter(({ is_active }) => is_active), [menuItems]);
@@ -24,7 +28,10 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
   );
 
   const onClick = async (event: MouseEvent<HTMLButtonElement>, productData: ProductData) => {
-    if (!isUser?.user_id || !data?.id) return;
+    if (!isUser?.user_id || !data?.id) {
+      event.stopPropagation();
+      return setToRegPage(true);
+    }
     handleAddToCart({
       event,
       productData,
@@ -57,6 +64,9 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
           </div>
         </div>
       ))}
+      <MaterialModal open={toRegPage} onClose={() => setToRegPage(false)} minHeight={0}>
+        <GuestBox setToRegPage={setToRegPage} />
+      </MaterialModal>
     </>
   );
 };

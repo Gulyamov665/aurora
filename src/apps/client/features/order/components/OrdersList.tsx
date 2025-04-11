@@ -42,7 +42,10 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
   };
 
   const increase = (event: MouseEvent<HTMLButtonElement>, productData: CartItem) => {
-    if (!isUser?.user_id || !data?.id) return;
+    if (!isUser?.user_id || !data?.id) {
+      event.stopPropagation();
+      return window.alert("Для оформления заказа необходимо войти в свой аккаунт");
+    }
 
     handleAddToCart({
       event,
