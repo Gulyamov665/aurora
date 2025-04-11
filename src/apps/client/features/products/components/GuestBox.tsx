@@ -14,11 +14,6 @@ export const GuestBox: FC<GuestBoxProps> = ({ setToRegPage }) => {
           mt: 2,
           fontWeight: 500,
           textAlign: "center",
-          fontSize: {
-            xs: "14px", // экраны до 600px
-            sm: "14px", // от 600px
-            md: "16px", // от 900px
-          },
         }}
       >
         Для оформления заказа необходимо зарегистрироваться
