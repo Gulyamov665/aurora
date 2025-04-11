@@ -82,7 +82,7 @@ export const ConfirmOrder: FC<ConfirmOrderProps> = ({ navigate, state, handleCre
       </Box>
       <Box>
         <Typography variant="h6" sx={{ mb: 1 }}>
-          Итого: {items.totalPrice.toLocaleString()} сум
+          Итого: {items?.totalPrice?.toLocaleString()} сум
         </Typography>
         <Button
           fullWidth
