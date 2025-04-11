@@ -49,6 +49,7 @@ export const ordersApi = createApi({
       query: ({ userId }) => ({
         url: `/orders/me/${userId}`,
       }),
+      providesTags: ["orders"],
     }),
     createOrder: build.mutation({
       query: (body) => ({
