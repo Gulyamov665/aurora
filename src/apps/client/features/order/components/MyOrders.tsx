@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Box, Card, Typography, Chip, Divider, List, ListItem } from "@mui/material";
+import { Box, Card, Typography, Divider, List, ListItem } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useGetMyOrdersQuery } from "@store/admin/api/orders";
 import { useSelector } from "react-redux";
@@ -8,18 +8,18 @@ import { getStatusChip } from "@/apps/admin/features/orders/components/Statuses"
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
-interface OrderItem {
-  id: number;
-  status: string;
-  created_at: string;
-  total_price: number;
-  address: string;
-  products: Array<{
-    name: string;
-    quantity: number;
-    price: number;
-  }>;
-}
+// interface OrderItem {
+//   id: number;
+//   status: string;
+//   created_at: string;
+//   total_price: number;
+//   address: string;
+//   products: Array<{
+//     name: string;
+//     quantity: number;
+//     price: number;
+//   }>;
+// }
 
 const OrderCard = styled(Card)({
   marginBottom: 16,
