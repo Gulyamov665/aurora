@@ -3,7 +3,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { FC } from "react";
 import { CostBoxType } from "../types/orderTypes";
 
-export const CostBox: FC<CostBoxType> = ({ handleCreateOrder, items }) => {
+export const CostBox: FC<CostBoxType> = ({ items, toConfirmPage }) => {
   return (
     <Box
       sx={{
@@ -14,12 +14,13 @@ export const CostBox: FC<CostBoxType> = ({ handleCreateOrder, items }) => {
         mt: 2,
       }}
     >
+     
       <Typography variant="subtitle1" fontWeight="bold" mb={2}>
         Итого: {items && items?.totalPrice} сум
       </Typography>
 
       <Button
-        onClick={handleCreateOrder}
+        onClick={toConfirmPage}
         fullWidth
         variant="contained"
         endIcon={<ArrowForwardIos />}

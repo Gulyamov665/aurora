@@ -9,7 +9,7 @@ interface PromoModalProps {
   minHeight?: number;
 }
 
-export const MaterialModal: React.FC<PromoModalProps> = ({ open, onClose, children, minHeight = 200 }) => {
+export const MaterialModal: React.FC<PromoModalProps> = ({ open, onClose, children, minHeight = 0 }) => {
   return (
     <Modal open={open} onClose={onClose}>
       <Fade in={open} mountOnEnter unmountOnExit timeout={{ enter: 400, exit: 300 }}>

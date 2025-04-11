@@ -1,7 +1,7 @@
 import { FC, MouseEvent } from "react";
 import { removeCartItems } from "@store/cartSlice";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDelete } from "@/hooks/useDelete";
 import { useEffect } from "react";
 import { CartItem } from "@store/user/types";
@@ -25,6 +25,10 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
 
   const removeItems = () => {
     deleteItem({ message: "все товари из корзины ?", type: "orders", id: 1 });
+  };
+
+  const toConfirmPage = () => {
+    navigate("../confirm", { state: { from: location.pathname } });
   };
 
   const handleCreateOrder = async () => {
@@ -88,7 +92,7 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
                 decrease={() => decrease(product)}
               />
             ))}
-            <CostBox handleCreateOrder={handleCreateOrder} items={items} />
+            <CostBox items={items} toConfirmPage={toConfirmPage} />
           </div>
         ) : (
           <div className="text-center">

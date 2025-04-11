@@ -2,6 +2,7 @@ import { CartItem, IsUserType, VendorInfoType } from "@store/user/types";
 import { MouseEvent } from "react";
 import { ProductData } from "../../products/types";
 import { addToCartMutationType, createOrderMutationType, decreaseItemMutationType } from "@store/admin/api/orders";
+import { NavigateFunction } from "react-router-dom";
 
 export type ProductType = {
   id: number;
@@ -39,6 +40,13 @@ export type OrderProps = {
 };
 
 export type CostBoxType = {
+  items: OrderItems;
+  toConfirmPage: () => void;
+};
+
+export type ConfirmOrderProps = {
+  state: { from: string };
+  navigate: NavigateFunction;
   handleCreateOrder: () => void;
   items: OrderItems;
 };

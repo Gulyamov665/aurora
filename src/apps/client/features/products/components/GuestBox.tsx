@@ -1,10 +1,16 @@
 import { Box, Typography, Button } from "@mui/material";
 import { FC } from "react";
-
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { GuestBoxProps } from "../types";
 
 export const GuestBox: FC<GuestBoxProps> = ({ setToRegPage }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLoginClick = () => {
+    navigate("/login", { state: { from: location.pathname } });
+  };
+
   return (
     <Box>
       <Typography
@@ -20,33 +26,34 @@ export const GuestBox: FC<GuestBoxProps> = ({ setToRegPage }) => {
       </Typography>
 
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Link to="/login" style={{ textDecoration: "none" }}>
-          <Button
-            variant="text"
-            sx={{
-              color: "#1976d2",
-              fontWeight: 500,
-              padding: "8px 16px",
-              fontSize: "18px",
-              textTransform: "none",
-              backgroundColor: "#f5f4f2",
-              mr: 2,
-            }}
-          >
-            Войти
-          </Button>
-        </Link>
-
         <Button
-          onClick={() => setToRegPage(false)}
           variant="text"
           sx={{
-            color: "#1976d2",
+            color: "black",
             fontWeight: 500,
             padding: "8px 16px",
             fontSize: "18px",
             textTransform: "none",
             backgroundColor: "#f5f4f2",
+            mr: 2,
+            borderRadius: "8px",
+          }}
+          onClick={handleLoginClick}
+        >
+          Войти
+        </Button>
+
+        <Button
+          onClick={() => setToRegPage(false)}
+          variant="text"
+          sx={{
+            color: "black",
+            fontWeight: 500,
+            padding: "8px 16px",
+            fontSize: "18px",
+            textTransform: "none",
+            backgroundColor: "#f5f4f2",
+            borderRadius: "8px",
           }}
         >
           Отмена

@@ -3,6 +3,7 @@ import Map from "@/apps/client/features/map/Maps.tsx";
 import Layout from "@/apps/client/pages/Layout.tsx";
 import OrdersPage from "@/apps/client/features/order/pages/OrdersPage.js";
 import ClientMainPage from "@/apps/client/pages/ClientMainPage";
+import OrderConfirmationPage from "@/apps/client/features/order/pages/ConfirmationPage";
 
 export default function VendorRoutes() {
   return (
@@ -13,6 +14,7 @@ export default function VendorRoutes() {
         <Route path="orders" element={<OrdersPage />} />
         <Route path="profile" element={<OrdersPage />} />
         <Route path="maps" element={<Map />} />
+        <Route path="confirm" element={<OrderConfirmationPage />} />
       </Route>
     </Routes>
   );
