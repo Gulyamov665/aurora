@@ -1,7 +1,7 @@
 import { CartItem, IsUserType, VendorInfoType } from "@store/user/types";
 import { MouseEvent } from "react";
 import { ProductData } from "../../products/types";
-import { addToCartMutationType, createOrderMutationType, decreaseItemMutationType } from "@store/admin/api/orders";
+import { addToCartMutationType, decreaseItemMutationType } from "@store/admin/api/orders";
 import { NavigateFunction } from "react-router-dom";
 
 export type ProductType = {
