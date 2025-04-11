@@ -1,7 +1,7 @@
 import { FC, MouseEvent } from "react";
 import { removeCartItems } from "@store/cartSlice";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDelete } from "@/hooks/useDelete";
 import { useEffect } from "react";
 import { CartItem } from "@store/user/types";
@@ -14,7 +14,7 @@ import OrderProducts from "./OrderProducts";
 import emptyCart from "@/assets/emptyCard.jpg";
 import styles from "../assets/Orders.module.scss";
 
-export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, decreaseItem, createOrder }) => {
+export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, decreaseItem }) => {
   const { deleteItem, confirmedId } = useDelete();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,25 +31,8 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
     navigate("../confirm", { state: { from: location.pathname } });
   };
 
-  const handleCreateOrder = async () => {
-    const itemsWithoutPhoto = items.products.map(({ photo, ...rest }: CartItem) => rest);
-    const orderData = {
-      created_by: isUser?.user_id,
-      lat: "40.7128",
-      long: "-74.0060",
-      user_id: 2,
-      restaurant: data.id,
-      status: "new",
-      products: itemsWithoutPhoto,
-    };
-    await createOrder(orderData).unwrap();
-  };
-
   const increase = (event: MouseEvent<HTMLButtonElement>, productData: CartItem) => {
-    if (!isUser?.user_id || !data?.id) {
-      event.stopPropagation();
-      return window.alert("Для оформления заказа необходимо войти в свой аккаунт");
-    }
+    if (!isUser?.user_id || !data?.id) return;
 
     handleAddToCart({
       event,

@@ -36,7 +36,6 @@ export type OrderProps = {
   items: OrderItems;
   decreaseItem: decreaseItemMutationType[0];
   addToCart: addToCartMutationType[0];
-  createOrder: createOrderMutationType[0];
 };
 
 export type CostBoxType = {
