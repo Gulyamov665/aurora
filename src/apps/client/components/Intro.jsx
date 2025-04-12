@@ -4,11 +4,12 @@ import TelegramIcon from '@mui/icons-material/Telegram'
 import { useWaiterCallMutation } from '../../../store/user/api/dispatcherApi'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import Snowfall from 'react-snowfall'
+// import Snowfall from 'react-snowfall'
 
 export default function Intro({ data }) {
   const { table } = useParams()
   const [callWaiter, { isLoading }] = useWaiterCallMutation()
+  console.log(data)
 
   const handleCallWaiter = async () => {
     if (data.waiter_chat_id) {
@@ -21,14 +22,14 @@ export default function Intro({ data }) {
   return (
     <div className="container container-sm">
       <div className="intro-page">
-        <div className="snowFall"></div>
-        <img src={data.photo} loading="lazy" className="img" alt="img" />
+        {/* <div className="snowFall"></div> */}
+        <img src={data.background_photo} loading="lazy" className="img" alt="img" />
         <div className="opacity-block" />
         <div className="img_log">
           <img src={data.logo} className="img_logo" alt="logo" />
         </div>
       </div>
-      <Snowfall color="white" snowflakeCount={100} />
+      {/* <Snowfall color="white" snowflakeCount={100} /> */}
 
       <div className="mt-4 ">
         <div className="name_container">

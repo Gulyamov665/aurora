@@ -1,13 +1,11 @@
 import React from 'react'
 import Card from './Card'
-import Skeleton from './ContentLoader'
 
 export default function Products({
   menuItems,
   category,
   sectionRefs,
   handleView,
-  isLoading,
 }) {
   return (
     <>
@@ -35,18 +33,14 @@ export default function Products({
                             key={filteredObj.id}
                             className="col-6 col-sm-6 col-md-4 col-lg-3"
                           >
-                            {!isLoading ? (
-                              <Card
-                                id={filteredObj.id}
-                                photo={filteredObj.photo}
-                                name={filteredObj.name}
-                                desc={filteredObj.description}
-                                price={filteredObj.price}
-                                {...filteredObj}
-                              />
-                            ) : (
-                              <Skeleton />
-                            )}
+                            <Card
+                              id={filteredObj.id}
+                              photo={filteredObj.photo}
+                              name={filteredObj.name}
+                              desc={filteredObj.description}
+                              price={filteredObj.price}
+                              {...filteredObj}
+                            />
                           </div>
                         )
                     )}
