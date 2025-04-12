@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from "react";
-import { GoogleMap, Libraries, LoadScriptNext, MarkerF } from "@react-google-maps/api";
+import { GoogleMap, Libraries, LoadScriptNext, MarkerF, Autocomplete } from "@react-google-maps/api";
+import { TextField, Paper } from "@mui/material";
 
 const containerStyle = {
   width: "100%",
@@ -17,24 +18,45 @@ function Map() {
   const [currentPosition, setCurrentPosition] = useState(defaultCenter);
   const [mapCenter, setMapCenter] = useState(defaultCenter);
   const mapRef = useRef<google.maps.Map>(null);
+  const [searchValue, setSearchValue] = useState("");
+  const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
+  const geocoderRef = useRef<google.maps.Geocoder | null>(null);
 
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
   const handleMapCenterChanged = useCallback(() => {
-    if (mapRef.current) {
+    if (mapRef.current && geocoderRef.current) {
       const newCenter = mapRef.current.getCenter();
-
       if (newCenter) {
-        setMapCenter({
+        const latLng = {
           lat: newCenter.lat(),
           lng: newCenter.lng(),
-        });
+        };
+        setMapCenter(latLng);
       }
     }
   }, []);
 
   const handleMapLoad = (map: google.maps.Map) => {
     mapRef.current = map;
+    geocoderRef.current = new google.maps.Geocoder();
+  };
+
+  const onDragEnd = () => {
+    geocoderRef?.current?.geocode({ location: mapCenter }, (results, status) => {
+      if (status === "OK" && results && results.length > 0) {
+        console.log(results, "results");
+        const preferredResult = results.find(
+          (r) =>
+            r.types.includes("street_address") ||
+            r.types.includes("route") ||
+            r.types.includes("premise") ||
+            r.types.includes("locality")
+        );
+
+        setSearchValue(preferredResult?.formatted_address || results[0].formatted_address);
+      }
+    });
   };
 
   const handleGeolocation = () => {
@@ -55,6 +77,22 @@ function Map() {
     );
   };
 
+  const handlePlaceChanged = () => {
+    if (autocompleteRef.current) {
+      const place = autocompleteRef.current.getPlace();
+      if (place.geometry && place.geometry.location) {
+        const newCenter = {
+          lat: place.geometry.location.lat(),
+          lng: place.geometry.location.lng(),
+        };
+        setCurrentPosition(newCenter);
+        setMapCenter(newCenter);
+        mapRef.current?.panTo(newCenter);
+        setSearchValue(place.formatted_address || "");
+      }
+    }
+  };
+
   const mapOptions = {
     scrollwheel: true, // Включить скролл колесиком мыши
     disableDefaultUI: false, // Показать стандартные элементы управления
@@ -72,6 +110,31 @@ function Map() {
     <div>
       <LoadScriptNext googleMapsApiKey={apiKey} libraries={libraries}>
         <div style={{ position: "relative" }}>
+          <Autocomplete
+            onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+            onPlaceChanged={handlePlaceChanged}
+          >
+            <Paper
+              elevation={3}
+              sx={{
+                position: "absolute",
+                top: 10,
+                left: 10,
+                zIndex: 1000,
+                width: 300,
+                p: 1,
+              }}
+            >
+              <TextField
+                fullWidth
+                label="Введите адрес"
+                variant="outlined"
+                size="small"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
+            </Paper>
+          </Autocomplete>
           <GoogleMap
             mapContainerStyle={containerStyle}
             center={currentPosition}
@@ -79,7 +142,7 @@ function Map() {
             onLoad={handleMapLoad}
             options={mapOptions}
             onCenterChanged={handleMapCenterChanged}
-            onDragEnd={() => console.log("onDragEnd", mapCenter)}
+            onDragEnd={onDragEnd}
           >
             <MarkerF position={mapCenter} />
           </GoogleMap>
