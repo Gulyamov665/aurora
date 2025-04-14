@@ -11,14 +11,14 @@ export const useOrderSocket = ({ vendorId, onOrderUpdate }: UseOrderSocketProps)
   useEffect(() => {
     const handleNewOrder = (newOrder: OrdersType) => {
       console.log("📦 Новый заказ по сокету:", newOrder);
-      if (newOrder.restaurant === vendorId) {
+      if (newOrder.restaurant.id === vendorId) {
         onOrderUpdate({ vendorId, page: 1, limit: 10 });
       }
     };
 
     const handleUpdateOrder = (updatedOrder: OrdersType) => {
       console.log("🔄 Обновление заказа по сокету:", updatedOrder);
-      if (updatedOrder.restaurant === vendorId) {
+      if (updatedOrder.restaurant.id === vendorId) {
         onOrderUpdate({ vendorId, page: 1, limit: 10 });
       }
     };

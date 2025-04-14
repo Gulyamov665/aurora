@@ -4,7 +4,6 @@ import { OutletContextType } from "@/apps/client/pages";
 import { authState } from "@store/user/slices/authSlice";
 import { useSelector } from "react-redux";
 import { useCreateOrderMutation, useGetCartQuery } from "@store/admin/api/orders";
-import { CartItem } from "@store/user/types";
 import OrderSuccess from "../components/OrderSuccess";
 import { useState } from "react";
 
@@ -21,7 +20,6 @@ const OrderConfirmationPage: React.FC = () => {
 
   const handleCreateOrder = async () => {
     try {
-      // const itemsWithoutPhoto = items.products.map(({ photo, ...rest }: CartItem) => rest);
       const orderData = {
         created_by: isUser?.user_id,
         lat: "40.7128",
