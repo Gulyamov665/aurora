@@ -51,6 +51,12 @@ export const ordersApi = createApi({
       }),
       providesTags: ["orders"],
     }),
+    getOrderById: build.query({
+      query: (id) => ({
+        url: `/orders/getOrderById/${id}`,
+      }),
+      providesTags: ["orders"],
+    }),
     createOrder: build.mutation({
       query: (body) => ({
         url: "/orders",
@@ -97,6 +103,7 @@ export type getCart = ReturnType<typeof useGetCartQuery>;
 export type createOrderMutationType = ReturnType<typeof useCreateOrderMutation>;
 export type getOrders = ReturnType<typeof useGetOrdersQuery>;
 export type getMyOrders = ReturnType<typeof useGetMyOrdersQuery>;
+export type getOrderById = ReturnType<typeof useGetOrderByIdQuery>;
 export type removeCartMutationType = ReturnType<typeof useRemoveCartMutation>;
 
 export const {
@@ -108,4 +115,5 @@ export const {
   useDecreaseItemMutation,
   useGetMyOrdersQuery,
   useRemoveCartMutation,
+  useGetOrderByIdQuery,
 } = ordersApi;

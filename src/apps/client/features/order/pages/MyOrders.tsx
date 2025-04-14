@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
 
 import { OrderHistory } from "../components/OrderHistory";
+import { Link } from "react-router-dom";
 
 export const OrderCard = styled(Card)({
   marginBottom: 16,
@@ -29,7 +30,9 @@ export const MyOrders: FC = () => {
       </Typography>
 
       {data.map((order) => (
-        <OrderHistory order={order} key={order.id} />
+        <Link to={`${order.id}`} key={order.id} style={{ all: "unset", cursor: "pointer" }}>
+          <OrderHistory order={order} key={order.id} />
+        </Link>
       ))}
     </Box>
   );

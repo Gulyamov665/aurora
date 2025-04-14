@@ -55,3 +55,7 @@ export type ConfirmOrderProps = {
 export type OrderHistoryProps = {
   order: OrdersType;
 };
+
+export type OrderDetailProps = {
+  order: OrdersType;
+};

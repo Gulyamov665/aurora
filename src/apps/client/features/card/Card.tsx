@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { CardType } from "./types";
-// import { CartItem } from "@store/user/types";
+
 import { formatPrice } from "@/Utils/tools";
 
 const Card: FC<CardType> = ({ id, photo, name, price, addToCart }) => {
