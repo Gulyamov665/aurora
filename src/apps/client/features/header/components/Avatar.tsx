@@ -1,7 +1,9 @@
 import React, { FC } from "react";
-import { Avatar, Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
+import { Avatar, Box, IconButton, ListItemIcon, Menu, MenuItem, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { UserAvatarProps } from "../types";
+import { Logout, PersonAdd, Settings } from "@mui/icons-material";
+import MailIcon from "@mui/icons-material/Mail";
 
 export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout }) => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -23,9 +25,11 @@ export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout }) => {
   const settings = [
     {
       title: isUser?.email,
+      icon: <MailIcon fontSize="small" />,
     },
     {
       title: "Профиль",
+      icon: <PersonAdd fontSize="small" />,
       action: () => {
         navigate("profile");
         handleCloseUserMenu();
@@ -33,6 +37,7 @@ export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout }) => {
     },
     {
       title: "Аккаунт",
+      icon: <Settings fontSize="small" />,
       action: () => {
         navigate("account");
         handleCloseUserMenu();
@@ -40,6 +45,7 @@ export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout }) => {
     },
     {
       title: "Выйти",
+      icon: <Logout fontSize="small" />,
       action: () => {
         logout();
         handleCloseUserMenu();
@@ -69,7 +75,8 @@ export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout }) => {
         onClose={handleCloseUserMenu}
       >
         {settings.map((setting) => (
-          <MenuItem key={setting.title} onClick={setting.action} >
+          <MenuItem key={setting.title} onClick={setting.action}>
+            <ListItemIcon>{setting.icon}</ListItemIcon>
             <Typography sx={{ textAlign: "center" }}>{setting.title}</Typography>
           </MenuItem>
         ))}
