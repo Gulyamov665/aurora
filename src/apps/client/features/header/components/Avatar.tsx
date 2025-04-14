@@ -5,7 +5,7 @@ import { UserAvatarProps } from "../types";
 
 export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout }) => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-  
+
   const navigate = useNavigate();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -21,6 +21,9 @@ export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout }) => {
   };
 
   const settings = [
+    {
+      title: isUser?.email,
+    },
     {
       title: "Профиль",
       action: () => {
@@ -46,7 +49,7 @@ export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout }) => {
   return (
     <Box sx={{ flexGrow: 0 }}>
       <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-        <Avatar alt="Remy Sharp" src={"userIcon"} />
+        <Avatar alt={isUser?.email} src={"userIcon"} />
       </IconButton>
 
       <Menu
@@ -66,7 +69,7 @@ export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout }) => {
         onClose={handleCloseUserMenu}
       >
         {settings.map((setting) => (
-          <MenuItem key={setting.title} onClick={setting.action}>
+          <MenuItem key={setting.title} onClick={setting.action} >
             <Typography sx={{ textAlign: "center" }}>{setting.title}</Typography>
           </MenuItem>
         ))}

@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
 import { UserAvatar } from "./components/Avatar";
+import { useActions } from "@/hooks/useActions";
 import header from "./assets/Header.module.scss";
 import newYearLogo from "@/assets/transparent_logo_new_year.png";
 import LocationDropdown from "../map/components/LocationDropdown";
 import EditOutlinedIcon from "@mui/icons-material/Edit";
-import { useActions } from "@/hooks/useActions";
 
 const Header: FC = () => {
   const { isUser } = useSelector(authState);
