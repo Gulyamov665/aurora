@@ -12,6 +12,13 @@ export type SpyType = (
   setActiveIndex: (index: number) => void
 ) => void;
 
+export type RestaurantOrderType = {
+  id: number;
+  name: string;
+  photo: string;
+  address: string;
+  phone: 12321321;
+};
 export interface AddToCartArgs {
   event: MouseEvent<HTMLButtonElement>;
   productData: ProductData;

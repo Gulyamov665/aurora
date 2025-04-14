@@ -1,4 +1,4 @@
-import { CartItem, IsUserType, VendorInfoType } from "@store/user/types";
+import { CartItem, IsUserType, OrdersType, VendorInfoType } from "@store/user/types";
 import { MouseEvent } from "react";
 import { ProductData } from "../../products/types";
 import { addToCartMutationType, decreaseItemMutationType, removeCartMutationType } from "@store/admin/api/orders";
@@ -50,4 +50,8 @@ export type ConfirmOrderProps = {
   navigate: NavigateFunction;
   handleCreateOrder: () => void;
   items: OrderItems;
+};
+
+export type OrderHistoryProps = {
+  order: OrdersType;
 };

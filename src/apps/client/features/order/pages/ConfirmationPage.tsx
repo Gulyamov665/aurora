@@ -21,15 +21,15 @@ const OrderConfirmationPage: React.FC = () => {
 
   const handleCreateOrder = async () => {
     try {
-      const itemsWithoutPhoto = items.products.map(({ photo, ...rest }: CartItem) => rest);
+      // const itemsWithoutPhoto = items.products.map(({ photo, ...rest }: CartItem) => rest);
       const orderData = {
         created_by: isUser?.user_id,
         lat: "40.7128",
         long: "-74.0060",
         user_id: isUser?.user_id,
-        restaurant: data.id,
+        restaurant: { id: data.id, name: data.name, address: data.address, photo: data.logo, phone: 998934567890 },
         status: "new",
-        products: itemsWithoutPhoto,
+        products: items.products,
       };
       await createOrder(orderData).unwrap();
       setShowSuccess(true);

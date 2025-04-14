@@ -82,6 +82,15 @@ type OrderProduct = {
   name: string;
   price: number;
   quantity: number;
+  photo: string;
+};
+
+export type RestaurantOrderType = {
+  id: number;
+  name: string;
+  photo: string;
+  address: string;
+  phone: number;
 };
 
 export type OrdersType = {
@@ -93,7 +102,7 @@ export type OrdersType = {
   lat: string;
   long: string;
   user_id: number;
-  restaurant: number;
+  restaurant: RestaurantOrderType;
   products: OrderProduct[];
   status: string;
 };
