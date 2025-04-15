@@ -47,6 +47,7 @@ export default function RegForm({
           })}
           placeholder="Фамилия"
         />
+        
         {
           <div className={`${styles["error-message"]} ${formState.errors.last_name ? styles["show"] : ""}`}>
             {formState.errors.last_name && formState.errors.last_name.message}
