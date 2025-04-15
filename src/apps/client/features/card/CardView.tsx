@@ -5,6 +5,7 @@ import { addCartItem } from "@/store/cartSlice";
 import { CardViewProps } from "./types";
 import { ProductType } from "../category/types";
 import CardViewContent from "./components/CardViewContent";
+import { Dialog } from "@mui/material";
 
 const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount }) => {
   const controls = useDragControls();
@@ -22,7 +23,7 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
   return (
     <AnimatePresence>
       {open && (
-        <div>
+        <Dialog open={open} onClose={() => setIsOpen(!open)}>
           <div className="card_modal" onClick={() => setIsOpen(!open)}></div>
 
           <motion.div
@@ -50,7 +51,7 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
               <CardViewContent addToCart={addToCart} item={item} count={count} setCount={setCount}></CardViewContent>
             )}
           </motion.div>
-        </div>
+        </Dialog>
       )}
     </AnimatePresence>
   );
