@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Navigate, useNavigate } from "react-router-dom";
 import { AuthType, DataType } from "../types";
@@ -14,14 +14,21 @@ const Auth: FC<AuthType> = ({ state }) => {
   const { register, handleSubmit, formState } = useForm<DataType>();
   const { isUser } = useSelector(authState);
   const [userAuth, { isLoading, error }] = useAuthMutation();
+  const linkToVendor = localStorage.getItem("from");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (state?.from) {
+      localStorage.setItem("from", state.from);
+    }
+  }, [state]);
 
   const submit: SubmitHandler<DataType> = async (data) => {
     await userAuth(data).unwrap();
   };
 
-  if (isUser) {
-    return <Navigate to={state.from} />;
+  if (isUser && linkToVendor) {
+    return <Navigate to={linkToVendor} />;
   }
 
   return (

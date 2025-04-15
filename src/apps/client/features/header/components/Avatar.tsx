@@ -24,7 +24,7 @@ export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout, user }) => {
 
   const settings = [
     {
-      title: user?.last_name,
+      title: user?.first_name,
       icon: <MailIcon fontSize="small" />,
     },
     {

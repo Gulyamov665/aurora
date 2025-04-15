@@ -5,8 +5,6 @@ import { regStepChange, userId, botLinkAction, regError } from "../user/slices/a
 listenerMiddleware.startListening({
   matcher: userRegistration.endpoints.registration.matchFulfilled,
   effect: async (action, listenerApi) => {
-    console.log("Запрос регистрации отправлен:", action);
-
     listenerApi.dispatch(userId(action.payload.id));
     listenerApi.dispatch(botLinkAction(action.payload.bot_link));
     listenerApi.dispatch(regStepChange(1));
@@ -24,8 +22,7 @@ listenerMiddleware.startListening({
 
 listenerMiddleware.startListening({
   matcher: userRegistration.endpoints.codeRequest.matchFulfilled,
-  effect: async (action, listenerApi) => {
-    console.log("Запрос регистрации отправлен patch:", action);
+  effect: async (_, listenerApi) => {
     listenerApi.dispatch(regStepChange(2));
   },
 });
