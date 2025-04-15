@@ -1,4 +1,11 @@
-import { SubmitHandler, UseFormHandleSubmit, UseFormRegister, UseFormStateReturn } from "react-hook-form";
+import {
+  Control,
+  SubmitHandler,
+  UseFormHandleSubmit,
+  UseFormRegister,
+  UseFormStateReturn,
+  UseFormTrigger,
+} from "react-hook-form";
 
 export type AuthType = {
   state: { from: string };
@@ -21,4 +28,6 @@ export type AuthData = {
   state: { from: string };
   error?: errorType | undefined;
   isLoading: boolean;
+  control: Control<DataType>;
+  trigger: UseFormTrigger<DataType>;
 };

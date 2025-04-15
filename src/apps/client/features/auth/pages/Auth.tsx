@@ -11,7 +11,7 @@ import Login from "../components/Login";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const Auth: FC<AuthType> = ({ state }) => {
-  const { register, handleSubmit, formState } = useForm<DataType>();
+  const { register, handleSubmit, formState, control, trigger } = useForm<DataType>({ mode: "onChange" });
   const { isUser } = useSelector(authState);
   const [userAuth, { isLoading, error }] = useAuthMutation();
   const linkToVendor = localStorage.getItem("from");
@@ -46,6 +46,8 @@ const Auth: FC<AuthType> = ({ state }) => {
           isLoading={isLoading}
           error={parseError(error)}
           formState={formState}
+          control={control}
+          trigger={trigger}
         />
       </div>
     </div>
