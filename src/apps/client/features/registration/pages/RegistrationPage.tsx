@@ -3,7 +3,7 @@ import styles from "../../auth/assets/AuthForm.module.scss";
 import Register from "../components/Register";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { RegistrationPageType } from "../types";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { authState } from "@store/user/slices/authSlice";
 import { useSelector } from "react-redux";
 import { useCodeRequestMutation, useRegistrationMutation } from "@store/user/api/userRegistrationApi";
@@ -13,6 +13,12 @@ const RegistrationPage: FC<RegistrationPageType> = ({ state }) => {
   const { regStep, userId, botLink, error } = useSelector(authState);
   const [registration, { isLoading }] = useRegistrationMutation();
   const [codeRequest] = useCodeRequestMutation();
+
+  useEffect(() => {
+    if (state?.from) {
+      localStorage.setItem("from", state.from);
+    }
+  }, [state]);
 
   return (
     <div className="container center mt-5">

@@ -59,3 +59,8 @@ export type OrderHistoryProps = {
 export type OrderDetailProps = {
   order: OrdersType;
 };
+
+export type GoToLoginProps = {
+  goToLogin: () => void;
+  goToRegister: () => void;
+};
