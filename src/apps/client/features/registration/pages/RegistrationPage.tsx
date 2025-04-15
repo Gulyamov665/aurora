@@ -11,7 +11,7 @@ import { useCodeRequestMutation, useRegistrationMutation } from "@store/user/api
 const RegistrationPage: FC<RegistrationPageType> = ({ state }) => {
   const navigate = useNavigate();
   const { regStep, userId, botLink, error } = useSelector(authState);
-  const [registration] = useRegistrationMutation();
+  const [registration, { isLoading }] = useRegistrationMutation();
   const [codeRequest] = useCodeRequestMutation();
 
   return (
@@ -29,6 +29,7 @@ const RegistrationPage: FC<RegistrationPageType> = ({ state }) => {
           error={error}
           registration={registration}
           codeRequest={codeRequest}
+          isLoading={isLoading}
         />
       </div>
     </div>

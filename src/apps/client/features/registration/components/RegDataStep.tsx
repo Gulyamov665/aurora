@@ -15,6 +15,7 @@ export default function RegForm({
   trigger,
   watch,
   error,
+  isLoading,
 }: RegDataType) {
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
@@ -47,7 +48,7 @@ export default function RegForm({
           })}
           placeholder="Фамилия"
         />
-        
+
         {
           <div className={`${styles["error-message"]} ${formState.errors.last_name ? styles["show"] : ""}`}>
             {formState.errors.last_name && formState.errors.last_name.message}
@@ -73,6 +74,10 @@ export default function RegForm({
               value: /^\+998\d{2}\d{3}\d{2}\d{2}$/,
               message: "Введите корректный номер телефона",
             },
+            minLength: {
+              value: 12,
+              message: "Номер телефона должен быть минимум 12 символов",
+            },
           }}
           render={({ field, fieldState }) => (
             <>
@@ -96,7 +101,13 @@ export default function RegForm({
         <input
           type={showPassword ? "text" : "password"}
           id="password1"
-          {...register("password_1", { required: "Это поле обязательно для заполнения" })}
+          {...register("password_1", {
+            required: "Это поле обязательно для заполнения",
+            minLength: {
+              value: 8,
+              message: "Пароль должен быть минимум 8 символов",
+            },
+          })}
           placeholder="Пароль"
         />
         <span
@@ -112,6 +123,10 @@ export default function RegForm({
           {...register("password_2", {
             required: "Это поле обязательно для заполнения",
             validate: (value) => value === password || "Пароли не совпадают",
+            minLength: {
+              value: 8,
+              message: "Пароль должен быть минимум 8 символов",
+            },
           })}
           placeholder="Повторите пароль"
         />
@@ -136,8 +151,15 @@ export default function RegForm({
         </Link>
       </p>
 
-      <button type="submit" className={`${styles["form-button"]} ${!formState.isValid ? "disabled" : ""} `}>
-        Продолжить
+      <button
+        type="submit"
+        className={`${styles["form-button"]} ${!formState.isValid || isLoading ? "disabled" : ""} `}
+      >
+        {!isLoading ? (
+          <span className={styles["btn-span"]}>Продолжить</span>
+        ) : (
+          <span className={`spinner-border spinner-border-sm ${styles["btn-span-spinner"]}`} aria-hidden="true"></span>
+        )}
       </button>
     </form>
   );

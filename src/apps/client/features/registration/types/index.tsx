@@ -41,6 +41,7 @@ export type RegDataType = {
     code: number;
   };
   state: { from: string };
+  isLoading: boolean;
 };
 export type RegisterType = {
   state: { from: string };
@@ -53,6 +54,7 @@ export type RegisterType = {
   };
   registration: RegistrationMutation[0];
   codeRequest: CodeRequest[0];
+  isLoading: boolean;
 };
 
 export type RegistrationPageType = {
