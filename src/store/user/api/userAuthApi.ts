@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { UserInfoType } from "../types";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -18,7 +19,7 @@ export const userAuth = createApi({
         body,
       }),
     }),
-    me: build.query<number, number>({
+    me: build.query<UserInfoType, number>({
       query: (id) => `v1/auth/user/${id}`,
     }),
   }),

@@ -8,9 +8,12 @@ import header from "./assets/Header.module.scss";
 import newYearLogo from "@/assets/transparent_logo_new_year.png";
 import LocationDropdown from "../map/components/LocationDropdown";
 import EditOutlinedIcon from "@mui/icons-material/Edit";
+import { useMeQuery } from "@store/user/api/userAuthApi";
+import { UserInfoType } from "@store/user/types";
 
 const Header: FC = () => {
   const { isUser } = useSelector(authState);
+  const { data: me } = useMeQuery(isUser?.user_id ?? 0, { skip: !isUser?.user_id });
   const { logout } = useActions();
 
   const items = [
@@ -39,7 +42,7 @@ const Header: FC = () => {
         <LocationDropdown items={items} />
 
         <div className={`${header.user_icon}`}>
-          <UserAvatar isUser={isUser} logout={logout} />
+          <UserAvatar isUser={isUser} user={me as UserInfoType} logout={logout} />
         </div>
       </div>
     </header>

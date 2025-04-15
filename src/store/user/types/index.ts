@@ -122,4 +122,13 @@ export interface CartItem {
   photo: string;
 }
 
+export type UserInfoType = {
+  email: string;
+  first_name: string;
+  id: number;
+  last_name: string;
+  phone: string;
+  user_registered_at: string;
+};
+
 export type { ProductType };

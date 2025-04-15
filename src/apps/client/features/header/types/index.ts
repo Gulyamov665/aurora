@@ -1,3 +1,5 @@
+import { UserInfoType } from "@store/user/types";
+
 export type IsUser = {
   token_type: string;
   exp: number;
@@ -12,5 +14,6 @@ export type IsUser = {
 
 export type UserAvatarProps = {
   isUser: Partial<IsUser> | null;
+  user: UserInfoType;
   logout: () => void;
 };

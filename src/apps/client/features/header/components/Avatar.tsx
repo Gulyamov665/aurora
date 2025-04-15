@@ -5,7 +5,7 @@ import { UserAvatarProps } from "../types";
 import { Logout, PersonAdd, Settings } from "@mui/icons-material";
 import MailIcon from "@mui/icons-material/Mail";
 
-export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout }) => {
+export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout, user }) => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout }) => {
 
   const settings = [
     {
-      title: isUser?.email,
+      title: user?.last_name,
       icon: <MailIcon fontSize="small" />,
     },
     {
@@ -74,8 +74,8 @@ export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout }) => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {settings.map((setting) => (
-          <MenuItem key={setting.title} onClick={setting.action}>
+        {settings.map((setting, i) => (
+          <MenuItem key={i} onClick={setting.action}>
             <ListItemIcon>{setting.icon}</ListItemIcon>
             <Typography sx={{ textAlign: "center" }}>{setting.title}</Typography>
           </MenuItem>

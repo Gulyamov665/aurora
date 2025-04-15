@@ -4,9 +4,9 @@ import { styled } from "@mui/material/styles";
 import { useGetMyOrdersQuery } from "@store/admin/api/orders";
 import { useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
-
 import { OrderHistory } from "../components/OrderHistory";
 import { Link } from "react-router-dom";
+import Loading from "../../loading/Loading";
 
 export const OrderCard = styled(Card)({
   marginBottom: 16,
@@ -19,9 +19,8 @@ export const MyOrders: FC = () => {
   const skip = { skip: !isUser?.user_id };
   const { data, isLoading } = useGetMyOrdersQuery({ userId: isUser?.user_id }, skip);
 
-  if (!data) return;
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   return (
     <Box sx={{ maxWidth: 600, mx: "auto", p: 2 }}>
@@ -29,7 +28,7 @@ export const MyOrders: FC = () => {
         Мои заказы
       </Typography>
 
-      {data.map((order) => (
+      {data?.map((order) => (
         <Link to={`${order.id}`} key={order.id} style={{ all: "unset", cursor: "pointer" }}>
           <OrderHistory order={order} key={order.id} />
         </Link>
