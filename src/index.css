@@ -25,11 +25,12 @@ code {
 
 .disabled {
   background-color: rgba(237, 243, 245, 1);
-  color: rgba(142, 157, 180, 1);
+  color: black !important;
   border: none;
   user-select: none;
   pointer-events: none;
 }
+
 .card_modal {
   width: auto;
   height: 100%;

@@ -35,9 +35,12 @@ export default function Login({ register, handleSubmit, submit, state, isLoading
         </Link>
       </p>
       <p className={`${styles["error-message"]} ${error?.message ? styles["show"] : ""}`}>{error && error.message}</p>
-      <button type="submit" className={`${styles["form-button"]} ${isLoading ? " disabled" : ""}`}>
+      <button
+        type="submit"
+        className={`${styles["form-button"]} ${isLoading || !formState.isValid ? " disabled" : ""}`}
+      >
         {!isLoading ? (
-          <span className={styles["btn-span"]}>Войти</span>
+          <p>Войти</p>
         ) : (
           <span className={`spinner-border spinner-border-sm ${styles["btn-span-spinner"]}`} aria-hidden="true"></span>
         )}

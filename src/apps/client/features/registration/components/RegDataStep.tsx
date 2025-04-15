@@ -156,7 +156,7 @@ export default function RegForm({
         className={`${styles["form-button"]} ${!formState.isValid || isLoading ? "disabled" : ""} `}
       >
         {!isLoading ? (
-          <span className={styles["btn-span"]}>Продолжить</span>
+          <p>Продолжить</p>
         ) : (
           <span className={`spinner-border spinner-border-sm ${styles["btn-span-spinner"]}`} aria-hidden="true"></span>
         )}
