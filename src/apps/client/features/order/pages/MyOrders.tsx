@@ -29,7 +29,7 @@ export const MyOrders: FC = () => {
       </Typography>
 
       {data?.map((order) => (
-        <Link to={`${order.id}`} key={order.id} style={{ all: "unset", cursor: "pointer" }}>
+        <Link to={`${order.id}`} key={order.id} className="link-reset">
           <OrderHistory order={order} key={order.id} />
         </Link>
       ))}

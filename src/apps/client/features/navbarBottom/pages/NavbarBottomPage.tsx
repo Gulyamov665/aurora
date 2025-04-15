@@ -31,7 +31,7 @@ const NavbarBottomPage: FC<NavbarBottomPageProps> = ({ data }) => {
       icon: <ShoppingCartOutlinedIcon sx={options} />,
       title: "Корзина",
       link: "cart",
-      counter: items?.products?.length,
+      counter: isUser && items?.products?.length,
       active: true,
     },
     {

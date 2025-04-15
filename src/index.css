@@ -18,6 +18,11 @@ code {
   overflow: hidden;
 }
 
+.link-reset {
+  all: unset;
+  cursor: pointer;
+}
+
 .disabled {
   background-color: rgba(237, 243, 245, 1);
   color: rgba(142, 157, 180, 1);
@@ -340,7 +345,7 @@ code {
     margin: 0 !important;
     padding: 2px !important;
   }
-  
+
   .card {
     margin: 10px auto;
 

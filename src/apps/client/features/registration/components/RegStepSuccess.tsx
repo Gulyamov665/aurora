@@ -11,7 +11,9 @@ export const RegStepSuccess: FC = () => {
         <img src={img} alt="" />
       </div>
       <button type="submit" className={`${styles["form-button"]} }`}>
-        <Link to={"/login"}>Войти</Link>
+        <Link className="link-reset" to={"/login"}>
+          Войти
+        </Link>
       </button>
     </div>
   );
