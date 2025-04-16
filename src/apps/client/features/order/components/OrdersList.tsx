@@ -42,6 +42,7 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
 
   const decrease = (product: CartItem) => {
     if (!isUser?.user_id || !data?.id) return;
+
     decreaseItem({
       product_id: product.id,
       user_id: isUser?.user_id,

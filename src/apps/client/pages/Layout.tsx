@@ -5,7 +5,7 @@ import { useLoadQuery } from "@store/admin/api/vendorApi.js";
 
 export default function Layout() {
   const { res = "" } = useParams();
-  const { data, isLoading } = useLoadQuery(res);
+  const { data, isLoading } = useLoadQuery(res, { skip: !res });
 
   return (
     <>

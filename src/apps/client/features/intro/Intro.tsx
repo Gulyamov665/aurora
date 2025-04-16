@@ -12,7 +12,7 @@ const Intro: FC<IntroType> = ({ data }) => {
   const [callWaiter, { isLoading }] = useWaiterCallMutation();
 
   const handleCallWaiter = async () => {
-    if (data.waiter_chat_id) {
+    if (data?.waiter_chat_id) {
       await callWaiter({ table, chat_id: data.waiter_chat_id });
       toast.success("Запрос отправлен");
       return;
@@ -24,7 +24,7 @@ const Intro: FC<IntroType> = ({ data }) => {
     <div className="container container-sm">
       <div className="intro-page">
         <div className="snowFall"></div>
-        <img src={data && data.background_photo} loading="lazy" className="img" alt="img" />
+        <img src={data && data?.background_photo} loading="lazy" className="img" alt="img" />
         <div className="opacity-block" />
         <div className="img_log">
           <img src={data?.logo} className="img_logo" alt="logo" />
@@ -34,11 +34,11 @@ const Intro: FC<IntroType> = ({ data }) => {
 
       <div className="mt-4 ">
         <div className="name_container">
-          <h1 className="texts">{data.name}</h1>
-          <p className="texts">{data.address}</p>
+          <h1 className="texts">{data?.name}</h1>
+          <p className="texts">{data?.address}</p>
 
           <div>
-            {data.instagram_link && (
+            {data?.instagram_link && (
               <a
                 href={data.instagram_link}
                 target="_blank"
@@ -48,7 +48,7 @@ const Intro: FC<IntroType> = ({ data }) => {
                 <InstagramIcon style={{ marginRight: 5 }} />
               </a>
             )}
-            {data.telegram_link && (
+            {data?.telegram_link && (
               <a
                 style={{ textDecoration: "none", color: "black" }}
                 href={data.telegram_link}

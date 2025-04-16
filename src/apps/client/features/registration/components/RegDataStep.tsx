@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { RegDataType } from "../types";
 import { Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask";
-import styles from "../assets/Registration.module.scss";
 import { useState } from "react";
+import styles from "../assets/Registration.module.scss";
 
 export default function RegForm({
   register,

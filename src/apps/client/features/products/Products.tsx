@@ -1,20 +1,25 @@
 import { FC, useMemo, useCallback, MouseEvent, useState } from "react";
-import Card from "../card/Card";
 import { ProductData, ProductsProps } from "./types";
-import { useAddToCartMutation } from "@store/admin/api/orders";
+import { useAddToCartMutation, useDecreaseItemMutation, useGetCartQuery } from "@store/admin/api/orders";
 import { useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
 import { useOutletContext } from "react-router-dom";
 import { OutletContextType } from "../../pages";
 import { handleAddToCart } from "@/Utils/tools";
 import { MaterialModal } from "@/apps/common/Modal";
-
 import { GuestBox } from "./components/GuestBox";
+import { CartItem } from "@store/user/types";
+import Card from "../card/Card";
 
 const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleView }) => {
   const [addToCart] = useAddToCartMutation();
   const { data } = useOutletContext<OutletContextType>();
   const { isUser } = useSelector(authState);
+  const { data: items } = useGetCartQuery(
+    { user: isUser?.user_id, vendorId: data?.id },
+    { skip: !data?.id || !isUser?.user_id }
+  );
+  const [decreaseItem] = useDecreaseItemMutation();
   const [toRegPage, setToRegPage] = useState(false);
 
   const activeCategories = useMemo(() => category.filter(({ is_active }) => is_active), [category]);
@@ -26,6 +31,21 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
     },
     [sectionRefs]
   );
+
+  const findItem = (id: number) => {
+    return items?.products?.find((item: CartItem) => item.id === id);
+  };
+
+  const decrease = (e: MouseEvent<HTMLButtonElement>, id: number) => {
+    if (!isUser?.user_id || !data?.id) return;
+    e.stopPropagation();
+
+    decreaseItem({
+      product_id: id,
+      user_id: isUser?.user_id,
+      restaurant_id: data.id,
+    });
+  };
 
   const onClick = async (event: MouseEvent<HTMLButtonElement>, productData: ProductData) => {
     if (!isUser?.user_id || !data?.id) {
@@ -57,7 +77,7 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
                     key={filteredObj.id}
                     className="col-6 col-sm-6 col-md-4 col-lg-3 "
                   >
-                    <Card {...filteredObj} addToCart={onClick} />
+                    <Card product={filteredObj} findItem={findItem} decrease={decrease} addToCart={onClick} />
                   </div>
                 ))}
             </div>

@@ -1,16 +1,12 @@
 import { MouseEvent } from "react";
 import { ProductType } from "../../category/types";
 import { ProductData } from "../../products/types";
+import { CartItem } from "@store/user/types";
 
 export type CardType = {
-  id: number;
-  photo: string;
-  name: string;
-  price: number;
-  is_active: boolean;
-  restaurant: number;
-  availability: boolean;
-  category: number;
+  product: CartItem;
+  findItem: (id: number) => CartItem;
+  decrease: (event: MouseEvent<HTMLButtonElement>, productData: number) => void;
   addToCart: (event: MouseEvent<HTMLButtonElement>, productData: ProductData) => Promise<void>;
 };
 

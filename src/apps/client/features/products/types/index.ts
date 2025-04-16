@@ -13,7 +13,6 @@ export interface ProductData {
   name: string;
   price: number;
   photo: string;
-  // quantity: number;
 }
 
 export type GuestBoxProps = {
