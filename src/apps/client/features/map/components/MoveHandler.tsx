@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useMap, useMapEvents } from "react-leaflet";
-import { NominatimReverseResponse } from "../types";
+import { MoveHandlerProps, NominatimReverseResponse } from "../types";
+import React from "react";
 
-export const MoveHandler = ({ setPosition, setAddress }: any) => {
+export const MoveHandler: React.FC<MoveHandlerProps> = ({ setPosition, setAddress }: any) => {
   const map = useMap();
 
   useMapEvents({

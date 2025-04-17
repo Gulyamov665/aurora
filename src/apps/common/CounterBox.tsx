@@ -9,7 +9,6 @@ type CounterBoxProps = {
   quantity?: number;
 };
 
-console.log("first");
 export const CounterBox: React.FC<CounterBoxProps> = ({ increase, decrease, quantity }) => {
   return (
     <CardActions sx={{ justifyContent: "center", height: 24 }}>

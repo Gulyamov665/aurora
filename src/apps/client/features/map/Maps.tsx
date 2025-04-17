@@ -3,7 +3,7 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import { Box, IconButton, TextField, Typography } from "@mui/material";
 import { MoveHandler } from "./components/MoveHandler";
 import { Map as LeafletMap } from "leaflet";
-import MyLocationIcon from "@mui/icons-material/MyLocation";
+import NearMeRoundedIcon from "@mui/icons-material/NearMeRounded";
 
 const defaultPosition = { lat: 39.7467565, lng: 64.4111207 };
 
@@ -85,7 +85,7 @@ const OsmMapWithAutocomplete = () => {
           onClick={handleGeolocate}
           sx={{
             position: "absolute",
-            bottom: 16,
+            bottom: 70,
             right: 16,
             zIndex: 1000,
             backgroundColor: "white",
@@ -95,7 +95,7 @@ const OsmMapWithAutocomplete = () => {
             },
           }}
         >
-          <MyLocationIcon />
+          <NearMeRoundedIcon />
         </IconButton>
       </Box>
 

@@ -11,3 +11,13 @@ export interface NominatimReverseResponse {
     postcode?: string;
   };
 }
+
+export type MoveHandlerProps = {
+  setPosition: React.Dispatch<
+    React.SetStateAction<{
+      lat: number;
+      lng: number;
+    }>
+  >;
+  setAddress: React.Dispatch<React.SetStateAction<string>>;
+};
