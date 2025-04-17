@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "react-image-crop/dist/ReactCrop.css";
+import "leaflet/dist/leaflet.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
