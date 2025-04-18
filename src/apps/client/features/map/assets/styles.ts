@@ -1,24 +1,17 @@
 export const styles = {
   address: {
-    // dark
-    position: "absolute",
-    top: "40%",
-    left: "50%",
-    zIndex: 999,
-    transform: "translate(-50%, -100%)",
     bgcolor: "#2c2c2c",
     color: "white",
-    p: 2,
     px: 3,
+    py: 1.5,
     borderRadius: "16px",
-
     boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
     fontWeight: 500,
     textAlign: "center",
     fontSize: "16px",
-    // opacity: 0.6,
     maxWidth: "200px",
-
+    mb: 1.5,
+    position: "relative",
     "&::after": {
       content: '""',
       position: "absolute",

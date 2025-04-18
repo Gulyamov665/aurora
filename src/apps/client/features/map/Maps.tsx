@@ -1,4 +1,4 @@
-import {  useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { Autocomplete, Box, IconButton, TextField, Typography } from "@mui/material";
 import { MoveHandler } from "./components/MoveHandler";
@@ -7,6 +7,7 @@ import { styles } from "./assets/styles";
 import { motion } from "framer-motion";
 import NearMeRoundedIcon from "@mui/icons-material/NearMeRounded";
 import { LocationType } from "./types";
+import DragWatcher from "./components/DragWatcher";
 
 const defaultPosition = { lat: 39.7467565, lng: 64.4111207 };
 
@@ -15,8 +16,7 @@ const OsmMapWithAutocomplete = () => {
   const [address, setAddress] = useState("");
   const [adressesList, setAdressesList] = useState<string[]>([]);
   const mapRef = useRef<LeafletMap | null>(null);
-
-  const MotionTypography = motion.create(Typography);
+  const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
     if (address.length > 2) {
@@ -119,27 +119,37 @@ const OsmMapWithAutocomplete = () => {
             attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
           />
           <MoveHandler setPosition={setPosition} setAddress={setAddress} />
+          <DragWatcher onDragStart={() => setIsDragging(true)} onDragEnd={() => setIsDragging(false)} />
         </MapContainer>
 
-        {/* Маркер по центру */}
-        <Box sx={styles.marker}>
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/684/684908.png"
-            alt="marker"
-            style={{ width: 35, height: 35 }}
-          />
-        </Box>
-
-        {address && (
-          <MotionTypography
-            sx={styles.address}
-            initial={{ padding: "10px 18px", fontSize: "16px", opacity: 0.8 }}
-            animate={{ padding: "8px 16px", fontSize: "16px", opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -100%)", // по центру и вверх
+            zIndex: 1000,
+            pointerEvents: "none",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          {/* Адрес */}
+          {!isDragging && address && <Box sx={styles.address}>{address}</Box>}
+          {/* Маркер */}
+          <motion.div
+            animate={isDragging ? { y: [0, -6, 5, -4, 2, 0] } : { y: 0 }}
+            transition={isDragging ? { duration: 1, repeat: Infinity, ease: "easeInOut" } : { duration: 0.5 }}
           >
-            {address}
-          </MotionTypography>
-        )}
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/684/684908.png"
+              alt="marker"
+              style={{ width: 35, height: 35 }}
+            />
+          </motion.div>
+        </div>
+
         <IconButton
           onClick={handleGeolocate}
           sx={{
