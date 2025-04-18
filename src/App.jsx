@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import AdminRoutes from './routes/AdminRoutes'
 import VendorRoutes from './routes/VendorRoutes'
+import { Analytics } from '@vercel/analytics/react'
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Route path="/admin/:res/*" element={<AdminRoutes />} />
         <Route path="vendor/:res/:table?/*" element={<VendorRoutes />} />
       </Routes>
-
+      <Analytics />
       <ToastContainer />
     </>
   )
