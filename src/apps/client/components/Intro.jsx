@@ -9,7 +9,6 @@ import { toast } from 'react-toastify'
 export default function Intro({ data }) {
   const { table } = useParams()
   const [callWaiter, { isLoading }] = useWaiterCallMutation()
-  console.log(data)
 
   const handleCallWaiter = async () => {
     if (data.waiter_chat_id) {
@@ -23,7 +22,12 @@ export default function Intro({ data }) {
     <div className="container container-sm">
       <div className="intro-page">
         {/* <div className="snowFall"></div> */}
-        <img src={data.background_photo} loading="lazy" className="img" alt="img" />
+        <img
+          src={data.background_photo}
+          loading="lazy"
+          className="img"
+          alt="img"
+        />
         <div className="opacity-block" />
         <div className="img_log">
           <img src={data.logo} className="img_logo" alt="logo" />
