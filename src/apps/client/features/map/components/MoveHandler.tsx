@@ -21,7 +21,11 @@ export const MoveHandler: React.FC<MoveHandlerProps> = ({ setPosition, setAddres
             format: "json",
           },
         });
-        setAddress(data.display_name || "Адрес не найден");
+        console.log(data);
+        setAddress(
+          `${data.address?.road || ""} ${data.address?.house_number || data.address?.amenity || data.address?.neighbourhood}` ||
+            "Адрес не найден"
+        );
       } catch {
         setAddress("Ошибка при получении адреса");
       }

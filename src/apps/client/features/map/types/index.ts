@@ -9,6 +9,8 @@ export interface NominatimReverseResponse {
     state?: string;
     country?: string;
     postcode?: string;
+    amenity?: string;
+    neighbourhood: string;
   };
 }
 
@@ -20,4 +22,9 @@ export type MoveHandlerProps = {
     }>
   >;
   setAddress: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export type LocationType = {
+  place_id: number; // можно использовать place_id из Nominatim или fallback на index
+  display_name: string;
 };

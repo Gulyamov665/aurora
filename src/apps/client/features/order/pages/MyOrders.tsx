@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
 import { OrderHistory } from "../components/OrderHistory";
 import { Link, useNavigate } from "react-router-dom";
-import Loading from "../../loading/Loading";
 import { GoToLogin } from "../components/GoToLogin";
+import Loading from "../../loading/Loading";
 
 export const OrderCard = styled(Card)({
   marginBottom: 16,

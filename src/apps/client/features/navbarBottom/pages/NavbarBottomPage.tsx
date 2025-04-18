@@ -1,13 +1,13 @@
-import RestaurantMenuOutlinedIcon from "@mui/icons-material/RestaurantMenu";
-import DeliveryDiningOutlinedIcon from "@mui/icons-material/DeliveryDiningOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
-import NavbarBottom from "../components/NavbarBottom";
 import { IconItem, NavbarBottomPageProps } from "../interfaces/interface";
 import { FC } from "react";
 import { useGetCartQuery } from "@store/admin/api/orders";
 import { useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
+import RestaurantMenuOutlinedIcon from "@mui/icons-material/RestaurantMenu";
+import DeliveryDiningOutlinedIcon from "@mui/icons-material/DeliveryDiningOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
+import NavbarBottom from "../components/NavbarBottom";
 
 const NavbarBottomPage: FC<NavbarBottomPageProps> = ({ data }) => {
   const { isUser } = useSelector(authState);
