@@ -44,7 +44,8 @@ export default function AdminCategory() {
 
   const handleActiveToggle = async (item: ProductType) => {
     const updatedItem = {
-      ...item,
+      restaurant: item.restaurant,
+      category: item.category,
       is_active: !item.is_active,
     };
     await updateProduct({
