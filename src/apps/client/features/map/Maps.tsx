@@ -1,4 +1,4 @@
-import { HTMLAttributes, useEffect, useRef, useState } from "react";
+import {  useEffect, useRef, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { Autocomplete, Box, IconButton, TextField, Typography } from "@mui/material";
 import { MoveHandler } from "./components/MoveHandler";
@@ -34,8 +34,8 @@ const OsmMapWithAutocomplete = () => {
       const data = await response.json();
 
       if (data.length > 0) {
-        const { lat, lon } = data[0];
-        const newPos: [number, number] = [parseFloat(lat), parseFloat(lon)];
+        // const { lat, lon } = data[0];
+        // const newPos: [number, number] = [parseFloat(lat), parseFloat(lon)];
         const location = data.map((loc: LocationType) => ({
           id: loc.place_id, // можно использовать place_id из Nominatim или fallback на index
           label: loc.display_name,
