@@ -3,7 +3,7 @@ import { jwtDecode } from 'jwt-decode'
 import { Link } from 'react-router-dom'
 import header from '../static/Header.module.scss'
 import logo from '../../../assets/transparent_logo.png'
-import newYearLogo from '../../../assets/transparent_logo_new_year.png'
+// import newYearLogo from '../../../assets/transparent_logo_new_year.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { productSearch } from '../../../store/appSlice'
 
@@ -36,7 +36,7 @@ const Header = () => {
       >
         {!vendor ? (
           <div>
-            <img src={newYearLogo} style={{ width: 150 }} alt="logo" />
+            <img src={logo} style={{ width: 150 }} alt="logo" />
           </div>
         ) : (
           <div>
