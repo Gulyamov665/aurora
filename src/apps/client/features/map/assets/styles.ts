@@ -1,3 +1,5 @@
+import { color } from "framer-motion";
+
 export const styles = {
   address: {
     bgcolor: "#2c2c2c",
@@ -57,5 +59,16 @@ export const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+  },
+
+  submitButton: {
+    position: "fixed",
+    bottom: 80,
+    left: "50%",
+    borderRadius: "8px",
+    transform: "translateX(-50%)",
+    zIndex: 1000,
+    backgroundColor: "#4CAF50",
+    "&:hover": { backgroundColor: "#45A049" },
   },
 };

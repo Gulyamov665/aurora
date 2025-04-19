@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
-import { Box, CircularProgress, IconButton, Typography } from "@mui/material";
+import { Box, CircularProgress, IconButton, Button } from "@mui/material";
 import { MoveHandler } from "./components/MoveHandler";
 import { Map as LeafletMap } from "leaflet";
 import { styles } from "./assets/styles";
-import { motion } from "framer-motion";
+import { color, motion } from "framer-motion";
+import { useLazyGetLocationsQuery } from "@store/user/api/locationApi";
+import { formatAddress } from "@/Utils/tools";
 import NearMeRoundedIcon from "@mui/icons-material/NearMeRounded";
 import marker from "@/assets/gps.png";
 import DragWatcher from "./components/DragWatcher";
-import { useLazyGetLocationsQuery } from "@store/user/api/locationApi";
-import { formatAddress } from "@/Utils/tools";
+import { useAddUserLocationMutation } from "@store/user/api/userLocationApi";
 
 const defaultPosition = { lat: 39.7467565, lng: 64.4111207 };
 
@@ -19,38 +20,13 @@ const OsmMapWithAutocomplete = () => {
   const [address, setAddress] = useState("");
   const [isDragging, setIsDragging] = useState(false);
   const [isLocating, setIsLocating] = useState(false);
+  const [addUserLocation] = useAddUserLocationMutation();
   const mapRef = useRef<LeafletMap | null>(null);
 
+  console.log(position);
   useEffect(() => {
     if (data) setAddress(formatAddress(data.address));
   }, [data]);
-
-  // const handleSearch = async () => {
-  //   if (!address) return;
-  //   try {
-  //     const response = await fetch(
-  //       `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&countrycodes=uz`
-  //     );
-  //     const data = await response.json();
-
-  //     if (data.length > 0) {
-  //       // const { lat, lon } = data[0];
-  //       // const newPos: [number, number] = [parseFloat(lat), parseFloat(lon)];
-  //       const location = data.map((loc: LocationType) => ({
-  //         id: loc.place_id, // можно использовать place_id из Nominatim или fallback на index
-  //         label: loc.display_name,
-  //       }));
-  //       setAdressesList(location);
-  //       {
-  //         adressesList;
-  //       }
-  //     } else {
-  //       alert("Адрес не найден 1");
-  //     }
-  //   } catch (err) {
-  //     console.error("Ошибка при поиске адреса:", err);
-  //   }
-  // };
 
   const handleGeolocate = () => {
     if (!navigator.geolocation) {
@@ -95,26 +71,14 @@ const OsmMapWithAutocomplete = () => {
     );
   };
 
+  const checkAddress = () => {
+    if (position) {
+      return JSON.stringify(position) === JSON.stringify(defaultPosition);
+    }
+  };
+
   return (
     <Box>
-      {/* <Autocomplete
-        disablePortal
-        fullWidth
-        onChange={(_, newValue) => setAddress(newValue || "")}
-        options={adressesList}
-        sx={{ width: 300 }}
-        getOptionLabel={(option: any) => option.label}
-        renderOption={(props: any, option: any) => (
-          <li {...props} key={option.id}>
-            {option.label}
-          </li>
-        )}
-        renderInput={(params) => (
-          <TextField {...params} label="Location" value={address} onChange={(e) => setAddress(e.target.value)} />
-        )}
-        freeSolo
-      /> */}
-
       <Box sx={styles.mapContainer}>
         <MapContainer
           center={[position.lat, position.lng]}
@@ -159,9 +123,13 @@ const OsmMapWithAutocomplete = () => {
         </IconButton>
       </Box>
 
-      <Typography variant="body2" sx={{ mt: 2 }}>
-        Координаты: {position.lat.toFixed(6)}, {position.lng.toFixed(6)}
-      </Typography>
+      {position && !checkAddress() && (
+        <Box>
+          <Button variant="contained" sx={styles.submitButton} onClick={() => alert(`Вы выбрали адрес: ${address}`)}>
+            Подтвердить адрес
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 };
