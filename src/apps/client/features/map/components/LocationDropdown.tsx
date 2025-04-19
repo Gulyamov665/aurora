@@ -31,7 +31,7 @@ const LocationDropdown: FC<LocationDropdownProps> = ({ items, me, isUser }) => {
   return (
     <Dropdown onSelect={handleSelect}>
       <Dropdown.Toggle variant="light" id="dropdown-basic" className="dropdownStyle">
-        {(isUser && me?.location.entrance) || "Указать локацию"}
+        {(isUser && me?.location?.entrance) || "Указать локацию"}
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="w-100">
