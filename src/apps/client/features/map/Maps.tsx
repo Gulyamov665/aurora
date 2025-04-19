@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { Box, CircularProgress, IconButton, Typography } from "@mui/material";
 import { MoveHandler } from "./components/MoveHandler";
@@ -6,7 +6,7 @@ import { Map as LeafletMap } from "leaflet";
 import { styles } from "./assets/styles";
 import { motion } from "framer-motion";
 import NearMeRoundedIcon from "@mui/icons-material/NearMeRounded";
-import { LocationType } from "./types";
+// import { LocationType } from "./types";
 import marker from "@/assets/gps.png";
 import DragWatcher from "./components/DragWatcher";
 
@@ -15,7 +15,7 @@ const defaultPosition = { lat: 39.7467565, lng: 64.4111207 };
 const OsmMapWithAutocomplete = () => {
   const [position, setPosition] = useState(defaultPosition);
   const [address, setAddress] = useState("");
-  const [adressesList, setAdressesList] = useState<string[]>([]);
+  // const [adressesList, setAdressesList] = useState<string[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [isLocating, setIsLocating] = useState(false);
   const mapRef = useRef<LeafletMap | null>(null);
