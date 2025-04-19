@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
-import { Autocomplete, Box, CircularProgress, IconButton, TextField, Typography } from "@mui/material";
+import { Box, CircularProgress, IconButton, Typography } from "@mui/material";
 import { MoveHandler } from "./components/MoveHandler";
 import { Map as LeafletMap } from "leaflet";
 import { styles } from "./assets/styles";
@@ -43,6 +43,9 @@ const OsmMapWithAutocomplete = () => {
           label: loc.display_name,
         }));
         setAdressesList(location);
+        {
+          adressesList;
+        }
       } else {
         alert("Адрес не найден");
       }
@@ -95,7 +98,7 @@ const OsmMapWithAutocomplete = () => {
   };
 
   return (
-    <Box >
+    <Box>
       {/* <Autocomplete
         disablePortal
         fullWidth
