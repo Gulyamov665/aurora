@@ -5,6 +5,7 @@ import { UserLocationType } from "../types";
 export const userLocationApi = createApi({
   reducerPath: "userLocationApi",
   baseQuery,
+  tagTypes: ["UserLocation"],
   endpoints: (build) => ({
     getUserLocations: build.query({
       query: ({ lat, lon }) => ({
@@ -16,12 +17,14 @@ export const userLocationApi = createApi({
           format: "json",
         },
       }),
+      providesTags: ["UserLocation"],
     }),
     getUserLocationById: build.query({
       query: (id) => ({
         url: `v1/auth/user/location/${id}`,
         method: "GET",
       }),
+      providesTags: ["UserLocation"],
     }),
     addUserLocation: build.mutation<UserLocationType, UserLocationType>({
       query: (body) => ({
@@ -29,6 +32,7 @@ export const userLocationApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["UserLocation"],
     }),
   }),
 });
