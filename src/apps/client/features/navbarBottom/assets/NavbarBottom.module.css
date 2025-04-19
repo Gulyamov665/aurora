@@ -1,14 +1,14 @@
 .navbar {
   width: 100%;
   position: fixed;
-  overflow: hidden;
+  /* overflow: hidden; */
   bottom: 0;
   background-color: #fff;
   padding: 10px;
   background: #f5f4f2;
   border: 0 transparent;
   box-shadow: 5px 5px 5px 5px rgb(238, 238, 238);
-  z-index: 3000;
+  z-index: 1300;
   text-align: center;
 }
 

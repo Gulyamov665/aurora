@@ -95,8 +95,8 @@ const OsmMapWithAutocomplete = () => {
   };
 
   return (
-    <Box p={2}>
-      <Autocomplete
+    <Box >
+      {/* <Autocomplete
         disablePortal
         fullWidth
         onChange={(_, newValue) => setAddress(newValue || "")}
@@ -112,7 +112,7 @@ const OsmMapWithAutocomplete = () => {
           <TextField {...params} label="Location" value={address} onChange={(e) => setAddress(e.target.value)} />
         )}
         freeSolo
-      />
+      /> */}
 
       <Box sx={styles.mapContainer}>
         <MapContainer
@@ -125,7 +125,14 @@ const OsmMapWithAutocomplete = () => {
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+
+            // url="https://api.maptiler.com/maps/toner-v2/{z}/{x}/{y}.png?key=iLvybLngAB9MEx9SOtCp"
+            // attribution="© MapTiler © OpenStreetMap contributors"
+            // url="https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=iLvybLngAB9MEx9SOtCp"
+            // attribution="© MapTiler © OpenStreetMap contributors"
+            // maxZoom={22}
           />
+
           <MoveHandler setPosition={setPosition} setAddress={setAddress} />
           <DragWatcher onDragStart={() => setIsDragging(true)} onDragEnd={() => setIsDragging(false)} />
         </MapContainer>
