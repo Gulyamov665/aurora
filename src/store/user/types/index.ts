@@ -1,3 +1,4 @@
+import { LocationType } from "@/apps/client/features/map/types";
 import { ProductType } from "@/apps/client/features/order/types/orderTypes";
 
 export type CartType = {
@@ -123,12 +124,17 @@ export interface CartItem {
 }
 
 export type UserInfoType = {
-  email: string;
-  first_name: string;
   id: number;
+  first_name: string;
   last_name: string;
   phone: string;
+  email: string;
+  avatar?: null;
   user_registered_at: string;
+  is_active: boolean;
+  is_user: boolean;
+  is_vendor: boolean;
+  location: UserLocationType;
 };
 
 export interface NominatimReverseResponse {
@@ -147,5 +153,16 @@ export interface NominatimReverseResponse {
     suburb?: string;
   };
 }
+
+export type UserLocationType = {
+  lat: string;
+  long: string;
+  house?: string;
+  apartment?: string;
+  floor?: string;
+  entrance: string;
+  is_active?: boolean;
+  user: number;
+};
 
 export type { ProductType };

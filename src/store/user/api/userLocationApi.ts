@@ -1,5 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "../apiConfigUser";
+import { UserLocationType } from "../types";
 
 export const userLocationApi = createApi({
   reducerPath: "userLocationApi",
@@ -16,7 +17,13 @@ export const userLocationApi = createApi({
         },
       }),
     }),
-    addUserLocation: build.mutation({
+    getUserLocationById: build.query({
+      query: (id) => ({
+        url: `v1/auth/user/location/${id}`,
+        method: "GET",
+      }),
+    }),
+    addUserLocation: build.mutation<UserLocationType, UserLocationType>({
       query: (body) => ({
         url: "v1/auth/user/location",
         method: "POST",
@@ -28,4 +35,4 @@ export const userLocationApi = createApi({
 
 export type addUserLocationMutationType = ReturnType<typeof useAddUserLocationMutation>;
 
-export const { useAddUserLocationMutation } = userLocationApi;
+export const { useAddUserLocationMutation, useGetUserLocationByIdQuery } = userLocationApi;

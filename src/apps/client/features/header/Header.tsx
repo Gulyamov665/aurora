@@ -39,7 +39,7 @@ const Header: FC = () => {
             </Link>
           </div>
         )}
-        <LocationDropdown items={items} />
+        <LocationDropdown items={items} me={me} isUser={isUser} />
 
         <div className={`${header.user_icon}`}>
           <UserAvatar isUser={isUser} user={me as UserInfoType} logout={logout} />

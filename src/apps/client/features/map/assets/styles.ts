@@ -1,5 +1,3 @@
-import { color } from "framer-motion";
-
 export const styles = {
   address: {
     bgcolor: "#2c2c2c",

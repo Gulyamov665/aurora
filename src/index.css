@@ -47,9 +47,14 @@ code {
 }
 .dropdownStyle {
   box-shadow: 0px 0px 10px 0px rgb(182, 182, 182);
-
-  width: 300px;
+  width: 100%;
+  min-width: 400px;
+  max-width: 400px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 
 /* ######################################################### */
 /* ################---INTRO styless ---#################### */
@@ -332,14 +337,16 @@ code {
 }
 @media (min-width: 320px) and (max-width: 425px) {
   .dropdownStyle {
+    min-width: auto;
     width: 220px !important;
-    font-size: 13px !important;
+    font-size: 16px !important;
   }
 }
 @media (min-width: 320px) and (max-width: 480px) {
   .dropdownStyle {
+    min-width: auto;
     width: 170px;
-    font-size: 12px !important;
+    font-size: 16px !important;
   }
   .col-sm-6 {
     margin: 0 !important;

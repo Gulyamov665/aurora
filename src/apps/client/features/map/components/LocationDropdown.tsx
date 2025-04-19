@@ -1,6 +1,8 @@
+import { UserInfoType } from "@store/user/types";
 import { useState, FC } from "react";
 import { Dropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { IsUser } from "../../header/types";
 
 type LocationType = {
   id: number;
@@ -9,9 +11,11 @@ type LocationType = {
 
 type LocationDropdownProps = {
   items: LocationType[];
+  me: UserInfoType | undefined;
+  isUser: Partial<IsUser> | null;
 };
 
-const LocationDropdown: FC<LocationDropdownProps> = ({ items }) => {
+const LocationDropdown: FC<LocationDropdownProps> = ({ items, me, isUser }) => {
   const [selectedItem, setSelectedItem] = useState("");
   const navigate = useNavigate();
 
@@ -25,8 +29,8 @@ const LocationDropdown: FC<LocationDropdownProps> = ({ items }) => {
 
   return (
     <Dropdown onSelect={handleSelect}>
-      <Dropdown.Toggle variant="light" id="dropdown-basic" className=" dropdownStyle">
-        {selectedItem || "Указать локацию"}
+      <Dropdown.Toggle variant="light" id="dropdown-basic" className="dropdownStyle">
+        {(isUser && me?.location.entrance) || "Указать локацию"}
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="w-100">

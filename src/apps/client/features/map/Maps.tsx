@@ -4,18 +4,21 @@ import { Box, CircularProgress, IconButton, Button } from "@mui/material";
 import { MoveHandler } from "./components/MoveHandler";
 import { Map as LeafletMap } from "leaflet";
 import { styles } from "./assets/styles";
-import { color, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLazyGetLocationsQuery } from "@store/user/api/locationApi";
 import { formatAddress } from "@/Utils/tools";
 import NearMeRoundedIcon from "@mui/icons-material/NearMeRounded";
 import marker from "@/assets/gps.png";
 import DragWatcher from "./components/DragWatcher";
 import { useAddUserLocationMutation } from "@store/user/api/userLocationApi";
+import { useSelector } from "react-redux";
+import { authState } from "@store/user/slices/authSlice";
 
 const defaultPosition = { lat: 39.7467565, lng: 64.4111207 };
 
 const OsmMapWithAutocomplete = () => {
   const [getLocation, { data, isFetching }] = useLazyGetLocationsQuery();
+  const { isUser } = useSelector(authState);
   const [position, setPosition] = useState(defaultPosition);
   const [address, setAddress] = useState("");
   const [isDragging, setIsDragging] = useState(false);
@@ -23,7 +26,6 @@ const OsmMapWithAutocomplete = () => {
   const [addUserLocation] = useAddUserLocationMutation();
   const mapRef = useRef<LeafletMap | null>(null);
 
-  console.log(position);
   useEffect(() => {
     if (data) setAddress(formatAddress(data.address));
   }, [data]);
@@ -77,6 +79,24 @@ const OsmMapWithAutocomplete = () => {
     }
   };
 
+  const handleAddUserLocation = async () => {
+    if (address && isUser?.user_id) {
+      try {
+        await addUserLocation({
+          lat: String(position.lat),
+          long: String(position.lng),
+          entrance: address,
+          user: isUser?.user_id,
+          is_active: true,
+        }).unwrap();
+        alert("Адрес успешно добавлен");
+      } catch (error) {
+        console.error("Ошибка при добавлении адреса:", error);
+        alert("Ошибка при добавлении адреса");
+      }
+    }
+  };
+
   return (
     <Box>
       <Box sx={styles.mapContainer}>
@@ -125,7 +145,7 @@ const OsmMapWithAutocomplete = () => {
 
       {position && !checkAddress() && (
         <Box>
-          <Button variant="contained" sx={styles.submitButton} onClick={() => alert(`Вы выбрали адрес: ${address}`)}>
+          <Button variant="contained" sx={styles.submitButton} onClick={handleAddUserLocation}>
             Подтвердить адрес
           </Button>
         </Box>

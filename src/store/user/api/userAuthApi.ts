@@ -25,4 +25,6 @@ export const userAuth = createApi({
   }),
 });
 
+export type meQueryType = ReturnType<typeof useMeQuery>;
+
 export const { useAuthMutation, useMeQuery } = userAuth;
