@@ -33,11 +33,11 @@ export const styles = {
     zIndex: 999,
     pointerEvents: "none",
   },
-  mapContainer: { height: "500px", width: "100%", position: "relative" },
+  mapContainer: { height: "100dvh", width: "100%", position: "relative" },
 
   nearMe: {
     position: "absolute",
-    bottom: 70,
+    bottom: 200,
     right: 16,
     zIndex: 1000,
     backgroundColor: "white",
