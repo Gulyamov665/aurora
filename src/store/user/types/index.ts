@@ -164,4 +164,8 @@ export type UserLocationType = {
   user: number;
 };
 
+export type UserLocationResponseType = UserLocationType & {
+  id: number;
+};
+
 export type { ProductType };

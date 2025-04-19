@@ -19,11 +19,11 @@ const defaultPosition = { lat: 39.7467565, lng: 64.4111207 };
 const OsmMapWithAutocomplete = () => {
   const [getLocation, { data, isFetching }] = useLazyGetLocationsQuery();
   const { isUser } = useSelector(authState);
+  const [addUserLocation] = useAddUserLocationMutation();
   const [position, setPosition] = useState(defaultPosition);
   const [address, setAddress] = useState("");
   const [isDragging, setIsDragging] = useState(false);
   const [isLocating, setIsLocating] = useState(false);
-  const [addUserLocation] = useAddUserLocationMutation();
   const mapRef = useRef<LeafletMap | null>(null);
 
   useEffect(() => {
@@ -89,7 +89,7 @@ const OsmMapWithAutocomplete = () => {
           user: isUser?.user_id,
           is_active: true,
         }).unwrap();
-        alert("Адрес успешно добавлен");
+        // alert("Адрес успешно добавлен");
       } catch (error) {
         console.error("Ошибка при добавлении адреса:", error);
         alert("Ошибка при добавлении адреса");

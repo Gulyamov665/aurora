@@ -1,16 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { UserInfoType } from "../types";
+import { sharedApi } from "./shared";
 
-const baseURL = import.meta.env.VITE_BASE_URL;
-
-const baseQuery = fetchBaseQuery({
-  baseUrl: baseURL,
-});
-
-export const userAuth = createApi({
-  reducerPath: "userAuth",
-  baseQuery,
-
+export const userAuth = sharedApi.injectEndpoints({
   endpoints: (build) => ({
     auth: build.mutation({
       query: (body) => ({
@@ -21,10 +12,11 @@ export const userAuth = createApi({
     }),
     me: build.query<UserInfoType, number>({
       query: (id) => `v1/auth/user/${id}`,
+      providesTags: ["UserLocation"],
     }),
   }),
 });
 
 export type meQueryType = ReturnType<typeof useMeQuery>;
 
-export const { useAuthMutation, useMeQuery } = userAuth;
+export const { useAuthMutation, useMeQuery, useLazyMeQuery } = userAuth;

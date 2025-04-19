@@ -1,22 +1,21 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
-import { productsApi } from "./admin/api/productsApi.js";
-import { categoriesApi } from "./admin/api/categoryApi.js";
+import { productsApi } from "./admin/api/productsApi";
+import { categoriesApi } from "./admin/api/categoryApi";
 import { tokenApi } from "./tokenApi";
-import { promosApi } from "./admin/api/promoApi.js";
+import { promosApi } from "./admin/api/promoApi";
 import { categoriesApiUser } from "./user/api/categoryApi";
 import { productsApiUser } from "./user/api/productsApi";
 import { promosApiUser } from "./user/api/promoApi";
-import { qrCodeApi } from "./admin/api/qrCode.js";
-import { vendorApi } from "./admin/api/vendorApi.js";
+import { qrCodeApi } from "./admin/api/qrCode";
+import { vendorApi } from "./admin/api/vendorApi";
 import { dispatcher } from "./user/api/dispatcherApi";
 import { userRegistration } from "./user/api/userRegistrationApi";
-import { userAuth } from "./user/api/userAuthApi.js";
-import { registerMiddleware } from "./middlewares/registrationMiddleware.js";
-import { authMiddleware } from "./middlewares/authMiddleware.js";
+import { registerMiddleware } from "./middlewares/registrationMiddleware";
+import { authMiddleware } from "./middlewares/authMiddleware";
 import { ordersApi } from "./admin/api/orders";
-import { locationApi } from "./user/api/locationApi.js";
-import { userLocationApi } from "./user/api/userLocationApi.js";
+import { locationApi } from "./user/api/locationApi";
+import { sharedApi } from "./user/api/shared";
 import cartSlice from "./cartSlice";
 import storage from "redux-persist/lib/storage";
 import appReducer from "./appSlice";
@@ -39,10 +38,9 @@ const rootReducer = combineReducers({
   [vendorApi.reducerPath]: vendorApi.reducer,
   [dispatcher.reducerPath]: dispatcher.reducer,
   [userRegistration.reducerPath]: userRegistration.reducer,
-  [userAuth.reducerPath]: userAuth.reducer,
   [ordersApi.reducerPath]: ordersApi.reducer,
   [locationApi.reducerPath]: locationApi.reducer,
-  [userLocationApi.reducerPath]: userLocationApi.reducer,
+  [sharedApi.reducerPath]: sharedApi.reducer,
 });
 
 const persistConfig = {
@@ -73,12 +71,11 @@ const store = configureStore({
       vendorApi.middleware,
       dispatcher.middleware,
       userRegistration.middleware,
-      userAuth.middleware,
       registerMiddleware,
       authMiddleware,
       ordersApi.middleware,
       locationApi.middleware,
-      userLocationApi.middleware
+      sharedApi.middleware
     ),
 });
 

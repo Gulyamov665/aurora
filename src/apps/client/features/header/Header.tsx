@@ -10,19 +10,15 @@ import LocationDropdown from "../map/components/LocationDropdown";
 import EditOutlinedIcon from "@mui/icons-material/Edit";
 import { useMeQuery } from "@store/user/api/userAuthApi";
 import { UserInfoType } from "@store/user/types";
+import { useGetUserLocationByIdQuery } from "@store/user/api/userLocationApi";
 
 const Header: FC = () => {
   const { isUser } = useSelector(authState);
-  const { data: me } = useMeQuery(isUser?.user_id ?? 0, { skip: !isUser?.user_id });
+  const { data: me, isLoading } = useMeQuery(isUser?.user_id ?? 0, { skip: !isUser?.user_id });
+  const { data: locationList } = useGetUserLocationByIdQuery(isUser?.user_id ?? 0, { skip: !isUser?.user_id });
   const { logout } = useActions();
 
-  const items = [
-    { id: 1, name: "item1" },
-    { id: 2, name: "item2" },
-    { id: 3, name: "item2" },
-    { id: 4, name: "item2" },
-  ];
-
+  console.log(locationList);
   return (
     <header className={`${header.header_backgroud} py-2 mb-2 header_backgroud`}>
       <div className={`${header.header_container} container`}>
@@ -39,7 +35,7 @@ const Header: FC = () => {
             </Link>
           </div>
         )}
-        <LocationDropdown items={items} me={me} isUser={isUser} />
+        <LocationDropdown me={me} isUser={isUser} isLoading={isLoading} locationList={locationList} />
 
         <div className={`${header.user_icon}`}>
           <UserAvatar isUser={isUser} user={me as UserInfoType} logout={logout} />

@@ -1,21 +1,18 @@
-import { UserInfoType } from "@store/user/types";
+import { UserInfoType, UserLocationResponseType } from "@store/user/types";
 import { useState, FC } from "react";
 import { Dropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { IsUser } from "../../header/types";
-
-type LocationType = {
-  id: number;
-  name: string;
-};
+import { CircularProgress } from "@mui/material";
 
 type LocationDropdownProps = {
-  items: LocationType[];
   me: UserInfoType | undefined;
   isUser: Partial<IsUser> | null;
+  isLoading: boolean;
+  locationList?: UserLocationResponseType[];
 };
 
-const LocationDropdown: FC<LocationDropdownProps> = ({ items, me, isUser }) => {
+const LocationDropdown: FC<LocationDropdownProps> = ({ locationList, me, isUser, isLoading }) => {
   const [selectedItem, setSelectedItem] = useState("");
   const navigate = useNavigate();
 
@@ -31,13 +28,14 @@ const LocationDropdown: FC<LocationDropdownProps> = ({ items, me, isUser }) => {
   return (
     <Dropdown onSelect={handleSelect}>
       <Dropdown.Toggle variant="light" id="dropdown-basic" className="dropdownStyle">
-        {(isUser && me?.location?.entrance) || "Указать локацию"}
+        {isLoading && <CircularProgress size={25} sx={{ color: "white" }} />}
+        {(!isLoading && isUser && me?.location?.entrance) || "Указать локацию"}
       </Dropdown.Toggle>
 
-      <Dropdown.Menu className="w-100">
-        {items.map((item) => (
+      <Dropdown.Menu className="dropdownStyle">
+        {locationList?.map((item) => (
           <Dropdown.Item key={item.id} eventKey={item.id}>
-            {item.name}
+            {item.entrance}
           </Dropdown.Item>
         ))}
 

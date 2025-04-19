@@ -1,11 +1,7 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "../apiConfigUser";
-import { UserLocationType } from "../types";
+import { UserLocationResponseType, UserLocationType } from "../types";
+import { sharedApi } from "./shared";
 
-export const userLocationApi = createApi({
-  reducerPath: "userLocationApi",
-  baseQuery,
-  tagTypes: ["UserLocation"],
+export const userLocationApi = sharedApi.injectEndpoints({
   endpoints: (build) => ({
     getUserLocations: build.query({
       query: ({ lat, lon }) => ({
@@ -19,10 +15,11 @@ export const userLocationApi = createApi({
       }),
       providesTags: ["UserLocation"],
     }),
-    getUserLocationById: build.query({
+    getUserLocationById: build.query<UserLocationResponseType[], number>({
       query: (id) => ({
-        url: `v1/auth/user/location/${id}`,
+        url: `v1/auth/user/location`,
         method: "GET",
+        params: { user_id: id },
       }),
       providesTags: ["UserLocation"],
     }),
