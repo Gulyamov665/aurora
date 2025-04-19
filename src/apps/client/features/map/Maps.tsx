@@ -15,8 +15,9 @@ const OsmMapWithAutocomplete = () => {
   const [position, setPosition] = useState(defaultPosition);
   const [address, setAddress] = useState("");
   const [adressesList, setAdressesList] = useState<string[]>([]);
-  const mapRef = useRef<LeafletMap | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [isLocating, setIsLocating] = useState(false);
+  const mapRef = useRef<LeafletMap | null>(null);
 
   useEffect(() => {
     if (address.length > 2) {
@@ -54,7 +55,7 @@ const OsmMapWithAutocomplete = () => {
       alert("Геолокация не поддерживается в вашем браузере.");
       return;
     }
-
+    setIsLocating(true);
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const { latitude, longitude } = pos.coords;
@@ -64,21 +65,28 @@ const OsmMapWithAutocomplete = () => {
         if (mapRef.current) {
           mapRef.current.setView([newPos.lat, newPos.lng], 18);
         }
+        setIsLocating(false);
       },
       (error) => {
         console.error("Geolocation error:", error);
-        if (error.code === 1) {
-          alert("Вы отклонили доступ к геолокации. Разрешите его в настройках браузера.");
-        } else if (error.code === 2) {
-          alert("Не удалось определить местоположение. Проверьте подключение к интернету.");
-        } else if (error.code === 3) {
-          alert("Тайм-аут при попытке получить местоположение.");
-        } else {
-          alert("Ошибка получения геолокации.");
+        setIsLocating(false);
+
+        switch (error.code) {
+          case 1:
+            alert("Вы отклонили доступ к геолокации.");
+            break;
+          case 2:
+            alert("Местоположение недоступно.");
+            break;
+          case 3:
+            alert("Время ожидания определения местоположения истекло.");
+            break;
+          default:
+            alert("Произошла неизвестная ошибка при определении местоположения.");
         }
       },
       {
-        enableHighAccuracy: true,
+        enableHighAccuracy: false,
         timeout: 10000,
         maximumAge: 0,
       }
@@ -137,6 +145,7 @@ const OsmMapWithAutocomplete = () => {
         >
           {/* Адрес */}
           {!isDragging && address && <Box sx={styles.address}>{address}</Box>}
+          {isLocating && <p>..Loading</p>}
           {/* Маркер */}
           <motion.div
             animate={isDragging ? { y: [0, -6, 5, -4, 2, 0] } : { y: 0 }}
