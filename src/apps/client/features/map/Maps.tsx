@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
-import { Autocomplete, Box, IconButton, TextField, Typography } from "@mui/material";
+import { Autocomplete, Box, CircularProgress, IconButton, TextField, Typography } from "@mui/material";
 import { MoveHandler } from "./components/MoveHandler";
 import { Map as LeafletMap } from "leaflet";
 import { styles } from "./assets/styles";
@@ -143,9 +143,9 @@ const OsmMapWithAutocomplete = () => {
             alignItems: "center",
           }}
         >
-          {/* Адрес */}
-          {!isDragging && address && <Box sx={styles.address}>{address}</Box>}
-          {isLocating && <p>..Loading</p>}
+          {!isDragging && address && <Box sx={styles.address}>{isLocating ? <CircularProgress /> : address}</Box>}
+          {/* {isLocating && <p>..Loading</p>} */}
+
           {/* Маркер */}
           <motion.div
             animate={isDragging ? { y: [0, -6, 5, -4, 2, 0] } : { y: 0 }}
