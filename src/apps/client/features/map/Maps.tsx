@@ -88,7 +88,7 @@ const OsmMapWithAutocomplete = () => {
       },
       {
         enableHighAccuracy: false,
-        timeout: 10000,
+        // timeout: 10000,
         maximumAge: 0,
       }
     );
