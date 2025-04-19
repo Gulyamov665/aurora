@@ -7,12 +7,12 @@ import { styles } from "./assets/styles";
 import { motion } from "framer-motion";
 import { useLazyGetLocationsQuery } from "@store/user/api/locationApi";
 import { formatAddress } from "@/Utils/tools";
-import NearMeRoundedIcon from "@mui/icons-material/NearMeRounded";
-import marker from "@/assets/gps.png";
-import DragWatcher from "./components/DragWatcher";
+import { DragWatcher } from "./components/DragWatcher";
 import { useAddUserLocationMutation } from "@store/user/api/userLocationApi";
 import { useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
+import NearMeRoundedIcon from "@mui/icons-material/NearMeRounded";
+import marker from "@/assets/gps.png";
 
 const defaultPosition = { lat: 39.7467565, lng: 64.4111207 };
 
@@ -145,7 +145,12 @@ const OsmMapWithAutocomplete = () => {
 
       {position && !checkAddress() && (
         <Box>
-          <Button variant="contained" sx={styles.submitButton} onClick={handleAddUserLocation}>
+          <Button
+            variant="contained"
+            sx={styles.submitButton}
+            onClick={handleAddUserLocation}
+            disabled={isDragging || isFetching}
+          >
             Подтвердить адрес
           </Button>
         </Box>

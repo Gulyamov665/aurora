@@ -1,8 +1,7 @@
-// DragWatcher.tsx
 import { useMap } from "react-leaflet";
 import { useEffect } from "react";
 
-const DragWatcher = ({ onDragStart, onDragEnd }: any) => {
+export const DragWatcher = ({ onDragStart, onDragEnd }: any) => {
   const map = useMap();
 
   useEffect(() => {
@@ -18,4 +17,4 @@ const DragWatcher = ({ onDragStart, onDragEnd }: any) => {
   return null;
 };
 
-export default DragWatcher;
+
