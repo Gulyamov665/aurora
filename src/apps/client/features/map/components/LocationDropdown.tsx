@@ -20,6 +20,7 @@ const LocationDropdown: FC<LocationDropdownProps> = ({ items, me, isUser }) => {
   const navigate = useNavigate();
 
   const handleSelect = (eventKey: string | null) => {
+    console.log(selectedItem);
     if (eventKey === "newLocation") {
       return navigate("maps");
     }

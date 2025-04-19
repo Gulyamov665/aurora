@@ -1,4 +1,3 @@
-import { LocationType } from "@/apps/client/features/map/types";
 import { ProductType } from "@/apps/client/features/order/types/orderTypes";
 
 export type CartType = {
