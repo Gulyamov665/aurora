@@ -25,6 +25,7 @@ const OrderConfirmationPage: React.FC = () => {
         lat: "40.7128",
         long: "-74.0060",
         user_id: isUser?.user_id,
+        orders_chat_id: data.orders_chat_id,
         restaurant: { id: data.id, name: data.name, address: data.address, photo: data.logo, phone: 998934567890 },
         status: "new",
         products: items.products,
