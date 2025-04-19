@@ -1,9 +1,8 @@
-// import axios from "axios";
 import { useMap, useMapEvents } from "react-leaflet";
 import { MoveHandlerProps } from "../types";
 import React from "react";
 
-export const MoveHandler: React.FC<MoveHandlerProps> = ({ setPosition, setAddress, getLocation }: any) => {
+export const MoveHandler: React.FC<MoveHandlerProps> = ({ setPosition, getLocation }: any) => {
   const map = useMap();
 
   const handleGetLocation = async (lat: number, lng: number) => {
@@ -17,11 +16,6 @@ export const MoveHandler: React.FC<MoveHandlerProps> = ({ setPosition, setAddres
       const lng = center.lng;
       setPosition({ lat, lng });
       handleGetLocation(lat, lng);
-      // try {
-      //   getLocation({ lat, lon: lng });
-      // } catch {
-      //   setAddress("Ошибка при получении адреса попробуйте повторить");
-      // }
     },
   });
 
