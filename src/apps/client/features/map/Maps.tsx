@@ -7,6 +7,7 @@ import { styles } from "./assets/styles";
 import { motion } from "framer-motion";
 import NearMeRoundedIcon from "@mui/icons-material/NearMeRounded";
 import { LocationType } from "./types";
+import marker from "@/assets/gps.png";
 import DragWatcher from "./components/DragWatcher";
 
 const defaultPosition = { lat: 39.7467565, lng: 64.4111207 };
@@ -114,7 +115,6 @@ const OsmMapWithAutocomplete = () => {
       />
 
       <Box sx={styles.mapContainer}>
-        {/* Карта */}
         <MapContainer
           center={[position.lat, position.lng]}
           zoom={20}
@@ -130,21 +130,12 @@ const OsmMapWithAutocomplete = () => {
           <DragWatcher onDragStart={() => setIsDragging(true)} onDragEnd={() => setIsDragging(false)} />
         </MapContainer>
 
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -100%)", // по центру и вверх
-            zIndex: 1000,
-            pointerEvents: "none",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          {!isDragging && address && <Box sx={styles.address}>{isLocating ? <CircularProgress /> : address}</Box>}
-          {/* {isLocating && <p>..Loading</p>} */}
+        <Box sx={styles.markerAnimation}>
+          {!isDragging && address && (
+            <Box sx={styles.address}>
+              {isLocating ? <CircularProgress size={25} sx={{ color: "white" }} /> : address}
+            </Box>
+          )}
 
           {/* Маркер */}
           <motion.div
@@ -152,27 +143,15 @@ const OsmMapWithAutocomplete = () => {
             transition={isDragging ? { duration: 1, repeat: Infinity, ease: "easeInOut" } : { duration: 0.5 }}
           >
             <img
-              src="https://cdn-icons-png.flaticon.com/512/684/684908.png"
+              // src="https://cdn-icons-png.flaticon.com/512/684/684908.png"
+              src={marker}
               alt="marker"
-              style={{ width: 35, height: 35 }}
+              style={{ width: 55, height: 55 }}
             />
           </motion.div>
-        </div>
+        </Box>
 
-        <IconButton
-          onClick={handleGeolocate}
-          sx={{
-            position: "absolute",
-            bottom: 70,
-            right: 16,
-            zIndex: 1000,
-            backgroundColor: "white",
-            boxShadow: 2,
-            "&:hover": {
-              backgroundColor: "#f0f0f0",
-            },
-          }}
-        >
+        <IconButton onClick={handleGeolocate} sx={styles.nearMe}>
           <NearMeRoundedIcon />
         </IconButton>
       </Box>

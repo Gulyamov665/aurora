@@ -34,4 +34,28 @@ export const styles = {
     pointerEvents: "none",
   },
   mapContainer: { height: "500px", width: "100%", position: "relative" },
+
+  nearMe: {
+    position: "absolute",
+    bottom: 70,
+    right: 16,
+    zIndex: 1000,
+    backgroundColor: "white",
+    boxShadow: 2,
+    "&:hover": {
+      backgroundColor: "#f0f0f0",
+    },
+  },
+
+  markerAnimation: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -100%)", // по центру и вверх
+    zIndex: 1000,
+    pointerEvents: "none",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
 };
