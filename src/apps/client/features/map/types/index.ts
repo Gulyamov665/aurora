@@ -10,7 +10,8 @@ export interface NominatimReverseResponse {
     country?: string;
     postcode?: string;
     amenity?: string;
-    neighbourhood: string;
+    neighbourhood?: string;
+    suburb?: string;
   };
 }
 

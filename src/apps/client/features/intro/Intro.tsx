@@ -1,24 +1,24 @@
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TelegramIcon from "@mui/icons-material/Telegram";
-import { useWaiterCallMutation } from "../../../../store/user/api/dispatcherApi";
-import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+// import { useWaiterCallMutation } from "../../../../store/user/api/dispatcherApi";
+// import { useParams } from "react-router-dom";
+// import { toast } from "react-toastify";
 // import Snowfall from "react-snowfall";
 import { FC } from "react";
 import { IntroType } from "./types";
 
 const Intro: FC<IntroType> = ({ data }) => {
-  const { table } = useParams();
-  const [callWaiter, { isLoading }] = useWaiterCallMutation();
+  // const { table } = useParams();
+  // const [callWaiter, { isLoading }] = useWaiterCallMutation();
 
-  const handleCallWaiter = async () => {
-    if (data?.waiter_chat_id) {
-      await callWaiter({ table, chat_id: data.waiter_chat_id });
-      toast.success("Запрос отправлен");
-      return;
-    }
-    console.log("вызов официанта не доступен в этом заведении");
-  };
+  // const handleCallWaiter = async () => {
+  //   if (data?.waiter_chat_id) {
+  //     await callWaiter({ table, chat_id: data.waiter_chat_id });
+  //     toast.success("Запрос отправлен");
+  //     return;
+  //   }
+  //   console.log("вызов официанта не доступен в этом заведении");
+  // };
 
   return (
     <div className="container container-sm">
@@ -59,7 +59,7 @@ const Intro: FC<IntroType> = ({ data }) => {
               </a>
             )}
           </div>
-          {isLoading ? (
+          {/* {isLoading ? (
             <button className="btn btn-waiter mt-3">
               <span className="spinner-border spinner-border-sm" aria-hidden="true"></span>
             </button>
@@ -68,7 +68,7 @@ const Intro: FC<IntroType> = ({ data }) => {
               {" "}
               Вызвать официанта
             </button>
-          )}
+          )} */}
         </div>
       </div>
     </div>

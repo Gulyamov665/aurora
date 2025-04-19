@@ -6,6 +6,13 @@ import React from "react";
 export const MoveHandler: React.FC<MoveHandlerProps> = ({ setPosition, setAddress }: any) => {
   const map = useMap();
 
+  const formatAddress = (address: NominatimReverseResponse["address"]) => {
+    const parts = [address?.road, address?.house_number, address?.amenity, address?.neighbourhood, address?.suburb];
+    // Оставим только непустые значения
+    const validParts = parts.filter(Boolean);
+    return validParts.length > 0 ? validParts.join(", ") : address?.city;
+  };
+
   useMapEvents({
     moveend: async () => {
       const center = map.getCenter();
@@ -21,13 +28,9 @@ export const MoveHandler: React.FC<MoveHandlerProps> = ({ setPosition, setAddres
             format: "json",
           },
         });
-        console.log(data);
-        setAddress(
-          `${data.address?.road || ""} ${data.address?.house_number || data.address?.amenity || data.address?.neighbourhood}` ||
-            "Адрес не найден"
-        );
+        setAddress(formatAddress(data.address));
       } catch {
-        setAddress("Ошибка при получении адреса");
+        setAddress("Ошибка при получении адреса попробуйте повторить");
       }
     },
   });

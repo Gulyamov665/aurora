@@ -20,39 +20,38 @@ const OsmMapWithAutocomplete = () => {
   const [isLocating, setIsLocating] = useState(false);
   const mapRef = useRef<LeafletMap | null>(null);
 
-  useEffect(() => {
-    if (address.length > 2) {
-      handleSearch();
-    }
-  }, [address]);
+  // useEffect(() => {
+  //   if (address.length > 2) {
+  //     handleSearch();
+  //   }
+  // }, [address]);
 
-  const handleSearch = async () => {
-    if (!address) return;
-    try {
-      const response = await fetch(
-        // `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json`
-        `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&countrycodes=uz`
-      );
-      const data = await response.json();
+  // const handleSearch = async () => {
+  //   if (!address) return;
+  //   try {
+  //     const response = await fetch(
+  //       `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&countrycodes=uz`
+  //     );
+  //     const data = await response.json();
 
-      if (data.length > 0) {
-        // const { lat, lon } = data[0];
-        // const newPos: [number, number] = [parseFloat(lat), parseFloat(lon)];
-        const location = data.map((loc: LocationType) => ({
-          id: loc.place_id, // можно использовать place_id из Nominatim или fallback на index
-          label: loc.display_name,
-        }));
-        setAdressesList(location);
-        {
-          adressesList;
-        }
-      } else {
-        alert("Адрес не найден");
-      }
-    } catch (err) {
-      console.error("Ошибка при поиске адреса:", err);
-    }
-  };
+  //     if (data.length > 0) {
+  //       // const { lat, lon } = data[0];
+  //       // const newPos: [number, number] = [parseFloat(lat), parseFloat(lon)];
+  //       const location = data.map((loc: LocationType) => ({
+  //         id: loc.place_id, // можно использовать place_id из Nominatim или fallback на index
+  //         label: loc.display_name,
+  //       }));
+  //       setAdressesList(location);
+  //       {
+  //         adressesList;
+  //       }
+  //     } else {
+  //       alert("Адрес не найден 1");
+  //     }
+  //   } catch (err) {
+  //     console.error("Ошибка при поиске адреса:", err);
+  //   }
+  // };
 
   const handleGeolocate = () => {
     if (!navigator.geolocation) {
