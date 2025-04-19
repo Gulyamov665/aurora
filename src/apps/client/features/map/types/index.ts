@@ -1,19 +1,4 @@
-export interface NominatimReverseResponse {
-  display_name: string;
-  lat: string;
-  lon: string;
-  address?: {
-    road?: string;
-    house_number?: string;
-    city?: string;
-    state?: string;
-    country?: string;
-    postcode?: string;
-    amenity?: string;
-    neighbourhood?: string;
-    suburb?: string;
-  };
-}
+import { getLocationsQueryType } from "@store/user/api/locationApi";
 
 export type MoveHandlerProps = {
   setPosition: React.Dispatch<
@@ -23,6 +8,7 @@ export type MoveHandlerProps = {
     }>
   >;
   setAddress: React.Dispatch<React.SetStateAction<string>>;
+  getLocation: getLocationsQueryType[0];
 };
 
 export type LocationType = {

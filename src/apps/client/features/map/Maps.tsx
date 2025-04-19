@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { Box, CircularProgress, IconButton, Typography } from "@mui/material";
 import { MoveHandler } from "./components/MoveHandler";
@@ -6,25 +6,24 @@ import { Map as LeafletMap } from "leaflet";
 import { styles } from "./assets/styles";
 import { motion } from "framer-motion";
 import NearMeRoundedIcon from "@mui/icons-material/NearMeRounded";
-// import { LocationType } from "./types";
 import marker from "@/assets/gps.png";
 import DragWatcher from "./components/DragWatcher";
+import { useLazyGetLocationsQuery } from "@store/user/api/locationApi";
+import { formatAddress } from "@/Utils/tools";
 
 const defaultPosition = { lat: 39.7467565, lng: 64.4111207 };
 
 const OsmMapWithAutocomplete = () => {
+  const [getLocation, { data, isFetching }] = useLazyGetLocationsQuery();
   const [position, setPosition] = useState(defaultPosition);
   const [address, setAddress] = useState("");
-  // const [adressesList, setAdressesList] = useState<string[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [isLocating, setIsLocating] = useState(false);
   const mapRef = useRef<LeafletMap | null>(null);
 
-  // useEffect(() => {
-  //   if (address.length > 2) {
-  //     handleSearch();
-  //   }
-  // }, [address]);
+  useEffect(() => {
+    if (data) setAddress(formatAddress(data.address));
+  }, [data]);
 
   // const handleSearch = async () => {
   //   if (!address) return;
@@ -127,36 +126,31 @@ const OsmMapWithAutocomplete = () => {
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-
-            // url="https://api.maptiler.com/maps/toner-v2/{z}/{x}/{y}.png?key=iLvybLngAB9MEx9SOtCp"
-            // attribution="© MapTiler © OpenStreetMap contributors"
-            // url="https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=iLvybLngAB9MEx9SOtCp"
-            // attribution="© MapTiler © OpenStreetMap contributors"
-            // maxZoom={22}
           />
 
-          <MoveHandler setPosition={setPosition} setAddress={setAddress} />
+          <MoveHandler setPosition={setPosition} setAddress={setAddress} getLocation={getLocation} />
           <DragWatcher onDragStart={() => setIsDragging(true)} onDragEnd={() => setIsDragging(false)} />
         </MapContainer>
 
         <Box sx={styles.markerAnimation}>
-          {!isDragging && address && (
+          {address && (
             <Box sx={styles.address}>
-              {isLocating ? <CircularProgress size={25} sx={{ color: "white" }} /> : address}
+              {isLocating || isFetching || isDragging ? (
+                <CircularProgress size={25} sx={{ color: "white" }} />
+              ) : (
+                address
+              )}
             </Box>
           )}
 
           {/* Маркер */}
           <motion.div
-            animate={isDragging ? { y: [0, -6, 5, -4, 2, 0] } : { y: 0 }}
-            transition={isDragging ? { duration: 1, repeat: Infinity, ease: "easeInOut" } : { duration: 0.5 }}
+            animate={isDragging || isFetching ? { y: [0, -6, 5, -4, 2, 0] } : { y: 0 }}
+            transition={
+              isDragging || isFetching ? { duration: 1, repeat: Infinity, ease: "easeInOut" } : { duration: 0.5 }
+            }
           >
-            <img
-              // src="https://cdn-icons-png.flaticon.com/512/684/684908.png"
-              src={marker}
-              alt="marker"
-              style={{ width: 55, height: 55 }}
-            />
+            <img src={marker} alt="marker" style={{ width: 55, height: 55 }} />
           </motion.div>
         </Box>
 

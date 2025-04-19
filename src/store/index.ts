@@ -15,6 +15,7 @@ import { userAuth } from "./user/api/userAuthApi.js";
 import { registerMiddleware } from "./middlewares/registrationMiddleware.js";
 import { authMiddleware } from "./middlewares/authMiddleware.js";
 import { ordersApi } from "./admin/api/orders";
+import { locationApi } from "./user/api/locationApi.js";
 import cartSlice from "./cartSlice";
 import storage from "redux-persist/lib/storage";
 import appReducer from "./appSlice";
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   [userRegistration.reducerPath]: userRegistration.reducer,
   [userAuth.reducerPath]: userAuth.reducer,
   [ordersApi.reducerPath]: ordersApi.reducer,
+  [locationApi.reducerPath]: locationApi.reducer,
 });
 
 const persistConfig = {
@@ -72,7 +74,8 @@ const store = configureStore({
       userAuth.middleware,
       registerMiddleware,
       authMiddleware,
-      ordersApi.middleware
+      ordersApi.middleware,
+      locationApi.middleware
     ),
 });
 

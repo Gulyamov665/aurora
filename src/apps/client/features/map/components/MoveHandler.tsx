@@ -1,16 +1,13 @@
-import axios from "axios";
+// import axios from "axios";
 import { useMap, useMapEvents } from "react-leaflet";
-import { MoveHandlerProps, NominatimReverseResponse } from "../types";
+import { MoveHandlerProps } from "../types";
 import React from "react";
 
-export const MoveHandler: React.FC<MoveHandlerProps> = ({ setPosition, setAddress }: any) => {
+export const MoveHandler: React.FC<MoveHandlerProps> = ({ setPosition, setAddress, getLocation }: any) => {
   const map = useMap();
 
-  const formatAddress = (address: NominatimReverseResponse["address"]) => {
-    const parts = [address?.road, address?.house_number, address?.amenity, address?.neighbourhood, address?.suburb];
-    // Оставим только непустые значения
-    const validParts = parts.filter(Boolean);
-    return validParts.length > 0 ? validParts.join(", ") : address?.city;
+  const handleGetLocation = async (lat: number, lng: number) => {
+    await getLocation({ lat, lon: lng }).unwrap();
   };
 
   useMapEvents({
@@ -19,19 +16,12 @@ export const MoveHandler: React.FC<MoveHandlerProps> = ({ setPosition, setAddres
       const lat = center.lat;
       const lng = center.lng;
       setPosition({ lat, lng });
-
-      try {
-        const { data } = await axios.get<NominatimReverseResponse>("https://nominatim.openstreetmap.org/reverse", {
-          params: {
-            lat,
-            lon: lng,
-            format: "json",
-          },
-        });
-        setAddress(formatAddress(data.address));
-      } catch {
-        setAddress("Ошибка при получении адреса попробуйте повторить");
-      }
+      handleGetLocation(lat, lng);
+      // try {
+      //   getLocation({ lat, lon: lng });
+      // } catch {
+      //   setAddress("Ошибка при получении адреса попробуйте повторить");
+      // }
     },
   });
 

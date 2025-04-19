@@ -1,4 +1,4 @@
-import { CartItem } from "@store/user/types";
+import { CartItem, NominatimReverseResponse } from "@store/user/types";
 import { ChangeEvent } from "react";
 import { AddToCartArgs } from "./types";
 
@@ -62,4 +62,11 @@ export const handleAddToCart = async ({ event, productData, userId, restaurantId
     console.error("Failed to add item to cart:", error);
     // Можно сюда передать колбэк для алерта/тоаста
   }
+};
+
+export const formatAddress = (address: NominatimReverseResponse["address"]) => {
+  const parts = [address?.road, address?.house_number, address?.amenity, address?.neighbourhood, address?.suburb];
+  // Оставим только непустые значения
+  const validParts = parts.filter(Boolean);
+  return validParts.length > 0 ? validParts.join(", ") : address.city;
 };
