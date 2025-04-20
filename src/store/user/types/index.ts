@@ -150,6 +150,7 @@ export interface NominatimReverseResponse {
     amenity?: string;
     neighbourhood?: string;
     suburb?: string;
+    village?: string;
   };
 }
 

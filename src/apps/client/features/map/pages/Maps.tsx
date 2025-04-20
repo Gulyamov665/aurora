@@ -90,7 +90,7 @@ const OsmMapWithAutocomplete = () => {
   };
 
   const onSubmit = async (data: LocationData) => {
-    if (address && isUser?.user_id) {
+    if (position && isUser?.user_id) {
       try {
         await addUserLocation({
           lat: String(position.lat),

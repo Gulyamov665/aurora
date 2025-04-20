@@ -65,7 +65,14 @@ export const handleAddToCart = async ({ event, productData, userId, restaurantId
 };
 
 export const formatAddress = (address: NominatimReverseResponse["address"]) => {
-  const parts = [address?.road, address?.house_number, address?.amenity, address?.neighbourhood, address?.suburb];
+  const parts = [
+    address?.road,
+    address?.house_number,
+    address?.amenity,
+    address?.neighbourhood,
+    address?.suburb,
+    address?.village,
+  ];
   // Оставим только непустые значения
   const validParts = parts.filter(Boolean);
   return validParts.length > 0 ? validParts.join(", ") : address.city;
