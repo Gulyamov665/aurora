@@ -32,19 +32,24 @@ export const InstallPrompt = () => {
     <div
       style={{
         position: "fixed",
-        bottom: 50,
+        bottom: 80,
         left: 20,
         right: 20,
         background: "#fff",
         borderRadius: 8,
         padding: "16px",
         boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
-        zIndex: 1000,
+        zIndex: 3000,
       }}
     >
       <p>Установите Aurora на главный экран!</p>
-      <Box onClick={handleInstall}>
-        <Button>Установить</Button>
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box onClick={handleInstall}>
+          <Button>Установить</Button>
+        </Box>
+        <Box onClick={() => setVisible(false)}>
+          <Button>Отмена</Button>
+        </Box>
       </Box>
     </div>
   );
