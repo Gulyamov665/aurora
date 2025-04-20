@@ -40,9 +40,9 @@ export const AddressSelector: React.FC = () => {
           <Box display="flex" alignItems="center" sx={{ cursor: "pointer" }} mt={1} key={location.id}>
             <BookmarkBorderIcon />
             <Box ml={1} flexGrow={1}>
-              <Typography>{location.entrance}</Typography>
+              <Typography>{location.address}</Typography>
               <Typography color="text.secondary" variant="body2">
-                подъезд 10, этаж 3, кв. 77
+                подъезд {location.entrance}, этаж {location.floor}, кв. {location.apartment}
               </Typography>
             </Box>
             <IconButton>

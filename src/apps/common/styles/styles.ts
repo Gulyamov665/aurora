@@ -12,7 +12,7 @@ export const styles = {
     p: 2,
     borderRadius: "16px",
     backgroundColor: "white",
-    boxShadow: 2,
+    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
     mb: 2,
     maxHeight: "400px",
     overflowY: "auto",

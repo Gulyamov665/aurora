@@ -159,7 +159,10 @@ export type UserLocationType = {
   house?: string;
   apartment?: string;
   floor?: string;
-  entrance: string;
+  entrance?: string;
+  address: string;
+  comment?: string;
+  name?: string;
   is_active?: boolean;
   user: number;
 };

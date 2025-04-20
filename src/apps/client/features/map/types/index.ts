@@ -1,4 +1,5 @@
 import { getLocationsQueryType } from "@store/user/api/locationApi";
+import { SubmitHandler, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
 
 export type MoveHandlerProps = {
   setPosition: React.Dispatch<
@@ -14,4 +15,22 @@ export type MoveHandlerProps = {
 export type LocationType = {
   place_id: number; // можно использовать place_id из Nominatim или fallback на index
   display_name: string;
+};
+
+export type LocationData = {
+  address?: string;
+  house?: string;
+  apartment?: string;
+  floor?: string;
+  entrance: string;
+  comment?: string;
+  name?: string;
+  street?: string;
+};
+
+export type LocationFormType = {
+  register: UseFormRegister<LocationData>;
+  handleSubmit: UseFormHandleSubmit<LocationData>;
+  onSubmit: SubmitHandler<LocationData>;
+  address: string;
 };

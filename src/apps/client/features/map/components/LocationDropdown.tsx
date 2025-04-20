@@ -18,7 +18,7 @@ const LocationDropdown: FC<LocationDropdownProps> = ({ me, isUser, isLoading }) 
   return (
     <Button variant="contained" fullWidth onClick={() => AddressSelectorToggle(true)} sx={styles.locationButton}>
       {isLoading && <CircularProgress size={25} sx={{ color: "white" }} />}
-      <Typography noWrap>{(!isLoading && isUser && me?.location?.entrance) || "Указать локацию"}</Typography>
+      <Typography noWrap>{(!isLoading && isUser && me?.location?.address) || "Указать локацию"}</Typography>
     </Button>
   );
 };

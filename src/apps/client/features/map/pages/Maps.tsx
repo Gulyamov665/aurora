@@ -11,10 +11,17 @@ import { DragWatcher } from "../components/DragWatcher";
 import { useAddUserLocationMutation } from "@store/user/api/userLocationApi";
 import { useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
+import { CustomSwipeableDrawer } from "@/apps/common/CustomSwipeableDrawer";
+import { LocationForm } from "../components/LocationForm";
 import NearMeRoundedIcon from "@mui/icons-material/NearMeRounded";
 import marker from "@/assets/gps.png";
+import { useForm } from "react-hook-form";
+import { LocationData } from "../types";
+import { useNavigate } from "react-router-dom";
 
 const defaultPosition = { lat: 39.7467565, lng: 64.4111207 };
+
+// TODO НУЖНА ДЕКОМПОЗИЦИЯ!!!
 
 const OsmMapWithAutocomplete = () => {
   const [getLocation, { data, isFetching }] = useLazyGetLocationsQuery();
@@ -24,7 +31,10 @@ const OsmMapWithAutocomplete = () => {
   const [address, setAddress] = useState("");
   const [isDragging, setIsDragging] = useState(false);
   const [isLocating, setIsLocating] = useState(false);
+  const [openLocationForm, setOpenLocationForm] = useState(false);
   const mapRef = useRef<LeafletMap | null>(null);
+  const { register, handleSubmit } = useForm<LocationData>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (data) setAddress(formatAddress(data.address));
@@ -79,17 +89,23 @@ const OsmMapWithAutocomplete = () => {
     }
   };
 
-  const handleAddUserLocation = async () => {
+  const onSubmit = async (data: LocationData) => {
     if (address && isUser?.user_id) {
       try {
         await addUserLocation({
           lat: String(position.lat),
           long: String(position.lng),
-          entrance: address,
+          address: address,
           user: isUser?.user_id,
+          entrance: data.entrance,
+          floor: data.floor,
+          apartment: data.apartment,
+          comment: data.comment,
+          name: data.name,
           is_active: true,
         }).unwrap();
-        // alert("Адрес успешно добавлен");
+        setOpenLocationForm(false);
+        navigate("..");
       } catch (error) {
         console.error("Ошибка при добавлении адреса:", error);
         alert("Ошибка при добавлении адреса");
@@ -148,13 +164,24 @@ const OsmMapWithAutocomplete = () => {
           <Button
             variant="contained"
             sx={styles.submitButton}
-            onClick={handleAddUserLocation}
+            onClick={() => setOpenLocationForm(true)}
             disabled={isDragging || isFetching}
           >
             Подтвердить адрес
           </Button>
         </Box>
       )}
+
+      <CustomSwipeableDrawer
+        open={openLocationForm}
+        onClose={() => setOpenLocationForm(false)}
+        onOpen={() => setOpenLocationForm(true)}
+        title="Выберите адрес"
+        buttonText="Подтвердить"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <LocationForm register={register} handleSubmit={handleSubmit} onSubmit={onSubmit} address={address} />
+      </CustomSwipeableDrawer>
     </Box>
   );
 };
