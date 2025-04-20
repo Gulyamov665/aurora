@@ -4,9 +4,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { LocationFormType } from "../types";
 
-export const LocationForm: React.FC<LocationFormType> = ({ register, handleSubmit, onSubmit, address }) => {
+export const LocationForm: React.FC<LocationFormType> = ({ register, address }) => {
   return (
-    // <form onSubmit={handleSubmit(onSubmit)}>
     <Box p={2}>
       <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
         <Box display="flex" alignItems="center">
@@ -35,6 +34,5 @@ export const LocationForm: React.FC<LocationFormType> = ({ register, handleSubmi
         <TextField label="Комментарий курьеру" {...register("comment")} multiline rows={2} fullWidth />
       </Box>
     </Box>
-    // </form>
   );
 };
