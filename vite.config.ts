@@ -18,7 +18,7 @@ export default defineConfig({
       manifest: {
         name: "Aurora",
         short_name: "Aurora",
-        start_url: "/vendor",
+        start_url: "/vendor/Olivia",
         display: "standalone",
         background_color: "#ffffff",
         theme_color: "#000000",
