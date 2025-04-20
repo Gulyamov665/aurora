@@ -69,4 +69,35 @@ export const styles = {
     backgroundColor: "#4CAF50",
     "&:hover": { backgroundColor: "#45A049" },
   },
+
+  locationButton: {
+    boxShadow: "0px 0px 10px 0px rgb(182, 182, 182)",
+    width: "100%",
+    minWidth: "400px",
+    maxWidth: "400px",
+    borderRadius: "4px",
+    backgroundColor: "#F5F5F5",
+    textTransform: "none",
+    color: "#000",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+    transition: "transform 0.3s",
+    padding: "8px 16px", // Отступы внутри кнопки
+    "& .MuiButton-startIcon": {
+      // Стили для иконки если она есть
+      marginRight: 2,
+    },
+    "&:hover": {
+      backgroundColor: "#E0E0E0",
+      transform: "translateY(-1px)",
+      transition: "transform 0.2s",
+    },
+    "@media (min-width: 320px) and (max-width: 425px)": {
+      minWidth: "auto",
+      width: "250px",
+      fontSize: "14px",
+      maxWidth: "300px",
+    },
+  },
 };

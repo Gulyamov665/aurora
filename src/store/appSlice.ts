@@ -30,6 +30,7 @@ interface AppState {
   isRejected: boolean;
   error: {} | null;
   addModalState: AddModalState;
+  addressSelector: boolean;
 }
 
 const initialState: AppState = {
@@ -52,6 +53,7 @@ const initialState: AppState = {
     categoryId: null,
     changeItem: "",
   },
+  addressSelector: false,
 };
 
 const appSlice = createSlice({
@@ -105,6 +107,9 @@ const appSlice = createSlice({
       state.addModalState.type = "";
       state.addModalState.changeItem = "";
     },
+    AddressSelectorToggle: (state, action) => {
+      state.addressSelector = action.payload;
+    },
   },
   // extraReducers: (builder) => {
   //   builder
@@ -135,6 +140,7 @@ export const {
   confirmDeletion,
   setOpenAddModal,
   onCloseAddModal,
+  AddressSelectorToggle,
 } = appSlice.actions;
 
 export default appSlice.reducer;

@@ -10,15 +10,12 @@ import LocationDropdown from "../map/components/LocationDropdown";
 import EditOutlinedIcon from "@mui/icons-material/Edit";
 import { useMeQuery } from "@store/user/api/userAuthApi";
 import { UserInfoType } from "@store/user/types";
-import { useGetUserLocationByIdQuery } from "@store/user/api/userLocationApi";
 
 const Header: FC = () => {
   const { isUser } = useSelector(authState);
   const { data: me, isLoading } = useMeQuery(isUser?.user_id ?? 0, { skip: !isUser?.user_id });
-  const { data: locationList } = useGetUserLocationByIdQuery(isUser?.user_id ?? 0, { skip: !isUser?.user_id });
   const { logout } = useActions();
 
-  console.log(locationList);
   return (
     <header className={`${header.header_backgroud} py-2 mb-2 header_backgroud`}>
       <div className={`${header.header_container} container`}>
@@ -35,7 +32,7 @@ const Header: FC = () => {
             </Link>
           </div>
         )}
-        <LocationDropdown me={me} isUser={isUser} isLoading={isLoading} locationList={locationList} />
+        <LocationDropdown me={me} isUser={isUser} isLoading={isLoading} />
 
         <div className={`${header.user_icon}`}>
           <UserAvatar isUser={isUser} user={me as UserInfoType} logout={logout} />

@@ -1,9 +1,9 @@
 import { UserInfoType, UserLocationResponseType } from "@store/user/types";
-import { useState, FC } from "react";
-import { Dropdown } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { FC } from "react";
 import { IsUser } from "../../header/types";
-import { CircularProgress } from "@mui/material";
+import { Button, CircularProgress, Typography } from "@mui/material";
+import { useActions } from "@/hooks/useActions";
+import { styles } from "../assets/styles";
 
 type LocationDropdownProps = {
   me: UserInfoType | undefined;
@@ -12,36 +12,14 @@ type LocationDropdownProps = {
   locationList?: UserLocationResponseType[];
 };
 
-const LocationDropdown: FC<LocationDropdownProps> = ({ locationList, me, isUser, isLoading }) => {
-  const [selectedItem, setSelectedItem] = useState("");
-  const navigate = useNavigate();
-
-  const handleSelect = (eventKey: string | null) => {
-    console.log(selectedItem);
-    if (eventKey === "newLocation") {
-      return navigate("maps");
-    }
-    if (eventKey) setSelectedItem(eventKey);
-    console.log(`Selected item: ${eventKey}`);
-  };
+const LocationDropdown: FC<LocationDropdownProps> = ({ me, isUser, isLoading }) => {
+  const { AddressSelectorToggle } = useActions();
 
   return (
-    <Dropdown onSelect={handleSelect}>
-      <Dropdown.Toggle variant="light" id="dropdown-basic" className="dropdownStyle">
-        {isLoading && <CircularProgress size={25} sx={{ color: "white" }} />}
-        {(!isLoading && isUser && me?.location?.entrance) || "Указать локацию"}
-      </Dropdown.Toggle>
-
-      <Dropdown.Menu className="dropdownStyle">
-        {locationList?.map((item) => (
-          <Dropdown.Item key={item.id} eventKey={item.id}>
-            {item.entrance}
-          </Dropdown.Item>
-        ))}
-
-        <Dropdown.Item eventKey={"newLocation"}>Добавить локацию</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+    <Button variant="contained" fullWidth onClick={() => AddressSelectorToggle(true)} sx={styles.locationButton}>
+      {isLoading && <CircularProgress size={25} sx={{ color: "white" }} />}
+      <Typography noWrap>{(!isLoading && isUser && me?.location?.entrance) || "Указать локацию"}</Typography>
+    </Button>
   );
 };
 
