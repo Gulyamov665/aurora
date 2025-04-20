@@ -10,6 +10,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "react-image-crop/dist/ReactCrop.css";
 import "leaflet/dist/leaflet.css";
+import { registerSW } from "virtual:pwa-register";
+
+registerSW({ immediate: true });
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
