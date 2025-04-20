@@ -55,7 +55,7 @@ export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout, user }) => {
   return (
     <Box sx={{ flexGrow: 0 }}>
       <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-        <Avatar alt={isUser?.email?.toUpperCase()} src={"userIcon"} />
+        <Avatar alt={isUser?.email?.toUpperCase() ?? "User"} src={user?.avatar ?? ""} />
       </IconButton>
 
       <Menu
