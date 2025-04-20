@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { Box, CircularProgress, IconButton, Button } from "@mui/material";
-import { MoveHandler } from "./components/MoveHandler";
+import { MoveHandler } from "../components/MoveHandler";
 import { Map as LeafletMap } from "leaflet";
-import { styles } from "./assets/styles";
+import { styles } from "../assets/styles";
 import { motion } from "framer-motion";
 import { useLazyGetLocationsQuery } from "@store/user/api/locationApi";
 import { formatAddress } from "@/Utils/tools";
-import { DragWatcher } from "./components/DragWatcher";
+import { DragWatcher } from "../components/DragWatcher";
 import { useAddUserLocationMutation } from "@store/user/api/userLocationApi";
 import { useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";

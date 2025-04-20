@@ -100,4 +100,30 @@ export const styles = {
       maxWidth: "300px",
     },
   },
+  addressSelectorButtonBox: {
+    p: 1,
+    borderRadius: "16px",
+    backgroundColor: "#f5f4f2",
+    mb: 2,
+    textAlign: "center",
+    cursor: "pointer",
+  },
+
+  addressSelectorBox: {
+    p: 2,
+    borderRadius: "16px",
+    backgroundColor: "white",
+    boxShadow: 2,
+    mb: 2,
+    maxHeight: "400px",
+    overflowY: "auto",
+  },
+
+  swipeAbleDrawerStyle: {
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    p: 2,
+    zIndex: 1500,
+    maxHeight: "600px",
+  },
 };

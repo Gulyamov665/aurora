@@ -2,7 +2,7 @@ import { Outlet, useParams } from "react-router-dom";
 import Header from "../features/header/Header.js";
 import NavbarBottomPage from "../features/navbarBottom/pages/NavbarBottomPage";
 import { useLoadQuery } from "@store/admin/api/vendorApi.js";
-import { AddressSelector } from "../features/header/components/AddressSelector.js";
+import { AddressSelector } from "../features/map/components/AddressSelector.js";
 
 export default function Layout() {
   const { res = "" } = useParams();
