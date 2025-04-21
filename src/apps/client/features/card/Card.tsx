@@ -1,9 +1,7 @@
 import { FC, useState } from "react";
 import { CardType } from "./types";
-
 import { formatPrice } from "@/Utils/tools";
 import { CounterBox } from "@/apps/common/CounterBox";
-import { AnimatePresence, motion } from "framer-motion";
 
 const Card: FC<CardType> = ({ product, addToCart, findItem, decrease }) => {
   const [isLoaded, setIsLoaded] = useState(false);
