@@ -26,7 +26,7 @@ const defaultPosition = { lat: 39.7467565, lng: 64.4111207 };
 const OsmMapWithAutocomplete = () => {
   const [getLocation, { data, isFetching }] = useLazyGetLocationsQuery();
   const { isUser } = useSelector(authState);
-  const [addUserLocation, { isLoading }] = useAddUserLocationMutation();
+  const [addUserLocation] = useAddUserLocationMutation();
   const [position, setPosition] = useState(defaultPosition);
   const [address, setAddress] = useState("");
   const [isDragging, setIsDragging] = useState(false);
