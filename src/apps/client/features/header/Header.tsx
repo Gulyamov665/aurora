@@ -13,7 +13,7 @@ import { UserInfoType } from "@store/user/types";
 
 const Header: FC = () => {
   const { isUser } = useSelector(authState);
-  const { data: me, isLoading } = useMeQuery(isUser?.user_id ?? 0, { skip: !isUser?.user_id });
+  const { data: me, isFetching } = useMeQuery(isUser?.user_id ?? 0, { skip: !isUser?.user_id });
   const { logout } = useActions();
 
   return (
@@ -32,7 +32,7 @@ const Header: FC = () => {
             </Link>
           </div>
         )}
-        <LocationDropdown me={me} isUser={isUser} isLoading={isLoading} />
+        <LocationDropdown me={me} isUser={isUser} isLoading={isFetching} />
 
         <div className={`${header.user_icon}`}>
           <UserAvatar isUser={isUser} user={me as UserInfoType} logout={logout} />

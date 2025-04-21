@@ -31,9 +31,18 @@ export const userLocationApi = sharedApi.injectEndpoints({
       }),
       invalidatesTags: ["UserLocation"],
     }),
+    toggleActiveLocation: build.mutation({
+      query: (id) => ({
+        url: `v1/auth/user/location/${id}/toggle_active`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["UserLocation"],
+    }),
   }),
 });
 
+export type toggleActiveLocation = ReturnType<typeof useToggleActiveLocationMutation>;
 export type addUserLocationMutationType = ReturnType<typeof useAddUserLocationMutation>;
 
-export const { useAddUserLocationMutation, useGetUserLocationByIdQuery } = userLocationApi;
+export const { useAddUserLocationMutation, useGetUserLocationByIdQuery, useToggleActiveLocationMutation } =
+  userLocationApi;
