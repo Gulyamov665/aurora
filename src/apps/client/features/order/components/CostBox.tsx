@@ -14,7 +14,6 @@ export const CostBox: FC<CostBoxType> = ({ items, toConfirmPage }) => {
         mt: 2,
       }}
     >
-     
       <Typography variant="subtitle1" fontWeight="bold" mb={2}>
         Итого: {items && items?.totalPrice} сум
       </Typography>
@@ -25,12 +24,14 @@ export const CostBox: FC<CostBoxType> = ({ items, toConfirmPage }) => {
         variant="contained"
         endIcon={<ArrowForwardIos />}
         sx={{
-          paddingY: 1.5,
+          p: 1,
+          borderRadius: "16px",
           backgroundColor: "#f5f4f2",
-          color: "black",
-          textTransform: "none",
-          fontWeight: 600,
-          fontSize: "1rem",
+          mb: 2,
+          textAlign: "center",
+          cursor: "pointer",
+          color: "#000",
+          fontWeight: 500,
           ":hover": {
             backgroundColor: "#e8e7e5",
           },

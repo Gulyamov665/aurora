@@ -165,6 +165,7 @@ export type UserLocationType = {
   comment?: string;
   name?: string;
   is_active?: boolean;
+  street?: string;
   user: number;
 };
 

@@ -180,7 +180,7 @@ const OsmMapWithAutocomplete = () => {
         buttonText="Подтвердить"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <LocationForm register={register} handleSubmit={handleSubmit} onSubmit={onSubmit} address={address} />
+        <LocationForm register={register} address={address} />
       </CustomSwipeableDrawer>
     </Box>
   );

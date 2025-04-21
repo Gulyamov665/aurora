@@ -4,34 +4,58 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { LocationFormType } from "../types";
 
-export const LocationForm: React.FC<LocationFormType> = ({ register, address }) => {
+export const LocationForm: React.FC<LocationFormType> = ({
+  register,
+  address,
+  back,
+  remove,
+  navbox = true,
+  p = 2,
+  disabled = false,
+}) => {
   return (
-    <Box p={2}>
-      <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
-        <Box display="flex" alignItems="center">
-          <IconButton onClick={() => window.history.back()}>
-            <ArrowBackIcon />
+    <Box p={p}>
+      {navbox && (
+        <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
+          <Box display="flex" alignItems="center">
+            <IconButton onClick={back}>
+              <ArrowBackIcon />
+            </IconButton>
+            <Typography variant="h6" ml={1}>
+              {address}
+            </Typography>
+          </Box>
+          <IconButton onClick={remove}>
+            <DeleteIcon />
           </IconButton>
-          <Typography variant="h6" ml={1}>
-            {address}
-          </Typography>
         </Box>
-        <IconButton>
-          <DeleteIcon />
-        </IconButton>
-      </Box>
+      )}
 
       <Divider />
 
       {/* Form fields */}
       <Box mt={2} display="flex" flexDirection="column" gap={2}>
-        <TextField label="Название" {...register("name")} fullWidth />
+        <TextField label="Название" defaultValue="" {...register("name")} disabled={disabled} fullWidth />
         <Box display="flex" gap={2}>
-          <TextField label="Кв./офис" {...register("apartment")} fullWidth />
-          <TextField label="Подъезд" {...register("entrance")} fullWidth />
-          <TextField label="Этаж" {...register("floor")} fullWidth />
+          <TextField
+            type="number"
+            label="Кв./офис"
+            defaultValue=""
+            {...register("apartment")}
+            disabled={disabled}
+            fullWidth
+          />
+          <TextField
+            type="number"
+            label="Подъезд"
+            defaultValue=""
+            {...register("entrance")}
+            disabled={disabled}
+            fullWidth
+          />
+          <TextField type="number" label="Этаж" defaultValue="" {...register("floor")} disabled={disabled} fullWidth />
         </Box>
-        <TextField label="Комментарий курьеру" {...register("comment")} multiline rows={2} fullWidth />
+        <TextField label="Комментарий курьеру" defaultValue="" {...register("comment")} multiline rows={2} fullWidth />
       </Box>
     </Box>
   );

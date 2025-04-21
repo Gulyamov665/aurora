@@ -1,5 +1,6 @@
 import { getLocationsQueryType } from "@store/user/api/locationApi";
-import { SubmitHandler, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
+import { UserLocationResponseType } from "@store/user/types";
+import { SubmitHandler, UseFormHandleSubmit, UseFormRegister, UseFormWatch } from "react-hook-form";
 
 export type MoveHandlerProps = {
   setPosition: React.Dispatch<
@@ -26,11 +27,26 @@ export type LocationData = {
   comment?: string;
   name?: string;
   street?: string;
+  phone?: string;
 };
 
 export type LocationFormType = {
   register: UseFormRegister<LocationData>;
-  handleSubmit: UseFormHandleSubmit<LocationData>;
-  onSubmit: SubmitHandler<LocationData>;
-  address: string;
+  handleSubmit?: UseFormHandleSubmit<LocationData>;
+  onSubmit?: SubmitHandler<LocationData>;
+  watch?: UseFormWatch<LocationData>;
+  address?: string;
+  back?: () => void;
+  remove?: () => void;
+  navbox?: boolean;
+  p?: number;
+  disabled?: boolean;
+};
+
+export type LocationListType = {
+  locationList: UserLocationResponseType[] | undefined;
+  onLocationClick: (locationId: number) => Promise<void>;
+  isLoading: boolean;
+  changingId: number;
+  setEditMode: React.Dispatch<React.SetStateAction<number>>;
 };

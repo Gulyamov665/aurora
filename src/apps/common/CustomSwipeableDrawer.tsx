@@ -1,4 +1,4 @@
-import { Box, Button, Divider, SwipeableDrawer, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Divider, SwipeableDrawer, Typography } from "@mui/material";
 import React from "react";
 import { styles } from "./styles/styles";
 
@@ -10,6 +10,7 @@ type CustomSwipeableDrawerProps = {
   title: string;
   buttonText: string;
   onSubmit: () => void;
+  loading?: boolean;
 };
 
 export const CustomSwipeableDrawer: React.FC<CustomSwipeableDrawerProps> = ({
@@ -20,6 +21,7 @@ export const CustomSwipeableDrawer: React.FC<CustomSwipeableDrawerProps> = ({
   title,
   buttonText,
   onSubmit,
+  loading,
 }) => {
   return (
     <Box>
@@ -39,7 +41,9 @@ export const CustomSwipeableDrawer: React.FC<CustomSwipeableDrawerProps> = ({
         <Box sx={styles.childrenBox}>{children}</Box>
         <Box sx={styles.onSubmit}>
           <Box onClick={onSubmit}>
-            <Button sx={{ color: "black", fontWeight: 500 }}>{buttonText}</Button>
+            <Button sx={{ color: "black", fontWeight: 500 }}>
+              {loading ? <CircularProgress size={20} color="warning" /> : <span>{buttonText}</span>}
+            </Button>
           </Box>
         </Box>
       </SwipeableDrawer>

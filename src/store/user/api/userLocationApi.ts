@@ -38,11 +38,32 @@ export const userLocationApi = sharedApi.injectEndpoints({
       }),
       invalidatesTags: ["UserLocation"],
     }),
+    updateUserLocation: build.mutation({
+      query: ({ id, body }) => ({
+        url: `v1/auth/user/location/${id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["UserLocation"],
+    }),
+    deleteUserLocation: build.mutation({
+      query: (id) => ({
+        url: `v1/auth/user/location/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["UserLocation"],
+    }),
   }),
 });
 
+export type getUserLocationByIdQueryType = ReturnType<typeof useUpdateUserLocationMutation>;
 export type toggleActiveLocation = ReturnType<typeof useToggleActiveLocationMutation>;
 export type addUserLocationMutationType = ReturnType<typeof useAddUserLocationMutation>;
 
-export const { useAddUserLocationMutation, useGetUserLocationByIdQuery, useToggleActiveLocationMutation } =
-  userLocationApi;
+export const {
+  useAddUserLocationMutation,
+  useGetUserLocationByIdQuery,
+  useToggleActiveLocationMutation,
+  useUpdateUserLocationMutation,
+  useDeleteUserLocationMutation,
+} = userLocationApi;

@@ -3,6 +3,8 @@ import { MouseEvent } from "react";
 import { ProductData } from "../../products/types";
 import { addToCartMutationType, decreaseItemMutationType, removeCartMutationType } from "@store/admin/api/orders";
 import { NavigateFunction } from "react-router-dom";
+import { UseFormRegister } from "react-hook-form";
+import { LocationData } from "../../map/types";
 
 export type ProductType = {
   id: number;
@@ -50,6 +52,7 @@ export type ConfirmOrderProps = {
   navigate: NavigateFunction;
   handleCreateOrder: () => void;
   items: OrderItems;
+  register: UseFormRegister<LocationData>;
 };
 
 export type OrderHistoryProps = {

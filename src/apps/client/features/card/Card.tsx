@@ -29,13 +29,13 @@ const Card: FC<CardType> = ({ product, addToCart, findItem, decrease }) => {
         </div>
         <div style={{ textAlign: "center" }}>
           {findItem(product.id) ? (
-            <button className="btn card-btn-order" onClick={(e) => e.stopPropagation()}>
+            <span className="btn card-btn-order" onClick={(e) => e.stopPropagation()}>
               <CounterBox
                 increase={(e) => addToCart(e, product)}
                 decrease={(e) => decrease(e, product.id)}
                 quantity={findItem(product.id).quantity}
               />
-            </button>
+            </span>
           ) : (
             <button className="btn card-btn-order" onClick={(e) => addToCart(e, product)}>
               <b>Добавить</b>
