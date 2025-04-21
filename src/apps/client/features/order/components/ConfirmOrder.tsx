@@ -32,6 +32,7 @@ export const ConfirmOrder: FC<ConfirmOrderProps> = ({ navigate, state, handleCre
         defaultValue=""
         {...register("phone")}
         fullWidth
+        InputLabelProps={{ shrink: true }}
       />
 
       <Box sx={{ mb: 3 }}>

@@ -17,7 +17,7 @@ const OrderConfirmationPage: React.FC = () => {
   const skip = { skip: !data?.id || !isUser?.user_id };
   const { data: items } = useGetCartQuery({ user: isUser?.user_id, vendorId: data?.id }, skip);
   const { data: me } = useMeQuery(isUser?.user_id ?? 0, { skip: !isUser?.user_id });
-  const { register, reset } = useForm<LocationData>();
+  const { register, reset, watch } = useForm<LocationData>();
   const [createOrder] = useCreateOrderMutation();
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -74,6 +74,7 @@ const OrderConfirmationPage: React.FC = () => {
         handleCreateOrder={handleCreateOrder}
         items={items}
         register={register}
+        watch={watch}
       />
       {showSuccess && <OrderSuccess />}
     </>

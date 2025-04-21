@@ -12,6 +12,7 @@ export const LocationForm: React.FC<LocationFormType> = ({
   navbox = true,
   p = 2,
   disabled = false,
+  // watch,
 }) => {
   return (
     <Box p={p}>
@@ -35,27 +36,57 @@ export const LocationForm: React.FC<LocationFormType> = ({
 
       {/* Form fields */}
       <Box mt={2} display="flex" flexDirection="column" gap={2}>
-        <TextField label="Название" defaultValue="" {...register("name")} disabled={disabled} fullWidth />
+        <TextField
+          label="Название"
+          defaultValue=""
+          // value={watch?.("name") || ""}
+          {...register("name")}
+          disabled={disabled}
+          fullWidth
+          InputLabelProps={{ shrink: true }}
+        />
         <Box display="flex" gap={2}>
           <TextField
             type="number"
             label="Кв./офис"
             defaultValue=""
+            // value={watch?.("apartment")}
             {...register("apartment")}
             disabled={disabled}
             fullWidth
+            InputLabelProps={{ shrink: true }}
           />
           <TextField
             type="number"
             label="Подъезд"
             defaultValue=""
+            // value={watch?.("entrance")}
             {...register("entrance")}
             disabled={disabled}
             fullWidth
+            InputLabelProps={{ shrink: true }}
           />
-          <TextField type="number" label="Этаж" defaultValue="" {...register("floor")} disabled={disabled} fullWidth />
+          <TextField
+            type="number"
+            label="Этаж"
+            defaultValue=""
+            // value={watch?.("floor")}
+            {...register("floor")}
+            disabled={disabled}
+            fullWidth
+            InputLabelProps={{ shrink: true }}
+          />
         </Box>
-        <TextField label="Комментарий курьеру" defaultValue="" {...register("comment")} multiline rows={2} fullWidth />
+        <TextField
+          label="Комментарий курьеру"
+          defaultValue=""
+          // value={watch?.("comment")}
+          {...register("comment")}
+          multiline
+          rows={2}
+          fullWidth
+          InputLabelProps={{ shrink: true }}
+        />
       </Box>
     </Box>
   );
