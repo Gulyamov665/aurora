@@ -7,6 +7,7 @@ export interface IconItem {
   link: string;
   counter?: number;
   active: boolean;
+  animation?: JSX.Element;
 }
 
 export interface NavbarBottomProps {

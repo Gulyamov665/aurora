@@ -9,8 +9,8 @@ import { CostBox } from "./CostBox";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import OrderProducts from "./OrderProducts";
-import emptyCart from "@/assets/emptyCard.jpg";
 import styles from "../assets/Orders.module.scss";
+import { EmptyCart } from "../../../../../animations/componets/EmptyCart";
 
 export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, decreaseItem, removeCart }) => {
   const { deleteItem, confirmedId } = useDelete();
@@ -77,7 +77,7 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
           </div>
         ) : (
           <div className="text-center">
-            <img src={emptyCart} alt="cart" className={styles["empty-cart"]} />
+            <EmptyCart />
             <p>
               <b>Ваша корзина пока пуста</b>
             </p>

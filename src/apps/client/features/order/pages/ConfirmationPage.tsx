@@ -8,7 +8,6 @@ import OrderSuccess from "../components/OrderSuccess";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMeQuery } from "@store/user/api/userAuthApi";
-
 import { LocationData } from "../../map/types";
 
 const OrderConfirmationPage: React.FC = () => {

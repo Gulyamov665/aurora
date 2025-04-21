@@ -8,6 +8,7 @@ import DeliveryDiningOutlinedIcon from "@mui/icons-material/DeliveryDiningOutlin
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
 import NavbarBottom from "../components/NavbarBottom";
+import { Cooking } from "@/animations/componets/Cooking";
 
 const NavbarBottomPage: FC<NavbarBottomPageProps> = ({ data }) => {
   const { isUser } = useSelector(authState);
@@ -38,6 +39,7 @@ const NavbarBottomPage: FC<NavbarBottomPageProps> = ({ data }) => {
       icon: <DeliveryDiningOutlinedIcon sx={options} />,
       title: "Заказы",
       link: "orders",
+      animation: <Cooking size={84} />,
       active,
     },
     {
