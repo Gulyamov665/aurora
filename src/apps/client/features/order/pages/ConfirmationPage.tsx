@@ -38,7 +38,6 @@ const OrderConfirmationPage: React.FC = () => {
     }
   }, [me, reset]);
 
-  console.log(me);
   const handleCreateOrder = async () => {
     try {
       const orderData = {
