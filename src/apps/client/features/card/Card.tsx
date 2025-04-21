@@ -43,37 +43,6 @@ const Card: FC<CardType> = ({ product, addToCart, findItem, decrease }) => {
             </button>
           )}
         </div>
-        {/* <AnimatePresence>
-          {findItem(product.id) ? (
-            <motion.div
-              key="counter"
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 10 }}
-              transition={{ duration: 0.3 }}
-              className="btn card-btn-order"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <CounterBox
-                increase={(e) => addToCart(e, product)}
-                decrease={(e) => decrease(e, product.id)}
-                quantity={findItem(product.id).quantity}
-              />
-            </motion.div>
-          ) : (
-            <motion.button
-              key="add"
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 10 }}
-              transition={{ duration: 0.3 }}
-              className="btn card-btn-order"
-              onClick={(e) => addToCart(e, product)}
-            >
-              <b>Добавить</b>
-            </motion.button>
-          )}
-        </AnimatePresence> */}
       </div>
     </>
   );
