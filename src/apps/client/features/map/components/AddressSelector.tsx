@@ -62,7 +62,12 @@ export const AddressSelector: React.FC = () => {
                   подъезд {location.entrance}, этаж {location.floor}, кв. {location.apartment}
                 </Typography>
               </Box>
-              <IconButton>
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                  console.log("first");
+                }}
+              >
                 <EditIcon />
               </IconButton>
             </Box>

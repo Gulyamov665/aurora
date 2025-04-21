@@ -4,7 +4,10 @@ import { OrdersData, OrdersType } from "@store/user/types";
 import { io } from "socket.io-client";
 
 const url = import.meta.env.VITE_EXPRESS_URL;
-export const socket = io("https://backend.aurora-app.uz"); // Подключаем WebSocket
+
+export const socket = io("https://new.aurora-api.uz", {
+  path: "/api-node/socket.io",
+}); // Подключаем WebSocket
 // export const socket = io("http://localhost:3000"); // Подключаем WebSocket
 
 export const baseQuery = fetchBaseQuery({
