@@ -1,4 +1,12 @@
-export const styles = {
+import { SxProps, Theme } from "@mui/material";
+
+type StylesType = {
+  onSubmit: SxProps<Theme>;
+  childrenBox: SxProps<Theme>;
+  swipeAbleDrawerStyle: SxProps<Theme>;
+};
+
+export const styles: StylesType = {
   onSubmit: {
     p: 1,
     borderRadius: "16px",

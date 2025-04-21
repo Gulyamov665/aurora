@@ -15,7 +15,10 @@ export const CounterBox: React.FC<CounterBoxProps> = ({ increase, decrease, quan
       <IconButton color="primary" onClick={decrease}>
         <Remove />
       </IconButton>
-      <Typography variant="h6">{quantity}</Typography>
+      <Typography variant="h6">
+        {/* <AnimateNumber>{count}</AnimateNumber> */}
+        {quantity}
+      </Typography>
       <IconButton color="primary" onClick={(e) => increase(e, {} as ProductData)}>
         <Add />
       </IconButton>
