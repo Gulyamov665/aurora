@@ -1,6 +1,6 @@
 import React from "react";
 import animation from "../files/cooking.json";
-import Lottie from "lottie-react";
+import Lottie from "react-lottie-player/dist/LottiePlayerLight";
 
 interface CookingProps {
   size: number;
