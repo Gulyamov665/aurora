@@ -76,9 +76,9 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
             <CostBox items={items} toConfirmPage={toConfirmPage} />
           </div>
         ) : (
-          <div className="text-center">
+          <div className="text-center" style={{ marginTop: 100 }}>
             <EmptyCart />
-            <p>
+            <p style={{marginTop: 50}}>
               <b>Ваша корзина пока пуста</b>
             </p>
           </div>

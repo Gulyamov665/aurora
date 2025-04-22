@@ -6,6 +6,7 @@ import OrdersPage from "@/apps/client/features/order/pages/OrdersPage.js";
 import ClientMainPage from "@/apps/client/pages/ClientMainPage";
 import OrderConfirmationPage from "@/apps/client/features/order/pages/ConfirmationPage";
 import { OrderDetailPage } from "@/apps/client/features/order/pages/OrderDetailPage";
+import { ProfilePage } from "@/apps/client/features/profile/ProfilePage";
 
 export default function VendorRoutes() {
   return (
@@ -15,7 +16,7 @@ export default function VendorRoutes() {
         <Route path="cart" element={<OrdersPage />} />
         <Route path="orders" element={<MyOrders />} />
         <Route path="orders/:id" element={<OrderDetailPage />} />
-        <Route path="profile" element={<OrdersPage />} />
+        <Route path="profile" element={<ProfilePage />} />
         <Route path="confirm" element={<OrderConfirmationPage />} />
         <Route path="maps" element={<Map />} />
       </Route>
