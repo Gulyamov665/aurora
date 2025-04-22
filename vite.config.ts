@@ -6,6 +6,7 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react()],
+  assetsInclude: ["**/*.lottie"],
   resolve: {
     alias: {
       "@store": path.resolve(__dirname, "./src/store"), // Алиас для store

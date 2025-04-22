@@ -1,12 +1,12 @@
 import React from "react";
-import animation from "../files/emptycart.json";
-import Lottie from "react-lottie-player/dist/LottiePlayerLight";
+import animation from "../files/waitConfirmation.lottie";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 export const EmptyCart: React.FC = () => {
   return (
     <div>
       <div style={{ width: 400, height: 400, margin: "0 auto" }}>
-        <Lottie animationData={animation} loop={true} play />
+        <DotLottieReact src={animation} loop autoplay />
       </div>
     </div>
   );
