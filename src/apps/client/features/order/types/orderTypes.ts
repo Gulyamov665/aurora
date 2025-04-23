@@ -67,5 +67,5 @@ export type OrderDetailProps = {
 export type GoToLoginProps = {
   goToLogin: () => void;
   goToRegister: () => void;
-  text: string;
+  text?: string;
 };

@@ -16,13 +16,15 @@ const LocationDropdown: FC<LocationDropdownProps> = ({ me, isUser, isLoading }) 
   const { AddressSelectorToggle } = useActions();
 
   return (
-    <Button variant="contained" fullWidth onClick={() => AddressSelectorToggle(true)} sx={styles.locationButton}>
-      <Typography noWrap alignItems={"center"} display={"flex"}>
-        {isLoading && <CircularProgress size={24} color="warning" />}
+    <>
+      <Button variant="contained" fullWidth onClick={() => AddressSelectorToggle(true)} sx={styles.locationButton}>
+        <Typography noWrap alignItems={"center"} display={"flex"}>
+          {isLoading && <CircularProgress size={24} color="warning" />}
 
-        {!isLoading && <span>{(isUser && me?.location?.name) || me?.location?.address || "Указать локацию"}</span>}
-      </Typography>
-    </Button>
+          {!isLoading && <span>{(isUser && me?.location?.name) || me?.location?.address || "Указать локацию"}</span>}
+        </Typography>
+      </Button>
+    </>
   );
 };
 

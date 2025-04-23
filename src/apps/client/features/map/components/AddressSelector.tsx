@@ -8,11 +8,10 @@ import { useUpdateUserLocationMutation, useToggleActiveLocationMutation } from "
 import { authState } from "@store/user/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import { CustomSwipeableDrawer } from "@/apps/common/CustomSwipeableDrawer";
-import { LocationList } from "./LocationList";
-import { LocationForm } from "./LocationForm";
 import { useForm } from "react-hook-form";
 import { LocationData } from "../types";
 import { useDelete } from "@/hooks/useDelete";
+import { SelectorContent } from "./SelectorContent";
 
 export const AddressSelector: React.FC = () => {
   const { isUser } = useSelector(authState);
@@ -74,24 +73,23 @@ export const AddressSelector: React.FC = () => {
         title="Выберите адрес"
         buttonText={editTargetId ? "Изменить" : "Указать адрес"}
         loading={updateLoading}
+        disabled={true}
       >
-        {editTargetId ? (
-          <LocationForm
-            register={register}
-            address={name || address}
-            back={() => setEditTargetId(0)}
-            watch={watch}
-            remove={removeLoc}
-          />
-        ) : (
-          <LocationList
-            locationList={locationList}
-            onLocationClick={onLocationClick}
-            isLoading={isLoading}
-            changingId={changingId}
-            setEditMode={setEditTargetId}
-          />
-        )}
+        <SelectorContent
+          isUser={isUser}
+          editTargetId={editTargetId}
+          register={register}
+          name={name}
+          address={address}
+          watch={watch}
+          removeLoc={removeLoc}
+          locationList={locationList}
+          onLocationClick={onLocationClick}
+          isLoading={isLoading}
+          changingId={changingId}
+          setEditTargetId={setEditTargetId}
+          navigate={navigate}
+        />
       </CustomSwipeableDrawer>
     </Box>
   );

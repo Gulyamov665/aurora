@@ -13,11 +13,11 @@ import { useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
 import { CustomSwipeableDrawer } from "@/apps/common/CustomSwipeableDrawer";
 import { LocationForm } from "../components/LocationForm";
-import NearMeRoundedIcon from "@mui/icons-material/NearMeRounded";
-import marker from "@/assets/gps.png";
 import { useForm } from "react-hook-form";
 import { LocationData } from "../types";
 import { useNavigate } from "react-router-dom";
+import NearMeRoundedIcon from "@mui/icons-material/NearMeRounded";
+import marker from "@/assets/gps.png";
 
 const defaultPosition = { lat: 39.7467565, lng: 64.4111207 };
 

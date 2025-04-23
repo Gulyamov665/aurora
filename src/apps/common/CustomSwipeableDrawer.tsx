@@ -11,6 +11,7 @@ type CustomSwipeableDrawerProps = {
   buttonText: string;
   onSubmit: () => void;
   loading?: boolean;
+  disabled?: boolean;
 };
 
 export const CustomSwipeableDrawer: React.FC<CustomSwipeableDrawerProps> = ({
@@ -22,6 +23,7 @@ export const CustomSwipeableDrawer: React.FC<CustomSwipeableDrawerProps> = ({
   buttonText,
   onSubmit,
   loading,
+  disabled = false,
 }) => {
   return (
     <Box>
@@ -41,7 +43,7 @@ export const CustomSwipeableDrawer: React.FC<CustomSwipeableDrawerProps> = ({
         <Box sx={styles.childrenBox}>{children}</Box>
         <Box sx={styles.onSubmit}>
           <Box onClick={onSubmit}>
-            <Button sx={{ color: "black", fontWeight: 500 }}>
+            <Button sx={{ color: "black", fontWeight: 500 }} disabled={disabled}>
               {loading ? <CircularProgress size={20} color="warning" /> : <span>{buttonText}</span>}
             </Button>
           </Box>
