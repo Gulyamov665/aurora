@@ -45,8 +45,10 @@ export const AddressSelector: React.FC = () => {
   };
 
   const navigateToMaps = () => {
-    navigate("maps");
-    AddressSelectorToggle(false);
+    if (isUser?.user_id) {
+      navigate("maps");
+      AddressSelectorToggle(false);
+    }
   };
 
   const onLocationClick = async (locationId: number) => {
@@ -73,7 +75,7 @@ export const AddressSelector: React.FC = () => {
         title="Выберите адрес"
         buttonText={editTargetId ? "Изменить" : "Указать адрес"}
         loading={updateLoading}
-        disabled={true}
+        disabled={!!!isUser?.user_id}
       >
         <SelectorContent
           isUser={isUser}
