@@ -30,7 +30,7 @@ export default function Login() {
     const password = e.target.password.value
 
     await getToken({
-      username: username,
+      phone: username,
       password: password,
     })
   }
@@ -39,7 +39,7 @@ export default function Login() {
     if (!isSuccess) {
       return
     }
-    
+
     const dataDecode = jwtDecode(data.access)
     localStorage.setItem('authTokens', JSON.stringify(data))
     setAuthTokens(data)
