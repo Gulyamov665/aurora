@@ -93,7 +93,7 @@ export const styles = {
       transform: "translateY(-1px)",
       transition: "transform 0.2s",
     },
-    "@media (min-width: 320px) and (max-width: 425px)": {
+    "@media (min-width: 320px) and (max-width: 768px)": {
       minWidth: "auto",
       width: "250px",
       fontSize: "14px",
