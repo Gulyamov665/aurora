@@ -3,12 +3,12 @@ import React from "react";
 import { OrderCard } from "../pages/MyOrders";
 import { GoToLoginProps } from "../types/orderTypes";
 
-export const GoToLogin: React.FC<GoToLoginProps> = ({ goToLogin, goToRegister }) => {
+export const GoToLogin: React.FC<GoToLoginProps> = ({ goToLogin, goToRegister, text }) => {
   return (
     <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", mt: "45%" }}>
       <OrderCard>
         <Typography sx={{ textAlign: "center" }}>
-          Для просмотра истории заказов необходимо войти в систему или зарегистрироваться.
+          {text || "Чтобы продолжить, пожалуйста, войдите в свою учетную запись или зарегистрируйтесь."}
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
           <Button

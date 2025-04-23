@@ -42,7 +42,11 @@ export const MyOrders: FC = () => {
           ))}
         </Box>
       ) : (
-        <GoToLogin goToLogin={goToLogin} goToRegister={goToRegister} />
+        <GoToLogin
+          goToLogin={goToLogin}
+          goToRegister={goToRegister}
+          text="Для просмотра истории заказов необходимо войти в систему или зарегистрироваться."
+        />
       )}
     </Box>
   );

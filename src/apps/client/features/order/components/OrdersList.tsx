@@ -78,7 +78,7 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
         ) : (
           <div className="text-center" style={{ marginTop: 100 }}>
             <EmptyCart />
-            <p style={{marginTop: 50}}>
+            <p style={{ marginTop: 50 }}>
               <b>Ваша корзина пока пуста</b>
             </p>
           </div>
