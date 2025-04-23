@@ -21,7 +21,13 @@ const LocationDropdown: FC<LocationDropdownProps> = ({ me, isUser, isLoading }) 
         <Typography noWrap alignItems={"center"} display={"flex"}>
           {isLoading && <CircularProgress size={24} color="warning" />}
 
-          {!isLoading && <span>{(isUser && me?.location?.name) || me?.location?.address || "Указать локацию"}</span>}
+          {!isLoading && (
+            <span>
+              {(!!isUser?.user_id && me?.location?.name) ||
+                (!!isUser?.user_id && me?.location?.address) ||
+                "Указать локацию"}
+            </span>
+          )}
         </Typography>
       </Button>
     </>
