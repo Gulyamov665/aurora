@@ -1,19 +1,20 @@
 import React from "react";
-import { ConfigProvider, DatePicker } from "antd";
+import { Button, ConfigProvider, DatePicker } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
+import { Box } from "@mui/material";
 import type { Dayjs } from "dayjs";
 import ruRU from "antd/locale/ru_RU";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
-import { Box } from "@mui/material";
 
 dayjs.locale("ru");
 
 type DateRangeProps = {
   setDate: React.Dispatch<React.SetStateAction<string[]>>;
+  onSubmit: () => Promise<void>;
 };
 
-export const DateRange: React.FC<DateRangeProps> = ({ setDate }) => {
+export const DateRange: React.FC<DateRangeProps> = ({ setDate, onSubmit }) => {
   const smileIcon = <SmileOutlined />;
   const { RangePicker } = DatePicker;
 
@@ -25,6 +26,9 @@ export const DateRange: React.FC<DateRangeProps> = ({ setDate }) => {
       <ConfigProvider locale={ruRU}>
         <Box>
           <RangePicker suffixIcon={smileIcon} onChange={onChange} />
+          <Button style={{ marginLeft: 4 }} onClick={onSubmit}>
+            Отправить
+          </Button>
         </Box>
       </ConfigProvider>
     </div>

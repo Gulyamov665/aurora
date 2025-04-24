@@ -22,6 +22,7 @@ import storage from "redux-persist/lib/storage";
 import appReducer from "./appSlice";
 import vendorReducer from "./admin/slices/vendorSlice";
 import authState from "./user/slices/authSlice";
+import { reportsApi } from "./admin/api/reports";
 
 const rootReducer = combineReducers({
   cart: cartSlice,
@@ -43,6 +44,7 @@ const rootReducer = combineReducers({
   [locationApi.reducerPath]: locationApi.reducer,
   [sharedApi.reducerPath]: sharedApi.reducer,
   [restaurantsApi.reducerPath]: restaurantsApi.reducer,
+  [reportsApi.reducerPath]: reportsApi.reducer,
 });
 
 const persistConfig = {
@@ -78,7 +80,8 @@ const store = configureStore({
       ordersApi.middleware,
       locationApi.middleware,
       sharedApi.middleware,
-      restaurantsApi.middleware
+      restaurantsApi.middleware,
+      reportsApi.middleware
     ),
 });
 

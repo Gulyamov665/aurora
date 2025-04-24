@@ -173,4 +173,10 @@ export type UserLocationResponseType = UserLocationType & {
   id: number;
 };
 
+export type ReportsType = {
+  orders: OrdersType[];
+  sum: number;
+  quantity: number;
+  canceled: number;
+};
 export type { ProductType };
