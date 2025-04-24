@@ -13,9 +13,10 @@ export const qrCodeApi = createApi({
 
     qrCode: build.mutation({
       query: (body) => ({
-        url: "generate/qr",
+        url: "admins/generate/qr",
         method: "POST",
         body,
+        responseHandler: (response) => response.blob(),
       }),
     }),
   }),

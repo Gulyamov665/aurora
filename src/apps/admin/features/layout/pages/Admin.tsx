@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import { useActions } from "@/hooks/useActions";
 import { LoadingScreen } from "@/apps/admin/features/loading/LoadingScreen";
-import Header from "../../../components/Header";
+import { Header } from "../../../components/Header.tsx";
 import styles from "../assets/Admin.module.scss";
 import Sidebar from "../components/Sidebar";
 import { useLoadQuery } from "@store/admin/api/vendorApi";
