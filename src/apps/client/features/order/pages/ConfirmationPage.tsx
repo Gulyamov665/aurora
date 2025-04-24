@@ -4,8 +4,8 @@ import { OutletContextType } from "@/apps/client/pages";
 import { authState } from "@store/user/slices/authSlice";
 import { useSelector } from "react-redux";
 import { useCreateOrderMutation, useGetCartQuery } from "@store/admin/api/orders";
-import OrderSuccess from "../components/OrderSuccess";
-import { useEffect, useState } from "react";
+// import OrderSuccess from "../components/OrderSuccess";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useMeQuery } from "@store/user/api/userAuthApi";
 import { LocationData } from "../../map/types";
@@ -18,7 +18,7 @@ const OrderConfirmationPage: React.FC = () => {
   const { data: me } = useMeQuery(isUser?.user_id ?? 0, { skip: !isUser?.user_id });
   const { register, reset, watch } = useForm<LocationData>();
   const [createOrder] = useCreateOrderMutation();
-  const [showSuccess, setShowSuccess] = useState(false);
+  // const [showSuccess, setShowSuccess] = useState(false);
 
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -56,10 +56,10 @@ const OrderConfirmationPage: React.FC = () => {
         products: items.products,
       };
       await createOrder(orderData).unwrap();
-      setShowSuccess(true);
-      setTimeout(() => {
-        navigate("..");
-      }, 2000);
+      // setShowSuccess(true);
+      // setTimeout(() => {
+      //   navigate("..");
+      // }, 2000);
     } catch (error) {
       console.error("Failed to create order:", error);
     }
@@ -75,7 +75,7 @@ const OrderConfirmationPage: React.FC = () => {
         register={register}
         watch={watch}
       />
-      {showSuccess && <OrderSuccess />}
+      {/* {showSuccess && <OrderSuccess />} */}
     </>
   );
 };

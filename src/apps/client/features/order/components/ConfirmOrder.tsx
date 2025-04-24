@@ -1,9 +1,10 @@
-import { Box, Typography, Button, TextField } from "@mui/material";
+import { Box, Typography, TextField } from "@mui/material";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { FC } from "react";
 import { ConfirmOrderProps } from "../types/orderTypes";
 import { LocationForm } from "../../map/components/LocationForm";
+import { OrderButton } from "@/animations/componets/OrderButton";
 
 export const ConfirmOrder: FC<ConfirmOrderProps> = ({ navigate, state, handleCreateOrder, items, register }) => {
   return (
@@ -61,7 +62,7 @@ export const ConfirmOrder: FC<ConfirmOrderProps> = ({ navigate, state, handleCre
         <Typography variant="h6" sx={{ mb: 1 }}>
           Итого: {items?.totalPrice?.toLocaleString()} сум
         </Typography>
-        <Button
+        {/* <Button
           fullWidth
           variant="contained"
           color="primary"
@@ -73,7 +74,10 @@ export const ConfirmOrder: FC<ConfirmOrderProps> = ({ navigate, state, handleCre
           onClick={handleCreateOrder}
         >
           Оплатить
-        </Button>
+        </Button> */}
+        <Box display="flex" justifyContent="center" alignItems="center" mt={2}>
+          <OrderButton onClick={handleCreateOrder} navigate={navigate} />
+        </Box>
       </Box>
     </Box>
   );
