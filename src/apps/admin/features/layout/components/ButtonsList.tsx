@@ -2,6 +2,7 @@ import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import RedeemIcon from "@mui/icons-material/Redeem";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 
 export const buttonsInfo = [
   {
@@ -23,5 +24,10 @@ export const buttonsInfo = [
     text: "Заказы",
     icon: <BorderColorIcon sx={{ fontSize: 35, color: "white" }} />,
     link: "orders",
+  },
+  {
+    text: "Отчеты",
+    icon: <ReceiptLongIcon sx={{ fontSize: 35, color: "white" }} />,
+    link: "reports",
   },
 ];

@@ -19,7 +19,7 @@ const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading }) => {
 
   if (!data) return <LoadingScreen loading={isLoading} />;
 
-  const sortedOrders = [...data.data].sort((a, b) => {
+  const sortedOrders = [...data].sort((a, b) => {
     const aValue = a[sortBy];
     const bValue = b[sortBy];
     if (aValue == null || bValue == null) {

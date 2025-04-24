@@ -21,7 +21,7 @@ export default function Login() {
   };
 
   if (isUser) {
-    return <Navigate to={`/admin/${isUser?.vendor}`} />;
+    return <Navigate to={`/dashboard/${isUser?.vendor}`} />;
   }
 
   return (

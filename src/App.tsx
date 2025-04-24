@@ -26,7 +26,7 @@ function App() {
         <Route path="/login" element={<Auth state={state} />} />
 
         {/*client and admin routes */}
-        <Route path="admin/:res/*" element={<AdminRoutes />} />
+        <Route path="dashboard/:res/*" element={<AdminRoutes />} />
         <Route path="vendor/:res/*" element={<VendorRoutes />} />
       </Routes>
 

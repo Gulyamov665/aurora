@@ -27,7 +27,7 @@ const Header: FC = () => {
           </Link>
         ) : (
           <div>
-            <Link to={`/admin/${isUser.vendor}/menu`}>
+            <Link to={`/dashboard/${isUser.vendor}/menu`}>
               <EditOutlinedIcon color="warning" fontSize="large" />
             </Link>
           </div>

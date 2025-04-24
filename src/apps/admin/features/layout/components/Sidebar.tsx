@@ -3,6 +3,7 @@ import { Button, Drawer, List, ListItemButton, ListItemIcon, ListItemText } from
 import { Link } from "react-router-dom";
 import { buttonsInfo } from "./ButtonsList";
 import { SideBarProps } from "../types";
+import { styles } from "../assets/styles";
 
 const Sidebar: FC<SideBarProps> = ({ open, logout, handleSidebar }) => {
   return (
@@ -12,19 +13,7 @@ const Sidebar: FC<SideBarProps> = ({ open, logout, handleSidebar }) => {
         <List sx={{ paddingLeft: 2, height: 500 }}>
           {buttonsInfo.map(({ text, icon, link }, index) => (
             <ListItemButton
-              sx={{
-                width: 180,
-                color: "#ffffff",
-                transition: "0.3s",
-                borderRadius: 2,
-
-                "&:hover": {
-                  backgroundColor: "#0da5ab",
-                  color: "#ffffff",
-                  transition: "0.3s",
-                  borderRadius: 2,
-                },
-              }}
+              sx={styles.listItemButton}
               alignItems="center"
               key={index}
               component={Link}

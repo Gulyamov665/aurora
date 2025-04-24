@@ -1,8 +1,8 @@
-import { OrdersData, OrdersType } from "@store/user/types";
+import { OrdersType } from "@store/user/types";
 
 export type OrderKey = keyof OrdersType;
 
 export interface OrdersTableProps {
-  data: OrdersData | undefined;
+  data: OrdersType[] | undefined;
   isLoading: boolean;
 }
