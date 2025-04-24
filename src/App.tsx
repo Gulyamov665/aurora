@@ -8,7 +8,7 @@ import VendorRoutes from "./routes/VendorRoutes";
 import RegistrationPage from "./apps/client/features/registration/pages/RegistrationPage";
 import Auth from "./apps/client/features/auth/pages/Auth";
 import { DeleteModal } from "./apps/common/DeleteModal";
-
+import { Main } from "./apps/client/features/main/Main";
 // import { InstallPrompt } from "./InstallPrompt";
 
 function App() {
@@ -17,17 +17,18 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="*" element={<NotFound />} />
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/dashboard" element={<Login />} />
 
         {/* client auth */}
-
         <Route path="/register" element={<RegistrationPage state={state} />} />
         <Route path="/login" element={<Auth state={state} />} />
 
         {/*client and admin routes */}
         <Route path="dashboard/:res/*" element={<AdminRoutes />} />
         <Route path="vendor/:res/*" element={<VendorRoutes />} />
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       {/* global elements */}

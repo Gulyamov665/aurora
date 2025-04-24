@@ -29,7 +29,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   if (!isUser || redirect) {
     return (
       <div style={{ height: "100dvh", width: "100%", background: "#210638" }}>
-        <Navigate to="/" />
+        <Navigate to="/dashboard" />
       </div>
     );
   }

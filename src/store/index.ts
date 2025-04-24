@@ -16,6 +16,7 @@ import { authMiddleware } from "./middlewares/authMiddleware";
 import { ordersApi } from "./admin/api/orders";
 import { locationApi } from "./user/api/locationApi";
 import { sharedApi } from "./user/api/shared";
+import { restaurantsApi } from "./user/api/restaurantsApi";
 import cartSlice from "./cartSlice";
 import storage from "redux-persist/lib/storage";
 import appReducer from "./appSlice";
@@ -41,6 +42,7 @@ const rootReducer = combineReducers({
   [ordersApi.reducerPath]: ordersApi.reducer,
   [locationApi.reducerPath]: locationApi.reducer,
   [sharedApi.reducerPath]: sharedApi.reducer,
+  [restaurantsApi.reducerPath]: restaurantsApi.reducer,
 });
 
 const persistConfig = {
@@ -75,7 +77,8 @@ const store = configureStore({
       authMiddleware,
       ordersApi.middleware,
       locationApi.middleware,
-      sharedApi.middleware
+      sharedApi.middleware,
+      restaurantsApi.middleware
     ),
 });
 
