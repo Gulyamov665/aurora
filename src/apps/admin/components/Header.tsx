@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useQrCodeMutation } from "../../../store/admin/api/qrCode";
-import { DownloadQr } from "../../../Utils/downloadQr";
 import { useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
 import styles from "./Header.module.scss";
@@ -15,16 +13,6 @@ type HeaderProps = {
 
 export const Header: React.FC<HeaderProps> = ({ sidebar }) => {
   const { isUser } = useSelector(authState);
-  const [qrCode, { isLoading }] = useQrCodeMutation();
-
-  const qrCodeGenerate = async () => {
-    try {
-      const blob = await qrCode({ quantity: 1 }).unwrap();
-      DownloadQr(blob);
-    } catch (error) {
-      console.error("Ошибка при скачивании QR-кода:", error);
-    }
-  };
 
   return (
     <header className={`${styles.header} sticky-top`}>
@@ -39,16 +27,6 @@ export const Header: React.FC<HeaderProps> = ({ sidebar }) => {
         <img src={logo} className={styles.logo} alt="img" />
       </div>
       <div className="d-flex justify-content-between">
-        {!isLoading ? (
-          <button className={`btn btn-danger ${styles.btn_size} me-2`} onClick={qrCodeGenerate}>
-            QrCode
-          </button>
-        ) : (
-          <button className={`btn btn-danger ${styles.btn_size}`} onClick={qrCodeGenerate}>
-            <span className="spinner-border spinner-border-sm " aria-hidden="true"></span>
-          </button>
-        )}
-
         <Link to={`/vendor/${isUser?.vendor}`}>
           <button className={`btn btn-info ${styles.btn_size}`}>
             <span style={{ color: "white" }}>

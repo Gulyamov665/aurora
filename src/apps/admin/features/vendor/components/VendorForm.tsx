@@ -11,7 +11,14 @@ import {
   LockOpenOutlined,
 } from "@mui/icons-material";
 
-const VendorForm: FC<VendorFormType> = ({ register, handleSubmit, handleUpdate, isLoading, isChanged }) => {
+const VendorForm: FC<VendorFormType> = ({
+  register,
+  handleSubmit,
+  handleUpdate,
+  isLoading,
+  isChanged,
+  qrCodeGenerate,
+}) => {
   return (
     <form onSubmit={handleSubmit(handleUpdate)}>
       <Box sx={{ maxWidth: 1200, mx: "auto", mt: 5 }}>
@@ -138,7 +145,7 @@ const VendorForm: FC<VendorFormType> = ({ register, handleSubmit, handleUpdate, 
 
           {/* Кнопки */}
           <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
-            <Button variant="contained" color="error" startIcon={<QrCode />}>
+            <Button variant="contained" color="error" startIcon={<QrCode />} onClick={qrCodeGenerate}>
               QrCode
             </Button>
             <Button variant="contained" color="primary">

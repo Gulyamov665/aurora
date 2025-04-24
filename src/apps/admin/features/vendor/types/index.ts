@@ -7,4 +7,5 @@ export type VendorFormType = {
   handleUpdate: SubmitHandler<VendorInfoType>;
   isLoading: boolean;
   isChanged: boolean;
+  qrCodeGenerate: () => Promise<void>;
 };
