@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@store/index";
 import { AuthState, ErrorType, IsUserType } from "../types";
 import { decodeToken } from "@/Utils/decodeToken";
-// import { userAuth } from "../api/userAuthApi";
 
 const initialState: AuthState = {
   regStep: 0,

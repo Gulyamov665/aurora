@@ -7,7 +7,7 @@ export const getStatusChip = (status: string) => {
       return <Chip label="Новый" color="success" icon={<Fastfood />} />;
     case "completed":
       return <Chip label="Готово" color="success" icon={<DoneOutlined />} />;
-    case "pending":
+    case "awaiting_courier":
       return <Chip label="Ожидание" color="secondary" icon={<AccessTime />} />;
     case "canceled":
       return <Chip label="Отменен" color="error" icon={<Close />} />;
@@ -24,7 +24,7 @@ export const getStatusChipNoIcons = (status: string) => {
       return <Chip label="Новый" color="success" />;
     case "completed":
       return <Chip label="Готово" color="success" />;
-    case "pending":
+    case "awaiting_courier":
       return <Chip label="Ожидание" color="secondary" />;
     case "canceled":
       return <Chip label="Отменен" color="error" />;

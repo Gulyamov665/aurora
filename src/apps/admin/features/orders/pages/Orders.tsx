@@ -3,10 +3,10 @@ import { useLazyGetOrdersQuery } from "@store/admin/api/orders";
 import { useOutletContext } from "react-router-dom";
 import { OutletContextType } from "@/apps/client/pages";
 import { useOrderSocket } from "@/hooks/useOrderSocket";
-import OrdersTable from "../components/OrdersTable";
 import { useInView } from "react-intersection-observer";
 import { OrdersType } from "@store/user/types";
 import { Box, CircularProgress, Fade } from "@mui/material";
+import OrdersTable from "../components/OrdersTable";
 
 const Orders: FC = () => {
   const { data } = useOutletContext<OutletContextType>();
