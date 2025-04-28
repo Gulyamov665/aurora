@@ -21,6 +21,7 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
   );
   const [decreaseItem] = useDecreaseItemMutation();
   const [toRegPage, setToRegPage] = useState(false);
+  const [unavailable, setUnavailable] = useState(false);
 
   const activeCategories = useMemo(() => category.filter(({ is_active }) => is_active), [category]);
   const activeMenuItems = useMemo(() => menuItems.filter(({ is_active }) => is_active), [menuItems]);
@@ -52,6 +53,12 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
       event.stopPropagation();
       return setToRegPage(true);
     }
+
+    if (!data.availability_orders) {
+      event.stopPropagation();
+      return setUnavailable(true);
+    }
+
     handleAddToCart({
       event,
       productData,
@@ -96,6 +103,9 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
       ))}
       <MaterialModal open={toRegPage} onClose={() => setToRegPage(false)} minHeight={0}>
         <GuestBox setToRegPage={setToRegPage} />
+      </MaterialModal>
+      <MaterialModal open={unavailable} onClose={() => setUnavailable(false)} minHeight={0}>
+        <GuestBox setToRegPage={setUnavailable} singleBtn title="Заказы в данном заведении недоступны" />
       </MaterialModal>
     </>
   );

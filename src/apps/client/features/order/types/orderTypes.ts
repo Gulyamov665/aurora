@@ -1,4 +1,4 @@
-import { CartItem, IsUserType, OrdersType, VendorInfoType } from "@store/user/types";
+import { CartItem, IsUserType, OrdersType, UserInfoType, VendorInfoType } from "@store/user/types";
 import { MouseEvent } from "react";
 import { ProductData } from "../../products/types";
 import { addToCartMutationType, decreaseItemMutationType, removeCartMutationType } from "@store/admin/api/orders";
@@ -40,6 +40,7 @@ export type OrderProps = {
   decreaseItem: decreaseItemMutationType[0];
   addToCart: addToCartMutationType[0];
   removeCart: removeCartMutationType[0];
+  user?: UserInfoType;
 };
 
 export type CostBoxType = {

@@ -3,7 +3,11 @@ import { FC } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { GuestBoxProps } from "../types";
 
-export const GuestBox: FC<GuestBoxProps> = ({ setToRegPage }) => {
+export const GuestBox: FC<GuestBoxProps> = ({
+  setToRegPage,
+  singleBtn = false,
+  title = "Для оформления заказа необходимо зарегистрироваться",
+}) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -22,26 +26,28 @@ export const GuestBox: FC<GuestBoxProps> = ({ setToRegPage }) => {
           textAlign: "center",
         }}
       >
-        Для оформления заказа необходимо зарегистрироваться
+        {title}
       </Typography>
 
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Button
-          variant="text"
-          sx={{
-            color: "black",
-            fontWeight: 500,
-            padding: "8px 16px",
-            fontSize: "18px",
-            textTransform: "none",
-            backgroundColor: "#f5f4f2",
-            mr: 2,
-            borderRadius: "8px",
-          }}
-          onClick={handleLoginClick}
-        >
-          Войти
-        </Button>
+        {!singleBtn && (
+          <Button
+            variant="text"
+            sx={{
+              color: "black",
+              fontWeight: 500,
+              padding: "8px 16px",
+              fontSize: "18px",
+              textTransform: "none",
+              backgroundColor: "#f5f4f2",
+              mr: 2,
+              borderRadius: "8px",
+            }}
+            onClick={handleLoginClick}
+          >
+            Войти
+          </Button>
+        )}
 
         <Button
           onClick={() => setToRegPage(false)}

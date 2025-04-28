@@ -12,7 +12,7 @@ import OrderProducts from "./OrderProducts";
 import styles from "../assets/Orders.module.scss";
 import { EmptyCart } from "../../../../../animations/componets/EmptyCart";
 
-export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, decreaseItem, removeCart }) => {
+export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, decreaseItem, removeCart, user }) => {
   const { deleteItem, confirmedId } = useDelete();
   const navigate = useNavigate();
 
@@ -25,6 +25,7 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
   };
 
   const toConfirmPage = () => {
+    if (!user?.location) return navigate("../maps");
     navigate("../confirm", { state: { from: location.pathname } });
   };
 

@@ -17,4 +17,6 @@ export interface ProductData {
 
 export type GuestBoxProps = {
   setToRegPage: React.Dispatch<React.SetStateAction<boolean>>;
+  singleBtn?: boolean;
+  title?: string;
 };
