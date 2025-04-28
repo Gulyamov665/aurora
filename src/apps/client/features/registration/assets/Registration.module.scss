@@ -1,0 +1,83 @@
+.error-message {
+  margin: 0;
+  font-size: small;
+  text-align: left;
+  color: red;
+  opacity: 0; /* Начальная прозрачность */
+  // height: 0; /* Начальная высота */
+  max-height: 10px;
+  overflow: hidden; /* Скрываем содержимое */
+  transition:
+    opacity 0.4s ease,
+    height 0.4s ease; /* Плавные переходы */
+}
+
+.error-message.show {
+  opacity: 1; /* Полная видимость */
+  // height: auto; /* Автоматическая высота */
+  max-height: 50px;
+  transition: opacity 0.4s ease;
+}
+
+.inputs-container {
+  height: 45px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.inputs-container .show-pass,
+.inputs-container .hide {
+  display: block; /* Делаем span блочным */
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background-size: cover;
+}
+
+.inputs-container .show-pass {
+  background-image: url("../../../../../assets/hide.svg");
+}
+
+.inputs-container .hide {
+  background-image: url("../../../../../assets/view.svg");
+}
+
+.form-button {
+  min-width: 180px;
+  height: 3em;
+  font-size: 16px;
+  font-weight: normal;
+  font-family: inherit;
+  color: #fff;
+  border-color: #0a1551;
+  background-color: #0a1551;
+  border: 1px solid;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 13px 0;
+}
+
+.form-button:hover {
+  border-color: rgba(10, 21, 81, 0.8);
+  background-color: rgba(10, 21, 81, 0.8);
+}
+
+.success-image {
+  max-width: 400px;
+}
+
+.success-image img {
+  max-width: 200px;
+  padding: 20px;
+}
+
+.btn-span {
+  color: white !important;
+}
+.btn-span-spinner {
+  color: #0a1551 !important;
+}

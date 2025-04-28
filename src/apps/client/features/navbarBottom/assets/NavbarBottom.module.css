@@ -1,0 +1,29 @@
+.navbar {
+  width: 100%;
+  position: fixed;
+  /* overflow: hidden; */
+  bottom: 0;
+  background-color: #fff;
+  padding: 10px;
+  background: #f5f4f2;
+  border: 0 transparent;
+  box-shadow: 5px 5px 5px 5px rgb(238, 238, 238);
+  z-index: 1200;
+  text-align: center;
+}
+
+.icons-list {
+  display: flex;
+  justify-content: space-around;
+  text-decoration: none;
+}
+
+.list-links {
+  text-decoration: none;
+  color: black;
+}
+
+.icons-list p {
+  margin: 0;
+  font-size: 14px;
+}
