@@ -1,5 +1,6 @@
 import { getToken } from "@/Utils/getToken";
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
+import { setUser } from "@store/user/slices/authSlice";
 import { OrdersData, OrdersType } from "@store/user/types";
 import { io } from "socket.io-client";
 
@@ -27,6 +28,12 @@ const baseQueryWithInterceptor: BaseQueryFn<string | FetchArgs, unknown, FetchBa
   extraOptions
 ) => {
   const result = await baseQuery(args, api, extraOptions);
+
+  if (result.error?.status === 401) {
+    api.dispatch(setUser(null));
+    localStorage.removeItem("token");
+    localStorage.removeItem("refresh");
+  }
 
   if (result.error?.status === 500) {
     console.error("Ошибка 500: проблема на сервере", result.error);

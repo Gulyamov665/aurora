@@ -55,7 +55,6 @@ code {
   text-overflow: ellipsis;
 }
 
-
 /* ######################################################### */
 /* ################---INTRO styless ---#################### */
 /* ######################################################### */
@@ -457,7 +456,7 @@ code {
 
 .custom-navbar {
   position: -webkit-sticky;
-  position: sticky;
+  position: relative;
   top: 0;
   margin: 27px auto 0;
   width: 100%;
@@ -481,6 +480,7 @@ code {
   text-transform: capitalize;
   color: #2d2d2d;
   cursor: pointer;
+  width: 100%;
   border-radius: 18px !important;
 }
 .custom-navbar .animation {
@@ -492,17 +492,27 @@ code {
   border-radius: 8px;
 }
 
+.nav__link {
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+  padding: 0 18px;
+  
+}
+
+.nav__link.active {
+  background-color: #ffffff;
+  font-weight: 700;
+  padding: 0 18px;
+  transition: all 0.3s ease;
+  
+}
+
 .swiper-slide.swiper-slide-next {
   width: auto;
 }
 
-.swiper-slide {
-  width: auto;
-  height: auto;
-  text-align: center;
-}
-
-.active {
+/* .active {
   width: 100%;
   font-weight: 700;
   background-color: #ffffff;
@@ -512,7 +522,7 @@ code {
   transition: all 0.3s ease 0s !important;
   border-radius: 8px !important;
   padding: 0 18px;
-}
+} */
 
 .scrollDiv {
   height: 130px;
