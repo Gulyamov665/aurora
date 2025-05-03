@@ -60,7 +60,7 @@ const Navbar: FC<NavbarProps> = ({ sectionRefs, category, rootRef }) => {
             .map((item, index) => (
               <SwiperSlide key={item.id}>
                 <a
-                  className="nav__link"
+                  className={`nav__link ${activeIndex === index ? "active" : ""}`}
                   href={`#${index}`}
                   ref={(ref) => {
                     if (ref) navLinks.current[index] = ref;
@@ -68,7 +68,6 @@ const Navbar: FC<NavbarProps> = ({ sectionRefs, category, rootRef }) => {
                 >
                   {item.name}
                 </a>
-                <div className="animation"></div>
               </SwiperSlide>
             ))}
         </Swiper>

@@ -1,25 +1,10 @@
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TelegramIcon from "@mui/icons-material/Telegram";
-// import { useWaiterCallMutation } from "../../../../store/user/api/dispatcherApi";
-// import { useParams } from "react-router-dom";
-// import { toast } from "react-toastify";
 // import Snowfall from "react-snowfall";
 import { FC } from "react";
 import { IntroType } from "./types";
 
 const Intro: FC<IntroType> = ({ data }) => {
-  // const { table } = useParams();
-  // const [callWaiter, { isLoading }] = useWaiterCallMutation();
-
-  // const handleCallWaiter = async () => {
-  //   if (data?.waiter_chat_id) {
-  //     await callWaiter({ table, chat_id: data.waiter_chat_id });
-  //     toast.success("Запрос отправлен");
-  //     return;
-  //   }
-  //   console.log("вызов официанта не доступен в этом заведении");
-  // };
-
   return (
     <div className="container container-sm">
       <div className="intro-page">
@@ -40,7 +25,7 @@ const Intro: FC<IntroType> = ({ data }) => {
           <div>
             {data?.instagram_link && (
               <a
-                href={data.instagram_link}
+                href={data?.instagram_link}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ textDecoration: "none", color: "black" }}
@@ -59,16 +44,6 @@ const Intro: FC<IntroType> = ({ data }) => {
               </a>
             )}
           </div>
-          {/* {isLoading ? (
-            <button className="btn btn-waiter mt-3">
-              <span className="spinner-border spinner-border-sm" aria-hidden="true"></span>
-            </button>
-          ) : (
-            <button className="btn btn-waiter mt-3" onClick={handleCallWaiter}>
-              {" "}
-              Вызвать официанта
-            </button>
-          )} */}
         </div>
       </div>
     </div>

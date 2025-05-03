@@ -10,7 +10,6 @@ const base = fetchBaseQuery({
     if (token) {
       headers.set("Authorization", token);
     }
-
     return headers;
   },
 });
