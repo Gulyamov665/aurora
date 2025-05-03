@@ -10,6 +10,12 @@ export const userAuth = sharedApi.injectEndpoints({
         body,
       }),
     }),
+    refresh: build.mutation({
+      query: (body) => ({
+        url: "v1/auth/refresh",
+        body,
+      }),
+    }),
     me: build.query<UserInfoType, number>({
       query: (id) => `v1/auth/user/${id}`,
       providesTags: ["UserLocation"],
