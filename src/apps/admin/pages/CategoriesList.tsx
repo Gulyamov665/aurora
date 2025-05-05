@@ -1,12 +1,11 @@
-import CategoryModal from "@/apps/client/components/CategoryModal";
-import ReorderPage from "../components/ReorderPage";
+import { ReorderPage } from "../components/ReorderPage";
 import { FC, useState } from "react";
 import { toast } from "react-toastify";
-import { useActions } from "@/hooks/useActions";
+import { CategoriesListType } from ".";
+import CategoryModal from "@/apps/client/components/CategoryModal";
 import styles from "../static/AdminCategory.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 import EditNoteIcon from "@mui/icons-material/EditNote";
-import { CategoriesListType } from ".";
 
 export const CategoriesList: FC<CategoriesListType> = ({
   updatePosition,
@@ -23,7 +22,6 @@ export const CategoriesList: FC<CategoriesListType> = ({
   const [showModalCategory, setShowModalCategory] = useState(false);
   const [newCategory, setNewCategory] = useState("");
   const [editCategory, setEditCategory] = useState(false);
-  const { setOpenAddModal } = useActions();
 
   const handleCategory = async () => {
     const categoryItem = {
@@ -87,7 +85,6 @@ export const CategoriesList: FC<CategoriesListType> = ({
         setEditCategory={setEditCategory}
         setNewCategory={setNewCategory}
         setChangeItem={setChangeItem}
-        setOpenAddModal={setOpenAddModal}
       />
     </div>
   );

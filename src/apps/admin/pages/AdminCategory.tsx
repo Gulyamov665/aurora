@@ -14,10 +14,10 @@ import { useActions } from "@/hooks/useActions";
 import { CategoriesList } from "./CategoriesList";
 import { CreateModal } from "../features/Product/pages/CreateModal";
 import { Fab } from "@mui/material";
+import { LoadingScreen } from "../features/loading/LoadingScreen";
 import AdminCard from "../components/AdminCard";
 import styles from "../static/AdminCategory.module.scss";
 import AddIcon from "@mui/icons-material/Add";
-import { LoadingScreen } from "../features/loading/LoadingScreen";
 
 export default function AdminCategory() {
   const { data: vendor, res } = useOutletContext<OutletContextType>();
