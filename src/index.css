@@ -525,7 +525,7 @@ code {
 } */
 
 .scrollDiv {
-  height: 130px;
+  height: 150px;
   transition: 0.3s !important;
 }
 .imgScroll {
@@ -550,7 +550,7 @@ code {
 
 @media (min-width: 320px) and (max-width: 480px) {
   .scrollDiv {
-    height: 90px;
+    height: 135px;
     transition: 0.3s !important;
   }
 

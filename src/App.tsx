@@ -9,10 +9,25 @@ import RegistrationPage from "./apps/client/features/registration/pages/Registra
 import Auth from "./apps/client/features/auth/pages/Auth";
 import { DeleteModal } from "./apps/common/DeleteModal";
 import { Main } from "./apps/client/features/main/Main";
+// import { useRefreshMutation } from "@store/user/api/userAuthApi";
+// import { useEffect } from "react";
+// import { isTokenExpired, getToken } from "./Utils/getToken";
+// import { StaffSettings } from "./apps/admin/features/staff/Staff";
 // import { InstallPrompt } from "./InstallPrompt";
 
 function App() {
   const { state } = useLocation();
+  // const [refresh] = useRefreshMutation();
+  // const token = getToken();
+  // useEffect(() => {
+  //   const refreshToken = async () => {
+  //     if (token && isTokenExpired(token)) {
+  //       await refresh({});
+  //     }
+  //   };
+
+  //   refreshToken();
+  // }, []);
 
   return (
     <>
@@ -29,6 +44,7 @@ function App() {
         <Route path="vendor/:res/*" element={<VendorRoutes />} />
 
         <Route path="*" element={<NotFound />} />
+        {/* <Route path="/staff" element={<StaffSettings />} /> */}
       </Routes>
 
       {/* global elements */}

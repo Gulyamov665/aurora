@@ -18,10 +18,9 @@ interface CustomJwtPayload extends JwtPayload {
 listenerMiddleware.startListening({
   matcher: userAuth.endpoints.auth.matchFulfilled,
   effect: async (action, listenerApi) => {
-    const { access, refresh } = action.payload;
-    localStorage.setItem("token", access);
-    localStorage.setItem("refresh", refresh);
-    const user = jwtDecode<CustomJwtPayload>(access);
+    const { access_token } = action.payload;
+    localStorage.setItem("token", access_token);
+    const user = jwtDecode<CustomJwtPayload>(access_token);
     listenerApi.dispatch(setUser(user));
   },
 });

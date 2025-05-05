@@ -1,114 +1,58 @@
-// import { getToken } from "@/Utils/getToken";
-// import { BaseQueryFn, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
-// import { setUser } from "./user/slices/authSlice";
-// const baseURL = import.meta.env.VITE_BASE_URL;
+import { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { createBaseQuery } from "./config/createBase";
+import { HTTP_STATUS } from "./config/constants";
+import { handleRefreshToken } from "./config/refresh";
+import { handleServerError } from "./config/errorHandlers";
+import { ENDPOINTS } from "./config/constants";
+import { getToken, isTokenExpired } from "@/Utils/getToken";
 
-// const base = fetchBaseQuery({
-//   baseUrl: baseURL,
-//   credentials: "include",
-//   prepareHeaders: (headers) => {
-//     const token = getToken();
-//     if (token) {
-//       headers.set("Authorization", token);
-//     }
-//     return headers;
-//   },
-// });
+const base = createBaseQuery(ENDPOINTS.BASE_URL);
 
-// export const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
-//   args,
-//   api,
-//   extraOptions
-// ) => {
-//   const result = await base(args, api, extraOptions);
-
-//   if (result.error?.status === 401) {
-//     const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
-
-//     api.dispatch(setUser(null));
-//     localStorage.removeItem("token");
-//     localStorage.removeItem("refresh");
-//   }
-
-//   if (result.error?.status === 500) {
-//     console.error("Ошибка 500: проблема на сервере", result.error);
-//     const errorData = result.error.data as { message: string };
-//     alert(`${errorData.message}! Попробуйте позже.`);
-//   }
-
-//   return result;
-// };
-
-import { getToken } from "@/Utils/getToken";
-import {
-  BaseQueryFn,
-  FetchArgs,
-  fetchBaseQuery,
-  FetchBaseQueryError,
-  FetchBaseQueryMeta,
-  QueryReturnValue,
-} from "@reduxjs/toolkit/query/react";
-import { logout } from "./user/slices/authSlice";
-
-const baseURL = import.meta.env.VITE_BASE_URL;
-
-const baseQuery1 = fetchBaseQuery({
-  baseUrl: baseURL,
-  credentials: "include", // 🔐 отправляет HttpOnly cookie
-  prepareHeaders: (headers) => {
-    const token = getToken(); // 🔄 accessToken из памяти / localStorage (если используешь)
-    if (token) {
-      headers.set("Authorization", `${token}`);
-    }
-    return headers;
-  },
-});
+let isRefreshing = false;
+let refreshPromise: Promise<void> | null = null;
 
 export const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
   args,
   api,
   extraOptions
 ) => {
-  let result = await baseQuery1(args, api, extraOptions);
+  try {
+    const token = getToken();
 
-  if (result.error?.status === 401) {
-    // 🔄 Пробуем обновить accessToken через refreshToken из HttpOnly cookie
-    const refreshResult = await baseQuery1(
-      {
-        url: "v1/auth/refresh",
-        method: "POST", // 👈 меняем метод
-        body: { refresh: localStorage.getItem("refresh") },
-        credentials: "include",
-      },
-      api,
-      extraOptions
-    );
+    if (token && isTokenExpired(token)) {
+      if (!isRefreshing) {
+        isRefreshing = true;
 
-    if (refreshResult.data && typeof refreshResult.data === "object" && "accessToken" in refreshResult.data) {
-      const newToken = (refreshResult.data as any).accessToken;
-      localStorage.setItem("token", newToken);
-      // ✅ Сохраняем новый токен в localStorage/памяти и повторяем исходный запрос
-      // setToken(newToken);
-      // api.dispatch(setUser({ token: newToken })); // адаптируй под свою структуру
+        refreshPromise = handleRefreshToken(args, api, extraOptions, base)
+          .then((refreshResult) => {
+            if ("error" in refreshResult) {
+              throw refreshResult.error;
+            }
+          })
+          .finally(() => {
+            isRefreshing = false;
+          });
+      }
 
-      // 🔁 Повторяем запрос с новым токеном
-      result = (await baseQuery1(args, api, extraOptions)) as QueryReturnValue<
-        unknown,
-        FetchBaseQueryError,
-        FetchBaseQueryMeta
-      >;
-    } else {
-      // 🔐 Не удалось обновить токен — деавторизуем
-      api.dispatch(logout());
-      localStorage.removeItem("token");
+      // Ждём пока токен обновится, чтобы другие запросы тоже ждали
+      await refreshPromise;
     }
-  }
+    let result = await base(args, api, extraOptions);
 
-  if (result.error?.status === 500) {
-    console.error("Ошибка 500: проблема на сервере", result.error);
-    const errorData = result.error.data as { message: string };
-    alert(`${errorData.message}! Попробуйте позже.`);
-  }
+    // if (result.error?.status === HTTP_STATUS.UNAUTHORIZED) {
+    //   result = await handleRefreshToken(args, api, extraOptions, base);
+    // }
 
-  return result;
+    if (
+      (typeof result.error?.status === "number" && result.error?.status === HTTP_STATUS.SERVER_ERROR) ||
+      (result.error?.status === "PARSING_ERROR" && result.error.originalStatus === HTTP_STATUS.SERVER_ERROR)
+    ) {
+      handleServerError(result.error);
+    }
+
+    return result;
+  } catch (error) {
+    console.error("Query Error:", error);
+    return { error: error as FetchBaseQueryError };
+  }
 };

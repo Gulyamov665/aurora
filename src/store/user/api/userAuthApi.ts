@@ -8,12 +8,14 @@ export const userAuth = sharedApi.injectEndpoints({
         url: "v1/auth/user/login",
         method: "POST",
         body,
+        credentials: "include",
       }),
     }),
     refresh: build.mutation({
-      query: (body) => ({
+      query: () => ({
         url: "v1/auth/refresh",
-        body,
+        method: "POST",
+        credentials: "include",
       }),
     }),
     me: build.query<UserInfoType, number>({
@@ -25,4 +27,4 @@ export const userAuth = sharedApi.injectEndpoints({
 
 export type meQueryType = ReturnType<typeof useMeQuery>;
 
-export const { useAuthMutation, useMeQuery, useLazyMeQuery } = userAuth;
+export const { useAuthMutation, useMeQuery, useLazyMeQuery, useRefreshMutation } = userAuth;

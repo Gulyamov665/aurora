@@ -30,7 +30,7 @@ const Navbar: FC<NavbarProps> = ({ sectionRefs, category, rootRef }) => {
   const breakpoints = {
     320: {
       slidesPerView: 2.8,
-      spaceBetween: 10,
+      // spaceBetween: 5,
     },
     480: {
       slidesPerView: 3,
