@@ -33,8 +33,7 @@ const userAuthState = createSlice({
     setUser(state, action: PayloadAction<IsUserType | null>) {
       state.isUser = action.payload;
     },
-    logout(state) {
-      localStorage.removeItem("token");
+    clearUser(state) {
       state.isUser = null;
     },
   },
@@ -42,5 +41,5 @@ const userAuthState = createSlice({
 
 export const authState = (state: RootState) => state.authState;
 
-export const { regStepChange, userId, botLinkAction, regError, setUser, logout } = userAuthState.actions;
+export const { regStepChange, userId, botLinkAction, regError, setUser, clearUser } = userAuthState.actions;
 export default userAuthState.reducer;

@@ -5,7 +5,7 @@ import {
   FetchBaseQueryMeta,
   QueryReturnValue,
 } from "@reduxjs/toolkit/query";
-import { logout } from "@store/user/slices/authSlice";
+import { logout } from "@store/user/authThunks";
 import { ENDPOINTS } from "./constants";
 
 export type TokenType = {
@@ -36,7 +36,6 @@ export const handleRefreshToken = async (
     return (await base(args, api, extraOptions)) as QueryReturnValue<unknown, FetchBaseQueryError, FetchBaseQueryMeta>;
   }
 
-  api.dispatch(logout());
-  // localStorage.removeItem("token");
+  await api.dispatch(logout());
   return refreshResult as QueryReturnValue<unknown, FetchBaseQueryError, FetchBaseQueryMeta>;
 };
