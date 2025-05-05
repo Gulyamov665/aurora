@@ -37,5 +37,6 @@ export const handleRefreshToken = async (
   }
 
   await api.dispatch(logout());
+  localStorage.removeItem("token");
   return refreshResult as QueryReturnValue<unknown, FetchBaseQueryError, FetchBaseQueryMeta>;
 };

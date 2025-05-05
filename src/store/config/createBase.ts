@@ -1,6 +1,7 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 
 import { getToken } from "@/Utils/getToken";
+import { getCookie } from "@/Utils/tools";
 
 export const createBaseQuery = (url: string) => {
   return fetchBaseQuery({
@@ -10,6 +11,11 @@ export const createBaseQuery = (url: string) => {
       const token = getToken();
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
+      }
+
+      const csrfToken = getCookie("csrftoken");
+      if (csrfToken) {
+        headers.set("X-CSRFToken", csrfToken);
       }
       return headers;
     },

@@ -77,3 +77,10 @@ export const formatAddress = (address: NominatimReverseResponse["address"]) => {
   const validParts = parts.filter(Boolean);
   return validParts.length > 0 ? validParts.join(", ") : address.city;
 };
+
+export const getCookie = (name: string): string | null => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop()!.split(";").shift()!;
+  return null;
+};
