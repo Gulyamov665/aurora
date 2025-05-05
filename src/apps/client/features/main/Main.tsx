@@ -7,7 +7,7 @@ import Header from "../header/Header";
 
 export const Main: React.FC = () => {
   const { data } = useGetRestaurantsQuery();
-  console.log(data);
+
   return (
     <Box>
       <Header />
