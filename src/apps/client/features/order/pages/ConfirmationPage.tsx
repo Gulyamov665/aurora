@@ -51,6 +51,8 @@ const OrderConfirmationPage: React.FC = () => {
           address: data.address,
           photo: data.logo,
           phone: me?.phone,
+          lat: data?.lat,
+          long: data?.long,
         },
         status: "new",
         products: items.products,

@@ -33,15 +33,9 @@ export const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryE
             isRefreshing = false;
           });
       }
-
-      // Ждём пока токен обновится, чтобы другие запросы тоже ждали
       await refreshPromise;
     }
     let result = await base(args, api, extraOptions);
-
-    // if (result.error?.status === HTTP_STATUS.UNAUTHORIZED) {
-    //   result = await handleRefreshToken(args, api, extraOptions, base);
-    // }
 
     if (
       (typeof result.error?.status === "number" && result.error?.status === HTTP_STATUS.SERVER_ERROR) ||

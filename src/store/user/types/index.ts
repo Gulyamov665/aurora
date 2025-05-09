@@ -68,6 +68,8 @@ export type VendorInfoType = {
   logo: string;
   orders_chat_id: number;
   availability_orders: boolean;
+  lat: string;
+  long: string;
 };
 
 export type initialDataType = Omit<VendorInfoType, "background_photo" | "logo">;
