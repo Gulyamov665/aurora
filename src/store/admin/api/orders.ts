@@ -106,7 +106,8 @@ export type getCart = ReturnType<typeof useGetCartQuery>;
 export type createOrderMutationType = ReturnType<typeof useCreateOrderMutation>;
 export type getOrders = ReturnType<typeof useGetOrdersQuery>;
 export type getMyOrders = ReturnType<typeof useGetMyOrdersQuery>;
-export type getOrderById = ReturnType<typeof useGetOrderByIdQuery>;
+export type getOrderByIdType = ReturnType<typeof useGetOrderByIdQuery>;
+export type lazyGetOrderByIdType = ReturnType<typeof useLazyGetOrderByIdQuery>;
 export type removeCartMutationType = ReturnType<typeof useRemoveCartMutation>;
 
 export const {
@@ -119,4 +120,5 @@ export const {
   useGetMyOrdersQuery,
   useRemoveCartMutation,
   useGetOrderByIdQuery,
+  useLazyGetOrderByIdQuery
 } = ordersApi;

@@ -7,15 +7,20 @@ import { OrderKey, OrdersTableProps } from "../types";
 import { getStatusChip } from "./Statuses";
 import { LoadingScreen } from "../../loading/LoadingScreen";
 
-const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading }) => {
+
+
+const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading, setDetails, getOrderById }) => {
   const [sortBy, setSortBy] = useState<OrderKey>("id");
   const [order, setOrder] = useState<"asc" | "desc">("desc");
+
 
   const handleSort = (key: OrderKey) => {
     const isAsc = sortBy === key && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setSortBy(key);
   };
+
+
 
   if (!data) return <LoadingScreen loading={isLoading} />;
 
@@ -32,6 +37,11 @@ const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading }) => {
     }
     return 0;
   });
+
+  const onEyeClick = async (id: number)=>{
+    setDetails(true)
+    await getOrderById(id).unwrap()
+  }
 
   return (
     <Card elevation={6} sx={{ mt: 3, mb: 4 }}>
@@ -78,6 +88,7 @@ const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading }) => {
                   Статус
                 </TableSortLabel>
               </TableCell>
+              <TableCell>Курьер</TableCell>
               <TableCell>Действие</TableCell>
             </TableRow>
           </TableHead>
@@ -86,10 +97,11 @@ const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading }) => {
               <TableRow key={row.id}>
                 <TableCell>{row.id}</TableCell>
                 <TableCell>{row.created_by}</TableCell>
-                <TableCell>{row.total_price} ₽</TableCell>
+                <TableCell>{row.total_price} UZS</TableCell>
                 <TableCell>{getStatusChip(row.status)}</TableCell>
+                <TableCell>Eshmat</TableCell>
                 <TableCell>
-                  <IconButton>
+                  <IconButton onClick={()=> onEyeClick(row.id)}>
                     <Visibility />
                   </IconButton>
                 </TableCell>
