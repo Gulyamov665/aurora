@@ -46,7 +46,6 @@ export const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryE
 
     return result;
   } catch (error) {
-    console.error("Query Error:", error);
     return { error: error as FetchBaseQueryError };
   }
 };

@@ -15,7 +15,7 @@ import CartBtn from "../../components/CartBtn";
 const Category: FC<CategoryProps> = ({ search }) => {
   const { res = "" } = useParams();
   const { data: category = [] } = useGetCategoriesQuery(res);
-  const { data: menuItems = [], isLoading, isError } = useGetProductsQuery({ res: res });
+  const { data: menuItems = [], isLoading } = useGetProductsQuery({ res: res });
   const { data: promo = [] } = useGetPromosQuery(res);
   const [isOpen, setIsOpen] = useState(false);
   const [viewItem, setViewItem] = useState<ProductType | null>(null);
@@ -40,9 +40,9 @@ const Category: FC<CategoryProps> = ({ search }) => {
 
   if (isLoading) return <Loading main={true} />;
 
-  if (isError) {
-    return <p>Error not found page </p>;
-  }
+  // if (isError || true) {
+  //   return <p>Error not found page </p>;
+  // }
 
   return (
     <>

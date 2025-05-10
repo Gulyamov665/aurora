@@ -68,7 +68,7 @@ const OrderConfirmationPage: React.FC = () => {
   };
 
   return (
-    <>
+    <div className="container">
       <ConfirmOrder
         navigate={navigate}
         state={state}
@@ -78,7 +78,7 @@ const OrderConfirmationPage: React.FC = () => {
         watch={watch}
       />
       {/* {showSuccess && <OrderSuccess />} */}
-    </>
+    </div>
   );
 };
 
