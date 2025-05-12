@@ -1,25 +1,14 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  FormControl,
-  Select,
-  MenuItem,
-  Fade,
-  CircularProgress,
-  Button
-} from "@mui/material";
+import { Box, Typography, Card, CardContent, FormControl, Select } from "@mui/material";
+import { MenuItem, Fade, CircularProgress, Button } from "@mui/material";
+import { OrdersType } from "@store/user/types";
 import PersonIcon from "@mui/icons-material/Person";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
-import { OrdersType } from "@store/user/types";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import WifiTetheringIcon from "@mui/icons-material/WifiTethering";
-import AltRouteIcon from '@mui/icons-material/AltRoute';
+import AltRouteIcon from "@mui/icons-material/AltRoute";
 
 interface OrderDetailsProps {
   order?: OrdersType;
@@ -28,6 +17,7 @@ interface OrderDetailsProps {
 
 export const OrderDetails: React.FC<OrderDetailsProps> = ({ order, orderFetch }) => {
   const [loadingRoute, setLoadingRoute] = useState(false);
+
   const handleBuildRoute = () => {
     if (!navigator.geolocation) {
       alert("Геолокация не поддерживается вашим браузером");
@@ -101,12 +91,12 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ order, orderFetch })
                 variant="outlined"
                 color="info"
                 size="small"
-                startIcon={<AltRouteIcon/>}
+                startIcon={<AltRouteIcon />}
                 onClick={handleBuildRoute}
                 disabled={loadingRoute}
-                sx={{marginLeft: "12px"}}
+                sx={{ marginLeft: "12px" }}
               >
-                {loadingRoute ? <CircularProgress/> : "Построить маршрут"}
+                {loadingRoute ? <CircularProgress /> : "Построить маршрут"}
               </Button>
             </Typography>
           </Box>

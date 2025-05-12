@@ -8,18 +8,16 @@ import { OrdersType } from "@store/user/types";
 import { Box, CircularProgress, Fade } from "@mui/material";
 import OrdersTable from "../components/OrdersTable";
 import { MaterialModal } from "@/apps/common/Modal";
-import { OrderDetails } from '../components/OrderDetails';
+import { OrderDetails } from "../components/OrderDetails";
 
 const Orders: FC = () => {
   const { data } = useOutletContext<OutletContextType>();
   const [page, setPage] = useState(1);
   const [allOrders, setAllOrders] = useState<OrdersType[]>([]);
   const [getOrders, { data: lazyData, isFetching }] = useLazyGetOrdersQuery();
-  const [ getOrderById, { data: orderData, isFetching: orderFetch }] = useLazyGetOrderByIdQuery()
+  const [getOrderById, { data: orderData, isFetching: orderFetch }] = useLazyGetOrderByIdQuery();
   const { ref, inView } = useInView({ threshold: 0.5 });
-  const [ details, setDetails ] = useState(false);
-
-
+  const [details, setDetails] = useState(false);
 
   useEffect(() => {
     if (data && page === 1) {
@@ -62,7 +60,7 @@ const Orders: FC = () => {
           </Fade>
         </Box>
       )}
-      <MaterialModal open={details} onClose={()=> setDetails(false) }>
+      <MaterialModal open={details} onClose={() => setDetails(false)}>
         <OrderDetails order={orderData} orderFetch={orderFetch} />
       </MaterialModal>
     </div>

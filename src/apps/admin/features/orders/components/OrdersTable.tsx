@@ -7,20 +7,15 @@ import { OrderKey, OrdersTableProps } from "../types";
 import { getStatusChip } from "./Statuses";
 import { LoadingScreen } from "../../loading/LoadingScreen";
 
-
-
 const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading, setDetails, getOrderById }) => {
   const [sortBy, setSortBy] = useState<OrderKey>("id");
   const [order, setOrder] = useState<"asc" | "desc">("desc");
-
 
   const handleSort = (key: OrderKey) => {
     const isAsc = sortBy === key && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setSortBy(key);
   };
-
-
 
   if (!data) return <LoadingScreen loading={isLoading} />;
 
@@ -38,10 +33,10 @@ const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading, setDetails, getOrd
     return 0;
   });
 
-  const onEyeClick = async (id: number)=>{
-    setDetails(true)
-    await getOrderById(id).unwrap()
-  }
+  const onEyeClick = async (id: number) => {
+    setDetails(true);
+    await getOrderById(id).unwrap();
+  };
 
   return (
     <Card elevation={6} sx={{ mt: 3, mb: 4 }}>
@@ -99,9 +94,9 @@ const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading, setDetails, getOrd
                 <TableCell>{row.created_by}</TableCell>
                 <TableCell>{row.total_price} UZS</TableCell>
                 <TableCell>{getStatusChip(row.status)}</TableCell>
-                <TableCell>Eshmat</TableCell>
+                <TableCell>{row.courier ? row.courier.username : "Не назначен"}</TableCell>
                 <TableCell>
-                  <IconButton onClick={()=> onEyeClick(row.id)}>
+                  <IconButton onClick={() => onEyeClick(row.id)}>
                     <Visibility />
                   </IconButton>
                 </TableCell>

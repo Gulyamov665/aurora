@@ -95,6 +95,12 @@ export type RestaurantOrderType = {
   phone: number;
 };
 
+export type CourierType = {
+  id: number;
+  phone_number: string;
+  username: string;
+};
+
 export type OrdersType = {
   id: number;
   created_at: string;
@@ -104,6 +110,7 @@ export type OrdersType = {
   lat: string;
   long: string;
   user_id: number;
+  courier: CourierType;
   restaurant: RestaurantOrderType;
   products: OrderProduct[];
   status: string;
