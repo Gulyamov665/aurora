@@ -7,5 +7,5 @@ export interface OrdersTableProps {
   data: OrdersType[] | undefined;
   isLoading: boolean;
   setDetails: React.Dispatch<React.SetStateAction<boolean>>;
-  getOrderById: lazyGetOrderByIdType[0]
+  getOrderById: lazyGetOrderByIdType[0];
 }
