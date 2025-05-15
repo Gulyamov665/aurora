@@ -30,10 +30,10 @@ export const OrderDetailPage: React.FC = () => {
 
   return (
     <Box sx={{ maxWidth: 1000, mx: "auto", p: 2 }}>
-      <div onClick={() => navigate(-1)} style={{ cursor: "pointer" }}>
-        <ArrowBack sx={{ mb: 3, mt: 3 }} />
-      </div>
       <OrderCard>
+      <Box onClick={() => navigate(-1)} style={{ cursor: "pointer" }}>
+        <ArrowBack sx={{ mb: 3 }} />
+      </Box>
         <OrderAnimation order={order} />
         <OrderDetail order={order} />
       </OrderCard>

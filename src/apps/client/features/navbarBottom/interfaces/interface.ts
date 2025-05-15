@@ -1,4 +1,4 @@
-import { CartItem, IsUserType, VendorInfoType } from "@store/user/types";
+import { CartItem, IsUserType, UserInfoType, VendorInfoType } from "@store/user/types";
 
 export type CartItems = {
   id: number;
@@ -13,8 +13,10 @@ export interface NavbarBottomProps {
   isUser: Partial<IsUserType> | null;
   current?: string;
   visible: boolean;
+  user?: UserInfoType;
 }
 
 export interface NavbarBottomPageProps {
   data?: VendorInfoType;
+  user?: UserInfoType;
 }

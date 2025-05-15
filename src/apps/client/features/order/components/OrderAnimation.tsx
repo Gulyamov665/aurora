@@ -9,13 +9,13 @@ export const OrderAnimation: React.FC<OrderAnimationProps> = ({ order }) => {
   const renderAnimation = () => {
     switch (order.status) {
       case "new":
-        return <Wait size={100} />;
+        return <Wait size={150} />;
       case "prepare":
         return <Cooking size={150} />;
       case "delivering":
         return <Delivery size={150} />;
       default:
-        return <Wait size={100} />;
+        return <Wait size={150} />;
     }
   };
 

@@ -7,7 +7,7 @@ import NavbarBottom from "../components/NavbarBottom";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-const NavbarBottomPage: FC<NavbarBottomPageProps> = ({ data }) => {
+const NavbarBottomPage: FC<NavbarBottomPageProps> = ({ data, user }) => {
   const { isUser } = useSelector(authState);
   const skip = { skip: !data?.id || !isUser?.user_id };
   const { data: items } = useGetCartQuery({ user: isUser?.user_id, vendorId: data?.id }, skip);
@@ -15,7 +15,7 @@ const NavbarBottomPage: FC<NavbarBottomPageProps> = ({ data }) => {
   const [showNavbar, setShowNavbar] = useState(false);
 
   useEffect(() => {
-    if (items?.products?.length > 0 && isUser && current !== "confirm") {
+    if (items?.products?.length > 0 && isUser && current !== "confirm" && current !== "maps") {
       setShowNavbar(true);
     } else {
       setShowNavbar(false);
@@ -24,7 +24,7 @@ const NavbarBottomPage: FC<NavbarBottomPageProps> = ({ data }) => {
 
   return (
     <div>
-      <NavbarBottom items={items} isUser={isUser} current={current} visible={showNavbar} />
+      <NavbarBottom items={items} isUser={isUser} current={current} visible={showNavbar} user={user} />
     </div>
   );
 };
