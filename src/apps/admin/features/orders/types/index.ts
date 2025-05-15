@@ -8,4 +8,5 @@ export interface OrdersTableProps {
   isLoading: boolean;
   setDetails: React.Dispatch<React.SetStateAction<boolean>>;
   getOrderById: lazyGetOrderByIdType[0];
+  isFetching: boolean;
 }

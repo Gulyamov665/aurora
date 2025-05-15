@@ -40,10 +40,6 @@ const Category: FC<CategoryProps> = ({ search }) => {
 
   if (isLoading) return <Loading main={true} />;
 
-  // if (isError || true) {
-  //   return <p>Error not found page </p>;
-  // }
-
   return (
     <>
       <Promo promo={promo} handleViewPromo={handleViewPromo} />

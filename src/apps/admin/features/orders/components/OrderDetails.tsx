@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Typography, Card, CardContent, FormControl, Select } from "@mui/material";
 import { MenuItem, Fade, CircularProgress, Button } from "@mui/material";
 import { OrdersType } from "@store/user/types";
@@ -8,7 +8,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import WifiTetheringIcon from "@mui/icons-material/WifiTethering";
-import AltRouteIcon from "@mui/icons-material/AltRoute";
+import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 
 interface OrderDetailsProps {
   order?: OrdersType;
@@ -16,35 +16,6 @@ interface OrderDetailsProps {
 }
 
 export const OrderDetails: React.FC<OrderDetailsProps> = ({ order, orderFetch }) => {
-  const [loadingRoute, setLoadingRoute] = useState(false);
-
-  const handleBuildRoute = () => {
-    if (!navigator.geolocation) {
-      alert("Геолокация не поддерживается вашим браузером");
-      return;
-    }
-
-    setLoadingRoute(true);
-
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        const url = `https://yandex.ru/maps/?rtext=${latitude},${longitude}~${order?.lat},${order?.long}&rtt=auto`;
-        window.open(url, "_blank");
-        setLoadingRoute(false);
-      },
-      (error) => {
-        console.error(error);
-        alert("Не удалось определить ваше местоположение");
-        setLoadingRoute(false);
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 10000,
-      }
-    );
-  };
-
   if (orderFetch)
     return (
       <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "468px" }}>
@@ -84,19 +55,9 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ order, orderFetch })
                 color="info"
                 style={{ textDecoration: "none" }}
                 href={`https://yandex.ru/maps/?pt=${order?.long},${order?.lat}&z=16&l=map`}
+                target="_blank"
               >
                 Открыть на карте
-              </Button>
-              <Button
-                variant="outlined"
-                color="info"
-                size="small"
-                startIcon={<AltRouteIcon />}
-                onClick={handleBuildRoute}
-                disabled={loadingRoute}
-                sx={{ marginLeft: "12px" }}
-              >
-                {loadingRoute ? <CircularProgress /> : "Построить маршрут"}
               </Button>
             </Typography>
           </Box>
@@ -121,6 +82,16 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ order, orderFetch })
           </Box>
         </Box>
 
+        <Box display="flex" alignItems="center" gap={1} mb={2}>
+          <DeliveryDiningIcon color="warning" />
+          <Box>
+            <Typography variant="body2" color="textSecondary">
+              Курьер
+            </Typography>
+            <Typography variant="subtitle1">{order?.courier ? order.courier.username : "Не назначен"}</Typography>
+            <Typography variant="subtitle1">{order?.courier ? order?.courier?.phone_number : ""}</Typography>
+          </Box>
+        </Box>
         <Box display="flex" alignItems="center" gap={1} mb={2}>
           <WifiTetheringIcon color="secondary" />
           <Box width="100%">

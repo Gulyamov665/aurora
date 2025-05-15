@@ -5,7 +5,6 @@ import { OutletContextType } from "@/apps/client/pages";
 import { useOrderSocket } from "@/hooks/useOrderSocket";
 import { useInView } from "react-intersection-observer";
 import { OrdersType } from "@store/user/types";
-import { Box, CircularProgress, Fade } from "@mui/material";
 import OrdersTable from "../components/OrdersTable";
 import { MaterialModal } from "@/apps/common/Modal";
 import { OrderDetails } from "../components/OrderDetails";
@@ -51,15 +50,15 @@ const Orders: FC = () => {
 
   return (
     <div className="container">
-      <OrdersTable data={allOrders} isLoading={isFetching} setDetails={setDetails} getOrderById={getOrderById} />
+      <OrdersTable
+        data={allOrders}
+        isLoading={isFetching}
+        setDetails={setDetails}
+        getOrderById={getOrderById}
+        isFetching={isFetching}
+      />
       <div ref={ref} style={{ height: 20 }} />
-      {isFetching && (
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Fade in={isFetching} unmountOnExit timeout={300}>
-            <CircularProgress />
-          </Fade>
-        </Box>
-      )}
+
       <MaterialModal open={details} onClose={() => setDetails(false)}>
         <OrderDetails order={orderData} orderFetch={orderFetch} />
       </MaterialModal>

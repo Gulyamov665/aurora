@@ -101,6 +101,13 @@ export type CourierType = {
   username: string;
 };
 
+export enum OrderStatus {
+  new = "new",
+  awaiting_courier = "awaiting_courier",
+  prepare = "prepare",
+  delivering = "delivering",
+}
+
 export type OrdersType = {
   id: number;
   created_at: string;
@@ -113,7 +120,8 @@ export type OrdersType = {
   courier: CourierType;
   restaurant: RestaurantOrderType;
   products: OrderProduct[];
-  status: string;
+  status: OrderStatus;
+  location: UserLocationType;
 };
 
 export type OrdersData = {
@@ -189,3 +197,8 @@ export type ReportsType = {
   canceled: number;
 };
 export type { ProductType };
+
+export type GroupedOrder = {
+  date: string;
+  orders: OrdersType[];
+};

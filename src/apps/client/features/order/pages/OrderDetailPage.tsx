@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { OrderDetail } from "../components/OrderDetail";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetOrderByIdQuery } from "@store/admin/api/orders";
 import { Box } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
 import Loading from "../../loading/Loading";
+import { useSocket } from "@/hooks/useSocket";
+import { OrderAnimation } from "../components/OrderAnimation";
+import { OrderCard } from "./MyOrders";
 
 export const OrderDetailPage: React.FC = () => {
   const { id } = useParams();
-  const { data: order } = useGetOrderByIdQuery(id, { skip: !id });
+  const { data: order, refetch } = useGetOrderByIdQuery(Number(id), { skip: !id });
+  const socket = useSocket();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("update_order", () => refetch());
+    }
+    return () => {
+      socket?.off("update_order");
+    };
+  }, [socket, refetch]);
 
   if (!order) {
     return <Loading />;
@@ -20,8 +33,10 @@ export const OrderDetailPage: React.FC = () => {
       <div onClick={() => navigate(-1)} style={{ cursor: "pointer" }}>
         <ArrowBack sx={{ mb: 3, mt: 3 }} />
       </div>
-
-      <OrderDetail order={order} />
+      <OrderCard>
+        <OrderAnimation order={order} />
+        <OrderDetail order={order} />
+      </OrderCard>
     </Box>
   );
 };

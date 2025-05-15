@@ -5,11 +5,11 @@ import { useEffect } from "react";
 import { CartItem } from "@store/user/types";
 import { handleAddToCart } from "@/Utils/tools";
 import { OrderProps } from "../types/orderTypes";
+import { EmptyCart } from "../../../../../animations/componets/EmptyCart";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import OrderProducts from "./OrderProducts";
 import styles from "../assets/Orders.module.scss";
-import { EmptyCart } from "../../../../../animations/componets/EmptyCart";
 
 export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, decreaseItem, removeCart }) => {
   const { deleteItem, confirmedId } = useDelete();

@@ -6,7 +6,7 @@ import { IsGuestFrame } from "@/apps/common/IsGuestFrame";
 
 export const GoToLogin: React.FC<GoToLoginProps> = ({ goToLogin, goToRegister, text }) => {
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", mt: "45%" }}>
+    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
       <OrderCard>
         <IsGuestFrame goToLogin={goToLogin} goToRegister={goToRegister} text={text} />
       </OrderCard>

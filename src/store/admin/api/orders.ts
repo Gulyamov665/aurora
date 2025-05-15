@@ -1,15 +1,9 @@
 import { getToken } from "@/Utils/getToken";
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { setUser } from "@store/user/slices/authSlice";
-import { OrdersData, OrdersType } from "@store/user/types";
-import { io } from "socket.io-client";
+import { GroupedOrder, OrdersData, OrdersType } from "@store/user/types";
 
 const url = import.meta.env.VITE_EXPRESS_URL;
-
-export const socket = io("https://new.aurora-api.uz", {
-  path: "/api-node/socket.io",
-});
-// export const socket = io("http://localhost:3000"); // Подключаем WebSocket
 
 export const baseQuery = fetchBaseQuery({
   baseUrl: url,
@@ -54,20 +48,21 @@ export const ordersApi = createApi({
         url: `/orders/${vendorId}`,
         params: { page, limit },
       }),
+      providesTags: ["orders"],
     }),
-    getMyOrders: build.query<OrdersType[], { userId: number | undefined }>({
+    getMyOrders: build.query<GroupedOrder[], { userId: number | undefined }>({
       query: ({ userId }) => ({
         url: `/orders/me/${userId}`,
       }),
       providesTags: ["orders"],
     }),
-    getOrderById: build.query({
+    getOrderById: build.query<OrdersType, number>({
       query: (id) => ({
         url: `/orders/getOrderById/${id}`,
       }),
       providesTags: ["orders"],
     }),
-    createOrder: build.mutation({
+    createOrder: build.mutation<OrdersType, any>({
       query: (body) => ({
         url: "/orders",
         method: "POST",
@@ -127,5 +122,5 @@ export const {
   useGetMyOrdersQuery,
   useRemoveCartMutation,
   useGetOrderByIdQuery,
-  useLazyGetOrderByIdQuery
+  useLazyGetOrderByIdQuery,
 } = ordersApi;

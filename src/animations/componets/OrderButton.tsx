@@ -7,7 +7,7 @@ type OrderButtonProps = {
   navigate: NavigateFunction;
 };
 
-export const OrderButton: React.FC<OrderButtonProps> = ({ onClick, navigate }) => {
+export const OrderButton: React.FC<OrderButtonProps> = ({ onClick }) => {
   const [animate, setAnimate] = useState(false);
 
   const handleClick = () => {
@@ -16,7 +16,7 @@ export const OrderButton: React.FC<OrderButtonProps> = ({ onClick, navigate }) =
       setAnimate(true);
       setTimeout(() => {
         setAnimate(false);
-        navigate("..");
+        // navigate("..");
       }, 8000);
     }
   };

@@ -70,3 +70,7 @@ export type GoToLoginProps = {
   goToRegister: () => void;
   text?: string;
 };
+
+export type OrderAnimationProps = {
+  order: OrdersType;
+};

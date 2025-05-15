@@ -57,11 +57,8 @@ const OrderConfirmationPage: React.FC = () => {
         status: "new",
         products: items.products,
       };
-      await createOrder(orderData).unwrap();
-      // setShowSuccess(true);
-      // setTimeout(() => {
-      //   navigate("..");
-      // }, 2000);
+      const order = await createOrder(orderData).unwrap();
+      navigate(`../orders/${order?.id}`);
     } catch (error) {
       console.error("Failed to create order:", error);
     }
@@ -77,7 +74,6 @@ const OrderConfirmationPage: React.FC = () => {
         register={register}
         watch={watch}
       />
-      {/* {showSuccess && <OrderSuccess />} */}
     </div>
   );
 };

@@ -1,13 +1,14 @@
 import { FC, useState } from "react";
-import { Table, TableHead, TableRow, TableCell, TableBody } from "@mui/material";
+import { Table, TableHead, TableRow, TableCell, TableBody, Grow } from "@mui/material";
 import { TableSortLabel, Card, CardContent, Typography, IconButton } from "@mui/material";
 import { Person, MonetizationOn, Receipt } from "@mui/icons-material";
 import { Visibility } from "@mui/icons-material";
 import { OrderKey, OrdersTableProps } from "../types";
 import { getStatusChip } from "./Statuses";
 import { LoadingScreen } from "../../loading/LoadingScreen";
+import { Box, CircularProgress, Fade } from "@mui/material";
 
-const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading, setDetails, getOrderById }) => {
+const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading, setDetails, getOrderById, isFetching }) => {
   const [sortBy, setSortBy] = useState<OrderKey>("id");
   const [order, setOrder] = useState<"asc" | "desc">("desc");
 
@@ -39,7 +40,7 @@ const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading, setDetails, getOrd
   };
 
   return (
-    <Card elevation={6} sx={{ mt: 3, mb: 4 }}>
+    <Card elevation={6} sx={{ mt: 3, mb: 4, width: "100%", overflow: "scroll" }}>
       <CardContent>
         <Typography variant="h6" gutterBottom>
           Заказы
@@ -89,22 +90,29 @@ const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading, setDetails, getOrd
           </TableHead>
           <TableBody>
             {sortedOrders.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>{row.id}</TableCell>
-                <TableCell>{row.created_by}</TableCell>
-                <TableCell>{row.total_price} UZS</TableCell>
-                <TableCell>{getStatusChip(row.status)}</TableCell>
-                <TableCell>{row.courier ? row.courier.username : "Не назначен"}</TableCell>
-                <TableCell>
-                  <IconButton onClick={() => onEyeClick(row.id)}>
-                    <Visibility />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
+              <Grow in key={row.id} timeout={500}>
+                <TableRow key={row.id}>
+                  <TableCell>{row.id}</TableCell>
+                  <TableCell>{row.created_by}</TableCell>
+                  <TableCell>{row.total_price} UZS</TableCell>
+                  <TableCell>{getStatusChip(row.status)}</TableCell>
+                  <TableCell>{row.courier ? row.courier.username : "Не назначен"}</TableCell>
+                  <TableCell>
+                    <IconButton onClick={() => onEyeClick(row.id)}>
+                      <Visibility />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              </Grow>
             ))}
           </TableBody>
         </Table>
       </CardContent>
+      <Box sx={{ display: "flex", justifyContent: "center", height: 60, alignItems: "center" }}>
+        <Fade in={isFetching} unmountOnExit timeout={300}>
+          <CircularProgress size={20} />
+        </Fade>
+      </Box>
     </Card>
   );
 };

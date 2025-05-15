@@ -10,6 +10,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "react-image-crop/dist/ReactCrop.css";
 import "leaflet/dist/leaflet.css";
+import { SocketProvider } from "./providers/SocketProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
@@ -20,9 +21,11 @@ root.render(
     }}
   >
     <Provider store={store}>
-      <PersistGate loading={"Loading..."} persistor={persistor}>
-        <App />
-      </PersistGate>
+      <SocketProvider>
+        <PersistGate loading={"Loading..."} persistor={persistor}>
+          <App />
+        </PersistGate>
+      </SocketProvider>
     </Provider>
   </BrowserRouter>
 );
