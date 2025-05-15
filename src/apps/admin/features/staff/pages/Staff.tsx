@@ -8,7 +8,7 @@ export const StaffSettings = () => {
 
   const {data: vendorData} = useOutletContext<OutletContextType>()
   const { data: staffData } = useGetStaffQuery(vendorData?.id, {skip: !vendorData?.id});
-  const [addStaff, { isLoading }] = useAddStaffMutation();
+  const [addStaff] = useAddStaffMutation();
   const [getRoles, {data: rolesData}] = useLazyGetUserRoleQuery()
 
 

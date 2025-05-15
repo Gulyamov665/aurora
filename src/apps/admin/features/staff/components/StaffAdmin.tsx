@@ -15,8 +15,8 @@ export const StaffAdmin: React.FC<StaffAdminProps> = ({ staffData, addStaff, rol
     <>
       <Box sx={{ maxWidth: 1200, width: "100%", mx: "auto" }}>
         <Tabs value={tab} onChange={handleTabChange} centered>
-          <Tab icon={<FolderSharedIcon />} iconPosition="start" label="Список персонала" />
-          <Tab icon={<PersonAddAltIcon />} iconPosition="start" label="Добавить персонала" />
+          <Tab icon={<FolderSharedIcon />} iconPosition="start" label="Список" />
+          <Tab icon={<PersonAddAltIcon />} iconPosition="start" label="Добавить" />
         </Tabs>
 
         {tab === 0 && <StaffList staffData={staffData} />}

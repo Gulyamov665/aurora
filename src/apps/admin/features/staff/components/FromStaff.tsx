@@ -1,40 +1,17 @@
 import React from "react";
-import {
-  Box,
-  Card,
-  Grid,
-  Typography,
-  CardContent,
-  MenuItem,
-  Button,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  FormHelperText,
-  Fade,
-  Select,
-} from "@mui/material";
+import { Box, Card, Grid, Typography, CardContent } from "@mui/material";
+import { MenuItem, Button, FormControl, InputLabel, OutlinedInput, FormHelperText, Fade, Select } from "@mui/material";
 import { Person } from "@mui/icons-material";
 import { FormStaffProps } from "../types";
 import { Controller } from "react-hook-form";
 
-
-export const FromStaff: React.FC<FormStaffProps> = ({
-  rolesData,
-  handleSubmit,
-  submit,
-  control,
-}) => {
-
-  
-
+export const FromStaff: React.FC<FormStaffProps> = ({ rolesData, handleSubmit, submit, control }) => {
   return (
-    <Card elevation={6} sx={{ p: 3, mb:5 }}>
+    <Card elevation={6} sx={{ p: 3, mb: 5 }}>
       <Typography variant="h5" gutterBottom align={"center"} mb={2}>
         Добавить персонала
       </Typography>
       <Grid container spacing={3} justifyContent={"center"}>
-        {/* {staff.map((member, index) => ( */}
         <Grid item xs={12} md={6} lg={10}>
           <Card
             sx={{
@@ -62,7 +39,7 @@ export const FromStaff: React.FC<FormStaffProps> = ({
                     <OutlinedInput id="first_name" label="Имя" {...field} />
                     <Fade
                       in={!!fieldState.error}
-                      timeout={{ enter: 500, exit: 300 }} // например, 500мс при появлении и 300мс при скрытии
+                      timeout={{ enter: 500, exit: 300 }}
                       style={{ height: 20 }}
                       unmountOnExit={false}
                     >
@@ -74,7 +51,7 @@ export const FromStaff: React.FC<FormStaffProps> = ({
 
               <Controller
                 name="phone"
-                defaultValue="" 
+                defaultValue=""
                 control={control}
                 rules={{
                   required: "Это обязательное поле",
@@ -97,67 +74,65 @@ export const FromStaff: React.FC<FormStaffProps> = ({
                 )}
               />
               <Controller
-              name="password_1"
-              defaultValue="" 
-              control={control}
-              rules={{
-                required: "Это обязательное поле"
-              }}
-              render={({field, fieldState})=>(
-                <FormControl fullWidth variant="outlined" error={!!fieldState.error}>
-                      <InputLabel htmlFor="password_1">Пароль</InputLabel>
-                      <OutlinedInput id="password_1" label="Пароль" {...field} />
-                      <Fade
-                        in={!!fieldState.error}
-                        timeout={{ enter: 500, exit: 300 }} // например, 500мс при появлении и 300мс при скрытии
-                        style={{ height: 20 }}
-                        unmountOnExit={false}
-                      >
-                        <FormHelperText sx={{ marginTop: 0 }}>{fieldState.error?.message}</FormHelperText>
-                      </Fade>
-                    </FormControl>
-              )
-              }
+                name="password_1"
+                defaultValue=""
+                control={control}
+                rules={{
+                  required: "Это обязательное поле",
+                }}
+                render={({ field, fieldState }) => (
+                  <FormControl fullWidth variant="outlined" error={!!fieldState.error}>
+                    <InputLabel htmlFor="password_1">Пароль</InputLabel>
+                    <OutlinedInput id="password_1" label="Пароль" {...field} />
+                    <Fade
+                      in={!!fieldState.error}
+                      timeout={{ enter: 500, exit: 300 }} // например, 500мс при появлении и 300мс при скрытии
+                      style={{ height: 20 }}
+                      unmountOnExit={false}
+                    >
+                      <FormHelperText sx={{ marginTop: 0 }}>{fieldState.error?.message}</FormHelperText>
+                    </Fade>
+                  </FormControl>
+                )}
               />
               <Controller
-              name="password_2"
-              defaultValue="" 
-              control={control}
-              rules={{
-                required: "Это обязательное поле"
-              }}
-              render={({field, fieldState})=>(
-                <FormControl fullWidth variant="outlined" error={!!fieldState.error}>
-                      <InputLabel htmlFor="password_2">Повторите пароль</InputLabel>
-                      <OutlinedInput id="password_2" label="Повторите пароль" {...field} />
-                      <Fade
-                        in={!!fieldState.error}
-                        timeout={{ enter: 500, exit: 300 }} // например, 500мс при появлении и 300мс при скрытии
-                        style={{ height: 20 }}
-                        unmountOnExit={false}
-                      >
-                        <FormHelperText sx={{ marginTop: 0 }}>{fieldState.error?.message}</FormHelperText>
-                      </Fade>
-                    </FormControl>
-              )
-              }
+                name="password_2"
+                defaultValue=""
+                control={control}
+                rules={{
+                  required: "Это обязательное поле",
+                }}
+                render={({ field, fieldState }) => (
+                  <FormControl fullWidth variant="outlined" error={!!fieldState.error}>
+                    <InputLabel htmlFor="password_2">Повторите пароль</InputLabel>
+                    <OutlinedInput id="password_2" label="Повторите пароль" {...field} />
+                    <Fade
+                      in={!!fieldState.error}
+                      timeout={{ enter: 500, exit: 300 }} // например, 500мс при появлении и 300мс при скрытии
+                      style={{ height: 20 }}
+                      unmountOnExit={false}
+                    >
+                      <FormHelperText sx={{ marginTop: 0 }}>{fieldState.error?.message}</FormHelperText>
+                    </Fade>
+                  </FormControl>
+                )}
               />
               <Controller
                 name="role"
                 control={control}
-                defaultValue={rolesData && rolesData?.length > 0 ? rolesData[0].id : ''}
+                defaultValue={rolesData && rolesData?.length > 0 ? rolesData[0].id : ""}
                 rules={{
                   required: "Это обязательное поле",
                 }}
                 render={({ field, fieldState }) => (
                   <>
                     <FormControl fullWidth variant="outlined" error={!!fieldState.error}>
-                      <InputLabel htmlFor="phone">Роль</InputLabel>
+                      <InputLabel htmlFor="role">Роль</InputLabel>
 
                       <Select label="Роль" {...field} labelId="role-label" id="role">
                         {(!rolesData || rolesData.length === 0) && <MenuItem value="">Нет ролей</MenuItem>}
                         {rolesData?.map((option) => (
-                          <MenuItem key={option.id} value={option.id}>
+                          <MenuItem disabled={option.role==="is_director"} key={option.id} value={option.id}>
                             {option.label}
                           </MenuItem>
                         ))}
