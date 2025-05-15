@@ -9,6 +9,8 @@ import UpdatePromo from "../apps/admin/features/promo/pages/UpdatePromo";
 import AddPromo from "../apps/admin/features/promo/pages/AddPromo";
 import ProtectedRoute from "./ProtectedRoute";
 import { Reports } from "@/apps/admin/features/reports/pages/Reports";
+import { StaffSettings } from "@/apps/admin/features/staff/pages/Staff";
+
 
 export default function AdminRoutes() {
   return (
@@ -29,6 +31,7 @@ export default function AdminRoutes() {
         <Route path="promo/:id" element={<UpdatePromo />} />
         <Route path="add-promo" element={<AddPromo />} />
         <Route path="reports" element={<Reports />} />
+        <Route path="staff" element={<StaffSettings />} />
       </Route>
     </Routes>
   );

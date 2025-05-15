@@ -136,6 +136,7 @@ export type UserInfoType = {
   is_user: boolean;
   is_vendor: boolean;
   location: UserLocationType;
+
 };
 
 export interface NominatimReverseResponse {
@@ -182,3 +183,21 @@ export type ReportsType = {
   canceled: number;
 };
 export type { ProductType };
+
+export type EditorType = UserInfoType & {
+  permissions: any[];
+  role: string;
+  role_label: string
+  role_permissions: string;
+};
+
+export type StaffType = {
+  id: Number
+  editors: EditorType[];
+};
+
+export type RoleType = {
+  id: number
+  role: string
+  label: string
+}
