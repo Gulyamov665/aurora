@@ -122,6 +122,7 @@ export type OrdersType = {
   products: OrderProduct[];
   status: OrderStatus;
   location: UserLocationType;
+  fee: number;
 };
 
 export type OrdersData = {

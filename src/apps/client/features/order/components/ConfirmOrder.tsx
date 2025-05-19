@@ -1,4 +1,4 @@
-import { Box, Typography, TextField } from "@mui/material";
+import { Box, Typography, TextField, Divider } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { FC } from "react";
 import { ConfirmOrderProps } from "../types/orderTypes";
@@ -6,6 +6,7 @@ import { LocationForm } from "../../map/components/LocationForm";
 import { OrderButton } from "@/animations/componets/OrderButton";
 
 export const ConfirmOrder: FC<ConfirmOrderProps> = ({ navigate, state, handleCreateOrder, items, register }) => {
+  const fee = 3500;
   return (
     <Box
       sx={{
@@ -45,8 +46,12 @@ export const ConfirmOrder: FC<ConfirmOrderProps> = ({ navigate, state, handleCre
         </Typography>
       </Box>
       <Box>
-        <Typography variant="h6" sx={{ mb: 1 }}>
-          Итого: {items?.totalPrice?.toLocaleString()} сум
+        <Typography fontWeight={500} sx={{ mb: 1 }}>
+          Работа сервиса : {fee} сум
+        </Typography>
+        <Divider />
+        <Typography variant="h6" sx={{ mb: 1, mt: 1 }}>
+          Итого: {items?.totalPrice + fee} сум
         </Typography>
         <Box display="flex" justifyContent="center" alignItems="center" mt={2}>
           <OrderButton onClick={handleCreateOrder} navigate={navigate} />
