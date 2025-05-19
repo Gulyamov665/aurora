@@ -1,5 +1,5 @@
 import React from "react";
-import animation from "../files/cooking.json";
+import animation from "../files/new-coocking.json";
 import Lottie from "react-lottie-player/dist/LottiePlayerLight";
 
 interface Cooking {
