@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { CardType } from "./types";
 import { formatPrice } from "@/Utils/tools";
 import { CounterBox } from "@/apps/common/CounterBox";
-import noDishPhoto from "@/assets/nodish-photo.png";
+import noDishPhoto from "@/assets/nodish.png";
 
 const Card: FC<CardType> = ({ product, addToCart, findItem, decrease }) => {
   const [isLoaded, setIsLoaded] = useState(false);
