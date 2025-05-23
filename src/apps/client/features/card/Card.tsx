@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { CardType } from "./types";
 import { formatPrice } from "@/Utils/tools";
 import { CounterBox } from "@/apps/common/CounterBox";
+import noDishPhoto from "@/assets/nodish-photo.png";
 
 const Card: FC<CardType> = ({ product, addToCart, findItem, decrease }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -14,7 +15,7 @@ const Card: FC<CardType> = ({ product, addToCart, findItem, decrease }) => {
         <img
           className="card__image"
           loading="lazy"
-          src={product.photo}
+          src={product.photo || noDishPhoto}
           alt={product.name}
           onLoad={() => setIsLoaded(true)}
           style={{ opacity: isLoaded ? 1 : 0 }}
