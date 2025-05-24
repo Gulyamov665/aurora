@@ -6,6 +6,7 @@ import { SideBarProps } from "../types";
 import { styles } from "../assets/styles";
 
 const Sidebar: FC<SideBarProps> = ({ open, logout, handleSidebar }) => {
+  
   return (
     <div>
       <Drawer anchor="left" open={open} onClose={handleSidebar} PaperProps={{ style: { backgroundColor: "#210638" } }}>
