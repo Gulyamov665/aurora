@@ -19,7 +19,7 @@ function UpdateProduct() {
   const [img, setImg] = useState<string | ArrayBuffer | null>(null);
   const [file, setFile] = useState<Blob | null>(null);
   const [cropData, setCropData] = useState<Cropper.Data | null>(null);
-  const [loadImage] = useUpdateImageMutation();
+  const [loadImage, { isLoading: ImageIsLoading }] = useUpdateImageMutation();
   const { deleteItem, confirmedId } = useDelete();
   const navigate = useNavigate();
 
@@ -69,6 +69,7 @@ function UpdateProduct() {
         onSubmit={onSubmit}
         deleteItem={handleDeleteProduct}
         watch={watch}
+        ImageIsLoading={ImageIsLoading}
       />
 
       <CropModal img={img} setCropData={setCropData} setImg={setImg} cropData={cropData} uploadImage={uploadImage} />

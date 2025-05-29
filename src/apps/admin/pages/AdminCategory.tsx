@@ -15,7 +15,7 @@ import { CategoriesList } from "./CategoriesList";
 import { CreateModal } from "../features/Product/pages/CreateModal";
 import { Fab } from "@mui/material";
 import { LoadingScreen } from "../features/loading/LoadingScreen";
-import AdminCard from "../components/AdminCard";
+import { AdminCard } from "../components/AdminCard";
 import styles from "../static/AdminCategory.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -43,6 +43,8 @@ export default function AdminCategory() {
   }, [category]);
 
   const handleActiveToggle = async (item: ProductType) => {
+    if (!item.price) return;
+
     const updatedItem = {
       restaurant: item.restaurant,
       category: item.category,

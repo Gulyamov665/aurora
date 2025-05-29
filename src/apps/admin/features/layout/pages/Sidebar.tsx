@@ -1,11 +1,10 @@
 import { FC, useState } from "react";
 import { Drawer } from "@mui/material";
 import { SideBarProps } from "../types";
-import { buttonGroups } from "../components/ButtonsList"; // см. ниже структуру
+import { buttonGroups } from "../components/ButtonsList";
 import { SidebarLogo } from "../components/SidebarHeader";
 import { SidebarSection } from "../components/SidebarSection";
 import { SidebarFooter } from "../components/SidebarFooter";
-
 
 const Sidebar: FC<SideBarProps> = ({ open, logout, handleSidebar }) => {
   const [openGroup, setOpenGroup] = useState<string | null>(null);
@@ -27,7 +26,6 @@ const Sidebar: FC<SideBarProps> = ({ open, logout, handleSidebar }) => {
           display: "flex",
           flexDirection: "column",
         },
-
       }}
     >
       <SidebarLogo />
@@ -40,7 +38,6 @@ const Sidebar: FC<SideBarProps> = ({ open, logout, handleSidebar }) => {
       />
 
       <SidebarFooter logout={logout} />
-      
     </Drawer>
   );
 };

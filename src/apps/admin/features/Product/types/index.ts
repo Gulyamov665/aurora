@@ -13,7 +13,7 @@ export type FormValuesType = {
   is_active: boolean;
   name: string;
   price: number;
-  photo?:string
+  photo?: string;
 };
 
 export type ProductFormType = {
@@ -24,4 +24,5 @@ export type ProductFormType = {
   productImage: ProductImageType;
   handleFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
   deleteItem: () => void;
+  ImageIsLoading: boolean;
 };
