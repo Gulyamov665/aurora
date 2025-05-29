@@ -3,12 +3,18 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import RedeemIcon from "@mui/icons-material/Redeem";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
+import PersonIcon from '@mui/icons-material/Person';
 
 export const buttonsInfo = [
   {
     text: "Заведение",
     icon: <RestaurantMenuIcon sx={{ fontSize: 35, color: "white" }} />,
     link: "main",
+  },
+  {
+    text: "Персонал",
+    icon: <PersonIcon sx={{ fontSize: 35, color: "white" }} />,
+    link: "employees",
   },
   {
     text: "Меню",

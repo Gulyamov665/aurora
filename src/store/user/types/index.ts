@@ -152,6 +152,7 @@ export type UserInfoType = {
   is_user: boolean;
   is_vendor: boolean;
   location: UserLocationType;
+
 };
 
 export interface NominatimReverseResponse {
@@ -203,3 +204,20 @@ export type GroupedOrder = {
   date: string;
   orders: OrdersType[];
 };
+export type EditorType = UserInfoType & {
+  permissions: any[];
+  role: string;
+  role_label: string
+  role_permissions: string;
+};
+
+export type StaffType = {
+  id: Number
+  editors: EditorType[];
+};
+
+export type RoleType = {
+  id: number
+  role: string
+  label: string
+}

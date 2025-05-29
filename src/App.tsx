@@ -28,7 +28,6 @@ function App() {
         <Route path="vendor/:res/*" element={<VendorRoutes />} />
 
         <Route path="*" element={<NotFound />} />
-        {/* <Route path="/staff" element={<StaffSettings />} /> */}
       </Routes>
 
       {/* global elements */}
