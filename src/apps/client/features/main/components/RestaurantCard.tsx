@@ -11,7 +11,7 @@ interface RestaurantCardProps {
   rating?: number;
 }
 
-export const RestaurantCard: React.FC<RestaurantCardProps> = ({ image, name, time, rating=4 }) => {
+export const RestaurantCard: React.FC<RestaurantCardProps> = ({ image, name, time, rating = 4 }) => {
   return (
     <Card
       sx={{
