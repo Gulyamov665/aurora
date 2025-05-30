@@ -118,6 +118,7 @@ export type OrdersType = {
   long: string;
   user_id: number;
   courier: CourierType;
+  user_phone_number: string;
   restaurant: RestaurantOrderType;
   products: OrderProduct[];
   status: OrderStatus;
@@ -152,7 +153,6 @@ export type UserInfoType = {
   is_user: boolean;
   is_vendor: boolean;
   location: UserLocationType;
-
 };
 
 export interface NominatimReverseResponse {
@@ -207,17 +207,17 @@ export type GroupedOrder = {
 export type EditorType = UserInfoType & {
   permissions: any[];
   role: string;
-  role_label: string
+  role_label: string;
   role_permissions: string;
 };
 
 export type StaffType = {
-  id: Number
+  id: Number;
   editors: EditorType[];
 };
 
 export type RoleType = {
-  id: number
-  role: string
-  label: string
-}
+  id: number;
+  role: string;
+  label: string;
+};

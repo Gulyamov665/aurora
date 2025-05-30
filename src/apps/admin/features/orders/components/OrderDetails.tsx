@@ -68,7 +68,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ order, orderFetch })
             <Typography variant="body2" color="textSecondary">
               Контакты
             </Typography>
-            <Typography variant="subtitle1">+998(12)123 12 12</Typography>
+            <Typography variant="subtitle1">{order?.user_phone_number}</Typography>
           </Box>
         </Box>
 

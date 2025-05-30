@@ -9,7 +9,7 @@ import UpdatePromo from "../apps/admin/features/promo/pages/UpdatePromo";
 import AddPromo from "../apps/admin/features/promo/pages/AddPromo";
 import ProtectedRoute from "./ProtectedRoute";
 import { Reports } from "@/apps/admin/features/reports/pages/Reports";
-import { Employees } from "@/apps/admin/features/staff/pages/Employees";
+import { Employees } from "@/apps/admin/features/employee/pages/Employees";
 
 export default function AdminRoutes() {
   return (

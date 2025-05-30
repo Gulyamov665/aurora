@@ -1,5 +1,6 @@
-import { AccessTime, Close, DoneOutlined, Kitchen, Fastfood } from "@mui/icons-material";
+import { AccessTime, Close, DoneOutlined, Kitchen, Fastfood, LocalShipping } from "@mui/icons-material";
 import { Chip } from "@mui/material";
+// import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
 export const getStatusChip = (status: string) => {
   switch (status) {
@@ -13,6 +14,8 @@ export const getStatusChip = (status: string) => {
       return <Chip label="Отменен" color="error" icon={<Close />} />;
     case "prepare":
       return <Chip label="Готовиться" color="warning" icon={<Kitchen />} />;
+    case "on_the_way":
+      return <Chip label="Доставляется" color="primary" icon={<LocalShipping />} />;
     default:
       return <Chip label="Неизвестно" />;
   }
