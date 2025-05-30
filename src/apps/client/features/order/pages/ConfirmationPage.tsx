@@ -43,6 +43,7 @@ const OrderConfirmationPage: React.FC = () => {
         long: me?.location?.long,
         user_id: isUser?.user_id,
         orders_chat_id: data.orders_chat_id,
+        user_phone_number: me?.phone,
         restaurant: {
           id: data.id,
           name: data.name,
