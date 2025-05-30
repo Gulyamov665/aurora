@@ -105,7 +105,7 @@ export enum OrderStatus {
   new = "new",
   awaiting_courier = "awaiting_courier",
   prepare = "prepare",
-  delivering = "delivering",
+  on_the_way = "on_the_way",
 }
 
 export type OrdersType = {

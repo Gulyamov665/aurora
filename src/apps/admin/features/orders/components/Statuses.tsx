@@ -33,6 +33,8 @@ export const getStatusChipNoIcons = (status: string) => {
       return <Chip label="Отменен" color="error" />;
     case "prepare":
       return <Chip label="Готовиться" color="warning" />;
+    case "on_the_way":
+      return <Chip label="Доставляется" color="primary" />;
     default:
       return <Chip label="Неизвестно" />;
   }

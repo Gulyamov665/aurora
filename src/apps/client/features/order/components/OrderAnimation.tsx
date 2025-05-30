@@ -12,7 +12,7 @@ export const OrderAnimation: React.FC<OrderAnimationProps> = ({ order }) => {
         return <Wait size={150} />;
       case "prepare":
         return <Cooking size={150} />;
-      case "delivering":
+      case "on_the_way":
         return <Delivery size={150} />;
       default:
         return <Wait size={150} />;
