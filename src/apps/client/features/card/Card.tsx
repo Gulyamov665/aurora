@@ -3,6 +3,7 @@ import { CardType } from "./types";
 import { formatPrice } from "@/Utils/tools";
 import { CounterBox } from "@/apps/common/CounterBox";
 import noDishPhoto from "@/assets/nodish.png";
+import { Grow } from "@mui/material";
 
 const Card: FC<CardType> = ({ product, addToCart, findItem, decrease }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -29,13 +30,15 @@ const Card: FC<CardType> = ({ product, addToCart, findItem, decrease }) => {
         </div>
         <div style={{ textAlign: "center" }}>
           {findItem(product.id) ? (
-            <span className="btn card-btn-order" onClick={(e) => e.stopPropagation()}>
-              <CounterBox
-                increase={(e) => addToCart(e, product)}
-                decrease={(e) => decrease(e, product.id)}
-                quantity={findItem(product.id).quantity}
-              />
-            </span>
+            <Grow in key={product.id} timeout={800}>
+              <span className="btn card-btn-order" onClick={(e) => e.stopPropagation()}>
+                <CounterBox
+                  increase={(e) => addToCart(e, product)}
+                  decrease={(e) => decrease(e, product.id)}
+                  quantity={findItem(product.id).quantity}
+                />
+              </span>
+            </Grow>
           ) : (
             <button className="btn card-btn-order" onClick={(e) => addToCart(e, product)}>
               <b>Добавить</b>

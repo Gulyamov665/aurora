@@ -1,7 +1,7 @@
 import { getToken } from "@/Utils/getToken";
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { setUser } from "@store/user/slices/authSlice";
-import { GroupedOrder, OrdersData, OrdersType } from "@store/user/types";
+import { CartData, CartItem, GroupedOrder, OrdersData, OrdersType } from "@store/user/types";
 
 const url = import.meta.env.VITE_EXPRESS_URL;
 
@@ -70,7 +70,7 @@ export const ordersApi = createApi({
       }),
       invalidatesTags: ["orders", "cart"],
     }),
-    getCart: build.query({
+    getCart: build.query<any, { user?: number; vendorId?: number }>({
       query: ({ user, vendorId }) => ({
         url: `/cart?user_id=${user}&restaurant_id=${vendorId}`,
       }),
@@ -82,6 +82,28 @@ export const ordersApi = createApi({
         method: "POST",
         body,
       }),
+      // async onQueryStarted(newItem, { dispatch, queryFulfilled }) {
+      //   const patchResult = dispatch(
+      //     ordersApi.util.updateQueryData(
+      //       "getCart",
+      //       { user: newItem.user_id, vendorId: newItem.restaurant },
+
+      //       (draft: CartData) => {
+      //         const existingItem = draft?.products?.find((item: CartItem) => item.id === newItem.products.id);
+      //         if (existingItem && existingItem.quantity) {
+      //           existingItem.quantity += 1;
+      //         } else {
+      //           draft.products.push({ ...newItem, quantity: 1 });
+      //         }
+      //       }
+      //     )
+      //   );
+      //   try {
+      //     await queryFulfilled;
+      //   } catch {
+      //     patchResult.undo();
+      //   }
+      // },
       invalidatesTags: ["cart"],
     }),
     decreaseItem: build.mutation({
@@ -90,6 +112,30 @@ export const ordersApi = createApi({
         method: "POST",
         body,
       }),
+      async onQueryStarted(newItem, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          ordersApi.util.updateQueryData(
+            "getCart",
+            { user: newItem.user_id, vendorId: newItem.restaurant_id },
+
+            (draft: CartData) => {
+              const existingItem = draft?.products?.find((item: CartItem) => item.id === newItem.product_id);
+              if (existingItem && existingItem.quantity) {
+                existingItem.quantity -= 1;
+
+                if (existingItem.quantity <= 0) {
+                  draft.products = draft.products.filter((i) => i.id !== newItem.product_id);
+                }
+              }
+            }
+          )
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
       invalidatesTags: ["cart"],
     }),
     removeCart: build.mutation({

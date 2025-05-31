@@ -2,7 +2,7 @@ import { ProductType } from "@/apps/client/features/order/types/orderTypes";
 
 export type CartType = {
   totalPrice: number;
-  items: CartItem[];
+  CartItems: CartItem[];
 };
 
 export type RegistrationRequestType = {
@@ -139,6 +139,14 @@ export interface CartItem {
   price: number;
   quantity?: number;
   photo: string;
+}
+
+export interface CartData {
+  products: CartItem[];
+  total_price: number;
+  vendor: number;
+  user: number;
+  id: number;
 }
 
 export type UserInfoType = {

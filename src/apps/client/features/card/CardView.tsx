@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { addCartItem } from "@/store/cartSlice";
 import { CardViewProps } from "./types";
 import { ProductType } from "../category/types";
-import CardViewContent from "./components/CardViewContent";
 import { Dialog } from "@mui/material";
+import CardViewContent from "./components/CardViewContent";
 
 const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount }) => {
   const controls = useDragControls();

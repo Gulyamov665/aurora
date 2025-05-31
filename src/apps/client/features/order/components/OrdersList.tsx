@@ -3,17 +3,20 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { useDelete } from "@/hooks/useDelete";
 import { useEffect } from "react";
 import { CartItem } from "@store/user/types";
-import { handleAddToCart } from "@/Utils/tools";
+import { handleAddToCart, updateCartCache } from "@/Utils/tools";
 import { OrderProps } from "../types/orderTypes";
 import { EmptyCart } from "../../../../../animations/componets/EmptyCart";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import OrderProducts from "./OrderProducts";
 import styles from "../assets/Orders.module.scss";
+import { AppDispatch } from "@store/index";
+import { useDispatch } from "react-redux";
 
 export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, decreaseItem, removeCart }) => {
   const { deleteItem, confirmedId } = useDelete();
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     if (confirmedId) removeCart(items.id).unwrap();
@@ -27,6 +30,8 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
 
   const increase = (event: MouseEvent<HTMLButtonElement>, productData: CartItem) => {
     if (!isUser?.user_id || !data?.id) return;
+
+    updateCartCache(dispatch, isUser.user_id, data.id, productData);
 
     handleAddToCart({
       event,

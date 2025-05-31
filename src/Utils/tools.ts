@@ -1,6 +1,9 @@
 import { CartItem, NominatimReverseResponse } from "@store/user/types";
 import { ChangeEvent } from "react";
 import { AddToCartArgs } from "./types";
+import { ordersApi } from "@store/admin/api/orders";
+import { AppDispatch } from "@store/index";
+import { ProductData } from "@/apps/client/features/products/types";
 
 /**
  * функция для отображения фото
@@ -83,4 +86,19 @@ export const getCookie = (name: string): string | null => {
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop()!.split(";").shift()!;
   return null;
+};
+
+export const updateCartCache = (dispatch: AppDispatch, userId: number, vendorId: number, product: ProductData) => {
+  dispatch(
+    ordersApi.util.updateQueryData("getCart", { user: userId, vendorId }, (draft: any) => {
+      if (!draft.products) draft.products = [];
+
+      const existing = draft.products.find((item: any) => item.id === product.id);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        draft.products.push({ ...product, quantity: 1 });
+      }
+    })
+  );
 };

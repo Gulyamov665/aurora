@@ -1,27 +1,27 @@
 import { FC, useMemo, useCallback, MouseEvent, useState } from "react";
 import { ProductData, ProductsProps } from "./types";
 import { useAddToCartMutation, useDecreaseItemMutation, useGetCartQuery } from "@store/admin/api/orders";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
 import { useOutletContext } from "react-router-dom";
 import { OutletContextType } from "../../pages";
-import { handleAddToCart } from "@/Utils/tools";
+import { handleAddToCart, updateCartCache } from "@/Utils/tools";
 import { MaterialModal } from "@/apps/common/Modal";
 import { GuestBox } from "./components/GuestBox";
 import { CartItem } from "@store/user/types";
+import { AppDispatch } from "@store/index";
 import Card from "../card/Card";
 
 const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleView }) => {
-  const [addToCart] = useAddToCartMutation();
   const { data } = useOutletContext<OutletContextType>();
   const { isUser } = useSelector(authState);
-  const { data: items } = useGetCartQuery(
-    { user: isUser?.user_id, vendorId: data?.id },
-    { skip: !data?.id || !isUser?.user_id }
-  );
+  const skip = { skip: !data?.id || !isUser?.user_id };
+  const { data: items } = useGetCartQuery({ user: isUser?.user_id, vendorId: data?.id }, skip);
+  const [addToCart] = useAddToCartMutation();
   const [decreaseItem] = useDecreaseItemMutation();
   const [toRegPage, setToRegPage] = useState(false);
   const [unavailable, setUnavailable] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
 
   const activeCategories = useMemo(() => category.filter(({ is_active }) => is_active), [category]);
   const activeMenuItems = useMemo(() => menuItems.filter(({ is_active }) => is_active), [menuItems]);
@@ -58,6 +58,8 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
       event.stopPropagation();
       return setUnavailable(true);
     }
+
+    updateCartCache(dispatch, isUser.user_id, data.id, productData);
 
     handleAddToCart({
       event,

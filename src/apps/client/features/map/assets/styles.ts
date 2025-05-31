@@ -89,7 +89,6 @@ export const styles: StylesType = {
     transition: "transform 0.3s",
     padding: "8px 16px", // Отступы внутри кнопки
     "& .MuiButton-startIcon": {
-      // Стили для иконки если она есть
       marginRight: 2,
     },
     "&:hover": {

@@ -22,7 +22,6 @@ const Category: FC<CategoryProps> = ({ search }) => {
   const [count, setCount] = useState(1);
   const sectionRefs = useRef<HTMLDivElement[]>([]);
   const rootSection = useRef<HTMLDivElement[]>([]);
-  console.log(promo)
 
   const handleView = useCallback((item: ProductType) => {
     setIsOpen((prev) => !prev);
