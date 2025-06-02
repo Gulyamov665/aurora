@@ -62,11 +62,28 @@ export const productsApi = createApi({
       }),
       invalidatesTags: ["Products"],
     }),
+    variant: build.mutation({
+      query: (body) => ({
+        url: `v1/variant`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Products"],
+    }),
+    variantDelete: build.mutation({
+      query: (id) => ({
+        url: `v1/variant/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Products"],
+    }),
   }),
 });
 
 export type AddProductMutationType = ReturnType<typeof useAddProductMutation>;
 export type LoadImageMutation = ReturnType<typeof useUpdateImageMutation>;
+export type VariantMutationType = ReturnType<typeof useVariantMutation>;
+export type VariantDeleteMutationType = ReturnType<typeof useVariantDeleteMutation>;
 
 export const {
   useGetProductsQuery,
@@ -78,4 +95,6 @@ export const {
   useGetImagesQuery,
   useUpdateImageMutation,
   useGetImageByIdQuery,
+  useVariantMutation,
+  useVariantDeleteMutation,
 } = productsApi;

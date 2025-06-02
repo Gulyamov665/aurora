@@ -1,13 +1,17 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { ProductForm } from "../components/ProductForm";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useDeleteProductMutation, useGetImageByIdQuery, useGetProductQuery } from "@store/admin/api/productsApi";
+import { useDeleteProductMutation, useGetImageByIdQuery, useVariantDeleteMutation } from "@store/admin/api/productsApi";
+import { useGetProductQuery, useVariantMutation } from "@store/admin/api/productsApi";
 import { useUpdateImageMutation, useUpdateProductMutation } from "@store/admin/api/productsApi";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDelete } from "@/hooks/useDelete";
-import CropModal from "../components/CropModal";
 import { showImage } from "@/Utils/tools";
 import { FormValuesType } from "../types";
+import { Box, Tab, Tabs } from "@mui/material";
+import { styles } from "@/apps/common/styles/styles";
+import { ProductVariants } from "./ProductVariants";
+import CropModal from "../components/CropModal";
 
 function UpdateProduct() {
   const { id = "" } = useParams();
@@ -15,6 +19,8 @@ function UpdateProduct() {
   const { data: product, isLoading } = useGetProductQuery(id);
   const [updateProduct] = useUpdateProductMutation();
   const [deleteProduct] = useDeleteProductMutation();
+  const [addVariant] = useVariantMutation();
+  const [deleteVariant] = useVariantDeleteMutation();
   const { register, handleSubmit, reset, watch } = useForm<FormValuesType>();
   const [img, setImg] = useState<string | ArrayBuffer | null>(null);
   const [file, setFile] = useState<Blob | null>(null);
@@ -22,6 +28,7 @@ function UpdateProduct() {
   const [loadImage, { isLoading: ImageIsLoading }] = useUpdateImageMutation();
   const { deleteItem, confirmedId } = useDelete();
   const navigate = useNavigate();
+  const [tab, setTab] = useState(0);
 
   useEffect(() => {
     const handleDelete = async () => {
@@ -34,7 +41,14 @@ function UpdateProduct() {
   }, [confirmedId]);
 
   useEffect(() => {
-    reset(product);
+    reset({
+      availability: product?.availability,
+      description: product?.description,
+      id: product?.id,
+      is_active: product?.is_active,
+      name: product?.name,
+      price: product?.price,
+    });
   }, [isLoading]);
 
   const handleDeleteProduct = () => {
@@ -55,22 +69,44 @@ function UpdateProduct() {
   };
 
   const onSubmit: SubmitHandler<FormValuesType> = async (body) => {
-    delete body.photo;
     await updateProduct({ body, id });
+  };
+
+  const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
+    setTab(newValue);
   };
 
   return (
     <div className="container">
-      <ProductForm
-        register={register}
-        handleSubmit={handleSubmit}
-        handleFileChange={handleFileChangeUpdate}
-        productImage={productImage}
-        onSubmit={onSubmit}
-        deleteItem={handleDeleteProduct}
-        watch={watch}
-        ImageIsLoading={ImageIsLoading}
-      />
+      <Box sx={{ maxWidth: 1200, width: "100%", mt: 2 }}>
+        <Tabs
+          value={tab}
+          onChange={handleTabChange}
+          centered
+          TabIndicatorProps={{
+            style: { backgroundColor: "#210648" },
+          }}
+        >
+          <Tab iconPosition="start" label="Основное" sx={styles.tabStyle} />
+          <Tab iconPosition="start" label="Опции" sx={styles.tabStyle} />
+        </Tabs>
+      </Box>
+      {tab === 0 && (
+        <ProductForm
+          register={register}
+          handleSubmit={handleSubmit}
+          handleFileChange={handleFileChangeUpdate}
+          productImage={productImage}
+          onSubmit={onSubmit}
+          deleteItem={handleDeleteProduct}
+          watch={watch}
+          ImageIsLoading={ImageIsLoading}
+        />
+      )}
+
+      {tab === 1 && product?.options && (
+        <ProductVariants data={product.options} addVariant={addVariant} deleteVariant={deleteVariant} />
+      )}
 
       <CropModal img={img} setCropData={setCropData} setImg={setImg} cropData={cropData} uploadImage={uploadImage} />
     </div>

@@ -15,7 +15,7 @@ const CardViewContent: FC<CardViewContentProps> = ({ addToCart, item, count, set
           </h2>
 
           <div className="card_view_desc">
-            <p style={{ padding: 10 }}>{item.description}</p>
+            <p style={{ padding: 10, whiteSpace: "break-spaces" }}>{item.description}</p>
           </div>
         </div>
       </div>

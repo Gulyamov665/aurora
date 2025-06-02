@@ -6,6 +6,17 @@ import { NavigateFunction } from "react-router-dom";
 import { UseFormRegister, UseFormWatch } from "react-hook-form";
 import { LocationData } from "../../map/types";
 
+export interface IVariants {
+  id: number;
+  name: string;
+  price: number;
+  is_active: boolean;
+}
+export interface IOptions {
+  id: number;
+  variants: IVariants[];
+}
+
 export type ProductType = {
   id: number;
   name: string;
@@ -17,6 +28,7 @@ export type ProductType = {
   restaurant: number;
   availability: boolean;
   category: number;
+  options: IOptions;
 };
 
 export type OrderProductsProps = {

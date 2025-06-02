@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { useAddProductMutation, useLazyGetProductsQuery } from "@store/admin/api/productsApi.js";
 import { useUpdateProductMutation } from "@store/admin/api/productsApi.js";
 import { useAddCategoryMutation, useGetCategoriesQuery } from "@store/admin/api/categoryApi.js";
@@ -33,6 +33,7 @@ export default function AdminCategory() {
   const { selectedCategory: categoryId } = useSelector(modals);
   const [changeItem, setChangeItem] = useState<CategoryItemType | null>(null);
   const { setOpenAddModal } = useActions();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (categoryId) getSelectedCategory(categoryId);
@@ -105,6 +106,7 @@ export default function AdminCategory() {
             item={item}
             isActive={item.is_active}
             onChange={() => handleActiveToggle({ ...item })}
+            onClick={() => navigate(`${item.id}`)}
           />
         ))}
         <CreateModal fetch={addProduct} title="Добавить позицию" />

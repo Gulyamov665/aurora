@@ -53,6 +53,10 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
       event.stopPropagation();
       return setToRegPage(true);
     }
+    if (productData.options?.variants.length) {
+      event.stopPropagation();
+      return handleView(productData as any);
+    }
 
     if (!data.availability_orders) {
       event.stopPropagation();
@@ -92,6 +96,7 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
                         photo: filteredObj.photo,
                         name: filteredObj.name,
                         price: filteredObj.price,
+                        options: filteredObj.options,
                       }}
                       findItem={findItem}
                       decrease={decrease}

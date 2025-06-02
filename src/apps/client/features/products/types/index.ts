@@ -1,5 +1,7 @@
 import { RefObject } from "react";
-import { CategoryType, ProductType } from "../../category/types";
+import { CategoryType } from "../../category/types";
+import { ProductType } from "@store/user/types";
+import { IOptions } from "../../order/types/orderTypes";
 
 export type ProductsProps = {
   menuItems: ProductType[];
@@ -13,6 +15,7 @@ export interface ProductData {
   name: string;
   price: number;
   photo: string;
+  options: IOptions;
 }
 
 export type GuestBoxProps = {

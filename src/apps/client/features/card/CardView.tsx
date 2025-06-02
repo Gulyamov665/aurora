@@ -1,24 +1,24 @@
 import { FC } from "react";
 import { motion, AnimatePresence, useDragControls } from "framer-motion";
-import { useDispatch } from "react-redux";
-import { addCartItem } from "@/store/cartSlice";
+// import { useDispatch } from "react-redux";
+// import { addCartItem } from "@/store/cartSlice";
 import { CardViewProps } from "./types";
-import { ProductType } from "../category/types";
+// import { ProductType } from "../category/types";
 import { Dialog } from "@mui/material";
 import CardViewContent from "./components/CardViewContent";
 
 const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount }) => {
   const controls = useDragControls();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const addToCart = (item: ProductType) => {
-    const cartItem = {
-      ...item,
-      quantity: count,
-    };
-    dispatch(addCartItem(cartItem));
-    setIsOpen(false);
-  };
+  // const addToCart = (item: ProductType) => {
+  //   const cartItem = {
+  //     ...item,
+  //     quantity: count,
+  //   };
+  //   dispatch(addCartItem(cartItem));
+  //   setIsOpen(false);
+  // };
 
   return (
     <AnimatePresence>
@@ -48,7 +48,7 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
             className="card_view_motion"
           >
             {item && (
-              <CardViewContent addToCart={addToCart} item={item} count={count} setCount={setCount}></CardViewContent>
+              <CardViewContent addToCart={() => {}} item={item} count={count} setCount={setCount}></CardViewContent>
             )}
           </motion.div>
         </Dialog>
