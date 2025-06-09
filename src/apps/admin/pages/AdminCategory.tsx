@@ -18,7 +18,7 @@ import { LoadingScreen } from "../features/loading/LoadingScreen";
 import { AdminCard } from "../components/AdminCard";
 import styles from "../static/AdminCategory.module.scss";
 import AddIcon from "@mui/icons-material/Add";
-import { snack } from "@/apps/common/notistack";
+import { snack } from "@/apps/common/Notistack";
 
 export default function AdminCategory() {
   const { data: vendor, res } = useOutletContext<OutletContextType>();

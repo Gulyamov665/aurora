@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { modals } from "@store/appSlice";
 import { useActions } from "@/hooks/useActions";
 import { AddProductMutationType } from "@store/admin/api/productsApi";
-import { snack } from "@/apps/common/notistack";
+import { snack } from "@/apps/common/Notistack";
 
 interface FormData {
   name: string;

@@ -8,7 +8,7 @@ import { useDelete } from "@/hooks/useDelete";
 import CropModal from "../components/CropModal";
 import { showImage } from "@/Utils/tools";
 import { FormValuesType } from "../types";
-import { snack } from "@/apps/common/notistack";
+import { snack } from "@/apps/common/Notistack";
 
 
 function UpdateProduct() {

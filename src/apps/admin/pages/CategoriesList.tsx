@@ -6,7 +6,7 @@ import CategoryModal from "@/apps/client/components/CategoryModal";
 import styles from "../static/AdminCategory.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 import EditNoteIcon from "@mui/icons-material/EditNote";
-import { snack } from "@/apps/common/notistack";
+import { snack } from "@/apps/common/Notistack";
 
 export const CategoriesList: FC<CategoriesListType> = ({
   updatePosition,
