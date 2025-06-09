@@ -1,11 +1,12 @@
 import { ReorderPage } from "../components/ReorderPage";
 import { FC, useState } from "react";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { CategoriesListType } from ".";
 import CategoryModal from "@/apps/client/components/CategoryModal";
 import styles from "../static/AdminCategory.module.scss";
 import AddIcon from "@mui/icons-material/Add";
 import EditNoteIcon from "@mui/icons-material/EditNote";
+import { snack } from "@/apps/common/notistack";
 
 export const CategoriesList: FC<CategoriesListType> = ({
   updatePosition,
@@ -31,7 +32,7 @@ export const CategoriesList: FC<CategoriesListType> = ({
 
     await addCategory(categoryItem).unwrap();
     setShowModalCategory(!showModalCategory);
-    toast.success("Новая категория добавлена");
+    snack.success("Успех!")
   };
   const handleUpdataCategory = async () => {
     await updateCategory({

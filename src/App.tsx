@@ -9,12 +9,16 @@ import RegistrationPage from "./apps/client/features/registration/pages/Registra
 import Auth from "./apps/client/features/auth/pages/Auth";
 import { DeleteModal } from "./apps/common/DeleteModal";
 import { Main } from "./apps/client/features/main/Main";
+import AppSnackbar from "./apps/common/notistack";
+
+
 
 function App() {
   const { state } = useLocation();
 
   return (
     <>
+    
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/dashboard" element={<Login />} />
@@ -33,6 +37,7 @@ function App() {
       {/* global elements */}
       {/* <InstallPrompt /> */}
       <ToastContainer />
+      <AppSnackbar/>
       <DeleteModal />
     </>
   );

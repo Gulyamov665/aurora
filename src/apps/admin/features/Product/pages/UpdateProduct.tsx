@@ -8,6 +8,8 @@ import { useDelete } from "@/hooks/useDelete";
 import CropModal from "../components/CropModal";
 import { showImage } from "@/Utils/tools";
 import { FormValuesType } from "../types";
+import { snack } from "@/apps/common/notistack";
+
 
 function UpdateProduct() {
   const { id = "" } = useParams();
@@ -27,6 +29,7 @@ function UpdateProduct() {
     const handleDelete = async () => {
       if (confirmedId) {
         await deleteProduct(confirmedId);
+        snack.warning("Продукт успешно удален!")
         navigate(-1);
       }
     };
@@ -57,6 +60,8 @@ function UpdateProduct() {
   const onSubmit: SubmitHandler<FormValuesType> = async (body) => {
     delete body.photo;
     await updateProduct({ body, id });
+    snack.success("Продукт успешно обновлен!")
+    navigate(-1);
   };
 
   return (

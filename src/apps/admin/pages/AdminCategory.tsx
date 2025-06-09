@@ -18,6 +18,7 @@ import { LoadingScreen } from "../features/loading/LoadingScreen";
 import { AdminCard } from "../components/AdminCard";
 import styles from "../static/AdminCategory.module.scss";
 import AddIcon from "@mui/icons-material/Add";
+import { snack } from "@/apps/common/notistack";
 
 export default function AdminCategory() {
   const { data: vendor, res } = useOutletContext<OutletContextType>();
@@ -54,6 +55,8 @@ export default function AdminCategory() {
       body: updatedItem,
       id: item.id,
     }).unwrap();
+    snack.success("Успех!")
+
   };
 
   const updatePosition = async () => {

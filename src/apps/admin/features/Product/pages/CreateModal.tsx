@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { modals } from "@store/appSlice";
 import { useActions } from "@/hooks/useActions";
 import { AddProductMutationType } from "@store/admin/api/productsApi";
+import { snack } from "@/apps/common/notistack";
 
 interface FormData {
   name: string;
@@ -28,6 +29,7 @@ export const CreateModal: FC<CreateModalType> = ({ fetch, title }) => {
 
   const submit: SubmitHandler<Partial<ProductType>> = async (data) => {
     await fetch({ ...data, restaurant: addModalState.vendorId, category: addModalState.categoryId }).unwrap();
+    snack.success("Успех!")
     reset();
     onCloseAddModal();
   };
