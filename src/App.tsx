@@ -9,7 +9,7 @@ import RegistrationPage from "./apps/client/features/registration/pages/Registra
 import Auth from "./apps/client/features/auth/pages/Auth";
 import { DeleteModal } from "./apps/common/DeleteModal";
 import { Main } from "./apps/client/features/main/Main";
-import AppSnackbar from "./apps/common/notistack";
+import AppSnackbar from "./apps/common/Notistack";
 
 
 
