@@ -34,7 +34,7 @@ export type ProductType = {
 export type OrderProductsProps = {
   product: CartItem;
   decrease: () => void;
-  increase: (event: MouseEvent<HTMLButtonElement>, productData: ProductData) => void;
+  increase: (event: MouseEvent<HTMLButtonElement>, productData: ProductData, quantity: number) => void;
 };
 
 type OrderItems = {

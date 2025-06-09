@@ -22,6 +22,7 @@ export type RestaurantOrderType = {
 export interface AddToCartArgs {
   event: MouseEvent<HTMLButtonElement>;
   productData: ProductData;
+  quantity: number;
   userId: number;
   restaurantId: number;
   addToCart: (body: any) => Promise<any>; // уточни тип, если нужно

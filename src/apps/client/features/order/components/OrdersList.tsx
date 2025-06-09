@@ -28,7 +28,7 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
     deleteItem({ message: "очистить корзину ?", type: "orders", id: 1 });
   };
 
-  const increase = (event: MouseEvent<HTMLButtonElement>, productData: CartItem) => {
+  const increase = (event: MouseEvent<HTMLButtonElement>, productData: CartItem, quantity: number) => {
     if (!isUser?.user_id || !data?.id) return;
 
     updateCartCache(dispatch, isUser.user_id, data.id, productData);
@@ -36,6 +36,7 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
     handleAddToCart({
       event,
       productData,
+      quantity,
       userId: isUser?.user_id,
       restaurantId: data.id,
       addToCart,
@@ -70,7 +71,7 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
             {items.products.map((product: CartItem) => (
               <OrderProducts
                 product={product}
-                key={product.id}
+                key={product.options ? product.options.id : product.id}
                 increase={increase}
                 decrease={() => decrease(product)}
               />

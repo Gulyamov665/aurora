@@ -1,4 +1,4 @@
-import { CartItem, NominatimReverseResponse } from "@store/user/types";
+import { CartData, CartItem, NominatimReverseResponse } from "@store/user/types";
 import { ChangeEvent } from "react";
 import { AddToCartArgs } from "./types";
 import { ordersApi } from "@store/admin/api/orders";
@@ -43,15 +43,20 @@ export const formatPrice = (price: number): string => {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 };
 
-// путь поправь под себя
-
-export const handleAddToCart = async ({ event, productData, userId, restaurantId, addToCart }: AddToCartArgs) => {
+export const handleAddToCart = async ({
+  event,
+  productData,
+  quantity,
+  userId,
+  restaurantId,
+  addToCart,
+}: AddToCartArgs) => {
   try {
     event.stopPropagation();
 
     const cartItem: CartItem = {
       ...productData,
-      quantity: 1,
+      quantity: quantity,
     };
 
     const body = {
@@ -90,12 +95,33 @@ export const getCookie = (name: string): string | null => {
 
 export const updateCartCache = (dispatch: AppDispatch, userId: number, vendorId: number, product: ProductData) => {
   dispatch(
-    ordersApi.util.updateQueryData("getCart", { user: userId, vendorId }, (draft: any) => {
+    ordersApi.util.updateQueryData("getCart", { user: userId, vendorId }, (draft: CartData) => {
       if (!draft.products) draft.products = [];
 
-      const existing = draft.products.find((item: any) => item.id === product.id);
-      if (existing) {
-        existing.quantity += 1;
+      // const existing = draft.products.find((item) => item.id === product.id);
+      // if (existing && existing.quantity) {
+      //   existing.quantity += 1;
+      // } else {
+      //   draft.products.push({ ...product, quantity: 1 });
+      // }
+
+      const existingProduct = draft.products.find((draftProduct) => {
+        return (
+          draftProduct.id === product.id &&
+          ((draftProduct.options && product.options && draftProduct.options.id === product.options.id) ||
+            (!draftProduct.options && !product.options))
+        );
+      });
+      if (existingProduct?.options && product.options) {
+        // Если продукт с опциями уже существует, обновляем количество
+        if (existingProduct.options.id === product.options.id && existingProduct.quantity) {
+          existingProduct.quantity += 1;
+        } else {
+          // Если опции разные, добавляем новый продукт
+          draft.products.push(product);
+        }
+      } else if (existingProduct && existingProduct.quantity) {
+        existingProduct.quantity += 1;
       } else {
         draft.products.push({ ...product, quantity: 1 });
       }

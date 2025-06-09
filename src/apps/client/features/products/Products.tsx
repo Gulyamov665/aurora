@@ -12,7 +12,7 @@ import { CartItem } from "@store/user/types";
 import { AppDispatch } from "@store/index";
 import Card from "../card/Card";
 
-const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleView }) => {
+export const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleView }) => {
   const { data } = useOutletContext<OutletContextType>();
   const { isUser } = useSelector(authState);
   const skip = { skip: !data?.id || !isUser?.user_id };
@@ -48,14 +48,16 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
     });
   };
 
-  const onClick = async (event: MouseEvent<HTMLButtonElement>, productData: ProductData) => {
+  const onClick = async (event: MouseEvent<HTMLButtonElement>, productData: ProductData, quantity: number) => {
     if (!isUser?.user_id || !data?.id) {
       event.stopPropagation();
       return setToRegPage(true);
     }
-    if (productData.options?.variants.length) {
+    const product = activeMenuItems.find((item) => item.id === productData.id);
+
+    if (product?.options?.variants.length) {
       event.stopPropagation();
-      return handleView(productData as any);
+      return handleView(product);
     }
 
     if (!data.availability_orders) {
@@ -68,6 +70,7 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
     handleAddToCart({
       event,
       productData,
+      quantity,
       userId: isUser?.user_id,
       restaurantId: data.id,
       addToCart,
@@ -96,7 +99,6 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
                         photo: filteredObj.photo,
                         name: filteredObj.name,
                         price: filteredObj.price,
-                        options: filteredObj.options,
                       }}
                       findItem={findItem}
                       decrease={decrease}
@@ -117,5 +119,3 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
     </>
   );
 };
-
-export default Products;

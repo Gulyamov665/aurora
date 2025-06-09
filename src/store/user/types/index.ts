@@ -1,4 +1,4 @@
-import { IOptions, ProductType } from "@/apps/client/features/order/types/orderTypes";
+import { IVariants, ProductType } from "@/apps/client/features/order/types/orderTypes";
 
 export type CartType = {
   totalPrice: number;
@@ -139,7 +139,7 @@ export interface CartItem {
   price: number;
   quantity?: number;
   photo: string;
-  options: IOptions
+  options?: IVariants | null;
 }
 
 export interface CartData {

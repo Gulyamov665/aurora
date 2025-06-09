@@ -2,8 +2,8 @@ import { FC, useState } from "react";
 import { CardType } from "./types";
 import { formatPrice } from "@/Utils/tools";
 import { CounterBox } from "@/apps/common/CounterBox";
-import noDishPhoto from "@/assets/nodish.png";
 import { Grow } from "@mui/material";
+import noDishPhoto from "@/assets/nodish.png";
 
 const Card: FC<CardType> = ({ product, addToCart, findItem, decrease }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -33,14 +33,14 @@ const Card: FC<CardType> = ({ product, addToCart, findItem, decrease }) => {
             <Grow in key={product.id} timeout={800}>
               <span className="btn card-btn-order" onClick={(e) => e.stopPropagation()}>
                 <CounterBox
-                  increase={(e) => addToCart(e, product)}
+                  increase={(e) => addToCart(e, product, 1)}
                   decrease={(e) => decrease(e, product.id)}
                   quantity={findItem(product.id).quantity}
                 />
               </span>
             </Grow>
           ) : (
-            <button className="btn card-btn-order" onClick={(e) => addToCart(e, product)}>
+            <button className="btn card-btn-order" onClick={(e) => addToCart(e, product, 1)}>
               <b>Добавить</b>
             </button>
           )}
