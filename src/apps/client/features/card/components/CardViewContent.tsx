@@ -1,6 +1,5 @@
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import CurrencyFormat from "react-currency-format";
 import { FC } from "react";
 import { CardViewContentProps } from "../types";
 import { RadioGroupCustom } from "@/apps/common/RadioGroup";
@@ -14,6 +13,7 @@ export const CardViewContent: FC<CardViewContentProps> = ({
   onAdd,
   selectedVariant,
   setSelectedVariant,
+  option,
 }) => {
   return (
     <>
@@ -53,7 +53,7 @@ export const CardViewContent: FC<CardViewContentProps> = ({
                 color: "#333333",
               }}
             >
-              <CurrencyFormat value={item.price * count} displayType={"text"} thousandSeparator={" "} suffix={" Сум"} />
+              {option ? (option.price * count).toLocaleString() : (item.price * count).toLocaleString()}
             </strong>
           </button>
 

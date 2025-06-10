@@ -34,8 +34,8 @@ const Card: FC<CardType> = ({ product, addToCart, findItem, decrease }) => {
               <span className="btn card-btn-order" onClick={(e) => e.stopPropagation()}>
                 <CounterBox
                   increase={(e) => addToCart(e, product, 1)}
-                  decrease={(e) => decrease(e, product.id)}
-                  quantity={findItem(product.id).quantity}
+                  decrease={(e) => decrease(e, product)}
+                  quantity={findItem(product.id)}
                 />
               </span>
             </Grow>

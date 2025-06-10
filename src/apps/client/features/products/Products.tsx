@@ -33,16 +33,20 @@ export const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, 
     [sectionRefs]
   );
 
-  const findItem = (id: number) => {
-    return items?.products?.find((item: CartItem) => item.id === id);
+  const findItem = (id: number): number => {
+    if (!items?.products) return 0;
+
+    return items.products
+      .filter((item: CartItem) => item.id === id)
+      .reduce((sum: number, item: CartItem): number => sum + (item.quantity ?? 0), 0);
   };
 
-  const decrease = (e: MouseEvent<HTMLButtonElement>, id: number) => {
+  const decrease = (e: MouseEvent<HTMLButtonElement>, product: CartItem) => {
     if (!isUser?.user_id || !data?.id) return;
     e.stopPropagation();
 
     decreaseItem({
-      product_id: id,
+      product,
       user_id: isUser?.user_id,
       restaurant_id: data.id,
     });

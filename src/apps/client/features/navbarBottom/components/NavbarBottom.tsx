@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 import { NavbarBottomProps } from "../interfaces/interface";
 import styles from "../assets/NavbarBottom.module.css";
 
-export default function NavbarBottom({ items, isUser, current, visible, user }: NavbarBottomProps) {
+export const NavbarBottom = ({ items, isUser, current, visible, user, itemsQuantity }: NavbarBottomProps) => {
   return (
     <div className={`${styles["navbar"]} ${visible ? styles["show"] : styles["hide"]}`}>
       <div className="container">
         <div className={styles["icons-list"]}>
-          <p className={`${styles["list-links"]} ${styles["counter"]}`}>{isUser && items?.products?.length}</p>
+          <p className={`${styles["list-links"]} ${styles["counter"]}`}>{isUser && itemsQuantity()}</p>
 
           <Link
             to={current == "cart" && !user?.location ? "maps" : current == "cart" ? "confirm" : "cart"}
@@ -21,4 +21,4 @@ export default function NavbarBottom({ items, isUser, current, visible, user }: 
       </div>
     </div>
   );
-}
+};

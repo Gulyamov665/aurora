@@ -6,8 +6,8 @@ import { IVariants } from "../../order/types/orderTypes";
 
 export type CardType = {
   product: CartItem;
-  findItem: (id: number) => CartItem;
-  decrease: (event: MouseEvent<HTMLButtonElement>, productData: number) => void;
+  findItem: (id: number) => number;
+  decrease: (event: MouseEvent<HTMLButtonElement>, productData: CartItem) => void;
   addToCart: (event: MouseEvent<HTMLButtonElement>, productData: ProductData, quantity: number) => Promise<void>;
 };
 

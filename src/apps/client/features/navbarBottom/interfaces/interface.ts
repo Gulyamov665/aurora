@@ -14,6 +14,7 @@ export interface NavbarBottomProps {
   current?: string;
   visible: boolean;
   user?: UserInfoType;
+  itemsQuantity: () => number;
 }
 
 export interface NavbarBottomPageProps {
