@@ -31,7 +31,7 @@ export const OrderDetail: React.FC<OrderDetailProps> = ({ order }) => {
       <List>
         {order.products.map((product) => (
           <ListItem
-            key={product.id}
+            key={product.options ? product.options.id : product.id}
             sx={{
               py: 1,
               display: "flex",
@@ -39,10 +39,13 @@ export const OrderDetail: React.FC<OrderDetailProps> = ({ order }) => {
             }}
           >
             <Typography variant="body1">
-              {product.name} x{product.quantity}
+              {product.name} {product.options && product.options.name} x {product.quantity}
             </Typography>
             <Typography variant="body1" fontWeight={500}>
-              {product.price.toLocaleString()} сум
+              {product.options
+                ? (product.options.price * product.quantity).toLocaleString()
+                : (product.price * product.quantity).toLocaleString()}{" "}
+              сум
             </Typography>
           </ListItem>
         ))}
@@ -53,7 +56,7 @@ export const OrderDetail: React.FC<OrderDetailProps> = ({ order }) => {
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <Typography variant="h6">Итого:</Typography>
         <Typography variant="h6" color="primary">
-          {order.total_price.toLocaleString()} сум
+          {parseInt(order.total_price).toLocaleString()} сум
         </Typography>
       </Box>
     </div>

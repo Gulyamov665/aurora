@@ -84,6 +84,7 @@ type OrderProduct = {
   name: string;
   price: number;
   quantity: number;
+  options?: IVariants;
   photo: string;
 };
 

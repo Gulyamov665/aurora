@@ -51,7 +51,7 @@ export const ConfirmOrder: FC<ConfirmOrderProps> = ({ navigate, state, handleCre
         </Typography>
         <Divider />
         <Typography variant="h6" sx={{ mb: 1, mt: 1 }}>
-          Итого: {items?.totalPrice + fee} сум
+          Итого: {(items?.totalPrice + fee).toLocaleString()} сум
         </Typography>
         <Box display="flex" justifyContent="center" alignItems="center" mt={2}>
           <OrderButton onClick={handleCreateOrder} navigate={navigate} />

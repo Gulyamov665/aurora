@@ -16,7 +16,7 @@ const Sidebar: FC<SideBarProps> = ({ open, logout, handleSidebar }) => {
   return (
     <Drawer
       anchor="left"
-      variant="persistent"
+      variant="temporary"
       open={open}
       onClose={handleSidebar}
       PaperProps={{

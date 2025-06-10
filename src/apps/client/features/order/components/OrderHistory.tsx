@@ -21,7 +21,12 @@ export const OrderHistory: React.FC<OrderHistoryProps> = ({ order }) => {
       </Box>
       <AvatarGroup max={4}>
         {order.products.map((product) => (
-          <Avatar sx={{ width: 30, height: 30 }} alt={product.name} src={product.photo || noPhoto} key={product.id} />
+          <Avatar
+            sx={{ width: 30, height: 30 }}
+            alt={product.name}
+            src={product.photo || noPhoto}
+            key={product.options ? product.options.id : product.id}
+          />
         ))}
       </AvatarGroup>
 
