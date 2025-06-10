@@ -497,6 +497,7 @@ code {
     max-height: 90dvh;
     overflow: scroll;
     display: block;
+    touch-action: none;
   }
   .card_view_content {
     width: 100%;
