@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
-import { motion, AnimatePresence, useDragControls } from "framer-motion";
+// import { motion, AnimatePresence, useDragControls } from "framer-motion";
 import { CardViewProps } from "./types";
-import { Dialog } from "@mui/material";
+// import { Dialog } from "@mui/material";
 import { CardViewContent } from "./components/CardViewContent";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { CardViewContentFullSize } from "./components/CardViewContentFullSize";
@@ -21,7 +21,7 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
   const [addToCart] = useAddToCartMutation();
   const [selectedVariant, setSelectedVariant] = useState<number | null>(null);
   const [option, setOption] = useState<IVariants | null>(null);
-  const controls = useDragControls();
+  // const controls = useDragControls();
   const breakpoint = useBreakpoint();
   const dispatch = useDispatch<AppDispatch>();
 
