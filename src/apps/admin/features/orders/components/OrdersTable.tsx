@@ -94,7 +94,7 @@ const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading, setDetails, getOrd
                 <TableRow key={row.id}>
                   <TableCell>{row.id}</TableCell>
                   <TableCell>{row.created_by}</TableCell>
-                  <TableCell>{row.total_price} UZS</TableCell>
+                  <TableCell>{parseInt(row.total_price).toLocaleString()} UZS</TableCell>
                   <TableCell>{getStatusChip(row.status)}</TableCell>
                   <TableCell>{row.courier ? row.courier.username : "Не назначен"}</TableCell>
                   <TableCell>
