@@ -16,19 +16,21 @@ export const RadioGroupCustom: React.FC<RadioGroupCustomProps> = ({ data, select
     <FormControl>
       <FormLabel>На выбор</FormLabel>
       <RadioGroup value={selectedVariant} onChange={(e) => setSelectedVariant(parseInt(e.target.value))}>
-        {data?.variants?.map((variant) => (
-          <FormControlLabel
-            key={variant.id}
-            value={variant.id}
-            control={<Radio />}
-            label={
-              <div>
-                <b>{variant.name}: </b>
-                {variant.price} Сум
-              </div>
-            }
-          />
-        ))}
+        {data?.variants
+          ?.filter((variant) => variant.is_active)
+          .map((variant) => (
+            <FormControlLabel
+              key={variant.id}
+              value={variant.id}
+              control={<Radio />}
+              label={
+                <div>
+                  <b>{variant.name}: </b>
+                  {variant.price} Сум
+                </div>
+              }
+            />
+          ))}
       </RadioGroup>
     </FormControl>
   );

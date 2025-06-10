@@ -27,7 +27,8 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
   // устанавливаем значение поумолчанию варианта при открытии модального окна
   useEffect(() => {
     if (item && item.options?.variants.length > 0) {
-      setSelectedVariant(item.options.variants[0].id);
+      const filteredVariants = item.options.variants.filter((v) => v.is_active);
+      setSelectedVariant(filteredVariants[0].id);
     }
   }, [item]);
 

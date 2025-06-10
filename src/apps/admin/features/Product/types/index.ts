@@ -34,6 +34,8 @@ export interface ProductVariantsProps {
   data: IOptions;
   addVariant: VariantMutationType[0];
   deleteVariant: VariantDeleteMutationType[0];
+  deleteResult: VariantDeleteMutationType[1];
+  variantGroup: number;
 }
 
 export type Variant = Record<string, string>;
@@ -43,7 +45,9 @@ export type ProductFormValues = {
 };
 export interface OptionsListProps {
   data: IOptions;
-  onDelete: (id: number) => Promise<void>;
+  onDelete: ({ message, type, id }: { message: string; type: string; id: number }) => void;
+  pendingId: number | null;
+  deleteResult: VariantDeleteMutationType[1];
 }
 
 export interface VariantsFormProps {

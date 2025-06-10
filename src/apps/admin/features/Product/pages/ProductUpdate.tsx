@@ -20,19 +20,19 @@ function UpdateProduct() {
   const [updateProduct] = useUpdateProductMutation();
   const [deleteProduct] = useDeleteProductMutation();
   const [addVariant] = useVariantMutation();
-  const [deleteVariant] = useVariantDeleteMutation();
+  const [deleteVariant, deleteResult] = useVariantDeleteMutation();
   const { register, handleSubmit, reset, watch } = useForm<FormValuesType>();
   const [img, setImg] = useState<string | ArrayBuffer | null>(null);
   const [file, setFile] = useState<Blob | null>(null);
   const [cropData, setCropData] = useState<Cropper.Data | null>(null);
   const [loadImage, { isLoading: ImageIsLoading }] = useUpdateImageMutation();
-  const { deleteItem, confirmedId } = useDelete();
+  const { deleteItem, confirmedId, type } = useDelete();
   const navigate = useNavigate();
   const [tab, setTab] = useState(0);
 
   useEffect(() => {
     const handleDelete = async () => {
-      if (confirmedId) {
+      if (confirmedId && type === "create-product") {
         await deleteProduct(confirmedId);
         navigate(-1);
       }
@@ -105,7 +105,13 @@ function UpdateProduct() {
       )}
 
       {tab === 1 && product?.options && (
-        <ProductVariants data={product.options} addVariant={addVariant} deleteVariant={deleteVariant} />
+        <ProductVariants
+          data={product.options}
+          addVariant={addVariant}
+          deleteVariant={deleteVariant}
+          deleteResult={deleteResult}
+          variantGroup={product?.options.id}
+        />
       )}
 
       <CropModal img={img} setCropData={setCropData} setImg={setImg} cropData={cropData} uploadImage={uploadImage} />
