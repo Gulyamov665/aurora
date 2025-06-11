@@ -1,5 +1,9 @@
 import { IOptions } from "@/apps/client/features/order/types/orderTypes";
-import { VariantDeleteMutationType, VariantMutationType } from "@store/admin/api/productsApi";
+import {
+  VariantDeleteMutationType,
+  VariantMutationType,
+  VariantToggleActiveMutationType,
+} from "@store/admin/api/productsApi";
 import { ChangeEvent } from "react";
 import { SubmitHandler, UseFormHandleSubmit, UseFormRegister, UseFormWatch } from "react-hook-form";
 
@@ -36,6 +40,7 @@ export interface ProductVariantsProps {
   deleteVariant: VariantDeleteMutationType[0];
   deleteResult: VariantDeleteMutationType[1];
   variantGroup: number;
+  toggleActive: VariantToggleActiveMutationType[0];
 }
 
 export type Variant = Record<string, string>;
@@ -48,6 +53,7 @@ export interface OptionsListProps {
   onDelete: ({ message, type, id }: { message: string; type: string; id: number }) => void;
   pendingId: number | null;
   deleteResult: VariantDeleteMutationType[1];
+  toggleActive: VariantToggleActiveMutationType[0];
 }
 
 export interface VariantsFormProps {

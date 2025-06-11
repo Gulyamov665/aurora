@@ -13,6 +13,7 @@ export const ProductVariants: React.FC<ProductVariantsProps> = ({
   deleteVariant,
   deleteResult,
   variantGroup,
+  toggleActive,
 }) => {
   const { control, handleSubmit, register, reset } = useForm<ProductFormValues>({ defaultValues: { variants: [] } });
   const { confirmedId, deleteItem, id } = useDelete();
@@ -57,7 +58,13 @@ export const ProductVariants: React.FC<ProductVariantsProps> = ({
         onSubmit={onSubmit}
       />
 
-      <OptionsList data={data} onDelete={onDelete} pendingId={pendingId} deleteResult={deleteResult} />
+      <OptionsList
+        data={data}
+        onDelete={onDelete}
+        pendingId={pendingId}
+        deleteResult={deleteResult}
+        toggleActive={toggleActive}
+      />
     </Box>
   );
 };

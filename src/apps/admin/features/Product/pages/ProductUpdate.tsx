@@ -1,7 +1,12 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { ProductForm } from "../components/ProductForm";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useDeleteProductMutation, useGetImageByIdQuery, useVariantDeleteMutation } from "@store/admin/api/productsApi";
+import {
+  useDeleteProductMutation,
+  useGetImageByIdQuery,
+  useVariantDeleteMutation,
+  useVariantToggleActiveMutation,
+} from "@store/admin/api/productsApi";
 import { useGetProductQuery, useVariantMutation } from "@store/admin/api/productsApi";
 import { useUpdateImageMutation, useUpdateProductMutation } from "@store/admin/api/productsApi";
 import { useNavigate, useParams } from "react-router-dom";
@@ -20,6 +25,7 @@ function UpdateProduct() {
   const [updateProduct] = useUpdateProductMutation();
   const [deleteProduct] = useDeleteProductMutation();
   const [addVariant] = useVariantMutation();
+  const [toggleActive] = useVariantToggleActiveMutation();
   const [deleteVariant, deleteResult] = useVariantDeleteMutation();
   const { register, handleSubmit, reset, watch } = useForm<FormValuesType>();
   const [img, setImg] = useState<string | ArrayBuffer | null>(null);
@@ -111,6 +117,7 @@ function UpdateProduct() {
           deleteVariant={deleteVariant}
           deleteResult={deleteResult}
           variantGroup={product?.options.id}
+          toggleActive={toggleActive}
         />
       )}
 

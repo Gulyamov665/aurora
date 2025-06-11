@@ -77,6 +77,13 @@ export const productsApi = createApi({
       }),
       invalidatesTags: ["Products"],
     }),
+    variantToggleActive: build.mutation({
+      query: (id) => ({
+        url: `v1/variant/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["Products"],
+    }),
   }),
 });
 
@@ -84,6 +91,7 @@ export type AddProductMutationType = ReturnType<typeof useAddProductMutation>;
 export type LoadImageMutation = ReturnType<typeof useUpdateImageMutation>;
 export type VariantMutationType = ReturnType<typeof useVariantMutation>;
 export type VariantDeleteMutationType = ReturnType<typeof useVariantDeleteMutation>;
+export type VariantToggleActiveMutationType = ReturnType<typeof useVariantToggleActiveMutation>;
 
 export const {
   useGetProductsQuery,
@@ -97,4 +105,5 @@ export const {
   useGetImageByIdQuery,
   useVariantMutation,
   useVariantDeleteMutation,
+  useVariantToggleActiveMutation,
 } = productsApi;

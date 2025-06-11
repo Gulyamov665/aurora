@@ -4,20 +4,28 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useGetOrderByIdQuery } from "@store/admin/api/orders";
 import { Box } from "@mui/material";
 import { ArrowBack } from "@mui/icons-material";
-import Loading from "../../loading/Loading";
 import { useSocket } from "@/hooks/useSocket";
 import { OrderAnimation } from "../components/OrderAnimation";
 import { OrderCard } from "./MyOrders";
+import { OrdersType } from "@store/user/types";
+import { useSelector } from "react-redux";
+import { authState } from "@store/user/slices/authSlice";
+import Loading from "../../loading/Loading";
 
 export const OrderDetailPage: React.FC = () => {
   const { id } = useParams();
   const { data: order, refetch } = useGetOrderByIdQuery(Number(id), { skip: !id });
+  const { isUser } = useSelector(authState);
   const socket = useSocket();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (socket) {
-      socket.on("update_order", () => refetch());
+      const handleRefetchOrder = (order: OrdersType) => {
+        if (order.user_id === isUser?.user_id) refetch();
+      };
+
+      socket.on("update_order", handleRefetchOrder);
     }
     return () => {
       socket?.off("update_order");

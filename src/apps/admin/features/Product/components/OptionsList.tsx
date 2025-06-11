@@ -18,7 +18,7 @@ const StyledTableRow = styled(TableRow, {
   }),
 }));
 
-export const OptionsList: React.FC<OptionsListProps> = ({ data, onDelete, pendingId, deleteResult }) => {
+export const OptionsList: React.FC<OptionsListProps> = ({ data, onDelete, pendingId, deleteResult, toggleActive }) => {
   return (
     <Box mt={3} maxWidth={800} mx="auto">
       <TableContainer component={Paper}>
@@ -49,7 +49,7 @@ export const OptionsList: React.FC<OptionsListProps> = ({ data, onDelete, pendin
                   <TableCell sx={{ width: 60 }} align="center">
                     <FormControlLabel
                       label=""
-                      control={<IOSSwitch checked={variant.is_active} onChange={() => {}} />}
+                      control={<IOSSwitch checked={variant.is_active} onChange={() => toggleActive(variant.id)} />}
                     />
                   </TableCell>
                   <TableCell>
