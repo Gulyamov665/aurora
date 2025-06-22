@@ -7,8 +7,18 @@ import { OrderKey, OrdersTableProps } from "../types";
 import { getStatusChip } from "./Statuses";
 import { LoadingScreen } from "../../loading/LoadingScreen";
 import { Box, CircularProgress, Fade } from "@mui/material";
+import EnableSoundButton from "./EnableSoundButton";
 
-const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading, setDetails, getOrderById, isFetching }) => {
+const OrdersTable: FC<OrdersTableProps> = ({
+  data,
+  isLoading,
+  setDetails,
+  getOrderById,
+  isFetching,
+  audioRef,
+  setSoundAllowed,
+  soundAllowed,
+}) => {
   const [sortBy, setSortBy] = useState<OrderKey>("id");
   const [order, setOrder] = useState<"asc" | "desc">("desc");
 
@@ -42,9 +52,12 @@ const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading, setDetails, getOrd
   return (
     <Card elevation={6} sx={{ mt: 3, mb: 4, width: "100%", overflow: "scroll" }}>
       <CardContent>
-        <Typography variant="h6" gutterBottom>
-          Заказы
-        </Typography>
+        <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"}>
+          <Typography variant="h6" gutterBottom>
+            Заказы
+          </Typography>
+          <EnableSoundButton audioRef={audioRef} setSoundAllowed={setSoundAllowed} soundAllowed={soundAllowed} />
+        </Box>
         <Table>
           <TableHead>
             <TableRow>

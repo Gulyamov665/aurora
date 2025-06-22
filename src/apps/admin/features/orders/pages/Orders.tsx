@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useLazyGetOrderByIdQuery, useLazyGetOrdersQuery } from "@store/admin/api/orders";
 import { useOutletContext } from "react-router-dom";
 import { OutletContextType } from "@/apps/client/pages";
@@ -8,6 +8,8 @@ import { OrdersType } from "@store/user/types";
 import OrdersTable from "../components/OrdersTable";
 import { MaterialModal } from "@/apps/common/Modal";
 import { OrderDetails } from "../components/OrderDetails";
+//@ts-ignore
+import notificationSound from "@/assets/notification/notification.mp3";
 
 const Orders: FC = () => {
   const { data } = useOutletContext<OutletContextType>();
@@ -17,6 +19,12 @@ const Orders: FC = () => {
   const [getOrderById, { data: orderData, isFetching: orderFetch }] = useLazyGetOrderByIdQuery();
   const { ref, inView } = useInView({ threshold: 0.5 });
   const [details, setDetails] = useState(false);
+  const [soundAllowed, setSoundAllowed] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    audioRef.current = new Audio(notificationSound);
+  }, []);
 
   useEffect(() => {
     if (data && page === 1) {
@@ -46,7 +54,18 @@ const Orders: FC = () => {
     }
   }, [lazyData]);
 
-  useOrderSocket({ vendorId: data?.id, onOrderUpdate: () => getOrders({ vendorId: data.id, page: 1, limit: 10 }) });
+  useOrderSocket({
+    vendorId: data?.id,
+    onOrderUpdate: () => {
+      getOrders({ vendorId: data.id, page: 1, limit: 10 });
+      if (soundAllowed && audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play().catch((e) => {
+          console.warn("Не удалось воспроизвести звук", e);
+        });
+      }
+    },
+  });
 
   return (
     <div className="container">
@@ -56,6 +75,9 @@ const Orders: FC = () => {
         setDetails={setDetails}
         getOrderById={getOrderById}
         isFetching={isFetching}
+        setSoundAllowed={setSoundAllowed}
+        audioRef={audioRef}
+        soundAllowed={soundAllowed}
       />
       <div ref={ref} style={{ height: 20 }} />
 
