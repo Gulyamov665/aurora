@@ -1,10 +1,6 @@
 import { FC, useEffect, useRef, useState } from "react";
-import {
-  useChangeOrderMutation,
-  useLazyGetOrderByIdQuery,
-  useLazyGetOrdersQuery,
-  useUpdateOrderMutation,
-} from "@store/admin/api/orders";
+import { useChangeOrderMutation, useLazyGetOrderByIdQuery } from "@store/admin/api/orders";
+import { useLazyGetOrdersQuery, useUpdateOrderMutation } from "@store/admin/api/orders";
 import { useOutletContext } from "react-router-dom";
 import { OutletContextType } from "@/apps/client/pages";
 import { useOrderSocket } from "@/hooks/useOrderSocket";
@@ -22,8 +18,7 @@ import { MaterialModal } from "../../../../common/Modal";
 import { OrderProductEdit } from "../components/OrderProductEdit";
 import { useLazyGetProductsQuery } from "@store/admin/api/productsApi";
 import { FormProvider, useForm } from "react-hook-form";
-
-// import { useGetProductsQuery } from "@store/admin/api/productsApi";
+import { styles } from "../assets/styles";
 
 const Orders: FC = () => {
   const { data } = useOutletContext<OutletContextType>();
@@ -89,7 +84,6 @@ const Orders: FC = () => {
   });
 
   const onEyeClick = async (id: number) => {
-    console.log(data.name);
     setDrawerOpen(true); // это теперь setDrawerOpen
     await getOrderById(id).unwrap();
     await getProducts({ res: data.name }).unwrap();
@@ -114,9 +108,9 @@ const Orders: FC = () => {
   };
 
   return (
-    <div
+    <Box
       className="container"
-      style={{
+      sx={{
         transition: "0.3s",
         marginRight: drawerOpen ? "495px" : "80px",
       }}
@@ -130,30 +124,16 @@ const Orders: FC = () => {
         audioRef={audioRef}
         soundAllowed={soundAllowed}
       />
+
       <div ref={ref} style={{ height: 20 }} />
 
-      <Drawer
-        anchor="right"
-        open={drawerOpen}
-        variant="persistent"
-        sx={{
-          width: 500,
-          flexShrink: 0,
-
-          "& .MuiDrawer-paper": {
-            width: 500,
-            boxSizing: "border-box",
-            pt: 2,
-            mt: 10,
-            borderRadius: "20px",
-          },
-        }}
-      >
+      <Drawer anchor="right" open={drawerOpen} variant="persistent" sx={styles.drawerStyles}>
         <Box display="flex" justifyContent="flex-end" px={2}>
           <IconButton onClick={() => setDrawerOpen(false)}>
             <CloseIcon />
           </IconButton>
         </Box>
+
         <OrderDetails
           setOpenModal={setOpenModal}
           order={orderData}
@@ -175,7 +155,7 @@ const Orders: FC = () => {
           </MaterialModal>
         </form>
       </FormProvider>
-    </div>
+    </Box>
   );
 };
 

@@ -14,20 +14,27 @@ import { useForm, Controller } from "react-hook-form";
 import { ORDER_STATUS_LABELS } from "./Statuses";
 import { UpdateOrderMutationType } from "@store/admin/api/orders";
 
-
 interface OrderDetailsProps {
   order?: OrdersType;
   orderFetch: boolean;
   couriersResult: LazyGetCouriersQueryType[1];
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
-  updateOrder: UpdateOrderMutationType[0]
-  
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  updateOrder: UpdateOrderMutationType[0];
 }
 
-export const OrderDetails: React.FC<OrderDetailsProps> = ({ order, orderFetch, couriersResult, setOpenModal, updateOrder }) => {
-
-  
-  const { control, handleSubmit, reset, formState: { isDirty }, } = useForm({
+export const OrderDetails: React.FC<OrderDetailsProps> = ({
+  order,
+  orderFetch,
+  couriersResult,
+  setOpenModal,
+  updateOrder,
+}) => {
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { isDirty },
+  } = useForm({
     defaultValues: {
       courier_id: order?.courier?.id || 0,
       status: order?.status || "",
@@ -41,21 +48,19 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ order, orderFetch, c
       (courier: UserInfoType) => courier.id === data.courier_id
     );
 
-    console.log(courier)
+    console.log(courier);
     try {
-
       await updateOrder({
-      id: order?.id,
-      body: {
-        status: data.status,
-        courier: {
-          id: data.courier_id,
-          username: `${courier?.first_name}  ${courier?.last_name}`,
-          phone_number: courier?.phone,
-
+        id: order?.id,
+        body: {
+          status: data.status,
+          courier: {
+            id: data.courier_id,
+            username: `${courier?.first_name}  ${courier?.last_name}`,
+            phone_number: courier?.phone,
+          },
         },
-      },
-    }).unwrap()
+      }).unwrap();
       // alert("Обновлен");
     } catch (error) {
       console.error("Ошибка обновления:", error);
@@ -157,6 +162,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ order, orderFetch, c
                 render={({ field }) => (
                   <FormControl fullWidth size="small">
                     <Select {...field}>
+                      <MenuItem value={0}>Не выбран</MenuItem>
                       {couriersResult?.data?.couriers?.map((courier: EditorType) => (
                         <MenuItem key={courier.id} value={courier.id}>
                           {courier.first_name} {courier.last_name}
@@ -192,7 +198,9 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({ order, orderFetch, c
             </Box>
           </Box>
           <Box display="flex" alignItems="center" gap={1} mt={4}>
-            <Button type="submit" variant="contained" color="success" disabled={!isDirty}>Сохранить</Button>
+            <Button type="submit" variant="contained" color="success" disabled={!isDirty}>
+              Сохранить
+            </Button>
           </Box>
         </CardContent>
       </Card>
