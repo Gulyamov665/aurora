@@ -92,6 +92,7 @@ export type LoadImageMutation = ReturnType<typeof useUpdateImageMutation>;
 export type VariantMutationType = ReturnType<typeof useVariantMutation>;
 export type VariantDeleteMutationType = ReturnType<typeof useVariantDeleteMutation>;
 export type VariantToggleActiveMutationType = ReturnType<typeof useVariantToggleActiveMutation>;
+export type LazyGetProductsQueryType = ReturnType<typeof useLazyGetProductsQuery>;
 
 export const {
   useGetProductsQuery,

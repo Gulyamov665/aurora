@@ -72,6 +72,29 @@ export const EmployeeFrom: React.FC<FormStaffProps> = ({ rolesData, handleSubmit
               />
 
               <Controller
+                name="last_name"
+                defaultValue=""
+                control={control}
+                rules={{
+                  required: "Это обязательное поле",
+                }}
+                render={({ fieldState, field }) => (
+                  <FormControl fullWidth variant="outlined" error={!!fieldState.error}>
+                    <InputLabel htmlFor="last_name">Фамилия</InputLabel>
+                    <OutlinedInput id="last_name" label="Фамилия" {...field} />
+                    <Fade
+                      in={!!fieldState.error}
+                      timeout={{ enter: 500, exit: 300 }}
+                      style={{ height: 20 }}
+                      unmountOnExit={false}
+                    >
+                      <FormHelperText sx={{ marginTop: 0 }}>{fieldState.error?.message}</FormHelperText>
+                    </Fade>
+                  </FormControl>
+                )}
+              />
+
+              <Controller
                 name="phone"
                 defaultValue=""
                 control={control}

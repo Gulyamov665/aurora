@@ -28,6 +28,7 @@ export type ProductType = {
   restaurant: number;
   availability: boolean;
   category: number;
+  category_label: string;
   options: IOptions;
 };
 

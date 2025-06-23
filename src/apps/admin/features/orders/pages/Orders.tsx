@@ -1,30 +1,51 @@
 import { FC, useEffect, useRef, useState } from "react";
-import { useLazyGetOrderByIdQuery, useLazyGetOrdersQuery } from "@store/admin/api/orders";
+import {
+  useChangeOrderMutation,
+  useLazyGetOrderByIdQuery,
+  useLazyGetOrdersQuery,
+  useUpdateOrderMutation,
+} from "@store/admin/api/orders";
 import { useOutletContext } from "react-router-dom";
 import { OutletContextType } from "@/apps/client/pages";
 import { useOrderSocket } from "@/hooks/useOrderSocket";
 import { useInView } from "react-intersection-observer";
 import { OrdersType } from "@store/user/types";
 import OrdersTable from "../components/OrdersTable";
-import { MaterialModal } from "@/apps/common/Modal";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 import { OrderDetails } from "../components/OrderDetails";
 //@ts-ignore
 import notificationSound from "@/assets/notification/notification.mp3";
+import { Box, Drawer } from "@mui/material";
+import { useLazyGetCouriersQuery } from "@store/admin/api/staffApi";
+import { MaterialModal } from "../../../../common/Modal";
+import { OrderProductEdit } from "../components/OrderProductEdit";
+import { useLazyGetProductsQuery } from "@store/admin/api/productsApi";
+import { FormProvider, useForm } from "react-hook-form";
+
+// import { useGetProductsQuery } from "@store/admin/api/productsApi";
 
 const Orders: FC = () => {
   const { data } = useOutletContext<OutletContextType>();
   const [page, setPage] = useState(1);
   const [allOrders, setAllOrders] = useState<OrdersType[]>([]);
   const [getOrders, { data: lazyData, isFetching }] = useLazyGetOrdersQuery();
+  const [getCouriers, couriersResult] = useLazyGetCouriersQuery();
+  const [updateOrder] = useUpdateOrderMutation();
+  const [getProducts, productsResult] = useLazyGetProductsQuery();
+  const [handleChangeOrder] = useChangeOrderMutation();
+
   const [getOrderById, { data: orderData, isFetching: orderFetch }] = useLazyGetOrderByIdQuery();
   const { ref, inView } = useInView({ threshold: 0.5 });
-  const [details, setDetails] = useState(false);
   const [soundAllowed, setSoundAllowed] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     audioRef.current = new Audio(notificationSound);
   }, []);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     if (data && page === 1) {
@@ -67,13 +88,43 @@ const Orders: FC = () => {
     },
   });
 
+  const onEyeClick = async (id: number) => {
+    console.log(data.name);
+    setDrawerOpen(true); // это теперь setDrawerOpen
+    await getOrderById(id).unwrap();
+    await getProducts({ res: data.name }).unwrap();
+    await getCouriers(data.id).unwrap();
+  };
+
+  const methods = useForm({
+    defaultValues: {
+      product_ids: orderData?.products.map((p) => p.id) || [],
+    },
+  });
+
+  const onSubmit = async (data: { product_ids: object }) => {
+    if (!orderData?.id) return;
+    try {
+      console.log(data);
+      // alert("Обновлен");
+    } catch (error) {
+      console.error("Ошибка обновления:", error);
+      // alert("Обновлен");
+    }
+  };
+
   return (
-    <div className="container">
+    <div
+      className="container"
+      style={{
+        transition: "0.3s",
+        marginRight: drawerOpen ? "495px" : "80px",
+      }}
+    >
       <OrdersTable
         data={allOrders}
         isLoading={isFetching}
-        setDetails={setDetails}
-        getOrderById={getOrderById}
+        onEyeClick={onEyeClick}
         isFetching={isFetching}
         setSoundAllowed={setSoundAllowed}
         audioRef={audioRef}
@@ -81,9 +132,49 @@ const Orders: FC = () => {
       />
       <div ref={ref} style={{ height: 20 }} />
 
-      <MaterialModal open={details} onClose={() => setDetails(false)}>
-        <OrderDetails order={orderData} orderFetch={orderFetch} />
-      </MaterialModal>
+      <Drawer
+        anchor="right"
+        open={drawerOpen}
+        variant="persistent"
+        sx={{
+          width: 500,
+          flexShrink: 0,
+
+          "& .MuiDrawer-paper": {
+            width: 500,
+            boxSizing: "border-box",
+            pt: 2,
+            mt: 10,
+            borderRadius: "20px",
+          },
+        }}
+      >
+        <Box display="flex" justifyContent="flex-end" px={2}>
+          <IconButton onClick={() => setDrawerOpen(false)}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+        <OrderDetails
+          setOpenModal={setOpenModal}
+          order={orderData}
+          orderFetch={orderFetch}
+          couriersResult={couriersResult}
+          updateOrder={updateOrder}
+        />
+      </Drawer>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <MaterialModal open={openModal} onClose={() => setOpenModal(false)} width="80%">
+            <OrderProductEdit
+              productsResult={productsResult.data ?? []}
+              orderProducts={orderData?.products || []}
+              orderId={orderData?.id}
+              control={methods.control}
+              handleChangeOrder={handleChangeOrder}
+            />
+          </MaterialModal>
+        </form>
+      </FormProvider>
     </div>
   );
 };

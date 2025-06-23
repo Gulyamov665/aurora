@@ -127,6 +127,11 @@ export type OrdersType = {
   fee: number;
 };
 
+export type ChangeOrderBody = {
+  id: number;
+  product_id: number;
+};
+
 export type OrdersData = {
   data: OrdersType[];
   last_page: number;
@@ -224,6 +229,11 @@ export type EditorType = UserInfoType & {
 export type StaffType = {
   id: Number;
   editors: EditorType[];
+};
+
+export type CourierTypes = {
+  id: Number;
+  couriers: EditorType[];
 };
 
 export type RoleType = {

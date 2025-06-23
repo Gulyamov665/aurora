@@ -12,9 +12,8 @@ import EnableSoundButton from "./EnableSoundButton";
 const OrdersTable: FC<OrdersTableProps> = ({
   data,
   isLoading,
-  setDetails,
-  getOrderById,
   isFetching,
+  onEyeClick,
   audioRef,
   setSoundAllowed,
   soundAllowed,
@@ -44,13 +43,8 @@ const OrdersTable: FC<OrdersTableProps> = ({
     return 0;
   });
 
-  const onEyeClick = async (id: number) => {
-    setDetails(true);
-    await getOrderById(id).unwrap();
-  };
-
   return (
-    <Card elevation={6} sx={{ mt: 3, mb: 4, width: "100%", overflow: "scroll" }}>
+    <Card elevation={6} sx={{ mt: 3, mb: 4, width: "100%", overflow: "scroll", borderRadius: "20px" }}>
       <CardContent>
         <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"}>
           <Typography variant="h6" gutterBottom>

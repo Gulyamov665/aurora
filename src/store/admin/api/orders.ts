@@ -2,7 +2,7 @@ import { getToken } from "@/Utils/getToken";
 import { decreaseProductInCache } from "@/Utils/tools";
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { setUser } from "@store/user/slices/authSlice";
-import { CartData, GroupedOrder, OrdersData, OrdersType } from "@store/user/types";
+import { CartData, ChangeOrderBody, GroupedOrder, OrdersData, OrdersType } from "@store/user/types";
 
 const url = import.meta.env.VITE_EXPRESS_URL;
 
@@ -71,6 +71,14 @@ export const ordersApi = createApi({
       }),
       invalidatesTags: ["orders", "cart"],
     }),
+    updateOrder: build.mutation({
+      query: ({ id, body }) => ({
+        url: `/orders/update/${id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["orders"],
+    }),
     getCart: build.query<any, { user?: number; vendorId?: number }>({
       query: ({ user, vendorId }) => ({
         url: `/cart?user_id=${user}&restaurant_id=${vendorId}`,
@@ -84,6 +92,14 @@ export const ordersApi = createApi({
         body,
       }),
       invalidatesTags: ["cart"],
+    }),
+    changeOrder: build.mutation<OrdersType, ChangeOrderBody>({
+      query: (body) => ({
+        url: "orders/changeOrderComposition",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["orders"],
     }),
     decreaseItem: build.mutation({
       query: (body) => ({
@@ -122,6 +138,7 @@ export const ordersApi = createApi({
 });
 
 export type addToCartMutationType = ReturnType<typeof useAddToCartMutation>;
+export type UpdateOrderMutationType = ReturnType<typeof useUpdateOrderMutation>;
 export type decreaseItemMutationType = ReturnType<typeof useDecreaseItemMutation>;
 export type getCart = ReturnType<typeof useGetCartQuery>;
 export type createOrderMutationType = ReturnType<typeof useCreateOrderMutation>;
@@ -130,6 +147,7 @@ export type getMyOrders = ReturnType<typeof useGetMyOrdersQuery>;
 export type getOrderByIdType = ReturnType<typeof useGetOrderByIdQuery>;
 export type lazyGetOrderByIdType = ReturnType<typeof useLazyGetOrderByIdQuery>;
 export type removeCartMutationType = ReturnType<typeof useRemoveCartMutation>;
+export type ChangeOrderMutationType = ReturnType<typeof useChangeOrderMutation>;
 
 export const {
   useGetOrdersQuery,
@@ -142,4 +160,6 @@ export const {
   useRemoveCartMutation,
   useGetOrderByIdQuery,
   useLazyGetOrderByIdQuery,
+  useUpdateOrderMutation,
+  useChangeOrderMutation
 } = ordersApi;

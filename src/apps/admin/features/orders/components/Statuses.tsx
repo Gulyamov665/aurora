@@ -39,3 +39,12 @@ export const getStatusChipNoIcons = (status: string) => {
       return <Chip label="Неизвестно" />;
   }
 };
+
+export const ORDER_STATUS_LABELS: Record<string, string> = {
+  new: "Новый",
+  prepare: "Готовиться",
+  awaiting_courier: "Ожидание",
+  on_the_way: "Доставляется",
+  completed: "Готово",
+  canceled: "Отменен",
+};
