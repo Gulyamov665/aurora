@@ -4,6 +4,8 @@ import { AddToCartArgs } from "./types";
 import { ordersApi } from "@store/admin/api/orders";
 import { AppDispatch } from "@store/index";
 import { ProductData } from "@/apps/client/features/products/types";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { SerializedError } from "@reduxjs/toolkit";
 
 /**
  * функция для отображения фото
@@ -50,6 +52,7 @@ export const handleAddToCart = async ({
   userId,
   restaurantId,
   addToCart,
+  trigger,
 }: AddToCartArgs) => {
   try {
     event.stopPropagation();
@@ -65,7 +68,14 @@ export const handleAddToCart = async ({
       products: cartItem,
     };
 
-    await addToCart(body);
+    try {
+      await (addToCart(body) as any).unwrap();
+    } catch (error) {
+      const err = error as FetchBaseQueryError | SerializedError;
+      if ("data" in err) {
+        trigger?.();
+      }
+    }
   } catch (error) {
     console.error("Failed to add item to cart:", error);
     // Можно сюда передать колбэк для алерта/тоаста

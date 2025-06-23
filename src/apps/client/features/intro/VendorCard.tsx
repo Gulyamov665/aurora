@@ -84,6 +84,8 @@ export const VendorCard: React.FC<VendorCardProps> = ({ data }) => {
             bottom: 10,
             left: 10,
             // color: "white",
+            width: "240px",
+
             color: "black",
             // background: "rgba(0, 0, 0, 0.7)",
             background: "rgba(255, 255, 255, 0.7)",
@@ -97,7 +99,9 @@ export const VendorCard: React.FC<VendorCardProps> = ({ data }) => {
           <Typography variant="subtitle2" fontWeight="bold" sx={{ maxWidth: "200px", overflow: "hidden" }}>
             {data?.address}
           </Typography>
-
+          <Typography variant="subtitle2" component="div" fontWeight="bold">
+            открыто
+          </Typography>
           {/* Actions */}
         </CardContent>
       </Card>
