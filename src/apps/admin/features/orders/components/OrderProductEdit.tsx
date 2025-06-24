@@ -8,7 +8,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { ChangeOrderMutationType } from "@store/admin/api/orders";
 
 interface OrderProductEditProps {
-  productsResult: ProductType[];
+  productsResult: Record<string, ProductType[]>;
   orderProducts: CartItem[];
   control: Control<any>;
   handleChangeOrder: ChangeOrderMutationType[0];
@@ -47,19 +47,6 @@ export const OrderProductEdit: React.FC<OrderProductEditProps> = ({
     } else {
     }
   };
-
-  // Группировка по категориям вручную
-  const groupedByCategory = React.useMemo(() => {
-    const result: Record<string, ProductType[]> = {};
-    for (const product of productsResult) {
-      const categoryLabel = product.category_label || "Без категории";
-      if (!result[categoryLabel]) {
-        result[categoryLabel] = [];
-      }
-      result[categoryLabel].push(product);
-    }
-    return result;
-  }, [productsResult]);
 
   return (
     <Box display={"flex"} width={"100%"} height={800} justifyContent={"space-around"}>
@@ -134,7 +121,7 @@ export const OrderProductEdit: React.FC<OrderProductEditProps> = ({
           <b>Блюдо заведения</b>
         </Typography>
         <hr />
-        {Object.entries(groupedByCategory).map(([categoryName, products]) => (
+        {Object.entries(productsResult)?.map(([categoryName, products]) => (
           <Accordion key={categoryName} expanded={expanded === categoryName} onChange={handleChange(categoryName)}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}

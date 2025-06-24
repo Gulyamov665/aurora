@@ -16,9 +16,9 @@ import { Box, Drawer } from "@mui/material";
 import { useLazyGetCouriersQuery } from "@store/admin/api/staffApi";
 import { MaterialModal } from "../../../../common/Modal";
 import { OrderProductEdit } from "../components/OrderProductEdit";
-import { useLazyGetProductsQuery } from "@store/admin/api/productsApi";
 import { FormProvider, useForm } from "react-hook-form";
 import { styles } from "../assets/styles";
+import { useGetFilteredCategoriesQuery } from "@store/admin/api/categoryApi";
 
 const Orders: FC = () => {
   const { data } = useOutletContext<OutletContextType>();
@@ -27,20 +27,19 @@ const Orders: FC = () => {
   const [getOrders, { data: lazyData, isFetching }] = useLazyGetOrdersQuery();
   const [getCouriers, couriersResult] = useLazyGetCouriersQuery();
   const [updateOrder] = useUpdateOrderMutation();
-  const [getProducts, productsResult] = useLazyGetProductsQuery();
   const [handleChangeOrder] = useChangeOrderMutation();
-
   const [getOrderById, { data: orderData, isFetching: orderFetch }] = useLazyGetOrderByIdQuery();
+  const { data: filteredProducts } = useGetFilteredCategoriesQuery(data?.id ?? 0, { skip: !data?.id });
   const { ref, inView } = useInView({ threshold: 0.5 });
   const [soundAllowed, setSoundAllowed] = useState(false);
+  const methods = useForm({ defaultValues: { product_ids: orderData?.products.map((p) => p.id) || [] } });
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     audioRef.current = new Audio(notificationSound);
   }, []);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-
-  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     if (data && page === 1) {
@@ -86,15 +85,8 @@ const Orders: FC = () => {
   const onEyeClick = async (id: number) => {
     setDrawerOpen(true); // это теперь setDrawerOpen
     await getOrderById(id).unwrap();
-    await getProducts({ res: data.name }).unwrap();
     await getCouriers(data.id).unwrap();
   };
-
-  const methods = useForm({
-    defaultValues: {
-      product_ids: orderData?.products.map((p) => p.id) || [],
-    },
-  });
 
   const onSubmit = async (data: { product_ids: object }) => {
     if (!orderData?.id) return;
@@ -146,7 +138,7 @@ const Orders: FC = () => {
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <MaterialModal open={openModal} onClose={() => setOpenModal(false)} width="80%">
             <OrderProductEdit
-              productsResult={productsResult.data ?? []}
+              productsResult={filteredProducts ?? {}}
               orderProducts={orderData?.products || []}
               orderId={orderData?.id}
               control={methods.control}
