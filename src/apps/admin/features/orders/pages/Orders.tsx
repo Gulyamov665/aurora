@@ -117,6 +117,7 @@ const Orders: FC = () => {
         soundAllowed={soundAllowed}
       />
 
+
       <div ref={ref} style={{ height: 20 }} />
 
       <Drawer anchor="right" open={drawerOpen} variant="persistent" sx={styles.drawerStyles}>
