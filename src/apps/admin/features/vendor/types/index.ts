@@ -8,4 +8,6 @@ export type VendorFormType = {
   isLoading: boolean;
   isChanged: boolean;
   qrCodeGenerate: () => Promise<void>;
+  handleTabChange:() => Promise<void>
+  tab: number;
 };

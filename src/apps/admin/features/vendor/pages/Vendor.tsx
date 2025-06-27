@@ -46,6 +46,12 @@ const Vendor: FC = () => {
     }
   };
 
+  const [tab, setTab] = useState(0);
+  const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
+      setTab(newValue);
+    };
+
+
   return (
     <div className="container">
       <VendorForm
@@ -55,6 +61,9 @@ const Vendor: FC = () => {
         isLoading={isLoading}
         isChanged={isChanged}
         qrCodeGenerate={qrCodeGenerate}
+        tab={tab}
+        handleTabChange={handleTabChange}
+
       />
     </div>
   );
