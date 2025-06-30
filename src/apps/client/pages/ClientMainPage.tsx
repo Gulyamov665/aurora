@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { modals } from "@store/appSlice";
-import Intro from "../features/intro/Intro";
+import { VendorCard } from "../features/intro/VendorCard";
 import Category from "../features/category/Category";
 import Loading from "../features/loading/Loading";
 import { OutletContextType } from ".";
@@ -23,7 +23,8 @@ function ClientMainPage() {
 
   return (
     <>
-      <Intro data={data} />
+      {/* <Intro data={data} /> */}
+      <VendorCard data={data} />
       <Category search={search} />
     </>
   );

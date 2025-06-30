@@ -6,6 +6,17 @@ import { NavigateFunction } from "react-router-dom";
 import { UseFormRegister, UseFormWatch } from "react-hook-form";
 import { LocationData } from "../../map/types";
 
+export interface IVariants {
+  id: number;
+  name: string;
+  price: number;
+  is_active: boolean;
+}
+export interface IOptions {
+  id: number;
+  variants: IVariants[];
+}
+
 export type ProductType = {
   id: number;
   name: string;
@@ -17,12 +28,14 @@ export type ProductType = {
   restaurant: number;
   availability: boolean;
   category: number;
+  category_label: string;
+  options: IOptions;
 };
 
 export type OrderProductsProps = {
   product: CartItem;
   decrease: () => void;
-  increase: (event: MouseEvent<HTMLButtonElement>, productData: ProductData) => void;
+  increase: (event: MouseEvent<HTMLButtonElement>, productData: ProductData, quantity: number) => void;
 };
 
 type OrderItems = {
@@ -69,4 +82,8 @@ export type GoToLoginProps = {
   goToLogin: () => void;
   goToRegister: () => void;
   text?: string;
+};
+
+export type OrderAnimationProps = {
+  order: OrdersType;
 };

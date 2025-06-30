@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "@reduxjs/toolkit";
 import { addCartItem, minusItem } from "@/store/cartSlice";
-import { logout } from "@store/user/slices/authSlice";
+import { logout } from "@store/user/authThunks";
 import {
   AddressSelectorToggle,
   closeDeleteModal,

@@ -1,9 +1,11 @@
 import { FC } from "react";
 import { ProductFormType } from "../types";
-import { Box, TextField, Button, Typography, Card, CardContent, IconButton } from "@mui/material";
+import { Box, TextField, Button, Typography, Card } from "@mui/material";
+import { CardContent, IconButton, Fade, CircularProgress } from "@mui/material";
 import { Save, Delete, ArrowBack } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { card, formBox, header, imgStyle, inputsBox, mainBox } from "../assets/ProductFormStyles";
+import { card, circlerProgress, formBox, header } from "../assets/ProductFormStyles";
+import { imgStyle, inputsBox, mainBox, onImageLoad } from "../assets/ProductFormStyles";
 import img from "@/assets/nophoto.jpg";
 
 export const ProductForm: FC<ProductFormType> = ({
@@ -14,6 +16,7 @@ export const ProductForm: FC<ProductFormType> = ({
   onSubmit,
   deleteItem,
   watch,
+  ImageIsLoading,
 }) => {
   const navigate = useNavigate();
 
@@ -63,8 +66,11 @@ export const ProductForm: FC<ProductFormType> = ({
             </Box>
             <Box>
               <Card sx={card}>
+                <Fade in={ImageIsLoading} unmountOnExit timeout={300}>
+                  <CircularProgress size={20} thickness={10} color="warning" sx={circlerProgress} />
+                </Fade>
                 <label htmlFor="upload-image">
-                  <img src={productImage?.photo || img} style={imgStyle} />
+                  <img src={productImage?.photo || img} style={ImageIsLoading ? onImageLoad : imgStyle} />
                 </label>
                 <CardContent sx={{ padding: 0, paddingBottom: "0 !important" }}>
                   <input

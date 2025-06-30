@@ -1,40 +1,42 @@
 import { FC, MouseEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { useDelete } from "@/hooks/useDelete";
 import { useEffect } from "react";
 import { CartItem } from "@store/user/types";
-import { handleAddToCart } from "@/Utils/tools";
+import { handleAddToCart, updateCartCache } from "@/Utils/tools";
 import { OrderProps } from "../types/orderTypes";
-import { CostBox } from "./CostBox";
+import { EmptyCart } from "../../../../../animations/componets/EmptyCart";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import OrderProducts from "./OrderProducts";
 import styles from "../assets/Orders.module.scss";
-import { EmptyCart } from "../../../../../animations/componets/EmptyCart";
+import { AppDispatch } from "@store/index";
+import { useDispatch } from "react-redux";
 
-export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, decreaseItem, removeCart, user }) => {
+export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, decreaseItem, removeCart }) => {
   const { deleteItem, confirmedId } = useDelete();
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     if (confirmedId) removeCart(items.id).unwrap();
   }, [confirmedId]);
 
+  if (!isUser) return <Navigate to=".." />;
+
   const removeItems = () => {
     deleteItem({ message: "очистить корзину ?", type: "orders", id: 1 });
   };
 
-  const toConfirmPage = () => {
-    if (!user?.location) return navigate("../maps");
-    navigate("../confirm", { state: { from: location.pathname } });
-  };
-
-  const increase = (event: MouseEvent<HTMLButtonElement>, productData: CartItem) => {
+  const increase = (event: MouseEvent<HTMLButtonElement>, productData: CartItem, quantity: number) => {
     if (!isUser?.user_id || !data?.id) return;
+
+    updateCartCache(dispatch, isUser.user_id, data.id, productData);
 
     handleAddToCart({
       event,
       productData,
+      quantity,
       userId: isUser?.user_id,
       restaurantId: data.id,
       addToCart,
@@ -45,7 +47,7 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
     if (!isUser?.user_id || !data?.id) return;
 
     decreaseItem({
-      product_id: product.id,
+      product: product,
       user_id: isUser?.user_id,
       restaurant_id: data.id,
     });
@@ -69,12 +71,11 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
             {items.products.map((product: CartItem) => (
               <OrderProducts
                 product={product}
-                key={product.id}
+                key={product.options ? product.options.id : product.id}
                 increase={increase}
                 decrease={() => decrease(product)}
               />
             ))}
-            <CostBox items={items} toConfirmPage={toConfirmPage} />
           </div>
         ) : (
           <div className="text-center" style={{ marginTop: 100 }}>

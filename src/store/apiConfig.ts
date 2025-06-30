@@ -1,37 +1,51 @@
-import { getToken } from "@/Utils/getToken";
-import { BaseQueryFn, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
-import { setUser } from "./user/slices/authSlice";
-const baseURL = import.meta.env.VITE_BASE_URL;
+import { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { createBaseQuery } from "./config/createBase";
+import { HTTP_STATUS } from "./config/constants";
+import { handleRefreshToken } from "./config/refresh";
+import { handleServerError } from "./config/errorHandlers";
+import { ENDPOINTS } from "./config/constants";
+import { getToken, isTokenExpired } from "@/Utils/getToken";
 
-const base = fetchBaseQuery({
-  baseUrl: baseURL,
-  prepareHeaders: (headers) => {
-    const token = getToken();
-    if (token) {
-      headers.set("Authorization", token);
-    }
-    return headers;
-  },
-});
+const base = createBaseQuery(ENDPOINTS.BASE_URL);
+
+let isRefreshing = false;
+let refreshPromise: Promise<void> | null = null;
 
 export const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
   args,
   api,
   extraOptions
 ) => {
-  const result = await base(args, api, extraOptions);
+  try {
+    const token = getToken();
 
-  if (result.error?.status === 401) {
-    api.dispatch(setUser(null));
-    localStorage.removeItem("token");
-    localStorage.removeItem("refresh");
+    if (token && isTokenExpired(token)) {
+      if (!isRefreshing) {
+        isRefreshing = true;
+
+        refreshPromise = handleRefreshToken(args, api, extraOptions, base)
+          .then((refreshResult) => {
+            if ("error" in refreshResult) {
+              throw refreshResult.error;
+            }
+          })
+          .finally(() => {
+            isRefreshing = false;
+          });
+      }
+      await refreshPromise;
+    }
+    let result = await base(args, api, extraOptions);
+
+    if (
+      (typeof result.error?.status === "number" && result.error?.status === HTTP_STATUS.SERVER_ERROR) ||
+      (result.error?.status === "PARSING_ERROR" && result.error.originalStatus === HTTP_STATUS.SERVER_ERROR)
+    ) {
+      handleServerError(result.error);
+    }
+
+    return result;
+  } catch (error) {
+    return { error: error as FetchBaseQueryError };
   }
-
-  if (result.error?.status === 500) {
-    console.error("Ошибка 500: проблема на сервере", result.error);
-    const errorData = result.error.data as { message: string };
-    alert(`${errorData.message}! Попробуйте позже.`);
-  }
-
-  return result;
 };

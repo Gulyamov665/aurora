@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Typography, Grid } from "@mui/material";
+
 import { RestaurantCard } from "./components/RestaurantCard";
 import { useGetRestaurantsQuery } from "@store/user/api/restaurantsApi";
 import { Link } from "react-router-dom";
@@ -11,20 +12,20 @@ export const Main: React.FC = () => {
   return (
     <Box>
       <Header />
-      <Container sx={{ py: 4 }}>
+      <div className="container py-4">
         <Typography variant="h5" fontWeight="bold" gutterBottom>
           Рестораны
         </Typography>
-        <Stack spacing={3}>
-          {data
-            ?.filter((restaurant) => restaurant.is_active)
-            .map((restaurant) => (
-              <Link to={`/vendor/${restaurant.name}`} style={{ textDecoration: "none" }} key={restaurant.id}>
+        <Grid container spacing={3}>
+          {data?.map((restaurant) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={restaurant.id}>
+              <Link to={`/vendor/${restaurant.name}`} style={{ textDecoration: "none" }}>
                 <RestaurantCard image={restaurant.background_photo} name={restaurant.name} />
               </Link>
-            ))}
-        </Stack>
-      </Container>
+            </Grid>
+          ))}
+        </Grid>
+      </div>
     </Box>
   );
 };

@@ -1,3 +1,5 @@
+import { IOptions } from "../../order/types/orderTypes";
+
 export type CategoryProps = {
   search: string;
 };
@@ -12,6 +14,7 @@ export type ProductType = {
   restaurant: number;
   availability: boolean;
   category: number;
+  options: IOptions;
 };
 
 export type CategoryType = {

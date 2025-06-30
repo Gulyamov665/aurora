@@ -3,27 +3,25 @@ import styles from "./AdminCard.module.scss";
 import IOSSwitch from "../../client/components/MuiSwitch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
-import { useDispatch } from "react-redux";
-import { toggleUpdate } from "@store/appSlice";
-import { useNavigate } from "react-router-dom";
+import { ProductType } from "@/apps/client/features/category/types";
 
-export default function AdminCard({ item, isActive, onChange }) {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+export interface AdminCardProps {
+  item: ProductType;
+  isActive: boolean;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick: () => void;
+}
 
-  const updateProduct = (item) => {
-    navigate(`${item}`);
-  };
-
+export const AdminCard: React.FC<AdminCardProps> = ({ item, isActive, onChange, onClick }) => {
   return (
     <div className={`${styles.col_1} mt-2`}>
       <div className={styles.title}>
-        <h6>{item.name}</h6>
-        <FormControlLabel onClick={() => updateProduct(item.id)} control={<BorderColorIcon />} />
+        <h6>{item.name} </h6>
+        <FormControlLabel label="" onClick={onClick} control={<BorderColorIcon />} />
       </div>
       <div className={styles.iosBtn}>
         <FormControlLabel label="Активность" control={<IOSSwitch checked={isActive} onChange={onChange} />} />
       </div>
     </div>
   );
-}
+};

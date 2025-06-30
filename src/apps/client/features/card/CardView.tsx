@@ -1,29 +1,67 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { motion, AnimatePresence, useDragControls } from "framer-motion";
-import { useDispatch } from "react-redux";
-import { addCartItem } from "@/store/cartSlice";
 import { CardViewProps } from "./types";
-import { ProductType } from "../category/types";
-import CardViewContent from "./components/CardViewContent";
-import { Dialog } from "@mui/material";
+import { SwipeableDrawer } from "@mui/material";
+import { CardViewContent } from "./components/CardViewContent";
+import { useBreakpoint } from "@/hooks/useBreakpoint";
+import { CardViewContentFullSize } from "./components/CardViewContentFullSize";
+import { handleAddToCart, updateCartCache } from "@/Utils/tools";
+import { OutletContextType } from "../../pages";
+import { useOutletContext } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useAddToCartMutation } from "@store/admin/api/orders";
+import { authState } from "@store/user/slices/authSlice";
+import { IVariants } from "../order/types/orderTypes";
+import { AppDispatch } from "@store/index";
 
 const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount }) => {
+  const { data } = useOutletContext<OutletContextType>();
+  const { isUser } = useSelector(authState);
+  const [addToCart] = useAddToCartMutation();
+  const [selectedVariant, setSelectedVariant] = useState<number | null>(null);
+  const [option, setOption] = useState<IVariants | null>(null);
   const controls = useDragControls();
-  const dispatch = useDispatch();
+  const breakpoint = useBreakpoint();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const addToCart = (item: ProductType) => {
-    const cartItem = {
-      ...item,
-      quantity: count,
+  // устанавливаем значение поумолчанию варианта при открытии модального окна
+  useEffect(() => {
+    if (item && item.options?.variants.length > 0) {
+      const filteredVariants = item.options.variants.filter((v) => v.is_active);
+      setSelectedVariant(filteredVariants[0].id);
+    }
+  }, [item]);
+
+  // устанавливаем опцию при изменении выбранного варианта
+  useEffect(() => {
+    if (selectedVariant && item) {
+      const options = item.options?.variants.find((v) => v.id === selectedVariant);
+      setOption(options ?? null);
+    }
+  }, [selectedVariant, item]);
+
+  const onAddProduct = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (!item) return;
+    if (!item || !isUser?.user_id || !data?.id) return;
+
+    const productData = {
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      photo: item.photo,
+      options: option,
     };
-    dispatch(addCartItem(cartItem));
+
+    updateCartCache(dispatch, isUser.user_id, data.id, productData);
+
+    handleAddToCart({ event, productData, quantity: count, userId: isUser?.user_id, restaurantId: data.id, addToCart });
     setIsOpen(false);
   };
 
   return (
     <AnimatePresence>
       {open && (
-        <Dialog open={open} onClose={() => setIsOpen(!open)}>
+        <SwipeableDrawer open={open} onClose={() => setIsOpen(!open)} onOpen={() => setIsOpen(!open)}>
           <div className="card_modal" onClick={() => setIsOpen(!open)}></div>
 
           <motion.div
@@ -47,11 +85,32 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
             }}
             className="card_view_motion"
           >
-            {item && (
-              <CardViewContent addToCart={addToCart} item={item} count={count} setCount={setCount}></CardViewContent>
-            )}
+            {item &&
+              (breakpoint === "lg" || breakpoint === "xl" ? (
+                <CardViewContentFullSize
+                  item={item}
+                  count={count}
+                  setCount={setCount}
+                  setIsOpen={setIsOpen}
+                  onAdd={onAddProduct}
+                  selectedVariant={selectedVariant}
+                  setSelectedVariant={setSelectedVariant}
+                  option={option}
+                />
+              ) : (
+                <CardViewContent
+                  item={item}
+                  count={count}
+                  setCount={setCount}
+                  setIsOpen={setIsOpen}
+                  onAdd={onAddProduct}
+                  selectedVariant={selectedVariant}
+                  setSelectedVariant={setSelectedVariant}
+                  option={option}
+                />
+              ))}
           </motion.div>
-        </Dialog>
+        </SwipeableDrawer>
       )}
     </AnimatePresence>
   );

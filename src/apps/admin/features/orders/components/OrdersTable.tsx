@@ -1,13 +1,23 @@
 import { FC, useState } from "react";
-import { Table, TableHead, TableRow, TableCell, TableBody } from "@mui/material";
+import { Table, TableHead, TableRow, TableCell, TableBody, Grow } from "@mui/material";
 import { TableSortLabel, Card, CardContent, Typography, IconButton } from "@mui/material";
 import { Person, MonetizationOn, Receipt } from "@mui/icons-material";
 import { Visibility } from "@mui/icons-material";
 import { OrderKey, OrdersTableProps } from "../types";
 import { getStatusChip } from "./Statuses";
 import { LoadingScreen } from "../../loading/LoadingScreen";
+import { Box, CircularProgress, Fade } from "@mui/material";
+import EnableSoundButton from "./EnableSoundButton";
 
-const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading }) => {
+const OrdersTable: FC<OrdersTableProps> = ({
+  data,
+  isLoading,
+  isFetching,
+  onEyeClick,
+  audioRef,
+  setSoundAllowed,
+  soundAllowed,
+}) => {
   const [sortBy, setSortBy] = useState<OrderKey>("id");
   const [order, setOrder] = useState<"asc" | "desc">("desc");
 
@@ -34,11 +44,14 @@ const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading }) => {
   });
 
   return (
-    <Card elevation={6} sx={{ mt: 3, mb: 4 }}>
+    <Card elevation={6} sx={{ mt: 3, mb: 4, width: "100%", overflow: "scroll", borderRadius: "20px" }}>
       <CardContent>
-        <Typography variant="h6" gutterBottom>
-          Заказы
-        </Typography>
+        <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"}>
+          <Typography variant="h6" gutterBottom>
+            Заказы
+          </Typography>
+          <EnableSoundButton audioRef={audioRef} setSoundAllowed={setSoundAllowed} soundAllowed={soundAllowed} />
+        </Box>
         <Table>
           <TableHead>
             <TableRow>
@@ -78,26 +91,35 @@ const OrdersTable: FC<OrdersTableProps> = ({ data, isLoading }) => {
                   Статус
                 </TableSortLabel>
               </TableCell>
+              <TableCell>Курьер</TableCell>
               <TableCell>Действие</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {sortedOrders.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>{row.id}</TableCell>
-                <TableCell>{row.created_by}</TableCell>
-                <TableCell>{row.total_price} ₽</TableCell>
-                <TableCell>{getStatusChip(row.status)}</TableCell>
-                <TableCell>
-                  <IconButton>
-                    <Visibility />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
+              <Grow in key={row.id} timeout={500}>
+                <TableRow key={row.id}>
+                  <TableCell>{row.id}</TableCell>
+                  <TableCell>{row.created_by}</TableCell>
+                  <TableCell>{parseInt(row.total_price).toLocaleString()} UZS</TableCell>
+                  <TableCell>{getStatusChip(row.status)}</TableCell>
+                  <TableCell>{row.courier ? row.courier.username : "Не назначен"}</TableCell>
+                  <TableCell>
+                    <IconButton onClick={() => onEyeClick(row.id)}>
+                      <Visibility />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              </Grow>
             ))}
           </TableBody>
         </Table>
       </CardContent>
+      <Box sx={{ display: "flex", justifyContent: "center", height: 60, alignItems: "center" }}>
+        <Fade in={isFetching} unmountOnExit timeout={300}>
+          <CircularProgress size={20} />
+        </Fade>
+      </Box>
     </Card>
   );
 };

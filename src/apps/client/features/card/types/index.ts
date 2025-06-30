@@ -2,12 +2,13 @@ import { MouseEvent } from "react";
 import { ProductType } from "../../category/types";
 import { ProductData } from "../../products/types";
 import { CartItem } from "@store/user/types";
+import { IVariants } from "../../order/types/orderTypes";
 
 export type CardType = {
   product: CartItem;
-  findItem: (id: number) => CartItem;
-  decrease: (event: MouseEvent<HTMLButtonElement>, productData: number) => void;
-  addToCart: (event: MouseEvent<HTMLButtonElement>, productData: ProductData) => Promise<void>;
+  findItem: (id: number) => number;
+  decrease: (event: MouseEvent<HTMLButtonElement>, productData: CartItem) => void;
+  addToCart: (event: MouseEvent<HTMLButtonElement>, productData: ProductData, quantity: number) => Promise<void>;
 };
 
 export type CardViewProps = {
@@ -19,8 +20,12 @@ export type CardViewProps = {
 };
 
 export type CardViewContentProps = {
-  addToCart: (item: ProductType) => void;
   item: ProductType;
   count: number;
   setCount: (count: number) => void;
+  setIsOpen: (value: boolean) => void;
+  onAdd: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  selectedVariant: number | null;
+  setSelectedVariant: React.Dispatch<React.SetStateAction<number | null>>;
+  option: IVariants | null;
 };

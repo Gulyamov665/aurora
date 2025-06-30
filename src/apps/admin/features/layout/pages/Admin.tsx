@@ -4,7 +4,7 @@ import { useActions } from "@/hooks/useActions";
 import { LoadingScreen } from "@/apps/admin/features/loading/LoadingScreen";
 import { Header } from "../../../components/Header.tsx";
 import styles from "../assets/Admin.module.scss";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "./Sidebar.tsx";
 import { useLoadQuery } from "@store/admin/api/vendorApi";
 
 export default function Admin() {
@@ -17,6 +17,7 @@ export default function Admin() {
   const handleSidebar = () => {
     setOpen(!open);
     localStorage.setItem("sidebar", JSON.stringify(!open));
+    
   };
 
   return (

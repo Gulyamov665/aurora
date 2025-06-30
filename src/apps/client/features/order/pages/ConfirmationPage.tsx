@@ -1,10 +1,9 @@
-import { useLocation, useNavigate, useOutletContext } from "react-router-dom";
+import { Navigate, useLocation, useNavigate, useOutletContext } from "react-router-dom";
 import { ConfirmOrder } from "../components/ConfirmOrder";
 import { OutletContextType } from "@/apps/client/pages";
 import { authState } from "@store/user/slices/authSlice";
 import { useSelector } from "react-redux";
 import { useCreateOrderMutation, useGetCartQuery } from "@store/admin/api/orders";
-// import OrderSuccess from "../components/OrderSuccess";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useMeQuery } from "@store/user/api/userAuthApi";
@@ -18,7 +17,6 @@ const OrderConfirmationPage: React.FC = () => {
   const { data: me } = useMeQuery(isUser?.user_id ?? 0, { skip: !isUser?.user_id });
   const { register, reset, watch } = useForm<LocationData>();
   const [createOrder] = useCreateOrderMutation();
-  // const [showSuccess, setShowSuccess] = useState(false);
 
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -45,28 +43,30 @@ const OrderConfirmationPage: React.FC = () => {
         long: me?.location?.long,
         user_id: isUser?.user_id,
         orders_chat_id: data.orders_chat_id,
+        user_phone_number: me?.phone,
         restaurant: {
           id: data.id,
           name: data.name,
           address: data.address,
           photo: data.logo,
           phone: me?.phone,
+          lat: data?.lat,
+          long: data?.long,
         },
         status: "new",
         products: items.products,
       };
-      await createOrder(orderData).unwrap();
-      // setShowSuccess(true);
-      // setTimeout(() => {
-      //   navigate("..");
-      // }, 2000);
+      const order = await createOrder(orderData).unwrap();
+      navigate(`../orders/${order?.id}`);
     } catch (error) {
       console.error("Failed to create order:", error);
     }
   };
 
+  if (!items?.totalPrice) return <Navigate to={".."} />;
+
   return (
-    <>
+    <div className="container">
       <ConfirmOrder
         navigate={navigate}
         state={state}
@@ -75,8 +75,7 @@ const OrderConfirmationPage: React.FC = () => {
         register={register}
         watch={watch}
       />
-      {/* {showSuccess && <OrderSuccess />} */}
-    </>
+    </div>
   );
 };
 

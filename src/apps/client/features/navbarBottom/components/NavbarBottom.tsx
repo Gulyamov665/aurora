@@ -1,33 +1,24 @@
-import styles from "../assets/NavbarBottom.module.css";
 import { Link } from "react-router-dom";
 import { NavbarBottomProps } from "../interfaces/interface";
-import { Badge } from "@mui/material";
+import styles from "../assets/NavbarBottom.module.css";
 
-export default function NavbarBottom({ icons }: NavbarBottomProps) {
-  const settings = {
-    anchorOrigin: {
-      vertical: "top" as "top",
-      horizontal: "right" as "right",
-    },
-  };
+export const NavbarBottom = ({ items, isUser, current, visible, user, itemsQuantity }: NavbarBottomProps) => {
   return (
-    <div className={styles["navbar"]}>
+    <div className={`${styles["navbar"]} ${visible ? styles["show"] : styles["hide"]}`}>
       <div className="container">
         <div className={styles["icons-list"]}>
-          {icons
-            .filter((item) => item.active)
-            .map((item) => (
-              <Link to={item.link} className={styles["list-links"]} key={item.title}>
-                <div key={item.title}>
-                  <Badge {...settings} color="error" badgeContent={item.counter}>
-                    {item.icon}
-                  </Badge>
-                  <p>{item.title}</p>
-                </div>
-              </Link>
-            ))}
+          <p className={`${styles["list-links"]} ${styles["counter"]}`}>{isUser && itemsQuantity()}</p>
+
+          <Link
+            to={current == "cart" && !user?.location ? "maps" : current == "cart" ? "confirm" : "cart"}
+            state={{ from: location.pathname }}
+            className={`${styles["list-links"]} ${styles["next"]}`}
+          >
+            <p>Далее</p>
+          </Link>
+          <p className={`${styles["list-links"]} ${styles["total"]}`}>{items?.totalPrice?.toLocaleString()}</p>
         </div>
       </div>
     </div>
   );
-}
+};

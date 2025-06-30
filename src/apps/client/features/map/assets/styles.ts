@@ -1,4 +1,8 @@
-export const styles = {
+import { SxProps, Theme } from "@mui/material/styles";
+
+type StylesType = Record<string, SxProps<Theme>>;
+
+export const styles: StylesType = {
   address: {
     bgcolor: "#2c2c2c",
     color: "white",
@@ -75,7 +79,7 @@ export const styles = {
     width: "100%",
     minWidth: "400px",
     maxWidth: "400px",
-    borderRadius: "4px",
+    borderRadius: "8px",
     backgroundColor: "#F5F5F5",
     textTransform: "none",
     color: "#000",
@@ -85,7 +89,6 @@ export const styles = {
     transition: "transform 0.3s",
     padding: "8px 16px", // Отступы внутри кнопки
     "& .MuiButton-startIcon": {
-      // Стили для иконки если она есть
       marginRight: 2,
     },
     "&:hover": {

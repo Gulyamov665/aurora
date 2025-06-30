@@ -4,6 +4,7 @@ type StylesType = {
   onSubmit: SxProps<Theme>;
   childrenBox: SxProps<Theme>;
   swipeAbleDrawerStyle: SxProps<Theme>;
+  tabStyle: SxProps<Theme>;
 };
 
 export const styles: StylesType = {
@@ -32,5 +33,12 @@ export const styles: StylesType = {
     p: 2,
     zIndex: 1500,
     maxHeight: "600px",
+  },
+  tabStyle: {
+    color: "#888", // цвет неактивной вкладки
+    "&.Mui-selected": {
+      color: "#210648", // цвет активной вкладки
+      fontWeight: 600,
+    },
   },
 };

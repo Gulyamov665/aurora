@@ -1,5 +1,5 @@
 import { createListenerMiddleware } from "@reduxjs/toolkit";
 
-export const listenerMiddleware = createListenerMiddleware();
+const listenerMiddleware = createListenerMiddleware();
 
 export default listenerMiddleware;

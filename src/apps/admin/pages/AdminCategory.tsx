@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { useAddProductMutation, useLazyGetProductsQuery } from "@store/admin/api/productsApi.js";
 import { useUpdateProductMutation } from "@store/admin/api/productsApi.js";
 import { useAddCategoryMutation, useGetCategoriesQuery } from "@store/admin/api/categoryApi.js";
@@ -14,10 +14,10 @@ import { useActions } from "@/hooks/useActions";
 import { CategoriesList } from "./CategoriesList";
 import { CreateModal } from "../features/Product/pages/CreateModal";
 import { Fab } from "@mui/material";
-import AdminCard from "../components/AdminCard";
+import { LoadingScreen } from "../features/loading/LoadingScreen";
+import { AdminCard } from "../components/AdminCard";
 import styles from "../static/AdminCategory.module.scss";
 import AddIcon from "@mui/icons-material/Add";
-import { LoadingScreen } from "../features/loading/LoadingScreen";
 
 export default function AdminCategory() {
   const { data: vendor, res } = useOutletContext<OutletContextType>();
@@ -33,6 +33,7 @@ export default function AdminCategory() {
   const { selectedCategory: categoryId } = useSelector(modals);
   const [changeItem, setChangeItem] = useState<CategoryItemType | null>(null);
   const { setOpenAddModal } = useActions();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (categoryId) getSelectedCategory(categoryId);
@@ -43,6 +44,8 @@ export default function AdminCategory() {
   }, [category]);
 
   const handleActiveToggle = async (item: ProductType) => {
+    if (!item.price) return;
+
     const updatedItem = {
       restaurant: item.restaurant,
       category: item.category,
@@ -103,6 +106,7 @@ export default function AdminCategory() {
             item={item}
             isActive={item.is_active}
             onChange={() => handleActiveToggle({ ...item })}
+            onClick={() => navigate(`${item.id}`)}
           />
         ))}
         <CreateModal fetch={addProduct} title="Добавить позицию" />

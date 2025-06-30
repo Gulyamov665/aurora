@@ -5,18 +5,19 @@ import { useGetPromosQuery } from "@/store/admin/api/promoApi";
 import { useParams, Link } from "react-router-dom";
 import { CategoryProps } from "./types";
 import { ProductType } from "./types";
+import { Products } from "../products/Products";
 import Loading from "../loading/Loading";
 import CardView from "../card/CardView";
 import Promo from "../promo/Promo";
 import Navbar from "../navbar/Navbar";
-import Products from "../products/Products";
 import CartBtn from "../../components/CartBtn";
 
 const Category: FC<CategoryProps> = ({ search }) => {
   const { res = "" } = useParams();
   const { data: category = [] } = useGetCategoriesQuery(res);
-  const { data: menuItems = [], isLoading, isError } = useGetProductsQuery({ res: res });
+  const { data: menuItems = [], isLoading } = useGetProductsQuery({ res: res });
   const { data: promo = [] } = useGetPromosQuery(res);
+
   const [isOpen, setIsOpen] = useState(false);
   const [viewItem, setViewItem] = useState<ProductType | null>(null);
   const [count, setCount] = useState(1);
@@ -39,10 +40,6 @@ const Category: FC<CategoryProps> = ({ search }) => {
   }, [menuItems, search]);
 
   if (isLoading) return <Loading main={true} />;
-
-  if (isError) {
-    return <p>Error not found page </p>;
-  }
 
   return (
     <>

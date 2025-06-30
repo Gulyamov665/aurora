@@ -1,22 +1,18 @@
 import { getToken } from "@/Utils/getToken";
+import { decreaseProductInCache } from "@/Utils/tools";
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { setUser } from "@store/user/slices/authSlice";
-import { OrdersData, OrdersType } from "@store/user/types";
-import { io } from "socket.io-client";
+import { CartData, ChangeOrderBody, GroupedOrder, OrdersData, OrdersType } from "@store/user/types";
+import { CartBadResponse, CartItem } from "@store/user/types";
 
 const url = import.meta.env.VITE_EXPRESS_URL;
-
-export const socket = io("https://new.aurora-api.uz", {
-  path: "/api-node/socket.io",
-});
-// export const socket = io("http://localhost:3000"); // Подключаем WebSocket
 
 export const baseQuery = fetchBaseQuery({
   baseUrl: url,
   prepareHeaders: (headers) => {
     const token = getToken();
     if (token) {
-      headers.set("Authorization", token);
+      headers.set("Authorization", `Bearer ${token}`);
     }
     return headers;
   },
@@ -54,20 +50,21 @@ export const ordersApi = createApi({
         url: `/orders/${vendorId}`,
         params: { page, limit },
       }),
+      providesTags: ["orders"],
     }),
-    getMyOrders: build.query<OrdersType[], { userId: number | undefined }>({
+    getMyOrders: build.query<GroupedOrder[], { userId: number | undefined }>({
       query: ({ userId }) => ({
         url: `/orders/me/${userId}`,
       }),
       providesTags: ["orders"],
     }),
-    getOrderById: build.query({
+    getOrderById: build.query<OrdersType, number>({
       query: (id) => ({
         url: `/orders/getOrderById/${id}`,
       }),
       providesTags: ["orders"],
     }),
-    createOrder: build.mutation({
+    createOrder: build.mutation<OrdersType, any>({
       query: (body) => ({
         url: "/orders",
         method: "POST",
@@ -75,19 +72,43 @@ export const ordersApi = createApi({
       }),
       invalidatesTags: ["orders", "cart"],
     }),
-    getCart: build.query({
+    updateOrder: build.mutation({
+      query: ({ id, body }) => ({
+        url: `/orders/update/${id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["orders"],
+    }),
+    getCart: build.query<any, { user?: number; vendorId?: number }>({
       query: ({ user, vendorId }) => ({
         url: `/cart?user_id=${user}&restaurant_id=${vendorId}`,
       }),
       providesTags: ["cart"],
     }),
-    addToCart: build.mutation({
+    addToCart: build.mutation<CartData | CartBadResponse, CartItem>({
       query: (body) => ({
         url: "/cart/addToCart",
         method: "POST",
         body,
       }),
+      transformResponse: (response: any, meta?: { response?: Response }) => {
+        if (meta?.response?.status === 201) {
+          // Успешно, возвращаем CartData
+          return response as CartData;
+        }
+        // Любой другой статус (например, 200) — это CartBadResponse
+        return { ...response, status: meta?.response?.status };
+      },
       invalidatesTags: ["cart"],
+    }),
+    changeOrder: build.mutation<OrdersType, ChangeOrderBody>({
+      query: (body) => ({
+        url: "orders/changeOrderComposition",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["orders"],
     }),
     decreaseItem: build.mutation({
       query: (body) => ({
@@ -95,6 +116,24 @@ export const ordersApi = createApi({
         method: "POST",
         body,
       }),
+      async onQueryStarted(newItem, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          ordersApi.util.updateQueryData(
+            "getCart",
+            { user: newItem.user_id, vendorId: newItem.restaurant_id },
+            (draft: CartData) => {
+              decreaseProductInCache(draft, newItem);
+            }
+          )
+        );
+
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
+
       invalidatesTags: ["cart"],
     }),
     removeCart: build.mutation({
@@ -108,13 +147,16 @@ export const ordersApi = createApi({
 });
 
 export type addToCartMutationType = ReturnType<typeof useAddToCartMutation>;
+export type UpdateOrderMutationType = ReturnType<typeof useUpdateOrderMutation>;
 export type decreaseItemMutationType = ReturnType<typeof useDecreaseItemMutation>;
 export type getCart = ReturnType<typeof useGetCartQuery>;
 export type createOrderMutationType = ReturnType<typeof useCreateOrderMutation>;
 export type getOrders = ReturnType<typeof useGetOrdersQuery>;
 export type getMyOrders = ReturnType<typeof useGetMyOrdersQuery>;
-export type getOrderById = ReturnType<typeof useGetOrderByIdQuery>;
+export type getOrderByIdType = ReturnType<typeof useGetOrderByIdQuery>;
+export type lazyGetOrderByIdType = ReturnType<typeof useLazyGetOrderByIdQuery>;
 export type removeCartMutationType = ReturnType<typeof useRemoveCartMutation>;
+export type ChangeOrderMutationType = ReturnType<typeof useChangeOrderMutation>;
 
 export const {
   useGetOrdersQuery,
@@ -126,4 +168,7 @@ export const {
   useGetMyOrdersQuery,
   useRemoveCartMutation,
   useGetOrderByIdQuery,
+  useLazyGetOrderByIdQuery,
+  useUpdateOrderMutation,
+  useChangeOrderMutation,
 } = ordersApi;

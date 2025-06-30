@@ -1,27 +1,27 @@
 import { FC, useMemo, useCallback, MouseEvent, useState } from "react";
 import { ProductData, ProductsProps } from "./types";
 import { useAddToCartMutation, useDecreaseItemMutation, useGetCartQuery } from "@store/admin/api/orders";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
 import { useOutletContext } from "react-router-dom";
 import { OutletContextType } from "../../pages";
-import { handleAddToCart } from "@/Utils/tools";
+import { handleAddToCart, updateCartCache } from "@/Utils/tools";
 import { MaterialModal } from "@/apps/common/Modal";
 import { GuestBox } from "./components/GuestBox";
 import { CartItem } from "@store/user/types";
+import { AppDispatch } from "@store/index";
 import Card from "../card/Card";
 
-const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleView }) => {
-  const [addToCart] = useAddToCartMutation();
+export const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleView }) => {
   const { data } = useOutletContext<OutletContextType>();
   const { isUser } = useSelector(authState);
-  const { data: items } = useGetCartQuery(
-    { user: isUser?.user_id, vendorId: data?.id },
-    { skip: !data?.id || !isUser?.user_id }
-  );
+  const skip = { skip: !data?.id || !isUser?.user_id };
+  const { data: items } = useGetCartQuery({ user: isUser?.user_id, vendorId: data?.id }, skip);
+  const [addToCart] = useAddToCartMutation();
   const [decreaseItem] = useDecreaseItemMutation();
   const [toRegPage, setToRegPage] = useState(false);
   const [unavailable, setUnavailable] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
 
   const activeCategories = useMemo(() => category.filter(({ is_active }) => is_active), [category]);
   const activeMenuItems = useMemo(() => menuItems.filter(({ is_active }) => is_active), [menuItems]);
@@ -33,25 +33,35 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
     [sectionRefs]
   );
 
-  const findItem = (id: number) => {
-    return items?.products?.find((item: CartItem) => item.id === id);
+  const findItem = (id: number): number => {
+    if (!items?.products) return 0;
+
+    return items.products
+      .filter((item: CartItem) => item.id === id)
+      .reduce((sum: number, item: CartItem): number => sum + (item.quantity ?? 0), 0);
   };
 
-  const decrease = (e: MouseEvent<HTMLButtonElement>, id: number) => {
+  const decrease = (e: MouseEvent<HTMLButtonElement>, product: CartItem) => {
     if (!isUser?.user_id || !data?.id) return;
     e.stopPropagation();
 
     decreaseItem({
-      product_id: id,
+      product,
       user_id: isUser?.user_id,
       restaurant_id: data.id,
     });
   };
 
-  const onClick = async (event: MouseEvent<HTMLButtonElement>, productData: ProductData) => {
+  const onClick = async (event: MouseEvent<HTMLButtonElement>, productData: ProductData, quantity: number) => {
     if (!isUser?.user_id || !data?.id) {
       event.stopPropagation();
       return setToRegPage(true);
+    }
+    const product = activeMenuItems.find((item) => item.id === productData.id);
+
+    if (product?.options?.variants.length) {
+      event.stopPropagation();
+      return handleView(product);
     }
 
     if (!data.availability_orders) {
@@ -59,12 +69,16 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
       return setUnavailable(true);
     }
 
+    updateCartCache(dispatch, isUser.user_id, data.id, productData);
+
     handleAddToCart({
       event,
       productData,
+      quantity,
       userId: isUser?.user_id,
       restaurantId: data.id,
       addToCart,
+      trigger: () => setUnavailable(true),
     });
   };
 
@@ -105,10 +119,8 @@ const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleV
         <GuestBox setToRegPage={setToRegPage} />
       </MaterialModal>
       <MaterialModal open={unavailable} onClose={() => setUnavailable(false)} minHeight={0}>
-        <GuestBox setToRegPage={setUnavailable} singleBtn title="Заказы в данном заведении недоступны" />
+        <GuestBox setToRegPage={setUnavailable} singleBtn title="В настоящее время заказы в заведении недоступны" />
       </MaterialModal>
     </>
   );
 };
-
-export default Products;

@@ -12,8 +12,14 @@ const OrderProducts: FC<OrderProductsProps> = ({ product, increase, decrease }) 
           <CardMedia component="img" image={product.photo} alt={product.name} sx={CardMediaStyle} />
           <CardContent sx={{ flex: 1 }}>
             <Typography variant="h6" fontWeight="bold" sx={TypographyStyle}>
-              {product.price} сум
+              {product.options?.price || product.price} сум
             </Typography>
+            {product.options?.name && (
+              <Typography variant="body1" color="text.secondary" sx={TypographyStyle}>
+                {product.options.name}
+              </Typography>
+            )}
+
             <Typography variant="body1" color="text.secondary" sx={TypographyStyle}>
               {product.name}
             </Typography>
@@ -23,7 +29,7 @@ const OrderProducts: FC<OrderProductsProps> = ({ product, increase, decrease }) 
               <Remove />
             </IconButton>
             <Typography variant="h6">{product.quantity}</Typography>
-            <IconButton color="primary" onClick={(e) => increase(e, { ...product })}>
+            <IconButton color="primary" onClick={(e) => increase(e, { ...product }, 1)}>
               <Add />
             </IconButton>
           </CardActions>

@@ -1,8 +1,8 @@
-import { ProductType } from "@/apps/client/features/order/types/orderTypes";
+import { IVariants, ProductType } from "@/apps/client/features/order/types/orderTypes";
 
 export type CartType = {
   totalPrice: number;
-  items: CartItem[];
+  CartItems: CartItem[];
 };
 
 export type RegistrationRequestType = {
@@ -85,6 +85,7 @@ type OrderProduct = {
   name: string;
   price: number;
   quantity: number;
+  options?: IVariants;
   photo: string;
 };
 
@@ -96,6 +97,19 @@ export type RestaurantOrderType = {
   phone: number;
 };
 
+export type CourierType = {
+  id: number;
+  phone_number: string;
+  username: string;
+};
+
+export enum OrderStatus {
+  new = "new",
+  awaiting_courier = "awaiting_courier",
+  prepare = "prepare",
+  on_the_way = "on_the_way",
+}
+
 export type OrdersType = {
   id: number;
   created_at: string;
@@ -105,9 +119,18 @@ export type OrdersType = {
   lat: string;
   long: string;
   user_id: number;
+  courier: CourierType;
+  user_phone_number: string;
   restaurant: RestaurantOrderType;
   products: OrderProduct[];
-  status: string;
+  status: OrderStatus;
+  location: UserLocationType;
+  fee: number;
+};
+
+export type ChangeOrderBody = {
+  id: number;
+  product_id: number;
 };
 
 export type OrdersData = {
@@ -123,6 +146,20 @@ export interface CartItem {
   price: number;
   quantity?: number;
   photo: string;
+  options?: IVariants | null;
+}
+
+export interface CartData {
+  products: CartItem[];
+  total_price: number;
+  vendor: number;
+  user: number;
+  id: number;
+}
+
+export interface CartBadResponse {
+  is_open: boolean;
+  message: string;
 }
 
 export type UserInfoType = {
@@ -183,3 +220,30 @@ export type ReportsType = {
   canceled: number;
 };
 export type { ProductType };
+
+export type GroupedOrder = {
+  date: string;
+  orders: OrdersType[];
+};
+export type EditorType = UserInfoType & {
+  permissions: any[];
+  role: string;
+  role_label: string;
+  role_permissions: string;
+};
+
+export type StaffType = {
+  id: Number;
+  editors: EditorType[];
+};
+
+export type CourierTypes = {
+  id: Number;
+  couriers: EditorType[];
+};
+
+export type RoleType = {
+  id: number;
+  role: string;
+  label: string;
+};

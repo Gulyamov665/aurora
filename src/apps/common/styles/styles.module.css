@@ -1,0 +1,19 @@
+.error-message {
+  padding-top: 6px;
+  font-size: small;
+  text-align: left;
+  color: red;
+  opacity: 0; /* Начальная прозрачность */
+  min-height: 20px;
+  max-height: 10px;
+  overflow: hidden; /* Скрываем содержимое */
+  transition:
+    opacity 0.4s ease,
+    height 0.4s ease; /* Плавные переходы */
+}
+
+.error-message.show {
+  opacity: 1; /* Полная видимость */
+  max-height: 50px;
+  transition: opacity 0.4s ease;
+}

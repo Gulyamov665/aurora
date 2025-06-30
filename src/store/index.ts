@@ -11,18 +11,19 @@ import { qrCodeApi } from "./admin/api/qrCode";
 import { vendorApi } from "./admin/api/vendorApi";
 import { dispatcher } from "./user/api/dispatcherApi";
 import { userRegistration } from "./user/api/userRegistrationApi";
-import { registerMiddleware } from "./middlewares/registrationMiddleware";
-import { authMiddleware } from "./middlewares/authMiddleware";
 import { ordersApi } from "./admin/api/orders";
 import { locationApi } from "./user/api/locationApi";
 import { sharedApi } from "./user/api/shared";
 import { restaurantsApi } from "./user/api/restaurantsApi";
+import { reportsApi } from "./admin/api/reports";
+import { staffApi } from "./admin/api/staffApi";
+import { setupAllListeners } from "./middlewares/setupListeners";
 import cartSlice from "./cartSlice";
 import storage from "redux-persist/lib/storage";
 import appReducer from "./appSlice";
 import vendorReducer from "./admin/slices/vendorSlice";
 import authState from "./user/slices/authSlice";
-import { reportsApi } from "./admin/api/reports";
+import listenerMiddleware from "./user/listenerMiddleware";
 
 const rootReducer = combineReducers({
   cart: cartSlice,
@@ -45,6 +46,7 @@ const rootReducer = combineReducers({
   [sharedApi.reducerPath]: sharedApi.reducer,
   [restaurantsApi.reducerPath]: restaurantsApi.reducer,
   [reportsApi.reducerPath]: reportsApi.reducer,
+  [staffApi.reducerPath]: staffApi.reducer,
 });
 
 const persistConfig = {
@@ -75,15 +77,17 @@ const store = configureStore({
       vendorApi.middleware,
       dispatcher.middleware,
       userRegistration.middleware,
-      registerMiddleware,
-      authMiddleware,
+      listenerMiddleware.middleware,
       ordersApi.middleware,
       locationApi.middleware,
       sharedApi.middleware,
       restaurantsApi.middleware,
-      reportsApi.middleware
+      reportsApi.middleware,
+      staffApi.middleware
     ),
 });
+
+setupAllListeners();
 
 export const persistor = persistStore(store);
 export default store;

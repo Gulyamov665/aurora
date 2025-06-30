@@ -8,7 +8,7 @@ export default function Loading({ main = false }) {
         <span className={`${style.spinner} ${style.spinner2}`} />
         <span className={`${style.spinner} ${style.spinner3}`} />
         <br />
-        <span className={style.loaderText}>LOADING...</span>
+        {/* <span className={style.loaderText}>Загрузка...</span> */}
       </div>
     </div>
   );

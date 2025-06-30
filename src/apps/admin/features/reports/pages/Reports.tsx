@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box } from "@mui/material";
 import { DateRange } from "@/apps/common/DateRange";
 import { useReportsMutation } from "@store/admin/api/reports";
-import OrdersTable from "../../orders/components/OrdersTable";
+// import OrdersTable from "../../orders/components/OrdersTable";
 import { useOutletContext } from "react-router-dom";
 import { OutletContextType } from "@/apps/client/pages";
 import OrdersStats from "../components/OrderStats";
@@ -10,9 +10,7 @@ import OrdersStats from "../components/OrderStats";
 export const Reports: React.FC = () => {
   const { data: vendor } = useOutletContext<OutletContextType>();
   const [date, setDate] = useState<string[]>([]);
-  const [reports, { data, isLoading }] = useReportsMutation();
-
-  console.log(data);
+  const [reports, { data }] = useReportsMutation();
 
   const handleSubmit = async () => {
     try {
@@ -25,6 +23,7 @@ export const Reports: React.FC = () => {
     }
   };
 
+  console.log(data);
   return (
     <Box className="container">
       <Box sx={{ ml: 2, mt: 2, boxShadow: 3, p: 2 }}>
@@ -34,7 +33,7 @@ export const Reports: React.FC = () => {
           {/* <GridComponent sum={data?.sum} /> */}
           <OrdersStats totalSum={data?.sum} totalCount={data?.quantity} delivered={3} cancelled={data?.canceled} />
         </Box>
-        <OrdersTable data={data?.orders} isLoading={isLoading} />
+        {/* <OrdersTable data={data?.orders} isLoading={isLoading} /> */}
       </Box>
     </Box>
   );

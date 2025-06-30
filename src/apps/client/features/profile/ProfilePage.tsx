@@ -5,7 +5,7 @@ export const ProfilePage: React.FC = () => {
   return (
     <div>
       <Wait size={300} />
-      <p style={{ textAlign: "center" , fontWeight:800}}>В процессе разработки</p>
+      <p style={{ textAlign: "center", fontWeight: 800 }}>В процессе разработки</p>
     </div>
   );
 };

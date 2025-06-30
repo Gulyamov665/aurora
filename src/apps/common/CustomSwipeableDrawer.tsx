@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, Divider, SwipeableDrawer, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Divider, Drawer, Typography } from "@mui/material";
 import React from "react";
 import { styles } from "./styles/styles";
 
@@ -17,7 +17,7 @@ type CustomSwipeableDrawerProps = {
 export const CustomSwipeableDrawer: React.FC<CustomSwipeableDrawerProps> = ({
   open,
   onClose,
-  onOpen,
+  // onOpen,
   children,
   title,
   buttonText,
@@ -27,11 +27,11 @@ export const CustomSwipeableDrawer: React.FC<CustomSwipeableDrawerProps> = ({
 }) => {
   return (
     <Box>
-      <SwipeableDrawer
+      <Drawer
         anchor="bottom"
         open={open}
         onClose={onClose}
-        onOpen={onOpen}
+        // onOpen={onOpen}
         PaperProps={{
           sx: styles.swipeAbleDrawerStyle,
         }}
@@ -48,7 +48,7 @@ export const CustomSwipeableDrawer: React.FC<CustomSwipeableDrawerProps> = ({
             </Button>
           </Box>
         </Box>
-      </SwipeableDrawer>
+      </Drawer>
     </Box>
   );
 };

@@ -1,11 +1,21 @@
 import React from "react";
-import styles from "./Reorder.module.scss";
 import { useDispatch } from "react-redux";
 import { Reorder } from "framer-motion";
-import EditNoteIcon from "@mui/icons-material/EditNote";
 import { selectedCategory } from "@store/appSlice";
+import { CategoryItemType } from "../pages";
+import styles from "./Reorder.module.scss";
+import EditNoteIcon from "@mui/icons-material/EditNote";
 
-export default function ReorderPage({
+export type ReorderPageProps = {
+  updatePosition: () => void;
+  items: CategoryItemType[];
+  setItems: React.Dispatch<React.SetStateAction<CategoryItemType[] | []>>;
+  select: number;
+  setEditCategory: React.Dispatch<React.SetStateAction<boolean>>;
+  setNewCategory: React.Dispatch<React.SetStateAction<string>>;
+  setChangeItem: React.Dispatch<React.SetStateAction<CategoryItemType | null>>;
+};
+export const ReorderPage: React.FC<ReorderPageProps> = ({
   updatePosition,
   items,
   setItems,
@@ -13,11 +23,10 @@ export default function ReorderPage({
   setEditCategory,
   setNewCategory,
   setChangeItem,
-  setOpenAddModal,
-}) {
+}) => {
   const dispatch = useDispatch();
 
-  const handleChangeCategory = (item) => {
+  const handleChangeCategory = (item: CategoryItemType) => {
     setEditCategory(true);
     setNewCategory(item.name);
     setChangeItem({
@@ -58,4 +67,4 @@ export default function ReorderPage({
       )}
     </div>
   );
-}
+};

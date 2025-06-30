@@ -1,19 +1,23 @@
-import { VendorInfoType } from "@store/user/types";
-import { JSX } from "react";
+import { CartItem, IsUserType, UserInfoType, VendorInfoType } from "@store/user/types";
 
-export interface IconItem {
-  icon: JSX.Element;
-  title: string;
-  link: string;
-  counter?: number;
-  active: boolean;
-  animation?: JSX.Element;
-}
+export type CartItems = {
+  id: number;
+  products: CartItem[];
+  totalPrice: number;
+  user: number;
+  vendor: number;
+};
 
 export interface NavbarBottomProps {
-  icons: IconItem[];
+  items: CartItems;
+  isUser: Partial<IsUserType> | null;
+  current?: string;
+  visible: boolean;
+  user?: UserInfoType;
+  itemsQuantity: () => number;
 }
 
 export interface NavbarBottomPageProps {
   data?: VendorInfoType;
+  user?: UserInfoType;
 }
