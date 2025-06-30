@@ -65,7 +65,7 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
         <div>
           <div className="card_modal" onClick={() => setIsOpen(!open)} />
           <motion.div
-            drag="y"
+            // drag="y"
             dragControls={controls}
             dragElastic={{ top: 0, bottom: 1 }}
             dragConstraints={{ top: 0, bottom: 0 }}
