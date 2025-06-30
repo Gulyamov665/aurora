@@ -13,6 +13,7 @@ import { useAddToCartMutation } from "@store/admin/api/orders";
 import { authState } from "@store/user/slices/authSlice";
 import { IVariants } from "../order/types/orderTypes";
 import { AppDispatch } from "@store/index";
+import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
 
 const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount }) => {
   const { data } = useOutletContext<OutletContextType>();
@@ -23,6 +24,7 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
   const controls = useDragControls();
   const breakpoint = useBreakpoint();
   const dispatch = useDispatch<AppDispatch>();
+  useLockBodyScroll(open);
 
   // устанавливаем значение поумолчанию варианта при открытии модального окна
   useEffect(() => {
