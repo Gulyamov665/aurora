@@ -66,14 +66,14 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
           <div className="card_modal" onClick={() => setIsOpen(!open)} />
           <motion.div
             // drag="y"
-            dragControls={controls}
-            dragElastic={{ top: 0, bottom: 1 }}
-            dragConstraints={{ top: 0, bottom: 0 }}
-            onDragEnd={(_, info) => {
-              if (info.offset.y > 100) {
-                setIsOpen(false);
-              }
-            }}
+            // dragControls={controls}
+            // dragElastic={{ top: 0, bottom: 1 }}
+            // dragConstraints={{ top: 0, bottom: 0 }}
+            // onDragEnd={(_, info) => {
+            //   if (info.offset.y > 100) {
+            //     setIsOpen(false);
+            //   }
+            // }}
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
