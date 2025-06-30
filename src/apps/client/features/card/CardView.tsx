@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { motion, AnimatePresence, useDragControls } from "framer-motion";
 import { CardViewProps } from "./types";
-import { Dialog } from "@mui/material";
 import { CardViewContent } from "./components/CardViewContent";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { CardViewContentFullSize } from "./components/CardViewContentFullSize";
@@ -24,7 +23,7 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
   const controls = useDragControls();
   const breakpoint = useBreakpoint();
   const dispatch = useDispatch<AppDispatch>();
-  useLockBodyScroll(open);
+  useLockBodyScroll(open, "modal-open");
 
   // устанавливаем значение поумолчанию варианта при открытии модального окна
   useEffect(() => {
@@ -63,9 +62,8 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
   return (
     <AnimatePresence>
       {open && (
-        <Dialog open={open} onClose={() => setIsOpen(!open)}>
-          <div className="card_modal" onClick={() => setIsOpen(!open)}></div>
-
+        <div>
+          <div className="card_modal" onClick={() => setIsOpen(!open)} />
           <motion.div
             drag="y"
             dragControls={controls}
@@ -112,7 +110,7 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
                 />
               ))}
           </motion.div>
-        </Dialog>
+        </div>
       )}
     </AnimatePresence>
   );
