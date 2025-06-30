@@ -17,16 +17,16 @@ export const useLockBodyScroll = (locked: boolean) => {
       return;
     }
 
-    if (isIOS) {
-      const scrollY = window.scrollY;
-      body.dataset.scrollY = scrollY.toString();
-      body.style.position = "fixed";
-      body.style.top = `-${scrollY}px`;
-      body.style.width = "100%";
-      body.classList.add("lock-ios-scroll");
-    } else {
-      body.style.overflow = "hidden";
-    }
+    // if (isIOS) {
+    //   const scrollY = window.scrollY;
+    //   body.dataset.scrollY = scrollY.toString();
+    //   body.style.position = "fixed";
+    //   body.style.top = `-${scrollY}px`;
+    //   body.style.width = "100%";
+    //   body.classList.add("lock-ios-scroll");
+    // } else {
+    //   body.style.overflow = "hidden";
+    // }
 
     return () => {
       body.style.overflow = "";
