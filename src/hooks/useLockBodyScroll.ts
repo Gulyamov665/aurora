@@ -10,10 +10,6 @@ export const useLockBodyScroll = (locked: boolean) => {
       body.style.position = "";
       body.style.top = "";
       body.style.width = "";
-      if (isIOS) {
-        window.scrollTo(0, parseInt(body.dataset.scrollY || "0", 10));
-        body.classList.remove("lock-ios-scroll");
-      }
       return;
     }
 
