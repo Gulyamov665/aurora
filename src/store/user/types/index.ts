@@ -156,6 +156,11 @@ export interface CartData {
   id: number;
 }
 
+export interface CartBadResponse {
+  is_open: boolean;
+  message: string;
+}
+
 export type UserInfoType = {
   id: number;
   first_name: string;

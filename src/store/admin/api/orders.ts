@@ -3,6 +3,7 @@ import { decreaseProductInCache } from "@/Utils/tools";
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { setUser } from "@store/user/slices/authSlice";
 import { CartData, ChangeOrderBody, GroupedOrder, OrdersData, OrdersType } from "@store/user/types";
+import { CartBadResponse, CartItem } from "@store/user/types";
 
 const url = import.meta.env.VITE_EXPRESS_URL;
 
@@ -85,12 +86,20 @@ export const ordersApi = createApi({
       }),
       providesTags: ["cart"],
     }),
-    addToCart: build.mutation({
+    addToCart: build.mutation<CartData | CartBadResponse, CartItem>({
       query: (body) => ({
         url: "/cart/addToCart",
         method: "POST",
         body,
       }),
+      transformResponse: (response: any, meta?: { response?: Response }) => {
+        if (meta?.response?.status === 201) {
+          // Успешно, возвращаем CartData
+          return response as CartData;
+        }
+        // Любой другой статус (например, 200) — это CartBadResponse
+        return { ...response, status: meta?.response?.status };
+      },
       invalidatesTags: ["cart"],
     }),
     changeOrder: build.mutation<OrdersType, ChangeOrderBody>({
@@ -161,5 +170,5 @@ export const {
   useGetOrderByIdQuery,
   useLazyGetOrderByIdQuery,
   useUpdateOrderMutation,
-  useChangeOrderMutation
+  useChangeOrderMutation,
 } = ordersApi;

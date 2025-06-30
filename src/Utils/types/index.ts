@@ -26,4 +26,5 @@ export interface AddToCartArgs {
   userId: number;
   restaurantId: number;
   addToCart: (body: any) => Promise<any>; // уточни тип, если нужно
+  trigger?: () => void; // функция для вызова при ошибке
 }
