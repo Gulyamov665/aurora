@@ -33,20 +33,6 @@ export const VendorCard: React.FC<VendorCardProps> = ({ data }) => {
           padding: 0,
         }}
       >
-        {/* Address chip */}
-        {/* <Box sx={{ position: "absolute", top: 16, left: 16, zIndex: 2 }}>
-          <Chip
-            label="улица Абдурахмана Джами, 3/2"
-            sx={{
-              bgcolor: "#e0e0e0",
-              color: "#000",
-              fontWeight: 500,
-              borderRadius: 2,
-            }}
-          />
-        </Box> */}
-
-        {/* Main image */}
         <CardMedia component="img" height="320" image={data?.background_photo} alt="restaurant" />
 
         <CardContent
@@ -78,20 +64,23 @@ export const VendorCard: React.FC<VendorCardProps> = ({ data }) => {
           </Stack>
         </CardContent>
         <CardContent
-          sx={{
+          sx={(theme) => ({
             position: "absolute",
             zIndex: 3,
             bottom: 10,
             left: 10,
-            // color: "white",
-            width: "240px",
-
+            width: {
+              xs: "170px", // <600px
+              sm: "200px", // ≥600px
+              md: "240px", // ≥900px
+            },
             color: "black",
-            // background: "rgba(0, 0, 0, 0.7)",
             background: "rgba(255, 255, 255, 0.7)",
-
             borderRadius: 4,
-          }}
+            [theme.breakpoints.down(350)]: {
+              width: "130px", // только для <=320px
+            },
+          })}
         >
           <Typography variant="h5" component="div" fontWeight="bold">
             {data?.name}
