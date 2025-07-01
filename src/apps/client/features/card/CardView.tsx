@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useDragControls } from "framer-motion";
 import { CardViewProps } from "./types";
 import { CardViewContent } from "./components/CardViewContent";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
@@ -20,7 +20,7 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
   const [addToCart] = useAddToCartMutation();
   const [selectedVariant, setSelectedVariant] = useState<number | null>(null);
   const [option, setOption] = useState<IVariants | null>(null);
-  // const controls = useDragControls();
+  const controls = useDragControls();
   const breakpoint = useBreakpoint();
   const dispatch = useDispatch<AppDispatch>();
   useLockBodyScroll(open, "modal-open");
@@ -60,20 +60,133 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
   };
 
   return (
+    // <AnimatePresence>
+    //   {open && (
+    //     <div>
+    //       <div className="card_modal" onClick={() => setIsOpen(!open)} />
+    //       <motion.div
+    //         drag="y"
+    //         dragControls={controls}
+    //         dragElastic={{ top: 0, bottom: 1 }}
+    //         dragConstraints={{ top: 0, bottom: 0 }}
+    //         onDragEnd={(_, info) => {
+    //           if (info.offset.y > 100) {
+    //             setIsOpen(false);
+    //           }
+    //         }}
+    //         initial={{ y: "100%" }}
+    //         animate={{ y: 0 }}
+    //         exit={{ y: "100%" }}
+    //         transition={{ duration: 0.3 }}
+    //         style={{
+    //           position: "fixed",
+    //           bottom: 0,
+    //           background: "white",
+    //         }}
+    //         className="card_view_motion"
+    //       >
+    //         {item &&
+    //           (breakpoint === "lg" || breakpoint === "xl" ? (
+    //             <CardViewContentFullSize
+    //               item={item}
+    //               count={count}
+    //               setCount={setCount}
+    //               setIsOpen={setIsOpen}
+    //               onAdd={onAddProduct}
+    //               selectedVariant={selectedVariant}
+    //               setSelectedVariant={setSelectedVariant}
+    //               option={option}
+    //             />
+    //           ) : (
+    //             <CardViewContent
+    //               item={item}
+    //               count={count}
+    //               setCount={setCount}
+    //               setIsOpen={setIsOpen}
+    //               onAdd={onAddProduct}
+    //               selectedVariant={selectedVariant}
+    //               setSelectedVariant={setSelectedVariant}
+    //               option={option}
+    //             />
+    //           ))}
+    //       </motion.div>
+    //     </div>
+    //   )}
+    // </AnimatePresence>
+    // <AnimatePresence>
+    //   {open && (
+    //     <>
+    //       <motion.div
+    //         onClick={() => setIsOpen(false)}
+    //         initial={{ opacity: 0 }}
+    //         animate={{ opacity: 0.4 }}
+    //         exit={{ opacity: 0 }}
+    //         className="fixed inset-0 bg-black z-40"
+    //       />
+
+    //       <motion.div
+    //         drag="y"
+    //         dragElastic={0.2}
+    //         dragConstraints={{ top: 0 }}
+    //         onDragEnd={(_, info) => {
+    //           if (info.offset.y > 100) {
+    //             setIsOpen(false);
+    //           }
+    //         }}
+    //         initial={{ y: "100%" }}
+    //         animate={{ y: 0 }}
+    //         exit={{ y: "100%" }}
+    //         transition={{ type: "spring", stiffness: 300, damping: 30 }}
+    //         className="card_view_motion"
+    //       >
+    //         {/* Хендл (грип) */}
+    //         <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto my-3" />
+
+    //         {/* Здесь твой контент */}
+    //         {item &&
+    //           (breakpoint === "lg" || breakpoint === "xl" ? (
+    //             <CardViewContentFullSize
+    //               item={item}
+    //               count={count}
+    //               setCount={setCount}
+    //               setIsOpen={setIsOpen}
+    //               onAdd={onAddProduct}
+    //               selectedVariant={selectedVariant}
+    //               setSelectedVariant={setSelectedVariant}
+    //               option={option}
+    //             />
+    //           ) : (
+    //             <CardViewContent
+    //               item={item}
+    //               count={count}
+    //               setCount={setCount}
+    //               setIsOpen={setIsOpen}
+    //               onAdd={onAddProduct}
+    //               selectedVariant={selectedVariant}
+    //               setSelectedVariant={setSelectedVariant}
+    //               option={option}
+    //             />
+    //           ))}
+    //       </motion.div>
+    //     </>
+    //   )}
+    // </AnimatePresence>
+
     <AnimatePresence>
       {open && (
         <div>
           <div className="card_modal" onClick={() => setIsOpen(!open)} />
+
           <motion.div
-            // drag="y"
-            // dragControls={controls}
-            // dragElastic={{ top: 0, bottom: 1 }}
-            // dragConstraints={{ top: 0, bottom: 0 }}
-            // onDragEnd={(_, info) => {
-            //   if (info.offset.y > 100) {
-            //     setIsOpen(false);
-            //   }
-            // }}
+            drag="y"
+            dragControls={controls}
+            dragElastic={{ top: 0, bottom: 1 }}
+            dragConstraints={{ top: 0, bottom: 0 }}
+            onDragEnd={(_, info) => {
+              if (info.offset.y > 100) {
+                setIsOpen(false);
+              }
+            }}
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
@@ -85,6 +198,12 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
             }}
             className="card_view_motion"
           >
+            {/* Грип (ползунок) */}
+            {/* <div
+              onPointerDown={(e) => controls.start(e)}
+              className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto my-3 cursor-pointer zIndex-2000"
+            /> */}
+
             {item &&
               (breakpoint === "lg" || breakpoint === "xl" ? (
                 <CardViewContentFullSize
@@ -107,6 +226,7 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
                   selectedVariant={selectedVariant}
                   setSelectedVariant={setSelectedVariant}
                   option={option}
+                  controls={controls}
                 />
               ))}
           </motion.div>

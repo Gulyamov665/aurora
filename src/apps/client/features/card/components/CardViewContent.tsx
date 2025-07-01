@@ -14,6 +14,7 @@ export const CardViewContent: FC<CardViewContentProps> = ({
   selectedVariant,
   setSelectedVariant,
   option,
+  controls,
 }) => {
   return (
     <>
@@ -23,7 +24,11 @@ export const CardViewContent: FC<CardViewContentProps> = ({
         </div>
 
         <div className="card_view_scrollable">
-          <div className="card_view">
+          <div
+            className="card_view"
+            onPointerDown={(e) => controls?.start(e)}
+            style={{ touchAction: "none", WebkitTouchCallout: "none", WebkitUserSelect: "none" }}
+          >
             <img className="card_view_img" loading="lazy" src={item.photo} alt="" />
           </div>
           <div className="card_view_content">

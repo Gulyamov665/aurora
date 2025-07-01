@@ -3,6 +3,7 @@ import { ProductType } from "../../category/types";
 import { ProductData } from "../../products/types";
 import { CartItem } from "@store/user/types";
 import { IVariants } from "../../order/types/orderTypes";
+import { useDragControls } from "framer-motion";
 
 export type CardType = {
   product: CartItem;
@@ -28,4 +29,5 @@ export type CardViewContentProps = {
   selectedVariant: number | null;
   setSelectedVariant: React.Dispatch<React.SetStateAction<number | null>>;
   option: IVariants | null;
+  controls?: ReturnType<typeof useDragControls>;
 };
