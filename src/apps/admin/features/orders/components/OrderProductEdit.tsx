@@ -27,25 +27,14 @@ export const OrderProductEdit: React.FC<OrderProductEditProps> = ({
   const handleChange = (panel: string) => (_: React.SyntheticEvent, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const handleAddToCart = async (productId: number) => {
-    try {
-      alert(productId);
-      console.log(productId);
-      // Можно показать тост или спиннер
-    } catch (error) {
-      console.error("Ошибка при добавлении товара:", error);
-    }
-  };
 
   const handleChangeQuantity = async (productId: number, type: string) => {
-    if (type === "increase") {
-      const body = {
-        id: orderId ?? 0,
-        product_id: productId,
-      };
-      await handleChangeOrder(body);
-    } else {
-    }
+    const body = {
+      id: orderId ?? 0,
+      product_id: productId,
+      type,
+    };
+    await handleChangeOrder(body).unwrap();
   };
 
   return (
@@ -148,10 +137,9 @@ export const OrderProductEdit: React.FC<OrderProductEditProps> = ({
                       render={() => (
                         <Grid item xs={2}>
                           <AddIcon
-                            onClick={() => handleAddToCart(product.id)}
+                            onClick={() => handleChangeQuantity(product.id, "add")}
                             color="secondary"
                             fontSize="medium"
-                            // fontWeight="700"
                             sx={{ cursor: "pointer" }}
                           />
                         </Grid>
