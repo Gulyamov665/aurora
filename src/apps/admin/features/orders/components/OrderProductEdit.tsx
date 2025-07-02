@@ -64,10 +64,10 @@ export const OrderProductEdit: React.FC<OrderProductEditProps> = (props) => {
                     control={control}
                   />
                   <hr />
-                  {showOptions && (
+                  {showOptions && product.options?.variants && (
                     <OrderVariantsDropdown
                       handleChangeQuantity={handleChangeQuantity}
-                      variants={product.options.variants}
+                      variants={product.options?.variants}
                       id={product.id}
                     />
                   )}
