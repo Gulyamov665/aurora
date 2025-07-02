@@ -20,7 +20,7 @@ export const OrderProductsList: React.FC<IOrderProductsListProps> = (props) => {
         name={`add_${product.id}`}
         control={control}
         render={() =>
-          product.options.variants.length > 0 ? (
+          product.options?.variants?.length > 0 ? (
             <Grid item xs={2}>
               <ExpandMoreIcon
                 onClick={() => setShowOptions(!showOptions)}
