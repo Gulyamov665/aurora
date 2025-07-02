@@ -6,7 +6,7 @@ import { IOrderVariantsDropdown } from "../types";
 export const OrderVariantsDropdown: React.FC<IOrderVariantsDropdown> = ({ handleChangeQuantity, id, variants }) => {
   return (
     <Box>
-      {variants.map((option) => (
+      {variants?.map((option) => (
         <Grid container alignItems="center" justifyContent={"space-between"} key={option.id} spacing={1} mt={1}>
           <Grid item xs={4}>
             <Typography>{option.name}</Typography>

@@ -53,6 +53,6 @@ export interface IOrderProductsListProps {
 
 export interface IOrderVariantsDropdown {
   handleChangeQuantity: (productId: number, type: string, optionId?: number) => Promise<void>;
-  variants: IVariants[];
+  variants?: IVariants[];
   id: number;
 }
