@@ -4,6 +4,7 @@ import { FC } from "react";
 import { CardViewContentProps } from "../types";
 import { RadioGroupCustom } from "@/apps/common/RadioGroup";
 import CloseIcon from "@mui/icons-material/Close";
+import noDishPhoto from "@/assets/default.jpg";
 
 export const CardViewContentFullSize: FC<CardViewContentProps> = ({
   item,
@@ -22,19 +23,14 @@ export const CardViewContentFullSize: FC<CardViewContentProps> = ({
           <CloseIcon />
         </div>
 
-        {/* <div className=""> */}
         <div className="card_view">
-          <img className="card_view_img" loading="lazy" src={item.photo} alt="" />
+          <img className="card_view_img" loading="lazy" src={item.photo ?? noDishPhoto} alt="" />
         </div>
         <div className="card_view_content">
           <div className="container card_description_name">
             <h2 style={{ padding: "10px 0px 0px", marginBottom: "0px" }}>
               <b> {item.name}</b> <hr style={{ margin: "16px 0 0px" }} />
             </h2>
-
-            {/* <div className="card_view_desc">
-              <p style={{ padding: "10px 0", whiteSpace: "break-spaces" }}>{item.description}</p>
-            </div> */}
           </div>
           <div className="card_view_price lg">
             <button className="btn btn-warning w-100 me-4 btnStyle" onClick={onAdd}>
@@ -79,7 +75,6 @@ export const CardViewContentFullSize: FC<CardViewContentProps> = ({
             />
           </div>
         </div>
-        {/* </div> */}
       </div>
       {item.description && (
         <div className="card_view_desc_full_width">

@@ -159,3 +159,24 @@ export const decreaseProductInCache = (draft: CartData, newItem: DecreaseItemBod
     draft.products.splice(productIndex, 1);
   }
 };
+
+type Product = {
+  id: number;
+  name: string;
+  [key: string]: any; // если есть другие поля
+};
+
+type MenuData = {
+  [category: string]: Product[];
+};
+
+export const findProductById = (data: MenuData, targetId: number): Product | null => {
+  for (const category in data) {
+    const products: Product[] = data[category];
+    if (Array.isArray(products)) {
+      const found: Product | undefined = products.find((product: Product) => product.id === targetId);
+      if (found) return found;
+    }
+  }
+  return null; // если не найден
+};

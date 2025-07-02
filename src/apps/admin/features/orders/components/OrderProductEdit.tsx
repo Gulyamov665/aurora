@@ -1,38 +1,28 @@
 import * as React from "react";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Card, Grid, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box } from "@mui/material";
+import { Typography } from "@mui/material";
+import { OrderContentList } from "./OrderContentList";
+import { OrderProductEditProps } from "../types";
+import { OrderProductsList } from "./OrderProductsList";
+import { OrderVariantsDropdown } from "./OrderVariantsDropdown";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Control, Controller } from "react-hook-form";
-import { CartItem, ProductType } from "@store/user/types";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import { ChangeOrderMutationType } from "@store/admin/api/orders";
 
-interface OrderProductEditProps {
-  productsResult: Record<string, ProductType[]>;
-  orderProducts: CartItem[];
-  control: Control<any>;
-  handleChangeOrder: ChangeOrderMutationType[0];
-  orderId: number | undefined;
-}
+export const OrderProductEdit: React.FC<OrderProductEditProps> = (props) => {
+  const { productsResult, orderProducts, control, handleChangeOrder, orderId } = props;
 
-export const OrderProductEdit: React.FC<OrderProductEditProps> = ({
-  productsResult,
-  orderProducts,
-  control,
-  handleChangeOrder,
-  orderId,
-}) => {
   const [expanded, setExpanded] = React.useState<string | false>(false);
+  const [showOptions, setShowOptions] = React.useState(false);
 
   const handleChange = (panel: string) => (_: React.SyntheticEvent, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const handleChangeQuantity = async (productId: number, type: string) => {
+  const handleChangeQuantity = async (productId: number, type: string, optionId?: number) => {
     const body = {
       id: orderId ?? 0,
       product_id: productId,
       type,
+      option_id: optionId,
     };
     await handleChangeOrder(body).unwrap();
   };
@@ -44,70 +34,12 @@ export const OrderProductEdit: React.FC<OrderProductEditProps> = ({
           <b>Состав заказа</b>
         </Typography>
         <hr />
-        <Box mt={2} display="flex" flexDirection="column" gap={1}>
-          {orderProducts.map((orderItem: CartItem) => (
-            <Card key={orderItem.id} variant="outlined" sx={{ p: 2 }}>
-              <Grid container alignItems="center" justifyContent={"space-around"} spacing={2}>
-                <Grid item xs={5}>
-                  <Typography variant="subtitle1" fontWeight="bold">
-                    {orderItem.name}
-                  </Typography>
-                  {orderItem.options && (
-                    <>
-                      <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
-                        Вариант: {orderItem.options.name}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
-                        Цена: {orderItem.options.price}
-                      </Typography>
-                    </>
-                  )}
-                </Grid>
-
-                <Grid item xs={4}>
-                  <Typography color="text.primary" fontWeight="medium">
-                    {orderItem.price.toLocaleString()} сум
-                  </Typography>
-                </Grid>
-                <Grid item xs={3}>
-                  <Box sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
-                    <Controller
-                      name={`add_${orderItem.id}`}
-                      control={control}
-                      render={() => (
-                        <AddIcon
-                          color="success"
-                          sx={{ cursor: "pointer" }}
-                          fontSize="small"
-                          onClick={() => handleChangeQuantity(orderItem.id, "increase")}
-                        />
-                      )}
-                    />
-                    <Typography>{orderItem.quantity}</Typography>
-
-                    <Controller
-                      name={`remove_${orderItem.id}`}
-                      control={control}
-                      render={() => (
-                        <RemoveIcon
-                          sx={{ cursor: "pointer" }}
-                          color="error"
-                          fontSize="small"
-                          onClick={() => handleChangeQuantity(orderItem.id, "decrease")}
-                        />
-                      )}
-                    />
-                  </Box>
-                </Grid>
-              </Grid>
-            </Card>
-          ))}
-        </Box>
+        <OrderContentList handleChangeQuantity={handleChangeQuantity} orderProducts={orderProducts} control={control} />
       </Box>
-      {/* <Box mt={3} width={"45%"}> */}
+
       <Box mt={3} width="45%" height={"100%"}>
         <Typography mb={2}>
-          <b>Блюдо заведения</b>
+          <b>Меню</b>
         </Typography>
         <hr />
         {Object.entries(productsResult)?.map(([categoryName, products]) => (
@@ -124,29 +56,21 @@ export const OrderProductEdit: React.FC<OrderProductEditProps> = ({
             <AccordionDetails>
               {products.map((product) => (
                 <Box key={product.id}>
-                  <Grid container alignItems="center" justifyContent={"space-between"} spacing={2}>
-                    <Grid item xs={4}>
-                      <Typography>{product.name}</Typography>
-                    </Grid>
-                    <Grid item xs={4}>
-                      <Typography color="text.secondary">{product.price} сум</Typography>
-                    </Grid>
-                    <Controller
-                      name={`add_${product.id}`}
-                      control={control}
-                      render={() => (
-                        <Grid item xs={2}>
-                          <AddIcon
-                            onClick={() => handleChangeQuantity(product.id, "add")}
-                            color="secondary"
-                            fontSize="medium"
-                            sx={{ cursor: "pointer" }}
-                          />
-                        </Grid>
-                      )}
-                    />
-                  </Grid>
+                  <OrderProductsList
+                    showOptions={showOptions}
+                    setShowOptions={setShowOptions}
+                    handleAddProduct={handleChangeQuantity}
+                    product={product}
+                    control={control}
+                  />
                   <hr />
+                  {showOptions && (
+                    <OrderVariantsDropdown
+                      handleChangeQuantity={handleChangeQuantity}
+                      variants={product.options.variants}
+                      id={product.id}
+                    />
+                  )}
                 </Box>
               ))}
             </AccordionDetails>

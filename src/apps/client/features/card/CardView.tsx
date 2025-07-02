@@ -42,7 +42,6 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
   }, [selectedVariant, item]);
 
   const onAddProduct = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (!item) return;
     if (!item || !isUser?.user_id || !data?.id) return;
 
     const productData = {
