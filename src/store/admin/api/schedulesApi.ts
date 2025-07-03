@@ -42,6 +42,7 @@ export type GetScheduleQueryType = ReturnType<typeof useGetScheduleQuery>;
 export type GetScheduleRestaurantQueryType = ReturnType<typeof useGetScheduleRestaurantQuery>;
 export type LazyGetScheduleQueryType = ReturnType<typeof useLazyGetScheduleQuery>;
 export type LazyGetScheduleRestaurantQuery = ReturnType<typeof useLazyGetScheduleRestaurantQuery>;
+export type UpdateScheduleMutationType = ReturnType<typeof useUpdateScheduleMutation>;
 
 
 export const {
