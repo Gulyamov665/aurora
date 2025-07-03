@@ -78,6 +78,7 @@ export const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, 
       userId: isUser?.user_id,
       restaurantId: data.id,
       addToCart,
+      trigger: () => setUnavailable(true),
     });
   };
 
@@ -118,7 +119,7 @@ export const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, 
         <GuestBox setToRegPage={setToRegPage} />
       </MaterialModal>
       <MaterialModal open={unavailable} onClose={() => setUnavailable(false)} minHeight={0}>
-        <GuestBox setToRegPage={setUnavailable} singleBtn title="Заказы в данном заведении недоступны" />
+        <GuestBox setToRegPage={setUnavailable} singleBtn title="В настоящее время заказы в заведении недоступны" />
       </MaterialModal>
     </>
   );

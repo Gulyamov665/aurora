@@ -19,13 +19,13 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    if (confirmedId) removeCart(items.id).unwrap();
+    if (confirmedId) removeCart(confirmedId).unwrap();
   }, [confirmedId]);
 
   if (!isUser) return <Navigate to=".." />;
 
   const removeItems = () => {
-    deleteItem({ message: "очистить корзину ?", type: "orders", id: 1 });
+    deleteItem({ message: "очистить корзину ?", type: "orders", id: items.id });
   };
 
   const increase = (event: MouseEvent<HTMLButtonElement>, productData: CartItem, quantity: number) => {

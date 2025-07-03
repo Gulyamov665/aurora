@@ -3,7 +3,7 @@ import { CardType } from "./types";
 import { formatPrice } from "@/Utils/tools";
 import { CounterBox } from "@/apps/common/CounterBox";
 import { Grow } from "@mui/material";
-import noDishPhoto from "@/assets/nodish.png";
+import noDishPhoto from "@/assets/default.jpg";
 
 const Card: FC<CardType> = ({ product, addToCart, findItem, decrease }) => {
   const [isLoaded, setIsLoaded] = useState(false);

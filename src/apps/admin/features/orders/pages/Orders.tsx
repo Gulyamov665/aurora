@@ -88,17 +88,6 @@ const Orders: FC = () => {
     await getCouriers(data.id).unwrap();
   };
 
-  const onSubmit = async (data: { product_ids: object }) => {
-    if (!orderData?.id) return;
-    try {
-      console.log(data);
-      // alert("Обновлен");
-    } catch (error) {
-      console.error("Ошибка обновления:", error);
-      // alert("Обновлен");
-    }
-  };
-
   return (
     <Box
       className="container"
@@ -135,17 +124,15 @@ const Orders: FC = () => {
         />
       </Drawer>
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <MaterialModal open={openModal} onClose={() => setOpenModal(false)} width="80%">
-            <OrderProductEdit
-              productsResult={filteredProducts ?? {}}
-              orderProducts={orderData?.products || []}
-              orderId={orderData?.id}
-              control={methods.control}
-              handleChangeOrder={handleChangeOrder}
-            />
-          </MaterialModal>
-        </form>
+        <MaterialModal open={openModal} onClose={() => setOpenModal(false)} width="80%">
+          <OrderProductEdit
+            productsResult={filteredProducts ?? {}}
+            orderProducts={orderData?.products || []}
+            orderId={orderData?.id}
+            control={methods.control}
+            handleChangeOrder={handleChangeOrder}
+          />
+        </MaterialModal>
       </FormProvider>
     </Box>
   );

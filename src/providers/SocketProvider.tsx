@@ -7,14 +7,8 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    // const token = getToken();
-    // if (!token) return;
-
     const newSocket = io(import.meta.env.VITE_SOCKET, {
       path: "/api-node/socket.io",
-      //   auth: {
-      //     token: `Bearer ${token}`,
-      //   },
     });
 
     setSocket(newSocket);

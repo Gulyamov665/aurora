@@ -70,6 +70,7 @@ export type VendorInfoType = {
   availability_orders: boolean;
   lat: string;
   long: string;
+  is_active: boolean;
 };
 
 export type initialDataType = Omit<VendorInfoType, "background_photo" | "logo">;
@@ -154,6 +155,11 @@ export interface CartData {
   vendor: number;
   user: number;
   id: number;
+}
+
+export interface CartBadResponse {
+  is_open: boolean;
+  message: string;
 }
 
 export type UserInfoType = {

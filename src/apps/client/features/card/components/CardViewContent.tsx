@@ -4,6 +4,7 @@ import { FC } from "react";
 import { CardViewContentProps } from "../types";
 import { RadioGroupCustom } from "@/apps/common/RadioGroup";
 import CloseIcon from "@mui/icons-material/Close";
+import noDishPhoto from "@/assets/default.jpg";
 
 export const CardViewContent: FC<CardViewContentProps> = ({
   item,
@@ -14,6 +15,7 @@ export const CardViewContent: FC<CardViewContentProps> = ({
   selectedVariant,
   setSelectedVariant,
   option,
+  controls,
 }) => {
   return (
     <>
@@ -23,8 +25,12 @@ export const CardViewContent: FC<CardViewContentProps> = ({
         </div>
 
         <div className="card_view_scrollable">
-          <div className="card_view">
-            <img className="card_view_img" loading="lazy" src={item.photo} alt="" />
+          <div
+            className="card_view"
+            onPointerDown={(e) => controls?.start(e)}
+            style={{ touchAction: "none", WebkitTouchCallout: "none", WebkitUserSelect: "none" }}
+          >
+            <img className="card_view_img" loading="lazy" src={item.photo ?? noDishPhoto} alt="" />
           </div>
           <div className="card_view_content">
             <div className="container card_description_name">
