@@ -241,3 +241,12 @@ export type RoleType = {
   role: string;
   label: string;
 };
+
+export type ScheduleType = {
+  id: number;
+  restaurant: number;
+  day: number;
+  day_display: string;
+  open_time: string;
+  close_time: string;
+};

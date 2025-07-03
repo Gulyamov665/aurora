@@ -1,75 +1,68 @@
-import React from "react";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import {
+  useGetScheduleQuery,
+  useGetScheduleRestaurantQuery,
+  useUpdateScheduleMutation,
+} from "@store/admin/api/schedulesApi";
+import { ScheduleList } from "../components/ScheduleList";
+import { useOutletContext } from "react-router-dom";
+import { OutletContextType } from "@/apps/client/pages";
+import { skipToken } from "@reduxjs/toolkit/query";
+import { useEffect, useState } from "react";
+import { MaterialModal } from "@/apps/common/Modal";
+import { ScheduleEdit } from "../components/ScheduleEdit";
+import { FormProvider, useForm } from "react-hook-form";
 
-import { Card, CardContent, Typography, List, ListItem, ListItemText, Divider, Box, Tooltip } from "@mui/material";
+export const Schedules = () => {
+  const { data } = useOutletContext<OutletContextType>();
+  const { data: getSchedules } = useGetScheduleRestaurantQuery(data?.id ? { id: data.id } : skipToken);
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedScheduleId, setSelectedScheduleId] = useState<number | null>(null);
+  const { data: schedule, isLoading } = useGetScheduleQuery(selectedScheduleId ?? skipToken);
+  const [updateSchedule] = useUpdateScheduleMutation();
 
-interface ScheduleItem {
-  day: string;
-  open_time: string | null;
-  close_time: string | null;
-}
+  const methods = useForm({
+    defaultValues: {
+      day: "",
+      open_time: "",
+      close_time: "",
+    },
+  });
 
-interface RestaurantScheduleProps {
-  schedule: ScheduleItem[];
-}
+  useEffect(() => {
+    if (schedule) {
+      methods.reset();
+    }
+  }, [schedule]);
 
-const dayMap: { [key: string]: string } = {
-  MONDAY: "Понедельник",
-  TUESDAY: "Вторник",
-  WEDNESDAY: "Среда",
-  THURSDAY: "Четверг",
-  FRIDAY: "Пятница",
-  SATURDAY: "Суббота",
-  SUNDAY: "Воскресенье",
+const handleEditClick = (id: number) => {
+  setSelectedScheduleId(id);
+  setOpenModal(true);
 };
 
-export const schedule = [
-  { day: "MONDAY", open_time: "09:00", close_time: "18:00" },
-  { day: "TUESDAY", open_time: "09:00", close_time: "18:00" },
-  { day: "WEDNESDAY", open_time: "09:00", close_time: "18:00" },
-  { day: "THURSDAY", open_time: "10:00", close_time: "17:00" },
-  { day: "FRIDAY", open_time: "10:00", close_time: "16:00" },
-  { day: "SATURDAY", open_time: null, close_time: null }, // выходной
-  { day: "SUNDAY", open_time: null, close_time: null }, // выходной
-];
+const onSubmit = async (formData: any) => {
+  try {
+    console.log(formData)
+    // await updateSchedule({
+    //   id: schedule.id, // конкретный ID записи!
+    //   body: formData,
+    // }).unwrap();
+    alert("График обновлён!");
+  } catch (err) {
+    console.error(err);
+    alert("Ошибка обновления");
+  }
+};
 
-export const Schedules: React.FC<RestaurantScheduleProps> = () => {
   return (
-    <Box sx={{ maxWidth: 1200, mx: "auto", mt: 5 }}>
-      <Card elevation={6} sx={{ p: 3 }}>
-        <CardContent>
-          <Typography variant="h6" gutterBottom>
-            График работы ресторана
-          </Typography>
-          <List disablePadding>
-            {schedule.map((item, index) => (
-              <Box key={item.day}>
-                <ListItem>
-                  <Tooltip
-                    title={`Время работы ресторана по данному графику ${
-                      item.open_time && item.close_time
-                        ? (item.close_time.split(":").reduce((h, m) => +h * 60 + +m, 0) -
-                            item.open_time.split(":").reduce((h, m) => +h * 60 + +m, 0)) /
-                          60
-                        : 0
-                    } часов`}
-                  >
-                    <ListItemText
-                      primary={dayMap[item.day.toUpperCase()] || item.day}
-                      secondary={
-                        item.open_time && item.close_time ? `${item.open_time} - ${item.close_time}` : "Выходной"
-                      }
-                    />
-                  </Tooltip>
-                  ;
-                  <ModeEditIcon />
-                </ListItem>
-                {index < schedule.length - 1 && <Divider component="li" />}
-              </Box>
-            ))}
-          </List>
-        </CardContent>
-      </Card>
-    </Box>
+    <>
+      <ScheduleList getSchedules={getSchedules} setonEditClick={handleEditClick} />
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <MaterialModal open={openModal} onClose={() => setOpenModal(false)} width="60%" minHeight={400}>
+            <ScheduleEdit control={methods.control} />
+          </MaterialModal>
+        </form>
+      </FormProvider>
+    </>
   );
 };
