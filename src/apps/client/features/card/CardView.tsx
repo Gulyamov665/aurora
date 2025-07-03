@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { motion, AnimatePresence, useDragControls } from "framer-motion";
 import { CardViewProps } from "./types";
-import { SwipeableDrawer } from "@mui/material";
 import { CardViewContent } from "./components/CardViewContent";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { CardViewContentFullSize } from "./components/CardViewContentFullSize";
@@ -13,6 +12,7 @@ import { useAddToCartMutation } from "@store/admin/api/orders";
 import { authState } from "@store/user/slices/authSlice";
 import { IVariants } from "../order/types/orderTypes";
 import { AppDispatch } from "@store/index";
+import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
 
 const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount }) => {
   const { data } = useOutletContext<OutletContextType>();
@@ -23,6 +23,7 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
   const controls = useDragControls();
   const breakpoint = useBreakpoint();
   const dispatch = useDispatch<AppDispatch>();
+  useLockBodyScroll(open, "modal-open");
 
   // устанавливаем значение поумолчанию варианта при открытии модального окна
   useEffect(() => {
@@ -41,7 +42,6 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
   }, [selectedVariant, item]);
 
   const onAddProduct = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (!item) return;
     if (!item || !isUser?.user_id || !data?.id) return;
 
     const productData = {
@@ -61,8 +61,8 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
   return (
     <AnimatePresence>
       {open && (
-        <SwipeableDrawer open={open} onClose={() => setIsOpen(!open)} onOpen={() => setIsOpen(!open)}>
-          <div className="card_modal" onClick={() => setIsOpen(!open)}></div>
+        <div>
+          <div className="card_modal" onClick={() => setIsOpen(!open)} />
 
           <motion.div
             drag="y"
@@ -107,10 +107,11 @@ const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount })
                   selectedVariant={selectedVariant}
                   setSelectedVariant={setSelectedVariant}
                   option={option}
+                  controls={controls}
                 />
               ))}
           </motion.div>
-        </SwipeableDrawer>
+        </div>
       )}
     </AnimatePresence>
   );

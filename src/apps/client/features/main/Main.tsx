@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Typography, Grid } from "@mui/material";
+
 import { RestaurantCard } from "./components/RestaurantCard";
-import Header from "../header/Header";
 import { useGetRestaurantsQuery } from "@store/user/api/restaurantsApi";
 import { Link } from "react-router-dom";
+import Header from "../header/Header";
 
 export const Main: React.FC = () => {
   const { data } = useGetRestaurantsQuery();

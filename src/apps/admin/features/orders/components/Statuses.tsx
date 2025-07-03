@@ -1,13 +1,14 @@
 import { AccessTime, Close, DoneOutlined, Kitchen, Fastfood, LocalShipping } from "@mui/icons-material";
 import { Chip } from "@mui/material";
-// import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
 export const getStatusChip = (status: string) => {
   switch (status) {
     case "new":
       return <Chip label="Новый" color="success" icon={<Fastfood />} />;
     case "completed":
-      return <Chip label="Готово" color="success" icon={<DoneOutlined />} />;
+      return (
+        <Chip label="Завершен" sx={{ background: "black", color: "#ffffff" }} icon={<DoneOutlined color="success" />} />
+      );
     case "awaiting_courier":
       return <Chip label="Ожидание" color="secondary" icon={<AccessTime />} />;
     case "canceled":
@@ -26,7 +27,7 @@ export const getStatusChipNoIcons = (status: string) => {
     case "new":
       return <Chip label="Новый" color="success" />;
     case "completed":
-      return <Chip label="Готово" color="success" />;
+      return <Chip label="Доставлено" sx={{ background: "black", color: "#ffffff" }} />;
     case "awaiting_courier":
       return <Chip label="Ожидание" color="secondary" />;
     case "canceled":

@@ -88,7 +88,7 @@ export const DetailsForm: React.FC<OrderDetailsFormProps> = (props) => {
               <Typography variant="body2" color="textSecondary">
                 Сумма
               </Typography>
-              <Typography variant="subtitle1">{props.order?.total_price.toLocaleString()} UZS</Typography>
+              <Typography variant="subtitle1">{Number(props.order?.total_price).toLocaleString()} UZS</Typography>
             </Box>
           </Box>
           <Box display="flex" alignItems="center" gap={1} mb={2}>
