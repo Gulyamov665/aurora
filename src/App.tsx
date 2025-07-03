@@ -9,6 +9,7 @@ import RegistrationPage from "./apps/client/features/registration/pages/Registra
 import Auth from "./apps/client/features/auth/pages/Auth";
 import { DeleteModal } from "./apps/common/DeleteModal";
 import { Main } from "./apps/client/features/main/Main";
+import { Snack } from "./apps/common/Snack";
 
 function App() {
   const { state } = useLocation();
@@ -32,6 +33,7 @@ function App() {
 
       {/* global elements */}
       {/* <InstallPrompt /> */}
+      <Snack />
       <ToastContainer />
       <DeleteModal />
     </>
