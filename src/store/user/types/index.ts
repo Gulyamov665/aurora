@@ -256,3 +256,17 @@ export type ScheduleType = {
   open_time: string;
   close_time: string;
 };
+export type DeliveryRuleType = {
+  id: number;
+  restaurant: string;
+  calculation_type: string;
+  name: string;
+  description: string;
+  price_per_km: number;
+  fixed_price: number;
+  price_per_percent: number;
+  min_distance: number;
+  max_distance: number;
+  max_order_price_for_free_delivery: number;
+  is_active: boolean;
+};

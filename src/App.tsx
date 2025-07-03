@@ -9,6 +9,7 @@ import RegistrationPage from "./apps/client/features/registration/pages/Registra
 import Auth from "./apps/client/features/auth/pages/Auth";
 import { DeleteModal } from "./apps/common/DeleteModal";
 import { Main } from "./apps/client/features/main/Main";
+import { Snack } from "./apps/common/Snack";
 // import { Analytics } from "@vercel/analytics/react";
 
 // import { InstallPrompt } from "./InstallPrompt";
@@ -35,6 +36,7 @@ function App() {
 
       {/* global elements */}
       {/* <InstallPrompt /> */}
+      <Snack />
       {/* <Analytics /> */}
       <ToastContainer />
       <DeleteModal />

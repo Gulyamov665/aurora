@@ -9,6 +9,7 @@ import {
   onCloseAddModal,
   setOpenAddModal,
   showDeleteModal,
+  snack,
 } from "@store/appSlice";
 
 export const useActions = () => {
@@ -24,6 +25,7 @@ export const useActions = () => {
       setOpenAddModal,
       onCloseAddModal,
       AddressSelectorToggle,
+      snack
     },
     dispatch
   );
