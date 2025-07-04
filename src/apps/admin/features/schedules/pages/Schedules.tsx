@@ -14,7 +14,6 @@ import { ScheduleEdit } from "../components/ScheduleEdit";
 import { ScheduleAdd } from "../components/ScheduleAdd";
 import { useDelete } from "@/hooks/useDelete";
 import { useActions } from "@/hooks/useActions";
-import { time } from "framer-motion";
 
 export const Schedules = () => {
   const { data: vendorData } = useOutletContext<OutletContextType>();
