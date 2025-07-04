@@ -1,25 +1,30 @@
 import React from "react";
-import { Box, Button, TextField, MenuItem, FormControlLabel, Tooltip } from "@mui/material";
+import { Box, Button, TextField, MenuItem, Tooltip, OutlinedInput, InputAdornment } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { DeliveryRuleFormValues, DeliveryRulesAddProps } from "../types";
-import IOSSwitch from "@/apps/client/components/MuiSwitch";
 import { useActions } from "@/hooks/useActions";
 
-export const DeliveryRulesAdd: React.FC<DeliveryRulesAddProps> = ({setOpenAddModal, addDeliveryRule, vendorData}) => {
+export const DeliveryRulesAdd: React.FC<DeliveryRulesAddProps> = ({ setOpenAddModal, addDeliveryRule, vendorData }) => {
   const { snack } = useActions();
-  const {control, handleSubmit, watch, reset} = useForm<DeliveryRuleFormValues>();
-
-
+  const { control, handleSubmit, watch, reset } = useForm<DeliveryRuleFormValues>({
+    defaultValues: {
+      name: "",
+      calculation_type: "",
+      price_per_km: 0,
+      price_per_percent: 0,
+      max_order_price_for_free_delivery: 0,
+    },
+  });
 
   const onSubmit = handleSubmit(async (data) => {
     data.restaurant = vendorData.id;
     await addDeliveryRule(data).unwrap();
     setOpenAddModal(false);
     snack({ open: true, color: "success", message: "Правило успешно добавлена" });
-    
+
     reset();
   });
-  
+
   const calculationType = watch("calculation_type");
   return (
     <>
@@ -41,12 +46,13 @@ export const DeliveryRulesAdd: React.FC<DeliveryRulesAddProps> = ({setOpenAddMod
         <Controller
           name="calculation_type"
           control={control}
+          defaultValue=""
           render={({ field }) => (
             <TextField
               select
               label="Тип расчета"
               fullWidth
-              value={field.value || ""}
+              value={field.value}
               onChange={(event) => field.onChange(event.target.value)}
             >
               <MenuItem value="percent">Процент от суммы заказа</MenuItem>
@@ -60,8 +66,16 @@ export const DeliveryRulesAdd: React.FC<DeliveryRulesAddProps> = ({setOpenAddMod
             name="price_per_km"
             control={control}
             render={({ field }) => (
-              <Tooltip title={"Сумма доставки будет рассчитываться по расстоянию до клиента"}>
-                <TextField {...field} label="Цена за км" type="number" fullWidth />
+              <Tooltip title={`Сумма доставки будет рассчитываться по расстоянию от ресторана до клиента`}>
+                <OutlinedInput
+                  {...field}
+                  id="outlined-adornment-weight"
+                  endAdornment={<InputAdornment position="end">UZS (за 1 км)</InputAdornment>}
+                  aria-describedby="outlined-weight-helper-text"
+                  inputProps={{
+                    "aria-label": "weight",
+                  }}
+                />
               </Tooltip>
             )}
           />
@@ -72,8 +86,16 @@ export const DeliveryRulesAdd: React.FC<DeliveryRulesAddProps> = ({setOpenAddMod
             name="price_per_percent"
             control={control}
             render={({ field }) => (
-              <Tooltip title={"Сумма доставки будет рассчитываться на указанный процент от суммы заказа"}>
-                <TextField {...field} label="Цена за процент" type="number" fullWidth />
+              <Tooltip title={`Сумма доставки будет рассчитываться на ${field?.value ?? ""} % от суммы заказа`}>
+                <OutlinedInput
+                  {...field}
+                  id="outlined-adornment-weight"
+                  endAdornment={<InputAdornment position="end">% (от суммы заказа)</InputAdornment>}
+                  aria-describedby="outlined-weight-helper-text"
+                  inputProps={{
+                    "aria-label": "weight",
+                  }}
+                />
               </Tooltip>
             )}
           />
@@ -89,16 +111,6 @@ export const DeliveryRulesAdd: React.FC<DeliveryRulesAddProps> = ({setOpenAddMod
               }
             >
               <TextField {...field} label="Мин. сумма заказа для бесплатной доставки" type="number" fullWidth />
-            </Tooltip>
-          )}
-        />
-
-        <Controller
-          name="is_active"
-          control={control}
-          render={({ field }) => (
-            <Tooltip title={"По умолчанию правило будет неактивным."} placement={"bottom-start"}>
-              <FormControlLabel control={<IOSSwitch {...field} checked={field.value} />} label="Активность" />
             </Tooltip>
           )}
         />
