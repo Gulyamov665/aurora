@@ -3,14 +3,17 @@ import { useAddDeliveryRuleMutation, useDeleteDeliveryRuleMutation, useToggleAct
 import { useGetDeliverRulesByRestaurantQuery, useUpdateDeliveryRuleMutation } from "@store/admin/api/delivery";
 import { useOutletContext } from "react-router-dom";
 import { OutletContextType } from "@/apps/client/pages";
+import { LoadingScreen } from "../../loading/LoadingScreen";
 
 export const DeliveryRules = () => {
   const { data: vendorData } = useOutletContext<OutletContextType>();
-  const { data: rules } = useGetDeliverRulesByRestaurantQuery(vendorData?.id ?? 0, { skip: !vendorData?.id });
+  const { data: rules, isLoading } = useGetDeliverRulesByRestaurantQuery(vendorData?.id ?? 0, { skip: !vendorData?.id });
   const [addDeliveryRule] = useAddDeliveryRuleMutation();
   const [updateDeliveryRule] = useUpdateDeliveryRuleMutation();
   const [deleteDeliveryRule] = useDeleteDeliveryRuleMutation();
   const [toggleActiveDeliveryRule] = useToggleActiveDeliveryRuleMutation()
+
+  if (isLoading) return <LoadingScreen loading={isLoading} />
 
   return (
     <>

@@ -13,6 +13,8 @@ export interface ScheduleListProps {
   getSchedules: GetScheduleRestaurantQueryType[0];
   setonEditClick: (id: number) => void;
   setOpenAddModal: React.Dispatch<React.SetStateAction<boolean>>;
+  deleteItem: ({ message, type, id }: { message: string, type: string, id: number }) => void
+
 }
 
 export interface ScheduleEditProps {

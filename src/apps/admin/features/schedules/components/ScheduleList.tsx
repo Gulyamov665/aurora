@@ -1,10 +1,11 @@
 import React from "react";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import { Card, CardContent, Typography, List, ListItem, ListItemText, Box, Button } from "@mui/material";
+import { Card, CardContent, Typography, List, ListItem, ListItemText, Box, Button, Tooltip, IconButton } from "@mui/material";
 import { ScheduleType } from "@store/user/types";
 import { ScheduleListProps } from "../types";
+import DeleteIcon from "@mui/icons-material/Delete";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
-export const ScheduleList: React.FC<ScheduleListProps> = ({ getSchedules, setonEditClick, setOpenAddModal }) => {
+export const ScheduleList: React.FC<ScheduleListProps> = ({ getSchedules, setonEditClick, setOpenAddModal, deleteItem }) => {
   return (
     <Box sx={{ maxWidth: 1200, mx: "auto", mt: 5 }}>
       <Card elevation={6} sx={{ p: 3 }}>
@@ -24,7 +25,20 @@ export const ScheduleList: React.FC<ScheduleListProps> = ({ getSchedules, setonE
                         : ("Выходной" as string)
                     }
                   />
-                  <ModeEditIcon onClick={() => setonEditClick(item.id)} sx={{ cursor: "pointer" }} />
+                  <Tooltip title="Дейстаие">
+                  <VisibilityIcon color="action" onClick={() => setonEditClick(item.id)} sx={{ cursor: "pointer", mr:"10px" }} />
+                    </Tooltip>
+                <Tooltip title="Удалить">
+                  <IconButton
+                    aria-label="delete"
+                    color="error"
+                    onClick={() =>
+                      deleteItem({ id: item.id, message: `удалить правило: ${item.day_display +" | "+ item.open_time + " — " + item.close_time}`, type: "deleteRule" })
+                    }
+                  >
+                    <DeleteIcon color="error" />
+                  </IconButton>
+                </Tooltip>
                 </ListItem>
                 <hr />
               </Box>

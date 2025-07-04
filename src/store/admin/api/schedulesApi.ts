@@ -34,6 +34,14 @@ export const schedulesApi = createApi({
       }),
       invalidatesTags: ["schedule"],
     }),
+
+    deleteSchedule: build.mutation({
+      query: (id) => ({
+        url: `v1/restaurant/schedule/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["schedule"],
+    }),
   }),
 });
 
@@ -43,6 +51,7 @@ export type GetScheduleRestaurantQueryType = ReturnType<typeof useGetScheduleRes
 export type LazyGetScheduleQueryType = ReturnType<typeof useLazyGetScheduleQuery>;
 export type LazyGetScheduleRestaurantQuery = ReturnType<typeof useLazyGetScheduleRestaurantQuery>;
 export type UpdateScheduleMutationType = ReturnType<typeof useUpdateScheduleMutation>;
+export type DeleteScheduleMutationType = ReturnType<typeof useDeleteScheduleMutation>;
 
 
 export const {
@@ -51,5 +60,6 @@ export const {
   useGetScheduleRestaurantQuery,
   useLazyGetScheduleQuery,
   useLazyGetScheduleRestaurantQuery,
-  useUpdateScheduleMutation
+  useUpdateScheduleMutation,
+  useDeleteScheduleMutation
 } = schedulesApi;

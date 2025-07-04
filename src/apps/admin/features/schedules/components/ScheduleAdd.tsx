@@ -7,12 +7,19 @@ import { dayMap } from "./ScheduleEdit";
 
 export const ScheduleAdd: React.FC<SchedulesAddProps> = ({ vendorData, setOpenAddModal, addSchedule }) => {
   const { snack } = useActions();
-  const { control, handleSubmit, reset } = useForm<IScheduleFormType>();
+  const { control, handleSubmit, reset } = useForm<IScheduleFormType>({
+    defaultValues: {
+      day: 0,
+      open_time: "",
+      close_time: "",
+      restaurant: vendorData?.id ?? "",
+    },
+  });
 
   const onSubmit = handleSubmit(async (data) => {
     data.restaurant = vendorData.id;
     console.log(data);
-    await addSchedule(data).unwrap()
+    await addSchedule(data).unwrap();
     snack({ open: true, color: "success", message: "Правило успешно добавлена" });
     setOpenAddModal(false);
     reset();
@@ -34,7 +41,7 @@ export const ScheduleAdd: React.FC<SchedulesAddProps> = ({ vendorData, setOpenAd
               render={({ field }) => (
                 <TextField {...field} select fullWidth label="День недели" SelectProps={{ native: true }}>
                   {Object.entries(dayMap).map(([key, value]) => (
-                    <option key={key} value={value}>
+                    <option key={key} value={key}>
                       {value}
                     </option>
                   ))}
