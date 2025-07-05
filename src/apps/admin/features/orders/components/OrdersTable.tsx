@@ -9,15 +9,9 @@ import { LoadingScreen } from "../../loading/LoadingScreen";
 import { Box, CircularProgress, Fade } from "@mui/material";
 import EnableSoundButton from "./EnableSoundButton";
 
-const OrdersTable: FC<OrdersTableProps> = ({
-  data,
-  isLoading,
-  isFetching,
-  onEyeClick,
-  audioRef,
-  setSoundAllowed,
-  soundAllowed,
-}) => {
+const OrdersTable: FC<OrdersTableProps> = (props) => {
+  const { data, isLoading, isFetching, onEyeClick, audioRef, setSoundAllowed, soundAllowed, sound = false } = props;
+
   const [sortBy, setSortBy] = useState<OrderKey>("id");
   const [order, setOrder] = useState<"asc" | "desc">("desc");
 
@@ -50,7 +44,13 @@ const OrdersTable: FC<OrdersTableProps> = ({
           <Typography variant="h6" gutterBottom>
             Заказы
           </Typography>
-          <EnableSoundButton audioRef={audioRef} setSoundAllowed={setSoundAllowed} soundAllowed={soundAllowed} />
+          {sound && (
+            <EnableSoundButton
+              audioRef={audioRef}
+              setSoundAllowed={setSoundAllowed ?? (() => {})}
+              soundAllowed={soundAllowed ?? false}
+            />
+          )}
         </Box>
         <Table>
           <TableHead>
@@ -105,7 +105,7 @@ const OrdersTable: FC<OrdersTableProps> = ({
                   <TableCell>{getStatusChip(row.status)}</TableCell>
                   <TableCell>{row.courier ? row.courier.username : "Не назначен"}</TableCell>
                   <TableCell>
-                    <IconButton onClick={() => onEyeClick(row.id)}>
+                    <IconButton onClick={() => onEyeClick && onEyeClick(row.id)}>
                       <Visibility />
                     </IconButton>
                   </TableCell>

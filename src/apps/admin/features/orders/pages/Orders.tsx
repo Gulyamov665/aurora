@@ -104,6 +104,7 @@ const Orders: FC = () => {
         setSoundAllowed={setSoundAllowed}
         audioRef={audioRef}
         soundAllowed={soundAllowed}
+        sound
       />
 
       <div ref={ref} style={{ height: 20 }} />

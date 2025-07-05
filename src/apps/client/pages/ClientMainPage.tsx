@@ -11,6 +11,7 @@ import { MaterialModal } from "@/apps/common/Modal";
 function ClientMainPage() {
   const { search } = useSelector(modals);
   const { data, isLoading } = useOutletContext<OutletContextType>();
+  
 
   if (isLoading) return <Loading />;
 

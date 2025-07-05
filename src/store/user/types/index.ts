@@ -55,6 +55,7 @@ export type AuthState = {
   botLink: string;
   isUser: Partial<IsUserType> | null;
   error: ErrorType;
+  vendorId: number | null;
 };
 
 export type VendorInfoType = {
@@ -155,6 +156,7 @@ export interface CartData {
   vendor: number;
   user: number;
   id: number;
+  cart_id?: number | null;
 }
 
 export interface CartBadResponse {
@@ -218,6 +220,8 @@ export type ReportsType = {
   sum: number;
   quantity: number;
   canceled: number;
+  delivered: number;
+  fee_sum: number;
 };
 export type { ProductType };
 

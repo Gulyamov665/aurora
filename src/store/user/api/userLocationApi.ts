@@ -1,5 +1,6 @@
 import { UserLocationResponseType, UserLocationType } from "../types";
 import { sharedApi } from "./shared";
+import { refreshCartOnLocationChange } from "@store/tools";
 
 export const userLocationApi = sharedApi.injectEndpoints({
   endpoints: (build) => ({
@@ -29,6 +30,12 @@ export const userLocationApi = sharedApi.injectEndpoints({
         method: "POST",
         body,
       }),
+      async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          refreshCartOnLocationChange(dispatch, getState);
+        } catch {}
+      },
       invalidatesTags: ["UserLocation"],
     }),
     toggleActiveLocation: build.mutation({
@@ -36,6 +43,12 @@ export const userLocationApi = sharedApi.injectEndpoints({
         url: `v1/auth/user/location/${id}/toggle_active`,
         method: "PATCH",
       }),
+      async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          refreshCartOnLocationChange(dispatch, getState);
+        } catch {}
+      },
       invalidatesTags: ["UserLocation"],
     }),
     updateUserLocation: build.mutation({
@@ -44,6 +57,12 @@ export const userLocationApi = sharedApi.injectEndpoints({
         method: "PUT",
         body,
       }),
+      async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          refreshCartOnLocationChange(dispatch, getState);
+        } catch {}
+      },
       invalidatesTags: ["UserLocation"],
     }),
     deleteUserLocation: build.mutation({

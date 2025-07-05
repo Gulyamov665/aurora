@@ -3,7 +3,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { useDelete } from "@/hooks/useDelete";
 import { useEffect } from "react";
 import { CartItem } from "@store/user/types";
-import { handleAddToCart, updateCartCache } from "@/Utils/tools";
+import { handleAddToCart } from "@/Utils/tools";
 import { OrderProps } from "../types/orderTypes";
 import { EmptyCart } from "../../../../../animations/componets/EmptyCart";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -12,6 +12,7 @@ import OrderProducts from "./OrderProducts";
 import styles from "../assets/Orders.module.scss";
 import { AppDispatch } from "@store/index";
 import { useDispatch } from "react-redux";
+import { updateCartCache } from "@store/tools";
 
 export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, decreaseItem, removeCart }) => {
   const { deleteItem, confirmedId } = useDelete();
@@ -40,6 +41,7 @@ export const OrdersList: FC<OrderProps> = ({ data, isUser, items, addToCart, dec
       userId: isUser?.user_id,
       restaurantId: data.id,
       addToCart,
+      cart_id: items.id ?? null,
     });
   };
 

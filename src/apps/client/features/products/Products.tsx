@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { authState } from "@store/user/slices/authSlice";
 import { useOutletContext } from "react-router-dom";
 import { OutletContextType } from "../../pages";
-import { handleAddToCart, updateCartCache } from "@/Utils/tools";
+import { handleAddToCart } from "@/Utils/tools";
 import { MaterialModal } from "@/apps/common/Modal";
 import { GuestBox } from "./components/GuestBox";
 import { CartItem } from "@store/user/types";
 import { AppDispatch } from "@store/index";
+import { updateCartCache } from "@store/tools";
 import Card from "../card/Card";
 
 export const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, handleView }) => {
@@ -75,6 +76,7 @@ export const Products: FC<ProductsProps> = ({ menuItems, category, sectionRefs, 
       event,
       productData,
       quantity,
+      cart_id: items.id ?? null,
       userId: isUser?.user_id,
       restaurantId: data.id,
       addToCart,

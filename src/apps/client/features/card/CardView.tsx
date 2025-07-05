@@ -4,7 +4,7 @@ import { CardViewProps } from "./types";
 import { CardViewContent } from "./components/CardViewContent";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { CardViewContentFullSize } from "./components/CardViewContentFullSize";
-import { handleAddToCart, updateCartCache } from "@/Utils/tools";
+import { handleAddToCart } from "@/Utils/tools";
 import { OutletContextType } from "../../pages";
 import { useOutletContext } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,7 @@ import { authState } from "@store/user/slices/authSlice";
 import { IVariants } from "../order/types/orderTypes";
 import { AppDispatch } from "@store/index";
 import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
+import { updateCartCache } from "@store/tools";
 
 const CardView: FC<CardViewProps> = ({ item, open, setIsOpen, count, setCount }) => {
   const { data } = useOutletContext<OutletContextType>();

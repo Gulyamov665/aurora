@@ -1,9 +1,6 @@
-import { CartData, CartItem, NominatimReverseResponse } from "@store/user/types";
+import { CartItem, NominatimReverseResponse } from "@store/user/types";
 import { ChangeEvent } from "react";
 import { AddToCartArgs } from "./types";
-import { ordersApi } from "@store/admin/api/orders";
-import { AppDispatch } from "@store/index";
-import { ProductData } from "@/apps/client/features/products/types";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { SerializedError } from "@reduxjs/toolkit";
 
@@ -53,6 +50,7 @@ export const handleAddToCart = async ({
   restaurantId,
   addToCart,
   trigger,
+  cart_id,
 }: AddToCartArgs) => {
   try {
     event.stopPropagation();
@@ -66,6 +64,7 @@ export const handleAddToCart = async ({
       user_id: userId,
       restaurant: restaurantId,
       products: cartItem,
+      cart_id,
     };
 
     try {
@@ -101,63 +100,6 @@ export const getCookie = (name: string): string | null => {
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop()!.split(";").shift()!;
   return null;
-};
-
-export const updateCartCache = (dispatch: AppDispatch, userId: number, vendorId: number, product: ProductData) => {
-  dispatch(
-    ordersApi.util.updateQueryData("getCart", { user: userId, vendorId }, (draft: CartData) => {
-      if (!draft.products) draft.products = [];
-
-      const existingProduct = draft.products.find((draftProduct) => {
-        return (
-          draftProduct.id === product.id &&
-          ((draftProduct.options && product.options && draftProduct.options.id === product.options.id) ||
-            (!draftProduct.options && !product.options))
-        );
-      });
-      if (existingProduct?.options && product.options) {
-        // Если продукт с опциями уже существует, обновляем количество
-        if (existingProduct.options.id === product.options.id && existingProduct.quantity) {
-          existingProduct.quantity += 1;
-        } else {
-          // Если опции разные, добавляем новый продукт
-          draft.products.push(product);
-        }
-      } else if (existingProduct && existingProduct.quantity) {
-        existingProduct.quantity += 1;
-      } else {
-        draft.products.push({ ...product, quantity: 1 });
-      }
-    })
-  );
-};
-
-type DecreaseItemBody = {
-  user_id: number;
-  restaurant_id: number;
-  product: CartItem;
-};
-
-export const decreaseProductInCache = (draft: CartData, newItem: DecreaseItemBody) => {
-  const productIndex = draft?.products?.findIndex((product) => {
-    return (
-      product.id === newItem.product.id &&
-      ((product.options && newItem.product.options && product.options.id === newItem.product.options.id) ||
-        (!product.options && !newItem.product.options))
-    );
-  });
-
-  if (productIndex === -1) return;
-
-  const existingProduct = draft.products[productIndex];
-
-  if (!existingProduct || !existingProduct.quantity) return;
-
-  existingProduct.quantity -= 1;
-
-  if (existingProduct.quantity <= 0) {
-    draft.products.splice(productIndex, 1);
-  }
 };
 
 type Product = {

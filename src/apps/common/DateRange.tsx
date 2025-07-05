@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ConfigProvider, DatePicker } from "antd";
+import { ConfigProvider, DatePicker } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
 import { Box } from "@mui/material";
 import type { Dayjs } from "dayjs";
@@ -11,10 +11,10 @@ dayjs.locale("ru");
 
 type DateRangeProps = {
   setDate: React.Dispatch<React.SetStateAction<string[]>>;
-  onSubmit: () => Promise<void>;
+  onSubmit?: () => Promise<void>;
 };
 
-export const DateRange: React.FC<DateRangeProps> = ({ setDate, onSubmit }) => {
+export const DateRange: React.FC<DateRangeProps> = ({ setDate }) => {
   const smileIcon = <SmileOutlined />;
   const { RangePicker } = DatePicker;
 
@@ -22,15 +22,10 @@ export const DateRange: React.FC<DateRangeProps> = ({ setDate, onSubmit }) => {
     setDate(dateString);
   };
   return (
-    <div>
-      <ConfigProvider locale={ruRU}>
-        <Box>
-          <RangePicker suffixIcon={smileIcon} onChange={onChange} />
-          <Button style={{ marginLeft: 4 }} onClick={onSubmit}>
-            Отправить
-          </Button>
-        </Box>
-      </ConfigProvider>
-    </div>
+    <ConfigProvider locale={ruRU}>
+      <Box>
+        <RangePicker suffixIcon={smileIcon} onChange={onChange} />
+      </Box>
+    </ConfigProvider>
   );
 };

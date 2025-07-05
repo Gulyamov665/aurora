@@ -35,24 +35,33 @@ const StatCard: React.FC<StatCardProps> = ({ title, value = 0, icon, color }) =>
 interface OrdersStatsProps {
   totalSum?: number;
   totalCount?: number;
-  delivered: number;
+  delivered?: number;
   cancelled?: number;
+  fee: number | undefined;
 }
 
-const OrdersStats: React.FC<OrdersStatsProps> = ({ totalSum = 0, totalCount, delivered, cancelled }) => {
+const OrdersStats: React.FC<OrdersStatsProps> = ({ totalSum = 0, totalCount, delivered, cancelled, fee }) => {
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} sm={6} md={3}>
-        <StatCard title="Общая сумма" value={totalSum?.toLocaleString()} icon={<AttachMoneyIcon />} color="green" />
-      </Grid>
-      <Grid item xs={12} sm={6} md={3}>
+      <Grid item xs={12} sm={6} md={2}>
         <StatCard title="Кол-во заказов" value={totalCount as number} icon={<ShoppingCartIcon />} color="blue" />
       </Grid>
-      <Grid item xs={12} sm={6} md={3}>
-        <StatCard title="Доставленные" value={delivered} icon={<CheckCircleIcon />} color="green" />
+      <Grid item xs={12} sm={6} md={2}>
+        <StatCard title="Доставленные" value={delivered as number} icon={<CheckCircleIcon />} color="green" />
       </Grid>
-      <Grid item xs={12} sm={6} md={3}>
+      <Grid item xs={12} sm={6} md={2}>
         <StatCard title="Отмененные" value={cancelled as number} icon={<CancelIcon />} color="red" />
+      </Grid>{" "}
+      <Grid item xs={12} sm={6} md={2}>
+        <StatCard title="Общая сумма" value={totalSum?.toLocaleString()} icon={<AttachMoneyIcon />} color="green" />
+      </Grid>
+      <Grid item xs={12} sm={6} md={2}>
+        <StatCard
+          title="Работа сервиса"
+          value={fee !== undefined ? fee.toLocaleString() : "0"}
+          icon={<AttachMoneyIcon />}
+          color="warning"
+        />
       </Grid>
     </Grid>
   );
