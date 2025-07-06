@@ -8,15 +8,15 @@ export const NavbarBottom = (props: NavbarBottomProps) => {
   return (
     <div className={`${styles["navbar"]} ${visible ? styles["show"] : styles["hide"]}`}>
       <div className="container">
-        <div style={{ padding: 0, display: "flex", justifyContent: "space-between", height: 35 }}>
+        <div style={{ padding: 0, display: "flex", justifyContent: "space-between", height: 25 }}>
           <div style={{ width: "30%", textAlign: "start" }}>
-            <LocalTaxiIcon />
+            <LocalTaxiIcon fontSize="small" style={{ marginLeft: 14 }} />
           </div>
 
-          <div style={{ width: "30%" }}>
+          <div style={{ width: "30%", fontSize: 13 }}>
             <b>{deliveryPrice?.toLocaleString()} сум</b>
           </div>
-          <div style={{ width: "30%", textAlign: "end" }}>
+          <div style={{ width: "30%", textAlign: "end", fontSize: 13 }}>
             <p>30-40 м</p>
           </div>
         </div>
