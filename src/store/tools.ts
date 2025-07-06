@@ -3,7 +3,7 @@ import { AppDispatch, RootState } from ".";
 import { ordersApi } from "./admin/api/orders";
 import { CartData, CartItem } from "./user/types";
 
-export const refreshCartOnLocationChange = (dispatch: AppDispatch, getState: () => unknown) => {
+export const refreshCartOnLocationChange = async (dispatch: AppDispatch, getState: () => unknown) => {
   const { authState } = getState() as RootState;
   const user = authState.isUser?.user_id;
   const vendorId = authState.vendorId ?? undefined;
@@ -11,7 +11,25 @@ export const refreshCartOnLocationChange = (dispatch: AppDispatch, getState: () 
   const sub = dispatch(
     ordersApi.endpoints.getCart.initiate({ user, vendorId, loc_change: true }, { forceRefetch: true })
   );
-  sub.unsubscribe();
+
+  try {
+    const newCart = await sub.unwrap(); // дождаться ответа
+
+    // вручную обновляем обычный getCart кеш
+    dispatch(
+      ordersApi.util.updateQueryData(
+        "getCart",
+        { user, vendorId }, // ключ без loc_change
+        (draft) => {
+          Object.assign(draft, newCart);
+        }
+      )
+    );
+  } catch (err) {
+    console.error("Ошибка обновления корзины с loc_change:", err);
+  } finally {
+    sub.unsubscribe();
+  }
 };
 
 export const updateCartCache = (dispatch: AppDispatch, userId: number, vendorId: number, product: ProductData) => {

@@ -55,6 +55,7 @@ export const AddressSelector: React.FC = () => {
     if (isUser?.user_id) {
       setChangingId(locationId);
       await toogleActive(locationId).unwrap();
+      AddressSelectorToggle(false);
     }
   };
 
