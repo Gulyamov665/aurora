@@ -127,6 +127,7 @@ export type OrdersType = {
   status: OrderStatus;
   location: UserLocationType;
   fee: number;
+  delivery_price: number;
 };
 
 export type ChangeOrderBody = {

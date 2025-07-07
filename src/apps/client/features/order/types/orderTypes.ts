@@ -44,6 +44,8 @@ type OrderItems = {
   user: number;
   vendor: number;
   id: number;
+  destination: string;
+  delivery_price: number;
 };
 
 export type OrderProps = {

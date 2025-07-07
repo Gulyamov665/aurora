@@ -92,7 +92,7 @@ export const OrderDetail: React.FC<OrderDetailProps> = ({ order }) => {
       <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
         <Typography variant="body1">Доставка:</Typography>
         <Typography variant="body1" color="text.secondary">
-          Бесплатно
+          {order?.delivery_price ? `${order.delivery_price.toLocaleString()} сум` : "Бесплатно"}
         </Typography>
       </Box>
       <Divider sx={{ my: 2 }} />
