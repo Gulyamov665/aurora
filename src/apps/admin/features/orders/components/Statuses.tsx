@@ -22,6 +22,7 @@ export const getStatusChip = (status: string) => {
   }
 };
 
+
 export const getStatusChipNoIcons = (status: string) => {
   switch (status) {
     case "new":
