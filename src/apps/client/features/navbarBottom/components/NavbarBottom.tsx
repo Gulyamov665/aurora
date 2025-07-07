@@ -14,7 +14,7 @@ export const NavbarBottom = (props: NavbarBottomProps) => {
           </div>
 
           <div style={{ width: "30%", fontSize: 13 }}>
-            <b>{deliveryPrice?.toLocaleString()} сум</b>
+            <b>{deliveryPrice ? `${deliveryPrice.toLocaleString()} сум` : "Бесплатно"}</b>
           </div>
           <div style={{ width: "30%", textAlign: "end", fontSize: 13 }}>
             <p>30-40 м</p>

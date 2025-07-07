@@ -50,7 +50,7 @@ export const ConfirmOrder: FC<ConfirmOrderProps> = ({ navigate, state, handleCre
           Работа сервиса : {fee.toLocaleString()} сум
         </Typography>
         <Typography fontWeight={500} sx={{ mb: 1 }}>
-          Доставка : {items?.delivery_price.toLocaleString()} сум
+          Доставка : {items?.delivery_price ? `${items.delivery_price.toLocaleString()} сум` : "Бесплатно"}
         </Typography>
         <Divider />
         <Typography variant="h6" sx={{ mb: 1, mt: 1 }}>
