@@ -47,7 +47,7 @@ export type GetStaffQueryType = ReturnType<typeof useGetStaffQuery>;
 export type GetUserRoleQueryType = ReturnType<typeof useGetUserRoleQuery>;
 export type LazyGetUserRoleQueryType = ReturnType<typeof useLazyGetUserRoleQuery>;
 export type LazyGetCouriersQueryType = ReturnType<typeof useLazyGetCouriersQuery>;
-
+export type UseGetCouriersQueryType = ReturnType<typeof useGetCouriersQuery>;
 
 export const {
   useAddStaffMutation,
@@ -57,4 +57,5 @@ export const {
   useUpdateStaffMutation,
   useLazyGetUserRoleQuery,
   useLazyGetCouriersQuery,
+  useGetCouriersQuery,
 } = staffApi;

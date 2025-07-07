@@ -5,13 +5,9 @@ import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { LocationListType } from "../types";
 
-export const LocationList: React.FC<LocationListType> = ({
-  locationList,
-  onLocationClick,
-  isLoading,
-  changingId,
-  setEditMode,
-}) => {
+export const LocationList: React.FC<LocationListType> = (props) => {
+  const { locationList, onLocationClick, isLoading, changingId, setEditMode } = props;
+  
   return (
     <Box>
       <Typography variant="h6" fontWeight="bold">

@@ -12,6 +12,7 @@ const initialState: AuthState = {
     message: "",
     code: 0,
   },
+  vendorId: null,
 };
 
 const userAuthState = createSlice({
@@ -36,10 +37,14 @@ const userAuthState = createSlice({
     clearUser(state) {
       state.isUser = null;
     },
+    setVendorId(state, action: PayloadAction<number | null>) {
+      state.vendorId = action.payload;
+    },
   },
 });
 
 export const authState = (state: RootState) => state.authState;
 
-export const { regStepChange, userId, botLinkAction, regError, setUser, clearUser } = userAuthState.actions;
+export const { regStepChange, userId, botLinkAction, regError, setUser, clearUser, setVendorId } =
+  userAuthState.actions;
 export default userAuthState.reducer;

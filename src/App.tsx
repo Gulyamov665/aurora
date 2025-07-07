@@ -10,6 +10,7 @@ import Auth from "./apps/client/features/auth/pages/Auth";
 import { DeleteModal } from "./apps/common/DeleteModal";
 import { Main } from "./apps/client/features/main/Main";
 import { Analytics } from "@vercel/analytics/react";
+import { Snack } from "./apps/common/Snack";
 
 // import { InstallPrompt } from "./InstallPrompt";
 
@@ -36,6 +37,7 @@ function App() {
       {/* global elements */}
       {/* <InstallPrompt /> */}
       <Analytics />
+      <Snack />
       <ToastContainer />
       <DeleteModal />
     </>

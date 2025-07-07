@@ -4,21 +4,10 @@ import { LocationForm } from "./LocationForm";
 import { LocationList } from "./LocationList";
 import { IsGuestFrame } from "@/apps/common/IsGuestFrame";
 
-export const SelectorContent: React.FC<SelectorContentProps> = ({
-  isUser,
-  editTargetId,
-  register,
-  name,
-  address,
-  watch,
-  removeLoc,
-  locationList,
-  onLocationClick,
-  isLoading,
-  changingId,
-  setEditTargetId,
-  navigate,
-}) => {
+export const SelectorContent: React.FC<SelectorContentProps> = (props) => {
+  const { isUser, editTargetId, register, name, address, watch, removeLoc } = props;
+  const { locationList, onLocationClick, isLoading, changingId, setEditTargetId, navigate } = props;
+
   const renderContent = () => {
     switch (true) {
       case !isUser?.user_id:

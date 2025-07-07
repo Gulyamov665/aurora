@@ -36,6 +36,7 @@ const NavbarBottomPage: FC<NavbarBottomPageProps> = ({ data, user }) => {
         visible={showNavbar}
         user={user}
         itemsQuantity={itemsQuantity}
+        deliveryPrice={items?.delivery_price}
       />
     </div>
   );

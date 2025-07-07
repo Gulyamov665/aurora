@@ -9,7 +9,9 @@ import {
   onCloseAddModal,
   setOpenAddModal,
   showDeleteModal,
+  snack,
 } from "@store/appSlice";
+import { setVendorId } from "@store/user/slices/authSlice";
 
 export const useActions = () => {
   const dispatch = useDispatch();
@@ -24,6 +26,8 @@ export const useActions = () => {
       setOpenAddModal,
       onCloseAddModal,
       AddressSelectorToggle,
+      snack,
+      setVendorId,
     },
     dispatch
   );

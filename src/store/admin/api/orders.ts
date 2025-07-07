@@ -1,6 +1,7 @@
 import { getToken } from "@/Utils/getToken";
-import { decreaseProductInCache } from "@/Utils/tools";
+
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
+import { decreaseProductInCache } from "@store/tools";
 import { setUser } from "@store/user/slices/authSlice";
 import { CartData, ChangeOrderBody, GroupedOrder, OrdersData, OrdersType } from "@store/user/types";
 import { CartBadResponse, CartItem } from "@store/user/types";
@@ -80,10 +81,19 @@ export const ordersApi = createApi({
       }),
       invalidatesTags: ["orders"],
     }),
-    getCart: build.query<any, { user?: number; vendorId?: number }>({
-      query: ({ user, vendorId }) => ({
-        url: `/cart?user_id=${user}&restaurant_id=${vendorId}`,
-      }),
+    getCart: build.query<any, { user?: number; vendorId?: number; loc_change?: boolean }>({
+      query: ({ user, vendorId, loc_change = false }) => {
+        const params: Record<string, any> = {
+          user_id: user,
+          restaurant_id: vendorId,
+          loc_change,
+        };
+
+        return {
+          url: `/cart`,
+          params,
+        };
+      },
       providesTags: ["cart"],
     }),
     addToCart: build.mutation<CartData | CartBadResponse, CartItem>({

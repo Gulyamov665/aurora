@@ -1,10 +1,10 @@
 import React from "react";
 import { Card, CardContent, CardMedia, Typography, IconButton, Stack } from "@mui/material";
+import { VendorCardProps } from "./types";
+import { vendorCardContentsSx, vendorCardContentSx, vendorCardSx } from "./assets/styles";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import { VendorCardProps } from "./types";
-import { vendorCardContentsSx, vendorCardContentSx, vendorCardSx } from "./assets/styles";
 
 export const VendorCard: React.FC<VendorCardProps> = ({ data }) => {
   return (

@@ -24,6 +24,7 @@ import appReducer from "./appSlice";
 import vendorReducer from "./admin/slices/vendorSlice";
 import authState from "./user/slices/authSlice";
 import listenerMiddleware from "./user/listenerMiddleware";
+import { deliveryApi } from "./admin/api/delivery";
 
 const rootReducer = combineReducers({
   cart: cartSlice,
@@ -47,6 +48,7 @@ const rootReducer = combineReducers({
   [restaurantsApi.reducerPath]: restaurantsApi.reducer,
   [reportsApi.reducerPath]: reportsApi.reducer,
   [staffApi.reducerPath]: staffApi.reducer,
+  [deliveryApi.reducerPath]: deliveryApi.reducer,
 });
 
 const persistConfig = {
@@ -83,7 +85,8 @@ const store = configureStore({
       sharedApi.middleware,
       restaurantsApi.middleware,
       reportsApi.middleware,
-      staffApi.middleware
+      staffApi.middleware,
+      deliveryApi.middleware,
     ),
 });
 

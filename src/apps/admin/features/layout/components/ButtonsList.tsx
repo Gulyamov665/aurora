@@ -7,6 +7,7 @@ import FoodBankIcon from "@mui/icons-material/FoodBank";
 import FactCheckIcon from "@mui/icons-material/FactCheck";
 import DataThresholdingIcon from "@mui/icons-material/DataThresholding";
 import AssessmentIcon from "@mui/icons-material/Assessment";
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 // import PieChartIcon from "@mui/icons-material/PieChart";
 
 export const buttonGroups = [
@@ -17,6 +18,7 @@ export const buttonGroups = [
     buttons: [
       { text: "Заведение", icon: <FoodBankIcon sx={{ color: "white" }} />, link: "main" },
       { text: "Персонал", icon: <PeopleIcon sx={{ color: "white" }} />, link: "employees" },
+      { text: "Доставка", icon: <LocalShippingIcon sx={{ color: "white" }} />, link: "delivery" },
     ],
   },
   {

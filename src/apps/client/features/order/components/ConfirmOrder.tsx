@@ -47,11 +47,14 @@ export const ConfirmOrder: FC<ConfirmOrderProps> = ({ navigate, state, handleCre
       </Box>
       <Box>
         <Typography fontWeight={500} sx={{ mb: 1 }}>
-          Работа сервиса : {fee} сум
+          Работа сервиса : {fee.toLocaleString()} сум
+        </Typography>
+        <Typography fontWeight={500} sx={{ mb: 1 }}>
+          Доставка : {items?.delivery_price ? `${items.delivery_price.toLocaleString()} сум` : "Бесплатно"}
         </Typography>
         <Divider />
         <Typography variant="h6" sx={{ mb: 1, mt: 1 }}>
-          Итого: {(items?.totalPrice + fee).toLocaleString()} сум
+          Итого: {(items?.totalPrice + fee + items.delivery_price).toLocaleString()} сум
         </Typography>
         <Box display="flex" justifyContent="center" alignItems="center" mt={2}>
           <OrderButton onClick={handleCreateOrder} navigate={navigate} />

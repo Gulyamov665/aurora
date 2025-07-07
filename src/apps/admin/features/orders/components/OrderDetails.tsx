@@ -15,19 +15,9 @@ interface OrderDetailsProps {
   updateOrder: UpdateOrderMutationType[0];
 }
 
-export const OrderDetails: React.FC<OrderDetailsProps> = ({
-  order,
-  orderFetch,
-  couriersResult,
-  setOpenModal,
-  updateOrder,
-}) => {
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: { isDirty },
-  } = useForm({
+export const OrderDetails: React.FC<OrderDetailsProps> = (props) => {
+  const { order, orderFetch, couriersResult, setOpenModal, updateOrder } = props;
+  const { control, handleSubmit, reset, formState } = useForm({
     defaultValues: {
       courier_id: order?.courier?.id || 0,
       status: order?.status || "",
@@ -84,7 +74,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({
       order={order}
       couriersResult={couriersResult}
       setOpenModal={setOpenModal}
-      isDirty={isDirty}
+      isDirty={formState.isDirty}
     />
   );
 };

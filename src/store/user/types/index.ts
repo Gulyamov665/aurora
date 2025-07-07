@@ -55,6 +55,7 @@ export type AuthState = {
   botLink: string;
   isUser: Partial<IsUserType> | null;
   error: ErrorType;
+  vendorId: number | null;
 };
 
 export type VendorInfoType = {
@@ -126,6 +127,7 @@ export type OrdersType = {
   status: OrderStatus;
   location: UserLocationType;
   fee: number;
+  delivery_price: number;
 };
 
 export type ChangeOrderBody = {
@@ -155,6 +157,7 @@ export interface CartData {
   vendor: number;
   user: number;
   id: number;
+  cart_id?: number | null;
 }
 
 export interface CartBadResponse {
@@ -218,6 +221,8 @@ export type ReportsType = {
   sum: number;
   quantity: number;
   canceled: number;
+  delivered: number;
+  fee_sum: number;
 };
 export type { ProductType };
 
@@ -246,4 +251,19 @@ export type RoleType = {
   id: number;
   role: string;
   label: string;
+};
+
+export type DeliveryRuleType = {
+  id: number;
+  restaurant: string;
+  calculation_type: string;
+  name: string;
+  description: string;
+  price_per_km: number;
+  fixed_price: number;
+  price_per_percent: number;
+  min_distance: number;
+  max_distance: number;
+  max_order_price_for_free_delivery: number;
+  is_active: boolean;
 };
