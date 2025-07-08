@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Avatar, Box, IconButton, ListItemIcon, Menu, MenuItem, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { UserAvatarProps } from "../types";
-import { Logout, Settings, BorderColor } from "@mui/icons-material";
+import { Logout, BorderColor } from "@mui/icons-material";
 import MailIcon from "@mui/icons-material/Mail";
 
 export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout, user }) => {
@@ -35,14 +35,14 @@ export const UserAvatar: FC<UserAvatarProps> = ({ isUser, logout, user }) => {
         handleCloseUserMenu();
       },
     },
-    {
-      title: "Аккаунт",
-      icon: <Settings fontSize="small" />,
-      action: () => {
-        navigate("account");
-        handleCloseUserMenu();
-      },
-    },
+    // {
+    //   title: "Аккаунт",
+    //   icon: <Settings fontSize="small" />,
+    //   action: () => {
+    //     navigate("account");
+    //     handleCloseUserMenu();
+    //   },
+    // },
     {
       title: "Выйти",
       icon: <Logout fontSize="small" />,
