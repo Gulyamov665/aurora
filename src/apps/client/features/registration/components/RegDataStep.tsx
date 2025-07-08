@@ -5,18 +5,9 @@ import { IMaskInput } from "react-imask";
 import { useState } from "react";
 import styles from "../assets/Registration.module.scss";
 
-export default function RegForm({
-  register,
-  handleSubmit,
-  state,
-  onSubmit,
-  control,
-  formState,
-  trigger,
-  watch,
-  error,
-  isLoading,
-}: RegDataType) {
+export default function RegForm(props: RegDataType) {
+  const { register, handleSubmit, state, onSubmit, control, formState, trigger, watch, error, isLoading } = props;
+
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const password = watch("password_1");
@@ -55,14 +46,14 @@ export default function RegForm({
           </div>
         }
       </div>
-      <div className={styles["inputs-container"]}>
+      {/* <div className={styles["inputs-container"]}>
         <input
           type="email"
           id="email"
           {...register("email", { required: "Это поле обязательно для заполнения" })}
           placeholder="Email"
         />
-      </div>
+      </div> */}
       <div className={styles["inputs-container"]}>
         <Controller
           name="phone"
