@@ -3,13 +3,14 @@ import { OrderProductsProps } from "../types/orderTypes";
 import { Container, Typography, Card, CardMedia, CardContent, CardActions, IconButton, Grow } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
 import { CardMediaStyle, CardStyle, TypographyStyle } from "../assets/Styles";
+import noDishPhoto from "@/assets/default.jpg";
 
 const OrderProducts: FC<OrderProductsProps> = ({ product, increase, decrease }) => {
   return (
     <Container maxWidth="md" sx={{ mt: 0 }}>
       <Grow in key={product.id} timeout={500}>
         <Card sx={CardStyle}>
-          <CardMedia component="img" image={product.photo} alt={product.name} sx={CardMediaStyle} />
+          <CardMedia component="img" image={product.photo || noDishPhoto} alt={product.name} sx={CardMediaStyle} />
           <CardContent sx={{ flex: 1 }}>
             <Typography variant="h6" fontWeight="bold" sx={TypographyStyle}>
               {product.options?.price || product.price} сум
