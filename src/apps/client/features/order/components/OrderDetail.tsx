@@ -1,7 +1,7 @@
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { getStatusChip } from "@/apps/admin/features/orders/components/Statuses";
-import { Box, Divider, List, ListItem, Typography } from "@mui/material";
+import { Box, Divider, Link, List, ListItem, Typography } from "@mui/material";
 import { OrderDetailProps } from "../types/orderTypes";
 import PhoneIcon from "@mui/icons-material/Phone";
 
@@ -44,16 +44,16 @@ export const OrderDetail: React.FC<OrderDetailProps> = ({ order }) => {
       {order.courier?.phone_number && (
         <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
           <PhoneIcon color="error" sx={{ cursor: "pointer", mr: 1 }} />
-          <a
+          <Link
             href={`tel:${order.courier.phone_number}`}
-            style={{ textDecoration: "none" }}
+            underline="none"
+            color="text.secondary"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`Позвонить курьеру по номеру ${order.courier.phone_number}`}
           >
-            <Typography variant="body2" color="text.secondary">
-              {"Номер курьера"} : {order.courier.phone_number}
-            </Typography>
-          </a>
+            <Typography variant="body2">Номер курьера: {order.courier.phone_number}</Typography>
+          </Link>
         </Box>
       )}
 
