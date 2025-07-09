@@ -45,7 +45,7 @@ export const OrderDetail: React.FC<OrderDetailProps> = ({ order }) => {
         <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
           <PhoneIcon color="error" sx={{ cursor: "pointer", mr: 1 }} />
           <a
-            href={`tel:${order.restaurant.phone}`}
+            href={`tel:${order.user_phone_number}`}
             style={{ textDecoration: "none" }}
             target="_blank"
             rel="noopener noreferrer"
