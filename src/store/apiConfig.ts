@@ -18,8 +18,7 @@ export const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryE
 ) => {
   try {
     const token = getToken();
-
-    if (token && isTokenExpired(token)) {
+    if (token && isTokenExpired(token, 2)) {
       if (!isRefreshing) {
         isRefreshing = true;
 

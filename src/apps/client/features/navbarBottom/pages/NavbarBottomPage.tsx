@@ -11,7 +11,7 @@ import { CartItem } from "@store/user/types";
 const NavbarBottomPage: FC<NavbarBottomPageProps> = ({ data, user }) => {
   const { isUser } = useSelector(authState);
   const skip = { skip: !data?.id || !isUser?.user_id };
-  const { data: items } = useGetCartQuery({ user: isUser?.user_id, vendorId: data?.id }, skip);
+  const { data: items, isFetching } = useGetCartQuery({ user: isUser?.user_id, vendorId: data?.id }, skip);
   const { ["*"]: current } = useParams();
   const [showNavbar, setShowNavbar] = useState(false);
 
@@ -37,6 +37,7 @@ const NavbarBottomPage: FC<NavbarBottomPageProps> = ({ data, user }) => {
         user={user}
         itemsQuantity={itemsQuantity}
         deliveryPrice={items?.delivery_price}
+        isLoading={isFetching}
       />
     </div>
   );

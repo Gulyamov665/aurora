@@ -16,6 +16,7 @@ export interface NavbarBottomProps {
   user?: UserInfoType;
   itemsQuantity: () => number;
   deliveryPrice: number;
+  isLoading: boolean;
 }
 
 export interface NavbarBottomPageProps {
