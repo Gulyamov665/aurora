@@ -6,7 +6,7 @@ import { getCookie } from "@/Utils/tools";
 export const createBaseQuery = (url: string) => {
   return fetchBaseQuery({
     baseUrl: url,
-    credentials: "include",
+    // credentials: "include",
     prepareHeaders: (headers) => {
       const token = getToken();
       if (token) {
