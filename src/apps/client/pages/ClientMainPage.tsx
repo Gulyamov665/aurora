@@ -11,13 +11,12 @@ import { MaterialModal } from "@/apps/common/Modal";
 function ClientMainPage() {
   const { search } = useSelector(modals);
   const { data, isLoading } = useOutletContext<OutletContextType>();
-  
 
   if (isLoading) return <Loading />;
 
-  if (!data.is_active)
+  if (!data?.is_active)
     return (
-      <MaterialModal open={!data.is_active} onClose={() => {}}>
+      <MaterialModal open={!data?.is_active} onClose={() => {}}>
         <GuestBox setToRegPage={() => {}} singleBtn title="Ресторан временно недоступен" />
       </MaterialModal>
     );
