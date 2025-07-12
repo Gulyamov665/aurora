@@ -1,23 +1,8 @@
-import { getToken } from "@/Utils/getToken";
-
-import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
+import { BaseQueryFn, createApi, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
+import { baseQuery } from "@store/apiConfig";
 import { decreaseProductInCache } from "@store/tools";
-import { setUser } from "@store/user/slices/authSlice";
 import { CartData, ChangeOrderBody, GroupedOrder, OrdersData, OrdersType } from "@store/user/types";
 import { CartBadResponse, CartItem } from "@store/user/types";
-
-const url = import.meta.env.VITE_EXPRESS_URL;
-
-export const baseQuery = fetchBaseQuery({
-  baseUrl: url,
-  prepareHeaders: (headers) => {
-    const token = getToken();
-    if (token) {
-      headers.set("Authorization", `Bearer ${token}`);
-    }
-    return headers;
-  },
-});
 
 const baseQueryWithInterceptor: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
   args,
@@ -25,12 +10,6 @@ const baseQueryWithInterceptor: BaseQueryFn<string | FetchArgs, unknown, FetchBa
   extraOptions
 ) => {
   const result = await baseQuery(args, api, extraOptions);
-
-  if (result.error?.status === 401) {
-    api.dispatch(setUser(null));
-    localStorage.removeItem("token");
-    localStorage.removeItem("refresh");
-  }
 
   if (result.error?.status === 500) {
     console.error("Ошибка 500: проблема на сервере", result.error);
@@ -50,19 +29,25 @@ export const ordersApi = createApi({
       query: ({ vendorId, page, limit }) => ({
         url: `/orders/${vendorId}`,
         params: { page, limit },
+        express: true,
       }),
+
       providesTags: ["orders"],
     }),
     getMyOrders: build.query<GroupedOrder[], { userId: number | undefined }>({
       query: ({ userId }) => ({
         url: `/orders/me/${userId}`,
+        express: true,
       }),
+
       providesTags: ["orders"],
     }),
     getOrderById: build.query<OrdersType, number>({
       query: (id) => ({
         url: `/orders/getOrderById/${id}`,
+        express: true,
       }),
+
       providesTags: ["orders"],
     }),
     createOrder: build.mutation<OrdersType, any>({
@@ -70,7 +55,9 @@ export const ordersApi = createApi({
         url: "/orders",
         method: "POST",
         body,
+        express: true,
       }),
+
       invalidatesTags: ["orders", "cart"],
     }),
     updateOrder: build.mutation({
@@ -78,7 +65,9 @@ export const ordersApi = createApi({
         url: `/orders/update/${id}`,
         method: "PUT",
         body,
+        express: true,
       }),
+
       invalidatesTags: ["orders"],
     }),
     getCart: build.query<any, { user?: number; vendorId?: number; loc_change?: boolean }>({
@@ -88,12 +77,13 @@ export const ordersApi = createApi({
           restaurant_id: vendorId,
           loc_change,
         };
-
         return {
           url: `/cart`,
           params,
+          express: true,
         };
       },
+
       providesTags: ["cart"],
     }),
     addToCart: build.mutation<CartData | CartBadResponse, CartItem>({
@@ -101,7 +91,9 @@ export const ordersApi = createApi({
         url: "/cart/addToCart",
         method: "POST",
         body,
+        express: true,
       }),
+
       transformResponse: (response: any, meta?: { response?: Response }) => {
         if (meta?.response?.status === 201) {
           // Успешно, возвращаем CartData
@@ -117,7 +109,9 @@ export const ordersApi = createApi({
         url: "orders/changeOrderComposition",
         method: "POST",
         body,
+        express: true,
       }),
+
       invalidatesTags: ["orders"],
     }),
     decreaseItem: build.mutation({
@@ -125,6 +119,7 @@ export const ordersApi = createApi({
         url: "/cart/decrease",
         method: "POST",
         body,
+        express: true,
       }),
       async onQueryStarted(newItem, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
@@ -143,14 +138,15 @@ export const ordersApi = createApi({
           patchResult.undo();
         }
       },
-
       invalidatesTags: ["cart"],
     }),
     removeCart: build.mutation({
       query: (cartId) => ({
         url: `/cart/${cartId}`,
         method: "DELETE",
+        express: true,
       }),
+
       invalidatesTags: ["cart"],
     }),
   }),
