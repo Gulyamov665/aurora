@@ -14,7 +14,7 @@ const Auth: FC<AuthType> = ({ state }) => {
   const { register, handleSubmit, formState, control, trigger } = useForm<DataType>({ mode: "onChange" });
   const { isUser } = useSelector(authState);
   const [userAuth, { isLoading, error }] = useAuthMutation();
-  const linkToVendor = localStorage.getItem("from");
+  const linkToVendor = localStorage.getItem("from") || "/";
   const navigate = useNavigate();
 
   useEffect(() => {

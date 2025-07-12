@@ -1,5 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "./orders";
+import { baseQuery } from "@store/apiConfig";
 import { ReportsType } from "@store/user/types";
 
 export const reportsApi = createApi({
@@ -12,6 +12,7 @@ export const reportsApi = createApi({
         url: "/orders/ordersByDateRange",
         method: "POST",
         body: { startDate, endDate, restaurantId },
+        express: true,
       }),
       invalidatesTags: ["reports"],
     }),
