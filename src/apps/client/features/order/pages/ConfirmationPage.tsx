@@ -51,7 +51,7 @@ const OrderConfirmationPage: React.FC = () => {
           name: data.name,
           address: data.address,
           photo: data.logo,
-          phone: me?.phone,
+          phone: data.contacts?.[0] || 'не указан',
           lat: data?.lat,
           long: data?.long,
         },

@@ -72,6 +72,7 @@ export type VendorInfoType = {
   lat: string;
   long: string;
   is_active: boolean;
+  contacts: string[];
 };
 
 export type initialDataType = Omit<VendorInfoType, "background_photo" | "logo">;
