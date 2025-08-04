@@ -116,13 +116,29 @@ const Orders: FC = () => {
           </IconButton>
         </Box>
 
-        <OrderDetails
+        {/* <OrderDetails
           setOpenModal={setOpenModal}
           order={orderData}
           orderFetch={orderFetch}
           couriersResult={couriersResult}
           updateOrder={updateOrder}
-        />
+        /> */}
+        <Box
+          sx={{
+            flexGrow: 1,
+            overflowY: "auto",
+            px: 2,
+            pb: 2,
+          }}
+        >
+          <OrderDetails
+            setOpenModal={setOpenModal}
+            order={orderData}
+            orderFetch={orderFetch}
+            couriersResult={couriersResult}
+            updateOrder={updateOrder}
+          />
+        </Box>
       </Drawer>
       <FormProvider {...methods}>
         <MaterialModal open={openModal} onClose={() => setOpenModal(false)} width="80%">
