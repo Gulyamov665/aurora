@@ -52,7 +52,7 @@ export const RadioGroupCustom: React.FC<{
 
   return (
     <FormControl>
-      <FormLabel>На выбор</FormLabel>
+      <FormLabel sx={{ color: "rgba(0, 0, 0, 0.6)" }}>На выбор</FormLabel>
       <RadioGroup value={selectedVariant} onChange={(e) => setSelectedVariant(+e.target.value)}>
         {data.variants
           .filter((v) => v.is_active)
