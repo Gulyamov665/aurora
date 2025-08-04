@@ -81,7 +81,7 @@ export const handleAddToCart = async ({
   }
 };
 
-export const formatAddress = (address: NominatimReverseResponse["address"]) => {
+export const formatAddress = (address: NominatimReverseResponse["address"]): string => {
   const parts = [
     address?.road,
     address?.house_number,

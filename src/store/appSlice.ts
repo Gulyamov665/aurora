@@ -17,9 +17,9 @@ interface AddModalState {
 }
 
 interface ISnack {
-  open: boolean
-  color?: "success" | "info" | "warning" | "error"
-  message?: string
+  open: boolean;
+  color?: "success" | "info" | "warning" | "error";
+  message?: string;
 }
 
 interface AppState {
@@ -37,7 +37,7 @@ interface AppState {
   error: {} | null;
   addModalState: AddModalState;
   addressSelector: boolean;
-  snackState: ISnack
+  snackState: ISnack;
 }
 
 const initialState: AppState = {
@@ -61,11 +61,11 @@ const initialState: AppState = {
     changeItem: "",
   },
   addressSelector: false,
-  snackState:{
+  snackState: {
     open: false,
-    color: 'info',
-    message: ''
-  }
+    color: "info",
+    message: "",
+  },
 };
 
 const appSlice = createSlice({
@@ -122,11 +122,11 @@ const appSlice = createSlice({
     AddressSelectorToggle: (state, action) => {
       state.addressSelector = action.payload;
     },
-    snack : (state, action: PayloadAction<ISnack>) => {
-      state.snackState.open = action.payload.open
-      state.snackState.color = action.payload.color
-      state.snackState.message = action.payload.message
-    }
+    snack: (state, action: PayloadAction<ISnack>) => {
+      state.snackState.open = action.payload.open;
+      state.snackState.color = action.payload.color;
+      state.snackState.message = action.payload.message;
+    },
   },
   // extraReducers: (builder) => {
   //   builder
@@ -158,7 +158,7 @@ export const {
   setOpenAddModal,
   onCloseAddModal,
   AddressSelectorToggle,
-  snack
+  snack,
 } = appSlice.actions;
 
 export default appSlice.reducer;

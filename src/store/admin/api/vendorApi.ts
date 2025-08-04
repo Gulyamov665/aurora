@@ -3,6 +3,7 @@ import { baseQuery } from "../../apiConfig";
 import { UpdateMutationType, VendorInfoType } from "@store/user/types";
 import { setVendorId } from "@store/user/slices/authSlice";
 
+
 export const vendorApi = createApi({
   reducerPath: "vendorApi",
   tagTypes: ["vendor"],

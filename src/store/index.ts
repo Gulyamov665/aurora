@@ -86,7 +86,7 @@ const store = configureStore({
       restaurantsApi.middleware,
       reportsApi.middleware,
       staffApi.middleware,
-      deliveryApi.middleware,
+      deliveryApi.middleware
     ),
 });
 

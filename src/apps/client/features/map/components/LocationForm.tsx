@@ -78,7 +78,7 @@ export const LocationForm: React.FC<LocationFormType> = ({
           />
         </Box>
         <TextField
-          label="Комментарий курьеру"
+          label="Комментарий к заказу"
           defaultValue=""
           // value={watch?.("comment")}
           {...register("comment")}
