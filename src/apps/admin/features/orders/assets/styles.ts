@@ -2,6 +2,7 @@ import { SxProps, Theme } from "@mui/material/styles";
 
 interface StyleTypes {
   drawerStyles: SxProps<Theme>;
+  drawerOrderBox: SxProps<Theme>;
 }
 
 export const styles: StyleTypes = {
@@ -27,4 +28,10 @@ export const styles: StyleTypes = {
       },
     },
   }),
+  drawerOrderBox: {
+    flexGrow: 1,
+    overflowY: "auto",
+    px: 2,
+    pb: 2,
+  },
 };

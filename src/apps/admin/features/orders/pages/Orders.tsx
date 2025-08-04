@@ -115,22 +115,7 @@ const Orders: FC = () => {
             <CloseIcon />
           </IconButton>
         </Box>
-
-        {/* <OrderDetails
-          setOpenModal={setOpenModal}
-          order={orderData}
-          orderFetch={orderFetch}
-          couriersResult={couriersResult}
-          updateOrder={updateOrder}
-        /> */}
-        <Box
-          sx={{
-            flexGrow: 1,
-            overflowY: "auto",
-            px: 2,
-            pb: 2,
-          }}
-        >
+        <Box sx={styles.drawerOrderBox}>
           <OrderDetails
             setOpenModal={setOpenModal}
             order={orderData}
