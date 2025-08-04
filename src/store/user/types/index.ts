@@ -129,6 +129,7 @@ export type OrdersType = {
   location: UserLocationType;
   fee: number;
   delivery_price: number;
+  comment?: string;
 };
 
 export type ChangeOrderBody = {

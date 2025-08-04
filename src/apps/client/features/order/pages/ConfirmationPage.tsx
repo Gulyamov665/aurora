@@ -21,6 +21,8 @@ const OrderConfirmationPage: React.FC = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
+  console.log(watch("comment"));
+
   useEffect(() => {
     if (me) {
       reset({
@@ -37,6 +39,8 @@ const OrderConfirmationPage: React.FC = () => {
 
   const handleCreateOrder = async () => {
     try {
+      const comment = watch("comment");
+
       const orderData = {
         created_by: isUser?.user_id,
         lat: me?.location?.lat,
@@ -46,12 +50,13 @@ const OrderConfirmationPage: React.FC = () => {
         user_phone_number: me?.phone,
         cart_id: items?.id,
         delivery_price: items?.delivery_price,
+        comment,
         restaurant: {
           id: data.id,
           name: data.name,
           address: data.address,
           photo: data.logo,
-          phone: data.contacts?.[0] || 'не указан',
+          phone: data.contacts?.[0] || "не указан",
           lat: data?.lat,
           long: data?.long,
         },

@@ -1,9 +1,9 @@
 import { Box, Typography, TextField, Divider } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { FC } from "react";
 import { ConfirmOrderProps } from "../types/orderTypes";
 import { LocationForm } from "../../map/components/LocationForm";
 import { OrderButton } from "@/animations/componets/OrderButton";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export const ConfirmOrder: FC<ConfirmOrderProps> = ({ navigate, state, handleCreateOrder, items, register }) => {
   const fee = 3500;

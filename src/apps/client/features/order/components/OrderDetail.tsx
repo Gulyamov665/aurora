@@ -81,7 +81,9 @@ export const OrderDetail: React.FC<OrderDetailProps> = ({ order }) => {
           </ListItem>
         ))}
       </List>
-
+      <Divider sx={{ my: 2 }} />
+      <Typography>Комментарий к заказу:</Typography>
+      <Typography>{order.comment}</Typography>
       <Divider sx={{ my: 2 }} />
       <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
         <Typography variant="body1">Работа сервиса:</Typography>
