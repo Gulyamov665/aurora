@@ -32,9 +32,30 @@ const DeliveryRulesList: React.FC<DeliveryRulesListProps> = ({
 
   const { snack } = useActions();
 
-  const toggleActive: IToggleActive = async (id, is_active, color, message) => {
-    await toggleActiveDeliveryRule({ id, is_active }).unwrap(), snack({ open: true, color, message });
-  };
+const toggleActive: IToggleActive = async (id, is_active, color, message) => {
+  try {
+    await toggleActiveDeliveryRule({ id, is_active }).unwrap();
+    snack({ open: true, color, message });
+  } catch (error: any) {
+    // Для RTK Query unwrap() ошибка будет внутри error.data
+    const status = error?.status;
+    const detail = error?.data?.detail || 'Произошла неизвестная ошибка';
+
+    if (status === 403) {
+      snack({
+        open: true,
+        color: 'error',
+        message: detail || 'У вас недостаточно прав для выполнения данного действия.'
+      });
+    } else {
+      snack({
+        open: true,
+        color: 'error',
+        message: detail
+      });
+    }
+  }
+};
 
   return (
     <Box sx={{ maxWidth: 1200, width: "100%", mx: "auto", mt: 3 }}>
