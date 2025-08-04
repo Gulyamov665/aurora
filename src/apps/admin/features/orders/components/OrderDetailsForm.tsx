@@ -12,6 +12,7 @@ import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import WifiTetheringIcon from "@mui/icons-material/WifiTethering";
 import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 import TableChartIcon from "@mui/icons-material/TableChart";
+import CommentIcon from '@mui/icons-material/Comment';
 
 export const DetailsForm: React.FC<OrderDetailsFormProps> = (props) => {
   return (
@@ -89,6 +90,15 @@ export const DetailsForm: React.FC<OrderDetailsFormProps> = (props) => {
                 Сумма
               </Typography>
               <Typography variant="subtitle1">{Number(props.order?.total_price).toLocaleString()} UZS</Typography>
+            </Box>
+          </Box>
+          <Box display="flex" alignItems="center" gap={1} mb={2}>
+            <CommentIcon color="primary" />
+            <Box>
+              <Typography variant="body2" color="textSecondary">
+                Комментарий к заказу:
+              </Typography>
+              <Typography variant="subtitle1">{props.order?.comment}</Typography>
             </Box>
           </Box>
           <Box display="flex" alignItems="center" gap={1} mb={2}>
