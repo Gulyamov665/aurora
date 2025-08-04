@@ -1,5 +1,5 @@
 import React from "react";
-import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Checkbox } from "@mui/material";
 import { IOptions } from "../client/features/order/types/orderTypes";
 
 interface RadioGroupCustomProps {
@@ -22,7 +22,7 @@ export const RadioGroupCustom: React.FC<RadioGroupCustomProps> = ({ data, select
             <FormControlLabel
               key={variant.id}
               value={variant.id}
-              control={<Radio />}
+              control={<Radio icon={<Checkbox checked={false} />} checkedIcon={<Checkbox checked />} />}
               label={
                 <div>
                   <b>{variant.name}: </b>
